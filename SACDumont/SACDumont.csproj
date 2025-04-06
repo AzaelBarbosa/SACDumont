@@ -58,6 +58,9 @@
     <Reference Include="FastReport.Compat, Version=2025.1.0.0, Culture=neutral, PublicKeyToken=5ceb240df42bf6e8, processorArchitecture=MSIL">
       <HintPath>..\packages\FastReport.Compat.2025.1.0\lib\net462\FastReport.Compat.dll</HintPath>
     </Reference>
+    <Reference Include="FastReport.OpenSource.Export.PdfSimple, Version=2025.1.0.0, Culture=neutral, PublicKeyToken=b33a9a06fcc00c4c, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastReport.OpenSource.Export.PdfSimple.2025.1.0\lib\net462\FastReport.OpenSource.Export.PdfSimple.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
     </Reference>
@@ -139,11 +142,23 @@
     <Compile Include="Base\frmBaseCatalogos.Designer.cs">
       <DependentUpon>frmBaseCatalogos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\frmBaseGeneral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\frmBaseGeneral.Designer.cs">
+      <DependentUpon>frmBaseGeneral.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\frmListados.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Base\frmListados.Designer.cs">
       <DependentUpon>frmListados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Base\Reporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\Reporte.Designer.cs">
+      <DependentUpon>Reporte.cs</DependentUpon>
     </Compile>
     <Compile Include="Clases\sqlServer.cs" />
     <Compile Include="Form1.cs">
@@ -152,16 +167,43 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados\frmAlumnos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\frmAlumnos.Designer.cs">
+      <DependentUpon>frmAlumnos.cs</DependentUpon>
+    </Compile>
     <Compile Include="modulos\basConfiguracion.cs" />
     <Compile Include="modulos\basFunctions.cs" />
     <Compile Include="modulos\basGlobals.cs" />
+    <Compile Include="Otros\frmConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Otros\frmConfig.Designer.cs">
+      <DependentUpon>frmConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Base\frmBaseCatalogos.resx">
       <DependentUpon>frmBaseCatalogos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmBaseGeneral.resx">
+      <DependentUpon>frmBaseGeneral.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\frmListados.resx">
       <DependentUpon>frmListados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\Reporte.resx">
+      <DependentUpon>Reporte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\frmAlumnos.resx">
+      <DependentUpon>frmAlumnos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Otros\frmConfig.resx">
+      <DependentUpon>frmConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -214,6 +256,81 @@
   <ItemGroup>
     <Folder Include="Catalogos\" />
     <Folder Include="Reportes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\apagar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bloquear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\configuracion-del-documento.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\actividad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\camisa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\factura.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\facturacion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beca-educativa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lista-de-asistentes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cumpleanos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reimpresion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\administrativo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\academic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\silueta-de-multiples-usuarios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\caja-de-entrega.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salario %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salario-bajo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salario-del-usuario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inscripcion-abierta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\contrato.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tutor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\estudiante-universitario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\libro-y-lapiz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cuenta-por-cobrar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

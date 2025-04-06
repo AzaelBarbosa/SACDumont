@@ -10,9 +10,11 @@ using System.IO;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using ClosedXML.Excel;
-using static CDURechazos.Modulos.basConfiguracion;
+using static SACDumont.Modulos.basConfiguracion;
+using DocumentFormat.OpenXml.Math;
+using System.Security.RightsManagement;
 
-namespace CDURechazos.Modulos
+namespace SACDumont.Modulos
 {
     public class basFunctions
     {
@@ -118,15 +120,29 @@ namespace CDURechazos.Modulos
             }
             else
             {
-             
             }
         }
 
-        public interface ICatalogo
+        public bool DataVacio(DataTable dt)
         {
-            void Nuevo();
-            void Guardar();
-            void Eliminar();
+            return dt == null || dt.Rows.Count == 0;
         }
+
+        public string DameFechaUltimoCorte()
+        {
+            string sSQL = "SELECT MAX(FechaCorte) AS Fecha FROM CIERREDIARIO";
+            DataTable dtPaso = sqlServer.ExecSQLReturnDT(sSQL);
+
+            if (dtPaso != null && dtPaso.Rows.Count > 0)
+            {
+                DataRow drPaso = dtPaso.Rows[0];
+                return drPaso["Fecha"].ToString();
+            }
+            else
+            {
+                return "SIN FECHA";
+            }
+        }
+
     }
 }

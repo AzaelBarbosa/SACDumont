@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SACDumont
+namespace SACDumont.Base
 {
-    public partial class frmMain: Form
+    public partial class frmBaseGeneral : Form
     {
-        public frmMain()
+        public frmBaseGeneral()
         {
             InitializeComponent();
         }

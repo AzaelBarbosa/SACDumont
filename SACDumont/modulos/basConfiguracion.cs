@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace CDURechazos.Modulos
+namespace SACDumont.Modulos
 {
     public class basConfiguracion
     {
@@ -29,8 +29,8 @@ namespace CDURechazos.Modulos
         public static int TipoPermiso;
         public static int ModoConexion = 0;
 
-        private static readonly string clave = "CopeLand12345678"; // 16 caracteres
-        private static readonly string iv = "CoLaVector123456";      // 16 caracteres
+        private static readonly string clave = "CoDumont12345678"; // 16 caracteres
+        private static readonly string iv = "CoDuVector123456";      // 16 caracteres
 
         public void SetUserSession(int userID, string numEmpleado, string nombre)
         {
@@ -64,8 +64,6 @@ namespace CDURechazos.Modulos
             public string BaseDatos { get; set; }
             public string Usuario { get; set; }
             public string Contrasena { get; set; }
-            public string pgUrl { get; set; }
-            public int ModoConexion { get; set; }
         }
 
         public static void GuardarConfig(ConfigInfo config, string rutaArchivo)

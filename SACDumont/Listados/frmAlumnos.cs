@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SACDumont.Base;
 
-namespace SACDumont
+namespace SACDumont.Listados
 {
-    public partial class frmMain: Form
+    public partial class frmAlumnos : frmListados
     {
-        public frmMain()
+        public frmAlumnos()
         {
             InitializeComponent();
+        }
+
+        private void frmAlumnos_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
