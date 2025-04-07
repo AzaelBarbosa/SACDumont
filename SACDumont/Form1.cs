@@ -12,9 +12,23 @@ namespace SACDumont
 {
     public partial class frmMain: Form
     {
-        public frmMain()
+        public frmMain(DataRow drUsuario)
         {
+            // Esta llamada es requerida por el diseñador
             InitializeComponent();
+
+            // Inicialización personalizada
+            tlUsuario.Text = drUsuario["nombre_usuario"].ToString();
+        }
+
+        private void btSalir_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

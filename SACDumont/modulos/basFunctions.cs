@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CDURechazos.Clases;
+using SACDumont.Clases;
 using System.IO;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
@@ -28,18 +28,14 @@ namespace SACDumont.Modulos
 
             try
             {
-                ConfigInfo config = basConfiguracion.LeerConfig(@"C:\CDU\configSecure.dll");
+                ConfigInfo config = basConfiguracion.LeerConfig(@"C:\SAC\configSecure.dll");
 
                 // Variables para almacenar los datos
                 string dbLocalHost = config.Servidor;
                 string dbLocalName = config.BaseDatos;
                 string dbLocalUser = config.Usuario;
                 string dbLocalPassword = config.Contrasena;
-                string dbUrl = config.pgUrl;
-                basConfiguracion.ModoConexion = Convert.ToInt32(config.ModoConexion);
 
-                if (basConfiguracion.ModoConexion == 1)
-                {
                     // Se establecen los parámetros de conexión a SQL Server
                     sqlServer.Init(300, dbLocalName, dbLocalHost, dbLocalUser, dbLocalPassword);
 
@@ -53,11 +49,7 @@ namespace SACDumont.Modulos
                     {
                         // Procesamiento adicional si es necesario
                     }
-                }
-                else
-                {
-               
-                }
+                
             }
             catch (Exception ex)
             {
@@ -113,14 +105,10 @@ namespace SACDumont.Modulos
         public void InsertarHistorial(string sAccion)
         {
             string sSQL;
-            if (basConfiguracion.ModoConexion == 1)
-            {
+           
                 sSQL = "INSERT INTO LogFallas (idUsuario, Descripcion) VALUES(" + basConfiguracion.UserID + ",'" + sAccion + "')";
                 sqlServer.ExecSQL(sSQL);
-            }
-            else
-            {
-            }
+           
         }
 
         public bool DataVacio(DataTable dt)
@@ -141,6 +129,27 @@ namespace SACDumont.Modulos
             else
             {
                 return "SIN FECHA";
+            }
+        }
+
+        public void UpdateConfig(string spName, bool recargos, bool promo, int porcentajeRecargos, int diasTolerancia)
+        {
+            try
+            {
+                var parametros = new SqlParameter[]
+                {
+                    new SqlParameter("@Recargos", SqlDbType.Bit) { Value = recargos },
+                    new SqlParameter("@Promo", SqlDbType.Bit) { Value =promo },
+                    new SqlParameter("@PorcentajeRecargo", SqlDbType.Int, 100) { Value = porcentajeRecargos },
+                    new SqlParameter("@DiasTolerancia", SqlDbType.Int, 100) { Value = diasTolerancia }
+                };
+
+
+                sqlServer.ExecSPNoQuery(spName, parametros);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

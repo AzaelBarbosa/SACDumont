@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.gbOtros = new System.Windows.Forms.GroupBox();
+            this.nDiasTolerancia = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txPorcentajeRecargo = new System.Windows.Forms.TextBox();
+            this.chRecargos = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.gbBase = new System.Windows.Forms.GroupBox();
             this.txContra = new System.Windows.Forms.TextBox();
@@ -39,16 +43,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txServidor = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.chRecargos = new System.Windows.Forms.CheckBox();
             this.chPromociones = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txPorcentajeRecargo = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.nDiasTolerancia = new System.Windows.Forms.NumericUpDown();
             this.gbOtros.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nDiasTolerancia)).BeginInit();
             this.gbBase.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nDiasTolerancia)).BeginInit();
             this.SuspendLayout();
             // 
             // gbOtros
@@ -64,6 +64,42 @@
             this.gbOtros.TabIndex = 12;
             this.gbOtros.TabStop = false;
             this.gbOtros.Text = "Recargos";
+            // 
+            // nDiasTolerancia
+            // 
+            this.nDiasTolerancia.Enabled = false;
+            this.nDiasTolerancia.Location = new System.Drawing.Point(215, 34);
+            this.nDiasTolerancia.Name = "nDiasTolerancia";
+            this.nDiasTolerancia.Size = new System.Drawing.Size(56, 20);
+            this.nDiasTolerancia.TabIndex = 10;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(212, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(92, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Dias de tolerancia";
+            // 
+            // txPorcentajeRecargo
+            // 
+            this.txPorcentajeRecargo.Enabled = false;
+            this.txPorcentajeRecargo.Location = new System.Drawing.Point(112, 34);
+            this.txPorcentajeRecargo.Name = "txPorcentajeRecargo";
+            this.txPorcentajeRecargo.Size = new System.Drawing.Size(58, 20);
+            this.txPorcentajeRecargo.TabIndex = 8;
+            // 
+            // chRecargos
+            // 
+            this.chRecargos.AutoSize = true;
+            this.chRecargos.Location = new System.Drawing.Point(14, 34);
+            this.chRecargos.Name = "chRecargos";
+            this.chRecargos.Size = new System.Drawing.Size(72, 17);
+            this.chRecargos.TabIndex = 1;
+            this.chRecargos.Text = "Recargos";
+            this.chRecargos.UseVisualStyleBackColor = true;
+            this.chRecargos.CheckedChanged += new System.EventHandler(this.chRecargos_CheckedChanged);
             // 
             // label5
             // 
@@ -155,16 +191,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Servidor:";
             // 
-            // chRecargos
-            // 
-            this.chRecargos.AutoSize = true;
-            this.chRecargos.Location = new System.Drawing.Point(14, 34);
-            this.chRecargos.Name = "chRecargos";
-            this.chRecargos.Size = new System.Drawing.Size(72, 17);
-            this.chRecargos.TabIndex = 1;
-            this.chRecargos.Text = "Recargos";
-            this.chRecargos.UseVisualStyleBackColor = true;
-            // 
             // chPromociones
             // 
             this.chPromociones.AutoSize = true;
@@ -185,31 +211,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General";
             // 
-            // txPorcentajeRecargo
-            // 
-            this.txPorcentajeRecargo.Enabled = false;
-            this.txPorcentajeRecargo.Location = new System.Drawing.Point(112, 34);
-            this.txPorcentajeRecargo.Name = "txPorcentajeRecargo";
-            this.txPorcentajeRecargo.Size = new System.Drawing.Size(58, 20);
-            this.txPorcentajeRecargo.TabIndex = 8;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(212, 16);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(92, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Dias de tolerancia";
-            // 
-            // nDiasTolerancia
-            // 
-            this.nDiasTolerancia.Enabled = false;
-            this.nDiasTolerancia.Location = new System.Drawing.Point(215, 34);
-            this.nDiasTolerancia.Name = "nDiasTolerancia";
-            this.nDiasTolerancia.Size = new System.Drawing.Size(56, 20);
-            this.nDiasTolerancia.TabIndex = 10;
-            // 
             // frmConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,11 +227,11 @@
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.gbOtros.ResumeLayout(false);
             this.gbOtros.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nDiasTolerancia)).EndInit();
             this.gbBase.ResumeLayout(false);
             this.gbBase.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nDiasTolerancia)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

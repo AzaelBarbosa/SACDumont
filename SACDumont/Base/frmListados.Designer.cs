@@ -86,6 +86,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Name = "frmListados";
             this.Text = "frmListados";
+            this.Load += new System.EventHandler(this.frmListados_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

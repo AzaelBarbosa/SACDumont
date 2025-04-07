@@ -13,7 +13,7 @@ namespace SACDumont.Modulos
     {
         // Variables para almacenar la información del usuario
         public static int UserID;
-        public static string NumEmpleado;
+        public static int IdPerfil;
         public static string Nombre;
 
         // Variables para almacenar la configuración de la aplicación
@@ -27,15 +27,14 @@ namespace SACDumont.Modulos
         public static int Linea;
         public static int TipoActividad;
         public static int TipoPermiso;
-        public static int ModoConexion = 0;
 
         private static readonly string clave = "CoDumont12345678"; // 16 caracteres
         private static readonly string iv = "CoDuVector123456";      // 16 caracteres
 
-        public void SetUserSession(int userID, string numEmpleado, string nombre)
+        public void SetUserSession(int userID, int idPerfil, string nombre)
         {
             basConfiguracion.UserID = userID;
-            basConfiguracion.NumEmpleado = numEmpleado;
+            basConfiguracion.IdPerfil = idPerfil;
             basConfiguracion.Nombre = nombre;
         }
 
@@ -54,7 +53,7 @@ namespace SACDumont.Modulos
         public void ClearUserSession()
         {
             basConfiguracion.UserID = 0;
-            basConfiguracion.NumEmpleado = string.Empty;
+            basConfiguracion.IdPerfil = 0;
             basConfiguracion.Nombre = string.Empty;
         }
 

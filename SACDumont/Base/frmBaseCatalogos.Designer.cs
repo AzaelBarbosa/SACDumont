@@ -91,6 +91,7 @@
             this.Name = "frmBaseCatalogos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmBaseCatalogos";
+            this.Load += new System.EventHandler(this.frmBaseCatalogos_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

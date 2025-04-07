@@ -14,4 +14,18 @@ namespace SACDumont.modulos
         public static string sNombre;
         public static int iGrado;
     }
+
+    public enum Perfiles
+    {
+        Director = 1,
+        Cajero = 2,
+        Coordinador = 3,
+        Administrador = 99,
+        Academico = 4,
+        Capturista = 5,
+        Usuario = 6,
+        Docente = 7,
+        Almacen = 8
+    }
+
 }
