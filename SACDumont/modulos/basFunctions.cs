@@ -18,8 +18,7 @@ namespace SACDumont.Modulos
 {
     public class basFunctions
     {
-        private static readonly string clave = "TuClaveSecreta123"; // debe ser de 16, 24 o 32 caracteres
-        private static readonly string iv = "VectorInicial1234";    // debe ser de 16 caracteres
+
         public static DataTable dtExportar;
         public void ConectaBD()
         {
@@ -151,6 +150,62 @@ namespace SACDumont.Modulos
             {
                 MessageBox.Show(ex.Message, "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        public static void CargarCatalogo(ComboBox combo, string tabla, string campoClave, string campoTexto, string whereClause = "")
+        {
+                DataTable dt = new DataTable();
+            dt = sqlServer.ExecSQLReturnDT($"SELECT {campoClave}, {campoTexto} FROM {tabla} {whereClause} ORDER BY {campoTexto}", "Catalogos");
+
+                combo.DataSource = dt;
+                combo.DisplayMember = campoTexto;
+                combo.ValueMember = campoClave;
+                combo.DropDownStyle = ComboBoxStyle.DropDown;
+                combo.SelectedIndex = -1;
+        }
+
+        public static void ValidarYAgregarNuevo(ComboBox combo, string tabla, string campoTexto, int idDependiente = 0)
+        {
+            string texto = combo.Text.Trim();
+            if (string.IsNullOrWhiteSpace(texto)) return;
+
+            bool existe = false;
+            foreach (DataRowView item in combo.Items)
+            {
+                if (item[combo.DisplayMember].ToString().Equals(texto, StringComparison.OrdinalIgnoreCase))
+                {
+                    existe = true;
+                    break;
+                }
+            }
+
+            if (!existe)
+            {
+                DialogResult r = MessageBox.Show(
+                    $"“{texto}” no está en el catálogo de {tabla}. ¿Deseas agregarlo?",
+                    "Agregar al catálogo",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (r == DialogResult.Yes)
+                {
+                    
+                    sqlServer.ExecSQL($"INSERT INTO {tabla} ({campoTexto}, PaisId) VALUES ('{texto}',{idDependiente})");
+               
+                    // Recargar
+                    CargarCatalogo(combo, tabla, combo.ValueMember, combo.DisplayMember);
+                    combo.SelectedIndex = combo.FindStringExact(texto);
+                    MessageBox.Show("Elemento agregado correctamente.", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        public static void LimpiarCombo(ComboBox combo)
+        {
+            combo.DataSource = null;
+            combo.Items.Clear();
+            combo.Text = string.Empty;
+            combo.SelectedIndex = -1;
         }
 
     }

@@ -17,6 +17,8 @@ namespace SACDumont.Base
         protected virtual void Nuevo() { }
         protected virtual void Guardar() { }
         protected virtual void Eliminar() { }
+        protected virtual void AgregarTutor() { }
+        protected virtual void Cerrar() { }
 
         public frmBaseCatalogos()
         {
@@ -26,6 +28,31 @@ namespace SACDumont.Base
         private void frmBaseCatalogos_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Guardar();
+        }
+
+        private void agregarTutorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AgregarTutor();
+        }
+
+        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Eliminar();
+        }
+
+        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Nuevo();
+        }
+
+        private void cerrarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Cerrar();
         }
     }
 }

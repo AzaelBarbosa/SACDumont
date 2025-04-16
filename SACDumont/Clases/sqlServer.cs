@@ -246,6 +246,89 @@ namespace SACDumont.Clases
 
         #endregion
 
+        #region "ExecSPReturnDT"
+            public static DataTable ExecSPReturnDT(string spName, SqlParameter[] paramValues = null, string tableName = "Table")
+            {
+                SqlCommand objCommand;
+                SqlDataAdapter objDA;
+                DataTable objDT = new DataTable();
+
+                try
+                {
+                    if (mblnDisposed)
+                        throw new ObjectDisposedException(mstrModuleName, "This object has already been disposed.");
+
+                    if (mobjConnection.State != ConnectionState.Open)
+                        mobjConnection.Open();
+
+                    objCommand = new SqlCommand(spName, mobjConnection)
+                    {
+                        CommandTimeout = mintTimeOut,
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    if (paramValues != null)
+                        AttachParameters(objCommand, paramValues);
+
+                    if (mobjTransaction != null)
+                        objCommand.Transaction = mobjTransaction;
+
+                    objDA = new SqlDataAdapter(objCommand);
+                    objDA.Fill(objDT);
+                    objDT.TableName = tableName;
+
+                    return objDT;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+        #endregion
+
+        #region "ExecSPReturnDS"
+            public static DataSet ExecSPReturnDS(string spName, SqlParameter[] paramValues = null, string strTableName = "Table")
+            {
+                SqlCommand objCommand;
+                SqlDataAdapter objDA;
+                DataSet objDS = new DataSet();
+
+                try
+                {
+                    if (mblnDisposed)
+                        throw new ObjectDisposedException(mstrModuleName, "This object has already been disposed.");
+
+                    if (mobjConnection == null)
+                        Init(); // Asume que Init() configura la conexión correctamente
+
+                    if (mobjConnection.State != ConnectionState.Open)
+                        mobjConnection.Open();
+
+                    objCommand = new SqlCommand(spName, mobjConnection)
+                    {
+                        CommandTimeout = mintTimeOut,
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    if (paramValues != null)
+                        AttachParameters(objCommand, paramValues);
+
+                    if (mobjTransaction != null)
+                        objCommand.Transaction = mobjTransaction;
+
+                    objDA = new SqlDataAdapter(objCommand);
+                    objDA.Fill(objDS, strTableName);
+
+                    return objDS;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        #endregion
+
         #region AssignParameterValues
 
         private static void AssignParameterValues(SqlParameter[] commandParameters, object[] parameterValues)
@@ -376,7 +459,7 @@ namespace SACDumont.Clases
                 objDT.TableName = tableName;
 
                 return objDT;
-            }
+            }   
             catch (Exception ex)
             {
                 throw ex;
@@ -484,6 +567,173 @@ namespace SACDumont.Clases
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        #endregion
+
+        #region Update Command
+
+        public static void UpdateDataset(ref DataSet ds, string strTable)
+        {
+            SqlDataAdapter da;
+            SqlCommandBuilder cb;
+            SqlTransaction tr;
+
+            try
+            {
+                if (mobjConnection.State != ConnectionState.Open)
+                    mobjConnection.Open();
+
+                da = new SqlDataAdapter($"SELECT * FROM {strTable} WHERE 1=0", mobjConnection);
+                cb = new SqlCommandBuilder(da);
+
+                tr = mobjConnection.BeginTransaction();
+                da.SelectCommand.Transaction = tr;
+                cb.RefreshSchema();
+
+                da.RowUpdated += new SqlRowUpdatedEventHandler(OnRowUpdated);
+
+                da.Update(ds, strTable);
+
+                da.RowUpdated -= new SqlRowUpdatedEventHandler(OnRowUpdated);
+
+                tr.Commit();
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    // tr?.Rollback();
+                }
+                catch { }
+
+                throw ex;
+            }
+        }
+
+        private static void OnRowUpdated(object sender, SqlRowUpdatedEventArgs args)
+        {
+            if (args.StatementType == StatementType.Insert)
+            {
+                var tableName = args.TableMapping.DataSetTable;
+                SqlCommand idCMD = new SqlCommand($"SELECT IDENT_CURRENT('{tableName}')", mobjConnection);
+
+                if (((SqlDataAdapter)sender).SelectCommand.Transaction != null)
+                {
+                    idCMD.Transaction = ((SqlDataAdapter)sender).SelectCommand.Transaction;
+                }
+
+                object newObj = idCMD.ExecuteScalar();
+                if (newObj != DBNull.Value)
+                {
+                    int newID = Convert.ToInt32(newObj);
+                    if (newID > 0)
+                    {
+                        args.Row[0] = newID;
+                    }
+                }
+            }
+        }
+
+        public static void UpdateByDataTable(ref DataTable dt)
+        {
+            if (dt == null) return;
+
+            SqlDataAdapter da;
+            SqlCommandBuilder cb;
+            SqlTransaction tr;
+
+            try
+            {
+                if (mobjConnection.State != ConnectionState.Open)
+                    mobjConnection.Open();
+
+                da = new SqlDataAdapter($"SELECT * FROM {dt.TableName} WHERE 1=0", mobjConnection);
+                cb = new SqlCommandBuilder(da);
+
+                tr = mobjConnection.BeginTransaction();
+                da.SelectCommand.Transaction = tr;
+                cb.RefreshSchema();
+
+                da.RowUpdated += new SqlRowUpdatedEventHandler(OnRowUpdated);
+
+                da.Update(dt);
+
+                da.RowUpdated -= new SqlRowUpdatedEventHandler(OnRowUpdated);
+
+                tr.Commit();
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    // tr?.Rollback();
+                }
+                catch { }
+
+                throw ex;
+            }
+        }
+
+        #endregion
+
+        #region Insert Command
+
+        public static DataSet InsertByDataset(DataSet ds, string strTable)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM " + strTable + " WHERE 1=0", mobjConnection);
+            SqlCommandBuilder cb = new SqlCommandBuilder(da);
+
+            try
+            {
+                if (mobjConnection.State != ConnectionState.Open)
+                    mobjConnection.Open();
+
+                cb.RefreshSchema();
+
+                // Rellenar la estructura en el DataSet para tener el esquema correcto
+                da.Fill(ds, strTable);
+
+                // Insertar los nuevos registros
+                da.Update(ds, strTable);
+            }
+            catch (Exception ex)
+            {
+                // Puedes capturar excepciones específicas si gustas:
+                // - DBConcurrencyException
+                // - InvalidOperationException
+
+                // Ejemplo:
+                // throw new Exception("Error al insertar registros: " + ex.Message, ex);
+
+                throw; // re-lanza la excepción para manejarla externamente si lo deseas
+            }
+
+            return ds;
+        }
+
+        public static void InsertByDataTable(ref DataTable dt, string strTable)
+        {
+            if (dt == null || dt.Rows.Count == 0)
+                return;
+
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM " + strTable + " WHERE 1=0", mobjConnection);
+            SqlCommandBuilder cb = new SqlCommandBuilder(da);
+
+            try
+            {
+                if (mobjConnection.State != ConnectionState.Open)
+                    mobjConnection.Open();
+
+                cb.RefreshSchema();
+
+                // Insertar los nuevos registros
+                da.Update(dt);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al insertar registros: " + ex.Message, ex);
             }
         }
 

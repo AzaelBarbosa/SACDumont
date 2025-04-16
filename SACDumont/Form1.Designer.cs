@@ -169,6 +169,7 @@
             this.btCatalogosAlumnos.Name = "btCatalogosAlumnos";
             this.btCatalogosAlumnos.Size = new System.Drawing.Size(128, 22);
             this.btCatalogosAlumnos.Text = "Alumnos";
+            this.btCatalogosAlumnos.Click += new System.EventHandler(this.btCatalogosAlumnos_Click);
             // 
             // btCatalogosTutores
             // 
@@ -176,6 +177,7 @@
             this.btCatalogosTutores.Name = "btCatalogosTutores";
             this.btCatalogosTutores.Size = new System.Drawing.Size(128, 22);
             this.btCatalogosTutores.Text = "Tutores";
+            this.btCatalogosTutores.Click += new System.EventHandler(this.btCatalogosTutores_Click);
             // 
             // btCatalogosUsuarios
             // 
@@ -351,13 +353,12 @@
             this.ClientSize = new System.Drawing.Size(981, 617);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMain";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "SAC Dumont";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);

@@ -72,8 +72,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
+        protected internal System.Windows.Forms.MenuStrip menuStrip1;
     }
 }

@@ -18,7 +18,7 @@ namespace SACDumont.Base
         protected virtual void Guardar() { }
         protected virtual void Eliminar() { }
         protected virtual void Imprimir() { }
-
+        protected virtual void Cerrar() { }
 
         public frmListados()
         {
@@ -28,6 +28,26 @@ namespace SACDumont.Base
         private void frmListados_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Nuevo();
+        }
+
+        private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Eliminar();
+        }
+
+        private void reporteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Imprimir();
+        }
+
+        private void cerrarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Cerrar();
         }
     }
 }
