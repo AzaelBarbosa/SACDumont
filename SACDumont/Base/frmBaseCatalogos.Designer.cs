@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.agregarTutorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cerrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.btSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.btDeshabilitar = new System.Windows.Forms.ToolStripMenuItem();
+            this.btDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.btAddTutor = new System.Windows.Forms.ToolStripMenuItem();
+            this.btAcciones = new System.Windows.Forms.ToolStripMenuItem();
+            this.btCerrar = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,76 +43,88 @@
             // 
             this.menuStrip1.AllowMerge = false;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nuevoToolStripMenuItem,
-            this.guardarToolStripMenuItem,
-            this.eliminarToolStripMenuItem,
-            this.agregarTutorToolStripMenuItem,
-            this.reporteToolStripMenuItem,
-            this.cerrarToolStripMenuItem});
+            this.btNew,
+            this.btSave,
+            this.btDeshabilitar,
+            this.btDelete,
+            this.btAddTutor,
+            this.btAcciones,
+            this.btCerrar});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(589, 55);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // nuevoToolStripMenuItem
+            // btNew
             // 
-            this.nuevoToolStripMenuItem.Image = global::SACDumont.Properties.Resources.agregar;
-            this.nuevoToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(54, 51);
-            this.nuevoToolStripMenuItem.Text = "Nuevo";
-            this.nuevoToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
+            this.btNew.Image = global::SACDumont.Properties.Resources.agregar;
+            this.btNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btNew.Name = "btNew";
+            this.btNew.Size = new System.Drawing.Size(54, 51);
+            this.btNew.Text = "Nuevo";
+            this.btNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btNew.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
             // 
-            // guardarToolStripMenuItem
+            // btSave
             // 
-            this.guardarToolStripMenuItem.Image = global::SACDumont.Properties.Resources.guardar;
-            this.guardarToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(61, 51);
-            this.guardarToolStripMenuItem.Text = "Guardar";
-            this.guardarToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
+            this.btSave.Image = global::SACDumont.Properties.Resources.guardar;
+            this.btSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btSave.Name = "btSave";
+            this.btSave.Size = new System.Drawing.Size(61, 51);
+            this.btSave.Text = "Guardar";
+            this.btSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btSave.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
-            // eliminarToolStripMenuItem
+            // btDeshabilitar
             // 
-            this.eliminarToolStripMenuItem.Image = global::SACDumont.Properties.Resources.eliminar;
-            this.eliminarToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(62, 51);
-            this.eliminarToolStripMenuItem.Text = "Eliminar";
-            this.eliminarToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
+            this.btDeshabilitar.Image = global::SACDumont.Properties.Resources.bajausuario;
+            this.btDeshabilitar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btDeshabilitar.Name = "btDeshabilitar";
+            this.btDeshabilitar.Size = new System.Drawing.Size(81, 51);
+            this.btDeshabilitar.Text = "Deshabilitar";
+            this.btDeshabilitar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btDeshabilitar.Click += new System.EventHandler(this.btDeshabilitar_Click);
             // 
-            // agregarTutorToolStripMenuItem
+            // btDelete
             // 
-            this.agregarTutorToolStripMenuItem.Image = global::SACDumont.Properties.Resources.eliminarusuario;
-            this.agregarTutorToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.agregarTutorToolStripMenuItem.Name = "agregarTutorToolStripMenuItem";
-            this.agregarTutorToolStripMenuItem.Size = new System.Drawing.Size(92, 51);
-            this.agregarTutorToolStripMenuItem.Text = "Agregar Tutor";
-            this.agregarTutorToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.agregarTutorToolStripMenuItem.Click += new System.EventHandler(this.agregarTutorToolStripMenuItem_Click);
+            this.btDelete.Image = global::SACDumont.Properties.Resources.eliminar;
+            this.btDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btDelete.Name = "btDelete";
+            this.btDelete.Size = new System.Drawing.Size(62, 51);
+            this.btDelete.Text = "Eliminar";
+            this.btDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btDelete.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
-            // reporteToolStripMenuItem
+            // btAddTutor
             // 
-            this.reporteToolStripMenuItem.Image = global::SACDumont.Properties.Resources.reportes;
-            this.reporteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.reporteToolStripMenuItem.Name = "reporteToolStripMenuItem";
-            this.reporteToolStripMenuItem.Size = new System.Drawing.Size(67, 51);
-            this.reporteToolStripMenuItem.Text = "Acciones";
-            this.reporteToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btAddTutor.Image = global::SACDumont.Properties.Resources.eliminarusuario;
+            this.btAddTutor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btAddTutor.Name = "btAddTutor";
+            this.btAddTutor.Size = new System.Drawing.Size(92, 51);
+            this.btAddTutor.Text = "Agregar Tutor";
+            this.btAddTutor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btAddTutor.Click += new System.EventHandler(this.agregarTutorToolStripMenuItem_Click);
             // 
-            // cerrarToolStripMenuItem
+            // btAcciones
             // 
-            this.cerrarToolStripMenuItem.Image = global::SACDumont.Properties.Resources.eliminar;
-            this.cerrarToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.cerrarToolStripMenuItem.Name = "cerrarToolStripMenuItem";
-            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(51, 51);
-            this.cerrarToolStripMenuItem.Text = "Cerrar";
-            this.cerrarToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.cerrarToolStripMenuItem.Click += new System.EventHandler(this.cerrarToolStripMenuItem_Click);
+            this.btAcciones.Image = global::SACDumont.Properties.Resources.reportes;
+            this.btAcciones.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btAcciones.Name = "btAcciones";
+            this.btAcciones.Size = new System.Drawing.Size(67, 51);
+            this.btAcciones.Text = "Acciones";
+            this.btAcciones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btAcciones.Click += new System.EventHandler(this.btAcciones_Click);
+            // 
+            // btCerrar
+            // 
+            this.btCerrar.Image = global::SACDumont.Properties.Resources.eliminar;
+            this.btCerrar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btCerrar.Name = "btCerrar";
+            this.btCerrar.Size = new System.Drawing.Size(51, 51);
+            this.btCerrar.Text = "Cerrar";
+            this.btCerrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btCerrar.Click += new System.EventHandler(this.cerrarToolStripMenuItem_Click);
             // 
             // frmBaseCatalogos
             // 
@@ -136,11 +149,12 @@
 
         #endregion
         public System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem reporteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem agregarTutorToolStripMenuItem;
-        protected internal System.Windows.Forms.ToolStripMenuItem cerrarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btNew;
+        private System.Windows.Forms.ToolStripMenuItem btDelete;
+        private System.Windows.Forms.ToolStripMenuItem btAcciones;
+        private System.Windows.Forms.ToolStripMenuItem btSave;
+        public System.Windows.Forms.ToolStripMenuItem btAddTutor;
+        protected internal System.Windows.Forms.ToolStripMenuItem btCerrar;
+        private System.Windows.Forms.ToolStripMenuItem btDeshabilitar;
     }
 }

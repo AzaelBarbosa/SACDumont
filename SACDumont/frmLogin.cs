@@ -17,7 +17,6 @@ namespace SACDumont
     {
         DataSet dtPaso;
         DataRow[] drPaso;
-
         public frmLogin()
         {
             InitializeComponent();

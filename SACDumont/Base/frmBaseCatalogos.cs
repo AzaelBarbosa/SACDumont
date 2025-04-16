@@ -19,7 +19,9 @@ namespace SACDumont.Base
         protected virtual void Eliminar() { }
         protected virtual void AgregarTutor() { }
         protected virtual void Cerrar() { }
+        protected virtual void Deshabilitar() { }
 
+        protected virtual void Acciones() { }
         public frmBaseCatalogos()
         {
             InitializeComponent();
@@ -53,6 +55,16 @@ namespace SACDumont.Base
         private void cerrarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Cerrar();
+        }
+
+        private void btDeshabilitar_Click(object sender, EventArgs e)
+        {
+            Deshabilitar();
+        }
+
+        private void btAcciones_Click(object sender, EventArgs e)
+        {
+            Acciones();
         }
     }
 }

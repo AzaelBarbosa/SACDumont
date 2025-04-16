@@ -164,6 +164,30 @@ namespace SACDumont.Modulos
                 combo.SelectedIndex = -1;
         }
 
+        public static void CargarCatalogoGeneral(ComboBox combo, string tipoCatalogo)
+        {
+            DataTable dt = new DataTable();
+            dt = sqlServer.ExecSQLReturnDT($"SELECT descripcion, valor FROM catalogos WHERE tipo_catalogo = '{tipoCatalogo}'", "Catalogos");
+
+            combo.DataSource = dt;
+            combo.DisplayMember = "descripcion";
+            combo.ValueMember = "valor";
+            combo.DropDownStyle = ComboBoxStyle.DropDown;
+            combo.SelectedIndex = -1;
+        }
+
+        public static void CargarCatalogoAlumnos(ComboBox combo)
+        {
+            DataTable dt = new DataTable();
+            dt = sqlServer.ExecSQLReturnDT($"SELECT matricula, a.appaterno + ' ' + a.apmaterno + ' ' + a.nombre AS nombrecompleto FROM alumnos a WHERE a.activo = 1 ORDER BY nombrecompleto", "Alumnos");
+
+            combo.DataSource = dt;
+            combo.DisplayMember = "matricula";
+            combo.ValueMember = "nombrecompleto";
+            combo.DropDownStyle = ComboBoxStyle.DropDown;
+            combo.SelectedIndex = -1;
+        }
+
         public static void ValidarYAgregarNuevo(ComboBox combo, string tabla, string campoTexto, int idDependiente = 0)
         {
             string texto = combo.Text.Trim();
@@ -208,5 +232,35 @@ namespace SACDumont.Modulos
             combo.SelectedIndex = -1;
         }
 
+        public static void Registrar(int usuario, string modulo, string tipoAccion, int entidadId, string descripcion = "")
+        {
+            try
+            {
+               string sql = $"INSERT INTO BitacoraAcciones (fecha, id_usuario, modulo, tipo_accion, entidad_id, descripcion) VALUES (GETDATE(), {usuario}, '{modulo}', '{tipoAccion}', {entidadId}, '{descripcion}')";
+               sqlServer.ExecSQL(sql);
+            }
+            catch (Exception ex)
+            {
+                // Aquí podrías registrar el error en un archivo de log o mostrar un mensaje
+                Console.WriteLine("Error al registrar en la bitácora: " + ex.Message);
+            }
+        }
+
+        public static void CargarAcciones(ref DataGridView dgvAcciones, string modulo, int entidadId)
+        {
+            try
+            {
+                DataTable dtAcciones = new DataTable();
+                string sql = $"SELECT acc.fecha as Fecha, us.nombre_usuario, acc.tipo_accion AS [Tipo Movimiento], acc.descripcion AS Descripcion  FROM acciones acc INNER JOIN usuarios us ON acc.id_usuario = us.id_usuario WHERE acc.modulo = '{modulo}' AND acc.entidad_id = {entidadId} ORDER BY acc.fecha";
+                dtAcciones = sqlServer.ExecSQLReturnDT(sql,"Acciones");
+                dgvAcciones.DataSource = dtAcciones;
+                dgvAcciones.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            }
+            catch (Exception ex)
+            {
+                // Aquí podrías registrar el error en un archivo de log o mostrar un mensaje
+                Console.WriteLine("Error al registrar en la bitácora: " + ex.Message);
+            }
+        }
     }
 }

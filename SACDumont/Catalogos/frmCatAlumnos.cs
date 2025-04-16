@@ -14,6 +14,7 @@ using System.Data.SqlClient;
 using DocumentFormat.OpenXml.Wordprocessing;
 using static ClosedXML.Excel.XLPredefinedFormat;
 using SACDumont.Listados;
+using SACDumont.Otros;
 
 namespace SACDumont.Catalogos
 {
@@ -33,12 +34,12 @@ namespace SACDumont.Catalogos
         }
 
         #region "Metodos Virtuales"
-            protected override void Nuevo()
+        protected override void Nuevo()
             {
                 frmCatAlumnos frmCatAlumnos = new frmCatAlumnos(0);
                 frmCatAlumnos.ShowDialog();
             }
-            protected override void Guardar()
+        protected override void Guardar()
             {
                 // Validaciones...
                 if (txtNombre.Text == "") { MessageBox.Show("El campo Nombre es obligatorio."); txtNombre.Focus(); return; }
@@ -53,19 +54,20 @@ namespace SACDumont.Catalogos
 
                 if (esNuevo)
                 {
-                    dtAlumnos = sqlServer.ExecSQLReturnDT("SELECT * FROM alumnos WHERE 1=0");
-                    DataRow newRow = dtAlumnos.NewRow();
-                    newRow["matricula"] = 0; // Placeholder
+                    
+                dtAlumnos = sqlServer.ExecSQLReturnDT("SELECT * FROM alumnos WHERE 1=0");
+                DataRow newRow = dtAlumnos.NewRow();
+                newRow["matricula"] = 0; // Placeholder
+                AsignarValoresAlumno(newRow);
+                dtAlumnos.Rows.Add(newRow);
+                sqlServer.InsertByDataTable(ref dtAlumnos, "alumnos");
 
-                    AsignarValoresAlumno(newRow);
-                    dtAlumnos.Rows.Add(newRow);
-                    sqlServer.InsertByDataTable(ref dtAlumnos, "alumnos");
+                // Obtener la matrícula generada
+                int nuevaMatricula = Convert.ToInt32(dtAlumnos.Rows[0]["matricula"]); 
+                lbMatricula.Text = nuevaMatricula.ToString();
 
-                    // Obtener la matrícula generada
-                    int nuevaMatricula = Convert.ToInt32(dtAlumnos.Rows[0]["matricula"]);
-                    lbMatricula.Text = nuevaMatricula.ToString();
-
-                    MessageBox.Show("Alumno registrado correctamente con matrícula " + nuevaMatricula);
+                basFunctions.Registrar(basConfiguracion.UserID, "Alumnos", "Alta", nuevaMatricula, "Se registró un nuevo alumno con matrícula: " + nuevaMatricula);   
+                MessageBox.Show("Alumno registrado correctamente con matrícula " + nuevaMatricula);
 
                     if (MessageBox.Show("¿Desea agregar un tutor?", "Agregar Tutor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
@@ -79,37 +81,43 @@ namespace SACDumont.Catalogos
                 }
                 else
                 {
-                    dtAlumnos = sqlServer.ExecSQLReturnDT($"SELECT * FROM alumnos WHERE matricula = {matricula}");
-                    if (dtAlumnos.Rows.Count == 0)
-                    {
-                        MessageBox.Show("No se encontró el alumno para actualizar.");
-                        return;
-                    }
+                dtAlumnos = sqlServer.ExecSQLReturnDT($"SELECT * FROM alumnos WHERE matricula = {matricula}");
+                if (dtAlumnos.Rows.Count == 0)
+                 {
+                 MessageBox.Show("No se encontró el alumno para actualizar.");
+                 return;
+                 }
 
-                    DataRow existingRow = dtAlumnos.Rows[0];
-                    AsignarValoresAlumno(existingRow);
-                    //existingRow.SetModified(); // importante
+                DataRow existingRow = dtAlumnos.Rows[0];
+                AsignarValoresAlumno(existingRow);
+                //existingRow.SetModified(); // importante
 
-                    sqlServer.InsertByDataTable(ref dtAlumnos, "alumnos");
-
-                    MessageBox.Show("Alumno actualizado correctamente.");
+                sqlServer.InsertByDataTable(ref dtAlumnos, "alumnos");
+                basFunctions.Registrar(basConfiguracion.UserID, "Alumnos", "Editar", matricula);
+                MessageBox.Show("Alumno actualizado correctamente.");
                 }
 
             }
-            protected override void Eliminar()
+        protected override void Eliminar()
             {
                 // Implementar la lógica para eliminar el registro de alumno
             }
-            protected override void AgregarTutor()
+        protected override void AgregarTutor()
             {
                 frmCatTutores frm = new frmCatTutores(intMatricula);
                 frm.Text = "Agregar Tutor";
                 frm.ShowDialog();
             }
-            protected override void Cerrar()
+        protected override void Cerrar()
             {
                 this.Close();
             }
+        protected override void Acciones()
+        {
+            frmAcciones frm = new frmAcciones("Alumnos", intMatricula);
+            frm.Text = "Acciones Alumno";
+            frm.ShowDialog();
+        }
 
         #endregion
 
@@ -161,14 +169,14 @@ namespace SACDumont.Catalogos
                     txtTel2.Text = "";
                     txtTel3.Text = "";
                     txtEmail.Text = "";
-                    agregarTutorToolStripMenuItem.Visible = false;
+                    btAddTutor.Visible = false;
                 }
                 else
                 {
                     // Cargar el registro de alumno existente
                     string sSQL = "SELECT * FROM Alumnos WHERE matricula = " + matricula;
                     DataTable dtAlumno = sqlServer.ExecSQLReturnDT(sSQL, "Alumnos");
-                    agregarTutorToolStripMenuItem.Visible = true;
+                    btAddTutor.Visible = true;
                     if (dtAlumno.Rows.Count > 0)
                     {
                         DataRow row = dtAlumno.Rows[0];
@@ -212,7 +220,7 @@ namespace SACDumont.Catalogos
                 // Validar si el alumno tiene tutores
                 string sSQL = "SELECT * FROM tutores_alumnos WHERE matricula = " + intMatricula;
                 DataTable dtTutores = sqlServer.ExecSQLReturnDT(sSQL, "Tutores");
-                if (dtTutores.Rows.Count > 0)
+                if (dtTutores.Rows.Count == 0)
                 {
                     if (MessageBox.Show("El Alumno no tiene tutores asignados. ¿Desea agregar un tutor?", "Agregar Tutor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {

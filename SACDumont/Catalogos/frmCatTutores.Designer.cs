@@ -53,17 +53,23 @@
             this.lblTel1 = new System.Windows.Forms.Label();
             this.lblTel2 = new System.Windows.Forms.Label();
             this.lblTel3 = new System.Windows.Forms.Label();
-            this.chkActivo = new System.Windows.Forms.CheckBox();
             this.txRFC = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.chFactura = new System.Windows.Forms.CheckBox();
+            this.cboAlumnos = new System.Windows.Forms.ComboBox();
+            this.lbNombreAlumno = new System.Windows.Forms.Label();
+            this.txDenominacionSocial = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cboParentesco = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbTutorID
             // 
             this.lbTutorID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbTutorID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTutorID.Location = new System.Drawing.Point(517, 425);
+            this.lbTutorID.ForeColor = System.Drawing.Color.DimGray;
+            this.lbTutorID.Location = new System.Drawing.Point(517, 506);
             this.lbTutorID.Name = "lbTutorID";
             this.lbTutorID.Size = new System.Drawing.Size(100, 23);
             this.lbTutorID.TabIndex = 67;
@@ -257,16 +263,6 @@
             this.lblTel3.TabIndex = 62;
             this.lblTel3.Text = "Teléfono 3:";
             // 
-            // chkActivo
-            // 
-            this.chkActivo.Checked = true;
-            this.chkActivo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActivo.Location = new System.Drawing.Point(9, 402);
-            this.chkActivo.Name = "chkActivo";
-            this.chkActivo.Size = new System.Drawing.Size(100, 24);
-            this.chkActivo.TabIndex = 66;
-            this.chkActivo.Text = "Activo";
-            // 
             // txRFC
             // 
             this.txRFC.Location = new System.Drawing.Point(9, 342);
@@ -285,19 +281,75 @@
             // 
             // chFactura
             // 
-            this.chFactura.Checked = true;
-            this.chFactura.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chFactura.Location = new System.Drawing.Point(9, 372);
+            this.chFactura.Location = new System.Drawing.Point(12, 505);
             this.chFactura.Name = "chFactura";
             this.chFactura.Size = new System.Drawing.Size(100, 24);
             this.chFactura.TabIndex = 70;
             this.chFactura.Text = "Pide factura";
             // 
+            // cboAlumnos
+            // 
+            this.cboAlumnos.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboAlumnos.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboAlumnos.Location = new System.Drawing.Point(9, 449);
+            this.cboAlumnos.Name = "cboAlumnos";
+            this.cboAlumnos.Size = new System.Drawing.Size(263, 21);
+            this.cboAlumnos.TabIndex = 72;
+            this.cboAlumnos.Tag = "Seleccione al Alumno de quien esta acargo el Tutor";
+            // 
+            // lbNombreAlumno
+            // 
+            this.lbNombreAlumno.Location = new System.Drawing.Point(9, 429);
+            this.lbNombreAlumno.Name = "lbNombreAlumno";
+            this.lbNombreAlumno.Size = new System.Drawing.Size(100, 23);
+            this.lbNombreAlumno.TabIndex = 71;
+            this.lbNombreAlumno.Text = "Nombre del Alumno";
+            // 
+            // txDenominacionSocial
+            // 
+            this.txDenominacionSocial.Location = new System.Drawing.Point(9, 392);
+            this.txDenominacionSocial.MaxLength = 10;
+            this.txDenominacionSocial.Name = "txDenominacionSocial";
+            this.txDenominacionSocial.Size = new System.Drawing.Size(260, 20);
+            this.txDenominacionSocial.TabIndex = 74;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(9, 372);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(171, 23);
+            this.label2.TabIndex = 73;
+            this.label2.Text = "Denominacion Social:";
+            // 
+            // cboParentesco
+            // 
+            this.cboParentesco.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboParentesco.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cboParentesco.Location = new System.Drawing.Point(300, 449);
+            this.cboParentesco.Name = "cboParentesco";
+            this.cboParentesco.Size = new System.Drawing.Size(203, 21);
+            this.cboParentesco.TabIndex = 76;
+            this.cboParentesco.Tag = "Seleccione al Alumno de quien esta acargo el Tutor";
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(300, 429);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 23);
+            this.label3.TabIndex = 75;
+            this.label3.Text = "Parentesco:";
+            // 
             // frmCatTutores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(629, 455);
+            this.ClientSize = new System.Drawing.Size(629, 536);
+            this.Controls.Add(this.cboParentesco);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txDenominacionSocial);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.cboAlumnos);
+            this.Controls.Add(this.lbNombreAlumno);
             this.Controls.Add(this.chFactura);
             this.Controls.Add(this.txRFC);
             this.Controls.Add(this.label1);
@@ -326,11 +378,9 @@
             this.Controls.Add(this.lblTel1);
             this.Controls.Add(this.lblTel2);
             this.Controls.Add(this.lblTel3);
-            this.Controls.Add(this.chkActivo);
             this.Name = "frmCatTutores";
             this.Text = "frmCatTutores";
             this.Load += new System.EventHandler(this.frmCatTutores_Load);
-            this.Controls.SetChildIndex(this.chkActivo, 0);
             this.Controls.SetChildIndex(this.lblTel3, 0);
             this.Controls.SetChildIndex(this.lblTel2, 0);
             this.Controls.SetChildIndex(this.lblTel1, 0);
@@ -359,6 +409,12 @@
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.txRFC, 0);
             this.Controls.SetChildIndex(this.chFactura, 0);
+            this.Controls.SetChildIndex(this.lbNombreAlumno, 0);
+            this.Controls.SetChildIndex(this.cboAlumnos, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.txDenominacionSocial, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.cboParentesco, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -391,9 +447,14 @@
         private System.Windows.Forms.Label lblTel1;
         private System.Windows.Forms.Label lblTel2;
         private System.Windows.Forms.Label lblTel3;
-        private System.Windows.Forms.CheckBox chkActivo;
         private System.Windows.Forms.TextBox txRFC;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chFactura;
+        private System.Windows.Forms.ComboBox cboAlumnos;
+        private System.Windows.Forms.Label lbNombreAlumno;
+        private System.Windows.Forms.TextBox txDenominacionSocial;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cboParentesco;
+        private System.Windows.Forms.Label label3;
     }
 }
