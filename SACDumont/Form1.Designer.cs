@@ -28,7 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tlUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.btInscripcion = new System.Windows.Forms.ToolStripMenuItem();
             this.btNuevoIngreso = new System.Windows.Forms.ToolStripMenuItem();
             this.btReinscripcion = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,11 +61,11 @@
             this.btRptAdministrativoUniformes = new System.Windows.Forms.ToolStripMenuItem();
             this.btRptAdministrativoActividad = new System.Windows.Forms.ToolStripMenuItem();
             this.btConfiguracion = new System.Windows.Forms.ToolStripMenuItem();
+            this.generalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cambiarCicloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btCerarSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.btSalir = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tlUsuario = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -81,6 +85,32 @@
             this.menuStrip1.Size = new System.Drawing.Size(981, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.tlUsuario});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 595);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.statusStrip1.Size = new System.Drawing.Size(981, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
+            this.toolStripStatusLabel1.Text = "Usuario:";
+            // 
+            // tlUsuario
+            // 
+            this.tlUsuario.Name = "tlUsuario";
+            this.tlUsuario.Size = new System.Drawing.Size(57, 17);
+            this.tlUsuario.Text = "lbUsuario";
             // 
             // btInscripcion
             // 
@@ -162,6 +192,7 @@
             this.btCatalogosProducto.Name = "btCatalogosProducto";
             this.btCatalogosProducto.Size = new System.Drawing.Size(128, 22);
             this.btCatalogosProducto.Text = "Productos";
+            this.btCatalogosProducto.Click += new System.EventHandler(this.btCatalogosProducto_Click);
             // 
             // btCatalogosAlumnos
             // 
@@ -300,10 +331,28 @@
             // 
             // btConfiguracion
             // 
+            this.btConfiguracion.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generalToolStripMenuItem,
+            this.cambiarCicloToolStripMenuItem});
             this.btConfiguracion.Image = global::SACDumont.Properties.Resources.configuracion_del_documento;
             this.btConfiguracion.Name = "btConfiguracion";
             this.btConfiguracion.Size = new System.Drawing.Size(111, 20);
             this.btConfiguracion.Text = "Configuracion";
+            this.btConfiguracion.Click += new System.EventHandler(this.btConfiguracion_Click);
+            // 
+            // generalToolStripMenuItem
+            // 
+            this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
+            this.generalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generalToolStripMenuItem.Text = "General";
+            this.generalToolStripMenuItem.Click += new System.EventHandler(this.generalToolStripMenuItem_Click);
+            // 
+            // cambiarCicloToolStripMenuItem
+            // 
+            this.cambiarCicloToolStripMenuItem.Name = "cambiarCicloToolStripMenuItem";
+            this.cambiarCicloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cambiarCicloToolStripMenuItem.Text = "Cambiar Ciclo";
+            this.cambiarCicloToolStripMenuItem.Click += new System.EventHandler(this.cambiarCicloToolStripMenuItem_Click);
             // 
             // btCerarSesion
             // 
@@ -320,31 +369,10 @@
             this.btSalir.Text = "Salir";
             this.btSalir.Click += new System.EventHandler(this.btSalir_Click);
             // 
-            // statusStrip1
+            // timer1
             // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.tlUsuario});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 595);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.statusStrip1.Size = new System.Drawing.Size(981, 22);
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
-            this.toolStripStatusLabel1.Text = "Usuario:";
-            // 
-            // tlUsuario
-            // 
-            this.tlUsuario.Name = "tlUsuario";
-            this.tlUsuario.Size = new System.Drawing.Size(57, 17);
-            this.tlUsuario.Text = "lbUsuario";
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // frmMain
             // 
@@ -407,6 +435,9 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel tlUsuario;
+        private System.Windows.Forms.ToolStripMenuItem generalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cambiarCicloToolStripMenuItem;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

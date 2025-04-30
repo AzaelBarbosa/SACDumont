@@ -12,6 +12,7 @@ using SACDumont.Base;
 using static SACDumont.Modulos.basConfiguracion;
 using System.IO;
 using System.Configuration;
+using SACDumont.Clases;
 
 namespace SACDumont.Otros
 {
@@ -65,6 +66,17 @@ namespace SACDumont.Otros
                 txBasseDatos.Text = config.BaseDatos;
                 txUsuario.Text = config.Usuario;
                 txContra.Text = config.Contrasena;
+
+                // Cargar configuraciones adicionales
+                DataTable dt = sqlServer.ExecSQLReturnDT("SELECT * FROM config", "Config");
+                if (dt.Rows.Count > 0)
+                {
+                    chRecargos.Checked = Convert.ToBoolean(dt.Rows[0]["aplicar_recargos"]);
+                    chPromociones.Checked = Convert.ToBoolean(dt.Rows[0]["aplicar_promociones"]);
+                    txPorcentajeRecargo.Text = dt.Rows[0]["porcentaje_recargo"].ToString();
+                    nDiasTolerancia.Value = Convert.ToInt32(dt.Rows[0]["dias_tolerancia"]);
+                }
+
             }
             catch (Exception ex)
             {

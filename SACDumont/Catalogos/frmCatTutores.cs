@@ -185,7 +185,7 @@ namespace SACDumont.Catalogos
                 ["factura"] = chFactura.Checked,
                 ["fecha_nacimiento"] = dtpFechaNac.Value,
                 ["fecha_alta"] = DateTime.Now,
-                ["activo"] = true
+                ["acivo"] = true
             };
             foreach (var item in valores)
             {

@@ -203,6 +203,12 @@
     <Compile Include="Listados\frmAlumnos.Designer.cs">
       <DependentUpon>frmAlumnos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados\frmProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\frmProductos.Designer.cs">
+      <DependentUpon>frmProductos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listados\frmTutores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -218,11 +224,11 @@
     <Compile Include="Otros\frmAcciones.Designer.cs">
       <DependentUpon>frmAcciones.cs</DependentUpon>
     </Compile>
-    <Compile Include="Otros\frmCambiarCiclo.cs">
+    <Compile Include="Otros\frmCambioCiclo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Otros\frmCambiarCiclo.Designer.cs">
-      <DependentUpon>frmCambiarCiclo.cs</DependentUpon>
+    <Compile Include="Otros\frmCambioCiclo.Designer.cs">
+      <DependentUpon>frmCambioCiclo.cs</DependentUpon>
     </Compile>
     <Compile Include="Otros\frmConfig.cs">
       <SubType>Form</SubType>
@@ -265,14 +271,17 @@
     <EmbeddedResource Include="Listados\frmAlumnos.resx">
       <DependentUpon>frmAlumnos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\frmProductos.resx">
+      <DependentUpon>frmProductos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\frmTutores.resx">
       <DependentUpon>frmTutores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmAcciones.resx">
       <DependentUpon>frmAcciones.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Otros\frmCambiarCiclo.resx">
-      <DependentUpon>frmCambiarCiclo.cs</DependentUpon>
+    <EmbeddedResource Include="Otros\frmCambioCiclo.resx">
+      <DependentUpon>frmCambioCiclo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmConfig.resx">
       <DependentUpon>frmConfig.cs</DependentUpon>

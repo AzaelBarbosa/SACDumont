@@ -27,6 +27,12 @@ namespace SACDumont.Modulos
         public static int Linea;
         public static int TipoActividad;
         public static int TipoPermiso;
+        public static int IdCiclo;
+        public static bool Recargos;
+        public static bool Promociones;
+        public static int PorcentajeRecargo;
+        public static int DiasTolerancia;
+        public static string InformacionHeader;
 
         private static readonly string clave = "CoDumont12345678"; // 16 caracteres
         private static readonly string iv = "CoDuVector123456";      // 16 caracteres
@@ -38,15 +44,13 @@ namespace SACDumont.Modulos
             basConfiguracion.Nombre = nombre;
         }
 
-        public void SetConfig(string rutaArchivos, bool envioNominas, bool sincroEmpleados, string hostCorreo, int puerto, string correo, string contrasena)
+        public void SetConfig(int idCiclo, bool bRecargos, bool bPromociones, int porcentajeRecargo, int diasTolerancia)
         {
-            basConfiguracion.RutaArchivos = rutaArchivos;
-            basConfiguracion.EnvioNominas = envioNominas;
-            basConfiguracion.SincronizarEmpleados = sincroEmpleados;
-            basConfiguracion.HostCorreo = hostCorreo;
-            basConfiguracion.Puerto = puerto;
-            basConfiguracion.CorreoEnvio = correo;
-            basConfiguracion.ContrasenaCorreo = contrasena;
+            
+            basConfiguracion.IdCiclo = idCiclo;
+            basConfiguracion.Recargos = bRecargos;
+            basConfiguracion.Promociones = bPromociones;
+            basConfiguracion.PorcentajeRecargo = porcentajeRecargo;
         }
 
         // Método opcional para limpiar la información del usuario
