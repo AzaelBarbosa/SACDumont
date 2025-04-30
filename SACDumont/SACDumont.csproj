@@ -166,6 +166,12 @@
     <Compile Include="Catalogos\frmCatAlumnos.Designer.cs">
       <DependentUpon>frmCatAlumnos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Catalogos\frmCatProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\frmCatProducto.Designer.cs">
+      <DependentUpon>frmCatProducto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Catalogos\frmCatTutores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,6 +218,12 @@
     <Compile Include="Otros\frmAcciones.Designer.cs">
       <DependentUpon>frmAcciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="Otros\frmCambiarCiclo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Otros\frmCambiarCiclo.Designer.cs">
+      <DependentUpon>frmCambiarCiclo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Otros\frmConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,6 +247,9 @@
     <EmbeddedResource Include="Catalogos\frmCatAlumnos.resx">
       <DependentUpon>frmCatAlumnos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\frmCatProducto.resx">
+      <DependentUpon>frmCatProducto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Catalogos\frmCatTutores.resx">
       <DependentUpon>frmCatTutores.cs</DependentUpon>
     </EmbeddedResource>
@@ -255,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmAcciones.resx">
       <DependentUpon>frmAcciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Otros\frmCambiarCiclo.resx">
+      <DependentUpon>frmCambiarCiclo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmConfig.resx">
       <DependentUpon>frmConfig.cs</DependentUpon>
