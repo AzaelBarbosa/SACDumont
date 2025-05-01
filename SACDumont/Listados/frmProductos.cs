@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SACDumont.Base;
+using SACDumont.Catalogos;
 using SACDumont.Clases;
 using SACDumont.Modulos;
 
@@ -19,7 +20,9 @@ namespace SACDumont.Listados
         int idCiclo = 0;
         protected override void Nuevo()
         {
-            // Implementar la lógica para crear un nuevo producto
+            frmCatProducto frmCatProductos = new frmCatProducto(0);
+            frmCatProductos.ShowDialog();
+            CargarProductos();
         }
         protected override void Guardar()
         {
@@ -43,7 +46,7 @@ namespace SACDumont.Listados
             InitializeComponent();
         }
 
-        private void CargarTutores()
+        private void CargarProductos()
         {
             dtProductos = sqlServer.ExecSQLReturnDT($"SELECT pr.concepto AS Concepto, pr.descripcion AS Producto, prc.precio AS Costo FROM productos pr INNER JOIN producto_ciclo prc ON pr.id_producto = prc.id_producto INNER JOIN ciclos_escolares c ON c.id_ciclo = prc.id_ciclo WHERE c.id_ciclo = {idCiclo}", "Tutores");
             dgvProductos.DataSource = dtProductos;
@@ -59,7 +62,7 @@ namespace SACDumont.Listados
         {
             // Cargar el ciclo escolar activo
             idCiclo = basConfiguracion.IdCiclo;
-            CargarTutores();
+            CargarProductos();
             CargarMenu();
         }
     }

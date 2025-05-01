@@ -236,7 +236,7 @@ namespace SACDumont.Modulos
         {
             try
             {
-               string sql = $"INSERT INTO BitacoraAcciones (fecha, id_usuario, modulo, tipo_accion, entidad_id, descripcion) VALUES (GETDATE(), {usuario}, '{modulo}', '{tipoAccion}', {entidadId}, '{descripcion}')";
+               string sql = $"INSERT INTO acciones (fecha, id_usuario, modulo, tipo_accion, entidad_id, descripcion) VALUES (GETDATE(), {usuario}, '{modulo}', '{tipoAccion}', {entidadId}, '{descripcion}')";
                sqlServer.ExecSQL(sql);
             }
             catch (Exception ex)
