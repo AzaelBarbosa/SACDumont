@@ -36,6 +36,7 @@
             this.btAddTutor = new System.Windows.Forms.ToolStripMenuItem();
             this.btAcciones = new System.Windows.Forms.ToolStripMenuItem();
             this.btCerrar = new System.Windows.Forms.ToolStripMenuItem();
+            this.btQuitarRecargo = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,12 +48,13 @@
             this.btSave,
             this.btDeshabilitar,
             this.btDelete,
+            this.btQuitarRecargo,
             this.btAddTutor,
             this.btAcciones,
             this.btCerrar});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(589, 55);
+            this.menuStrip1.Size = new System.Drawing.Size(697, 55);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -126,11 +128,21 @@
             this.btCerrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btCerrar.Click += new System.EventHandler(this.cerrarToolStripMenuItem_Click);
             // 
+            // btQuitarRecargo
+            // 
+            this.btQuitarRecargo.Image = global::SACDumont.Properties.Resources.eliminar;
+            this.btQuitarRecargo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btQuitarRecargo.Name = "btQuitarRecargo";
+            this.btQuitarRecargo.Size = new System.Drawing.Size(98, 51);
+            this.btQuitarRecargo.Text = "Quitar Recargo";
+            this.btQuitarRecargo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btQuitarRecargo.Click += new System.EventHandler(this.btQuitarRecargo_Click);
+            // 
             // frmBaseCatalogos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(589, 622);
+            this.ClientSize = new System.Drawing.Size(697, 622);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
@@ -156,5 +168,6 @@
         public System.Windows.Forms.ToolStripMenuItem btAddTutor;
         protected internal System.Windows.Forms.ToolStripMenuItem btCerrar;
         private System.Windows.Forms.ToolStripMenuItem btDeshabilitar;
+        protected internal System.Windows.Forms.ToolStripMenuItem btQuitarRecargo;
     }
 }

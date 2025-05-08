@@ -30,9 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tlUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.btInscripcion = new System.Windows.Forms.ToolStripMenuItem();
             this.btNuevoIngreso = new System.Windows.Forms.ToolStripMenuItem();
             this.btReinscripcion = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,7 +37,6 @@
             this.btCobroColegiatura = new System.Windows.Forms.ToolStripMenuItem();
             this.btCobroInscripcion = new System.Windows.Forms.ToolStripMenuItem();
             this.btCobroProducts = new System.Windows.Forms.ToolStripMenuItem();
-            this.btCobroAbonos = new System.Windows.Forms.ToolStripMenuItem();
             this.btCatalogos = new System.Windows.Forms.ToolStripMenuItem();
             this.btCatalogosProducto = new System.Windows.Forms.ToolStripMenuItem();
             this.btCatalogosAlumnos = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,6 +61,9 @@
             this.cambiarCicloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btCerarSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.btSalir = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tlUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -86,32 +85,6 @@
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.tlUsuario});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 595);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.statusStrip1.Size = new System.Drawing.Size(981, 22);
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
-            this.toolStripStatusLabel1.Text = "Usuario:";
-            // 
-            // tlUsuario
-            // 
-            this.tlUsuario.Name = "tlUsuario";
-            this.tlUsuario.Size = new System.Drawing.Size(57, 17);
-            this.tlUsuario.Text = "lbUsuario";
-            // 
             // btInscripcion
             // 
             this.btInscripcion.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -125,13 +98,13 @@
             // btNuevoIngreso
             // 
             this.btNuevoIngreso.Name = "btNuevoIngreso";
-            this.btNuevoIngreso.Size = new System.Drawing.Size(151, 22);
+            this.btNuevoIngreso.Size = new System.Drawing.Size(180, 22);
             this.btNuevoIngreso.Text = "Nuevo Ingreso";
             // 
             // btReinscripcion
             // 
             this.btReinscripcion.Name = "btReinscripcion";
-            this.btReinscripcion.Size = new System.Drawing.Size(151, 22);
+            this.btReinscripcion.Size = new System.Drawing.Size(180, 22);
             this.btReinscripcion.Text = "Reinscripcion";
             // 
             // btCobros
@@ -139,8 +112,7 @@
             this.btCobros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btCobroColegiatura,
             this.btCobroInscripcion,
-            this.btCobroProducts,
-            this.btCobroAbonos});
+            this.btCobroProducts});
             this.btCobros.Image = global::SACDumont.Properties.Resources.cuenta_por_cobrar;
             this.btCobros.Name = "btCobros";
             this.btCobros.Size = new System.Drawing.Size(73, 20);
@@ -150,29 +122,25 @@
             // 
             this.btCobroColegiatura.Image = global::SACDumont.Properties.Resources.salario_del_usuario;
             this.btCobroColegiatura.Name = "btCobroColegiatura";
-            this.btCobroColegiatura.Size = new System.Drawing.Size(135, 22);
+            this.btCobroColegiatura.Size = new System.Drawing.Size(180, 22);
             this.btCobroColegiatura.Text = "Colegiatura";
+            this.btCobroColegiatura.Click += new System.EventHandler(this.btCobroColegiatura_Click);
             // 
             // btCobroInscripcion
             // 
             this.btCobroInscripcion.Image = global::SACDumont.Properties.Resources.salario__1_;
             this.btCobroInscripcion.Name = "btCobroInscripcion";
-            this.btCobroInscripcion.Size = new System.Drawing.Size(135, 22);
+            this.btCobroInscripcion.Size = new System.Drawing.Size(180, 22);
             this.btCobroInscripcion.Text = "Inscripcion";
+            this.btCobroInscripcion.Click += new System.EventHandler(this.btCobroInscripcion_Click);
             // 
             // btCobroProducts
             // 
             this.btCobroProducts.Image = global::SACDumont.Properties.Resources.salario;
             this.btCobroProducts.Name = "btCobroProducts";
-            this.btCobroProducts.Size = new System.Drawing.Size(135, 22);
+            this.btCobroProducts.Size = new System.Drawing.Size(180, 22);
             this.btCobroProducts.Text = "Productos";
-            // 
-            // btCobroAbonos
-            // 
-            this.btCobroAbonos.Image = global::SACDumont.Properties.Resources.salario_bajo;
-            this.btCobroAbonos.Name = "btCobroAbonos";
-            this.btCobroAbonos.Size = new System.Drawing.Size(135, 22);
-            this.btCobroAbonos.Text = "Abonos";
+            this.btCobroProducts.Click += new System.EventHandler(this.btCobroProducts_Click);
             // 
             // btCatalogos
             // 
@@ -343,14 +311,14 @@
             // generalToolStripMenuItem
             // 
             this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
-            this.generalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generalToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.generalToolStripMenuItem.Text = "General";
             this.generalToolStripMenuItem.Click += new System.EventHandler(this.generalToolStripMenuItem_Click);
             // 
             // cambiarCicloToolStripMenuItem
             // 
             this.cambiarCicloToolStripMenuItem.Name = "cambiarCicloToolStripMenuItem";
-            this.cambiarCicloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cambiarCicloToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.cambiarCicloToolStripMenuItem.Text = "Cambiar Ciclo";
             this.cambiarCicloToolStripMenuItem.Click += new System.EventHandler(this.cambiarCicloToolStripMenuItem_Click);
             // 
@@ -368,6 +336,32 @@
             this.btSalir.Size = new System.Drawing.Size(57, 20);
             this.btSalir.Text = "Salir";
             this.btSalir.Click += new System.EventHandler(this.btSalir_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.tlUsuario});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 595);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.statusStrip1.Size = new System.Drawing.Size(981, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
+            this.toolStripStatusLabel1.Text = "Usuario:";
+            // 
+            // tlUsuario
+            // 
+            this.tlUsuario.Name = "tlUsuario";
+            this.tlUsuario.Size = new System.Drawing.Size(57, 17);
+            this.tlUsuario.Text = "lbUsuario";
             // 
             // timer1
             // 
@@ -414,7 +408,6 @@
         private System.Windows.Forms.ToolStripMenuItem btCobroColegiatura;
         private System.Windows.Forms.ToolStripMenuItem btCobroInscripcion;
         private System.Windows.Forms.ToolStripMenuItem btCobroProducts;
-        private System.Windows.Forms.ToolStripMenuItem btCobroAbonos;
         private System.Windows.Forms.ToolStripMenuItem btCatalogosProducto;
         private System.Windows.Forms.ToolStripMenuItem btCatalogosAlumnos;
         private System.Windows.Forms.ToolStripMenuItem btCatalogosTutores;

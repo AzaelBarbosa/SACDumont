@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Security.Cryptography;
 using System.IO;
+using SACDumont.modulos;
 
 namespace SACDumont.Modulos
 {
@@ -51,6 +52,8 @@ namespace SACDumont.Modulos
             basConfiguracion.Recargos = bRecargos;
             basConfiguracion.Promociones = bPromociones;
             basConfiguracion.PorcentajeRecargo = porcentajeRecargo;
+            basConfiguracion.DiasTolerancia = diasTolerancia;
+            basGlobals.iCiclo = idCiclo;
         }
 
         // Método opcional para limpiar la información del usuario

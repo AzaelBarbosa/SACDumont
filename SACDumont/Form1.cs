@@ -11,6 +11,7 @@ using SACDumont.Listados;
 using SACDumont.Otros;
 using SACDumont.Clases;
 using SACDumont.Modulos;
+using SACDumont.modulos;
 
 namespace SACDumont
 {
@@ -122,6 +123,27 @@ namespace SACDumont
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.Text = basConfiguracion.InformacionHeader;
+        }
+
+        private void btCobroColegiatura_Click(object sender, EventArgs e)
+        {
+            basGlobals.tipoMovimiento = (int)TipoMovimiento.Colegiatura;
+            basGlobals.sConcepto = Conceptos.COLEGIATURA.ToString();
+            AbrirUnicoFormularioHijo<frmMovimientos>();
+        }
+
+        private void btCobroInscripcion_Click(object sender, EventArgs e)
+        {
+            basGlobals.tipoMovimiento = (int)TipoMovimiento.Inscripcion;
+            basGlobals.sConcepto = Conceptos.INSCRIPCION.ToString();
+            AbrirUnicoFormularioHijo<frmMovimientos>();
+        }
+
+        private void btCobroProducts_Click(object sender, EventArgs e)
+        {
+            basGlobals.tipoMovimiento = (int)TipoMovimiento.Producto;
+            basGlobals.sConcepto = Conceptos.PRODUCTOS.ToString();
+            AbrirUnicoFormularioHijo<frmMovimientos>();
         }
     }
 }
