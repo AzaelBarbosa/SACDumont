@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txCosto = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lbSeleccion = new System.Windows.Forms.Label();
@@ -55,9 +56,18 @@
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.lbIDMovimiento = new System.Windows.Forms.Label();
             this.cboAlumnos = new SACDumont.Controles.ComboAlumnos();
+            this.gbProductos = new System.Windows.Forms.GroupBox();
+            this.gbCobros = new System.Windows.Forms.GroupBox();
+            this.dgvCobros = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nPorcDescuento)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
+            this.gbProductos.SuspendLayout();
+            this.gbCobros.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCobros)).BeginInit();
             this.SuspendLayout();
             // 
             // txCosto
@@ -151,7 +161,7 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Location = new System.Drawing.Point(16, 317);
+            this.groupBox2.Location = new System.Drawing.Point(29, 363);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(520, 136);
             this.groupBox2.TabIndex = 42;
@@ -316,20 +326,21 @@
             this.dgvProductos.AllowUserToAddRows = false;
             this.dgvProductos.AllowUserToDeleteRows = false;
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductos.Location = new System.Drawing.Point(16, 161);
+            this.dgvProductos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvProductos.Location = new System.Drawing.Point(3, 17);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.ReadOnly = true;
-            this.dgvProductos.Size = new System.Drawing.Size(520, 150);
+            this.dgvProductos.Size = new System.Drawing.Size(479, 84);
             this.dgvProductos.TabIndex = 3;
             // 
             // lbIDMovimiento
             // 
             this.lbIDMovimiento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbIDMovimiento.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lbIDMovimiento.Location = new System.Drawing.Point(437, 458);
+            this.lbIDMovimiento.Location = new System.Drawing.Point(437, 504);
             this.lbIDMovimiento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbIDMovimiento.Name = "lbIDMovimiento";
-            this.lbIDMovimiento.Size = new System.Drawing.Size(101, 27);
+            this.lbIDMovimiento.Size = new System.Drawing.Size(101, 23);
             this.lbIDMovimiento.TabIndex = 44;
             this.lbIDMovimiento.Text = "IDMovimiento";
             this.lbIDMovimiento.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -339,22 +350,81 @@
             this.cboAlumnos.idGrado = null;
             this.cboAlumnos.Location = new System.Drawing.Point(138, 77);
             this.cboAlumnos.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.cboAlumnos.matricula = null;
+            this.cboAlumnos.matricula = 0;
             this.cboAlumnos.Name = "cboAlumnos";
             this.cboAlumnos.Size = new System.Drawing.Size(398, 21);
             this.cboAlumnos.SqlQuery = null;
             this.cboAlumnos.TabIndex = 1;
             this.cboAlumnos.OnAlumnoSeleccionado += new System.Action<System.Data.DataRow>(this.cboAlumnos_OnAlumnoSeleccionado);
             // 
+            // gbProductos
+            // 
+            this.gbProductos.Controls.Add(this.dgvProductos);
+            this.gbProductos.Location = new System.Drawing.Point(23, 146);
+            this.gbProductos.Name = "gbProductos";
+            this.gbProductos.Size = new System.Drawing.Size(485, 104);
+            this.gbProductos.TabIndex = 45;
+            this.gbProductos.TabStop = false;
+            this.gbProductos.Text = "Productos";
+            // 
+            // gbCobros
+            // 
+            this.gbCobros.Controls.Add(this.dgvCobros);
+            this.gbCobros.Location = new System.Drawing.Point(26, 253);
+            this.gbCobros.Name = "gbCobros";
+            this.gbCobros.Size = new System.Drawing.Size(479, 104);
+            this.gbCobros.TabIndex = 46;
+            this.gbCobros.TabStop = false;
+            this.gbCobros.Text = "Cobros";
+            // 
+            // dgvCobros
+            // 
+            this.dgvCobros.AllowUserToAddRows = false;
+            this.dgvCobros.AllowUserToDeleteRows = false;
+            this.dgvCobros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCobros.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCobros.Location = new System.Drawing.Point(3, 17);
+            this.dgvCobros.Name = "dgvCobros";
+            this.dgvCobros.ReadOnly = true;
+            this.dgvCobros.Size = new System.Drawing.Size(473, 84);
+            this.dgvCobros.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(517, 163);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(25, 25);
+            this.button1.TabIndex = 47;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(517, 194);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(25, 25);
+            this.button2.TabIndex = 48;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // frmMovimiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 494);
+            this.ClientSize = new System.Drawing.Size(555, 536);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.gbCobros);
+            this.Controls.Add(this.gbProductos);
             this.Controls.Add(this.cboAlumnos);
             this.Controls.Add(this.comboProductos1);
             this.Controls.Add(this.lbIDMovimiento);
-            this.Controls.Add(this.dgvProductos);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbSeleccion);
@@ -366,14 +436,20 @@
             this.Controls.SetChildIndex(this.lbSeleccion, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.groupBox2, 0);
-            this.Controls.SetChildIndex(this.dgvProductos, 0);
             this.Controls.SetChildIndex(this.lbIDMovimiento, 0);
             this.Controls.SetChildIndex(this.comboProductos1, 0);
             this.Controls.SetChildIndex(this.cboAlumnos, 0);
+            this.Controls.SetChildIndex(this.gbProductos, 0);
+            this.Controls.SetChildIndex(this.gbCobros, 0);
+            this.Controls.SetChildIndex(this.button1, 0);
+            this.Controls.SetChildIndex(this.button2, 0);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nPorcDescuento)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
+            this.gbProductos.ResumeLayout(false);
+            this.gbCobros.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCobros)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -408,5 +484,11 @@
         private System.Windows.Forms.Label label9;
         private Controles.ComboCatalogos cboCatalogos;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox gbProductos;
+        private System.Windows.Forms.GroupBox gbCobros;
+        private System.Windows.Forms.DataGridView dgvCobros;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

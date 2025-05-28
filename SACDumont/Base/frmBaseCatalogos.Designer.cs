@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBaseCatalogos));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.btNew = new System.Windows.Forms.ToolStripMenuItem();
             this.btSave = new System.Windows.Forms.ToolStripMenuItem();
             this.btDeshabilitar = new System.Windows.Forms.ToolStripMenuItem();
             this.btDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.btQuitarRecargo = new System.Windows.Forms.ToolStripMenuItem();
             this.btAddTutor = new System.Windows.Forms.ToolStripMenuItem();
             this.btAcciones = new System.Windows.Forms.ToolStripMenuItem();
             this.btCerrar = new System.Windows.Forms.ToolStripMenuItem();
-            this.btQuitarRecargo = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,6 +101,16 @@
             this.btDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btDelete.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
+            // btQuitarRecargo
+            // 
+            this.btQuitarRecargo.Image = global::SACDumont.Properties.Resources.eliminar;
+            this.btQuitarRecargo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btQuitarRecargo.Name = "btQuitarRecargo";
+            this.btQuitarRecargo.Size = new System.Drawing.Size(98, 51);
+            this.btQuitarRecargo.Text = "Quitar Recargo";
+            this.btQuitarRecargo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btQuitarRecargo.Click += new System.EventHandler(this.btQuitarRecargo_Click);
+            // 
             // btAddTutor
             // 
             this.btAddTutor.Image = global::SACDumont.Properties.Resources.eliminarusuario;
@@ -128,15 +141,27 @@
             this.btCerrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btCerrar.Click += new System.EventHandler(this.cerrarToolStripMenuItem_Click);
             // 
-            // btQuitarRecargo
+            // imageList1
             // 
-            this.btQuitarRecargo.Image = global::SACDumont.Properties.Resources.eliminar;
-            this.btQuitarRecargo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btQuitarRecargo.Name = "btQuitarRecargo";
-            this.btQuitarRecargo.Size = new System.Drawing.Size(98, 51);
-            this.btQuitarRecargo.Text = "Quitar Recargo";
-            this.btQuitarRecargo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btQuitarRecargo.Click += new System.EventHandler(this.btQuitarRecargo_Click);
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "1.png");
+            this.imageList1.Images.SetKeyName(1, "2.png");
+            this.imageList1.Images.SetKeyName(2, "3.png");
+            this.imageList1.Images.SetKeyName(3, "4.png");
+            this.imageList1.Images.SetKeyName(4, "5.png");
+            this.imageList1.Images.SetKeyName(5, "6.png");
+            this.imageList1.Images.SetKeyName(6, "7.png");
+            this.imageList1.Images.SetKeyName(7, "8.png");
+            this.imageList1.Images.SetKeyName(8, "9.png");
+            this.imageList1.Images.SetKeyName(9, "10.png");
+            this.imageList1.Images.SetKeyName(10, "11.png");
+            this.imageList1.Images.SetKeyName(11, "12.png");
+            this.imageList1.Images.SetKeyName(12, "13.png");
+            this.imageList1.Images.SetKeyName(13, "14.png");
+            this.imageList1.Images.SetKeyName(14, "15.png");
+            this.imageList1.Images.SetKeyName(15, "16.png");
+            this.imageList1.Images.SetKeyName(16, "17.png");
             // 
             // frmBaseCatalogos
             // 
@@ -169,5 +194,6 @@
         protected internal System.Windows.Forms.ToolStripMenuItem btCerrar;
         private System.Windows.Forms.ToolStripMenuItem btDeshabilitar;
         protected internal System.Windows.Forms.ToolStripMenuItem btQuitarRecargo;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

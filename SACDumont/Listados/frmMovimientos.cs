@@ -23,7 +23,7 @@ namespace SACDumont.Listados
         int idCiclo = basConfiguracion.IdCiclo;
         int tipoMovimiento = basGlobals.tipoMovimiento;
         int estatusMovimiento = basGlobals.estatusMovimiento;
-
+        basSql sql = new basSql();
         protected override void Nuevo()
         {
             frmMovimiento frmMovimiento = new frmMovimiento(null);
@@ -115,8 +115,8 @@ namespace SACDumont.Listados
            
             if (dgvMovimientos.SelectedRows.Count == 0) return;
             {
-                DataTable dt = row.Table;
-                frmMovimiento frm = new frmMovimiento(dt);
+                DataSet ds = sql.GetMovimientoDetalle(Convert.ToInt32(row["id_registros"].ToString()));
+                frmMovimiento frm = new frmMovimiento(ds);
                 frm.ShowDialog();
                 CargarMovimientos();
             }

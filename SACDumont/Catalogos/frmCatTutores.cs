@@ -41,6 +41,9 @@ namespace SACDumont.Catalogos
             if (txtApMaterno.Text == "") { MessageBox.Show("El campo Apellido Materno es obligatorio."); txtApMaterno.Focus(); return; }
             if (txRFC.Text == "") { MessageBox.Show("El campo CURP es obligatorio."); txRFC.Focus(); return; }
             if (cmbEstado.SelectedIndex == -1) { MessageBox.Show("El campo Estado Nacimiento es obligatorio."); cmbEstado.Focus(); return; }
+            if (txtTel1.Text == "") { MessageBox.Show("El campo Teléfono 1 es obligatorio."); txtTel1.Focus(); return; }
+            if (txtTel1.Text.Length < 10) { MessageBox.Show("El campo Teléfono 1 debe tener al menos 10 dígitos."); txtTel1.Focus(); return; }
+            if (cboParentesco.SelectedIndex == -1) { MessageBox.Show("El campo Parentesco es obligatorio."); cboParentesco.Focus(); return; }
 
             bool esNuevo = idTutor == 0;
             int idTut = esNuevo ? 0 : Convert.ToInt32(idTutor);

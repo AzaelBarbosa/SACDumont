@@ -24,6 +24,9 @@ namespace SACDumont.Cobros
         int idGrado = 0;
         int idGrupo = 0;
         string strConcepto = "";
+        DataSet dsTemp = new DataSet("Movimiento");
+        basSql sql = new basSql();
+
         protected override void Nuevo()
         {
             frmMovimiento frmMovimiento = new frmMovimiento(null);
@@ -65,10 +68,10 @@ namespace SACDumont.Cobros
         {
             btAddTutor.Visible = false;
         }
-        public frmMovimiento(DataTable dtMov)
+        public frmMovimiento(DataSet dsMov)
         {
             InitializeComponent();
-            this.dtMovimiento = dtMov;
+            this.dsTemp = dsMov;
         }
 
         private void DefinirVariables()
@@ -94,25 +97,18 @@ namespace SACDumont.Cobros
 
         private void VerificarMovimiento()
         {
-            dtMovimiento = sqlServer.ExecSQLReturnDT($@"SELECT a.matricula, m.id_registros ,m.fechahora AS Fecha, a.apmaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, p.descripcion AS Descripcion, 
-                                                        m.monto AS Monto, m.montoTotal - m.monto AS MontoPendiente, m.montoTotal AS Total, catP.descripcion AS FormaPago, catE.descripcion AS Estatus, p.descripcion AS Producto, m.porcentaje_descuento AS Descuento,
-                                                        m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento,m.monto_recargo AS MontoRecargo , p.descripcion AS Producto   
-                                                        FROM movimientos m
-                                                        INNER JOIN movimiento_productos mp ON m.id_registros = mp.id_movimiento
-                                                        INNER JOIN productos p ON p.id_producto = mp.id_producto
-                                                        INNER JOIN alumnos a ON a.matricula = m.id_matricula
-                                                        INNER JOIN inscripciones i ON i.matricula = a.matricula
-                                                        LEFT JOIN catalogos cat ON cat.valor = i.id_grado AND cat.tipo_catalogo = 'Grado' 
-                                                        LEFT JOIN catalogos catG ON catG.valor = i.id_grupo AND catG.tipo_catalogo = 'Grupo' 
-                                                        LEFT JOIN catalogos catP ON catP.valor = m.id_tipopago AND catP.tipo_catalogo = 'TipoPago' 
-                                                        LEFT JOIN catalogos catE ON catE.valor = m.id_estatusmovimiento AND catE.tipo_catalogo = 'EstatusMovimiento'
-                                                        WHERE m.id_ciclo = {basGlobals.iCiclo} AND m.id_registros = {idMovimiento}", "Movimiento");
-            if (dtMovimiento.Rows.Count > 0)
+            if (dsTemp == null)
             {
-                DataRow row = dtMovimiento.Rows[0];
+                return;
+            }
+
+            if (dsTemp.Tables[0].Rows.Count > 0)
+            {
+                DataRow row = dsTemp.Tables[0].Rows[0];
+                lbIDMovimiento.Text = row["id_registros"].ToString();
                 cboAlumnos.matricula = Convert.ToInt32(row["matricula"].ToString());
                 cboAlumnos.Enabled = false;
-                txCosto.Text = Convert.ToDecimal(row["Monto"]).ToString("C");
+                txCosto.Text = Convert.ToDecimal(row["Total"]).ToString("C");
                 txFechaVencimiento.Text = Convert.ToDateTime(row["Fecha"]).ToString("dd/MM/yyyy");
                 txImportePte.Text = Convert.ToDecimal(row["MontoPendiente"]).ToString("C");
                 txTotal.Text = Convert.ToDecimal(row["Total"]).ToString("C");
@@ -124,19 +120,37 @@ namespace SACDumont.Cobros
                 comboProductos1.Enabled = false;
                 cboCatalogos.Text = row["FormaPago"].ToString();
                 cboCatalogos.Enabled = false;
+                dgvCobros.DataSource = dsTemp.Tables["Cobros"];
+                dgvCobros.Columns["id_cobro"].Visible = false;
+                dgvCobros.Columns["FormaPago"].HeaderText = "Forma de Pago";
+                dgvCobros.Columns["monto"].HeaderText = "Monto";
+                dgvCobros.Columns["monto"].DefaultCellStyle.Format = "C2";
+                dgvCobros.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvCobros.RowHeadersVisible = false;
+                dgvProductos.DataSource = dsTemp.Tables["Productos"];
+                dgvProductos.Columns["id_movimiento"].Visible = false;
+                dgvProductos.Columns["Concepto"].Visible = false;
+                dgvProductos.Columns["Producto"].HeaderText = "Producto";
+                dgvProductos.Columns["cantidad"].HeaderText = "Qty";
+                dgvProductos.Columns["cantidad"].DefaultCellStyle.Format = "N0";
+                dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvProductos.RowHeadersVisible = false;
             }
+
         }
 
         private void ValidaTipoMovimiento()
         {
             if (basGlobals.tipoMovimiento != 1)
             {
-                dgvProductos.Visible = false;
+                gbCobros.Visible = false;
+                gbProductos.Visible = false;
                 groupBox2.Location = new Point(16, 161);
             }
             else
             {
-                dgvProductos.Visible = true;
+                gbProductos.Visible = true;
+                gbCobros.Visible = true;
                 groupBox2.Location = new Point(16, 290);
             }
         }
@@ -147,7 +161,7 @@ namespace SACDumont.Cobros
             CargarAlumnos();
             DefinirVariables();
             VerificarMovimiento();
-            ValidaTipoMovimiento();
+            //ValidaTipoMovimiento();
         }
 
         private void comboProductos1_OnCobroSeleccionado_1(DataRow obj)

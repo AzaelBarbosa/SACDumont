@@ -40,7 +40,7 @@
             this.guardarToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(583, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(583, 39);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -48,8 +48,9 @@
             // 
             this.guardarToolStripMenuItem.Image = global::SACDumont.Properties.Resources.guardar;
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(61, 35);
             this.guardarToolStripMenuItem.Text = "Guardar";
+            this.guardarToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
             // frmBaseGeneral

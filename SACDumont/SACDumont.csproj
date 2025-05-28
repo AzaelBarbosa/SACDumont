@@ -248,6 +248,7 @@
     <Compile Include="modulos\basConfiguracion.cs" />
     <Compile Include="modulos\basFunctions.cs" />
     <Compile Include="modulos\basGlobals.cs" />
+    <Compile Include="modulos\basSql.cs" />
     <Compile Include="Otros\frmAcciones.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -265,6 +266,12 @@
     </Compile>
     <Compile Include="Otros\frmConfig.Designer.cs">
       <DependentUpon>frmConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Otros\frmPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Otros\frmPopup.Designer.cs">
+      <DependentUpon>frmPopup.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -330,6 +337,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmConfig.resx">
       <DependentUpon>frmConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Otros\frmPopup.resx">
+      <DependentUpon>frmPopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
