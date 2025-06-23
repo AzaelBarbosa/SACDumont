@@ -179,11 +179,23 @@
       <DependentUpon>frmCatTutores.cs</DependentUpon>
     </Compile>
     <Compile Include="Clases\sqlServer.cs" />
+    <Compile Include="Cobros\frmCobroProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cobros\frmCobroProducto.Designer.cs">
+      <DependentUpon>frmCobroProducto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cobros\frmMovimiento.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Cobros\frmMovimiento.Designer.cs">
       <DependentUpon>frmMovimiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cobros\frmMovimientoCobro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cobros\frmMovimientoCobro.Designer.cs">
+      <DependentUpon>frmMovimientoCobro.cs</DependentUpon>
     </Compile>
     <Compile Include="Controles\ComboAlumnos.cs">
       <SubType>UserControl</SubType>
@@ -245,6 +257,7 @@
     <Compile Include="Listados\frmTutores.Designer.cs">
       <DependentUpon>frmTutores.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\clsModels.cs" />
     <Compile Include="modulos\basConfiguracion.cs" />
     <Compile Include="modulos\basFunctions.cs" />
     <Compile Include="modulos\basGlobals.cs" />
@@ -296,8 +309,14 @@
     <EmbeddedResource Include="Catalogos\frmCatTutores.resx">
       <DependentUpon>frmCatTutores.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Cobros\frmCobroProducto.resx">
+      <DependentUpon>frmCobroProducto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Cobros\frmMovimiento.resx">
       <DependentUpon>frmMovimiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cobros\frmMovimientoCobro.resx">
+      <DependentUpon>frmMovimientoCobro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controles\ComboAlumnos.resx">
       <DependentUpon>ComboAlumnos.cs</DependentUpon>

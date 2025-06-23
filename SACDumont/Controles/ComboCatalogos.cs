@@ -15,6 +15,7 @@ namespace SACDumont.Controles
     public partial class ComboCatalogos : UserControl
     {
         public int? IDValor { get; set; }
+        public string Descripcion { get; set; }
         public string TipoCatalogo { get; set; }
 
         DataTable _datos = new DataTable();
@@ -77,6 +78,20 @@ namespace SACDumont.Controles
         private void cboCatalogos_Validating(object sender, CancelEventArgs e)
         {
             ValidarYAgregarNuevo(cboCatalogos);
+        }
+
+        private void cboCatalogos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboCatalogos.SelectedValue != null && cboCatalogos.SelectedValue is int)
+            {
+                IDValor = (int)cboCatalogos.SelectedValue;
+                Descripcion = cboCatalogos.Text;
+            }
+            else
+            {
+                IDValor = 0;
+                Descripcion = string.Empty;
+            }
         }
     }
 }

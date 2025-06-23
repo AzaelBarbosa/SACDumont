@@ -20,6 +20,7 @@ namespace SACDumont.Modulos
     {
 
         public static DataTable dtExportar;
+        private const string claveSecreta = "Dumont";
         public void ConectaBD()
         {
             string sSQL = "";
@@ -261,6 +262,24 @@ namespace SACDumont.Modulos
                 // Aquí podrías registrar el error en un archivo de log o mostrar un mensaje
                 Console.WriteLine("Error al registrar en la bitácora: " + ex.Message);
             }
+        }
+
+        public static string ObtenerPin()
+        {
+            string fecha = DateTime.Now.ToString("yyyyMMdd");
+            string baseString = claveSecreta + fecha;
+
+            // Usamos hash simple para generar PIN
+            int hash = baseString.GetHashCode();
+            hash = Math.Abs(hash);
+
+            // Tomamos los últimos 4 dígitos como PIN
+            return (hash % 10000).ToString("D4");
+        }
+
+        public static bool ValidarPin(string pinIngresado)
+        {
+            return ObtenerPin() == pinIngresado;
         }
     }
 }

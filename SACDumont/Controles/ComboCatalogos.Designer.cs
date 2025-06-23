@@ -39,6 +39,7 @@
             this.cboCatalogos.Name = "cboCatalogos";
             this.cboCatalogos.Size = new System.Drawing.Size(381, 21);
             this.cboCatalogos.TabIndex = 0;
+            this.cboCatalogos.SelectedIndexChanged += new System.EventHandler(this.cboCatalogos_SelectedIndexChanged);
             this.cboCatalogos.Validating += new System.ComponentModel.CancelEventHandler(this.cboCatalogos_Validating);
             // 
             // ComboCatalogos

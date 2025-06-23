@@ -11,6 +11,8 @@ using SACDumont.Base;
 using SACDumont.Modulos;
 using SACDumont.Clases;
 using SACDumont.modulos;
+using SACDumont.Models;
+using log4net.Util;
 
 namespace SACDumont.Cobros
 {
@@ -26,6 +28,7 @@ namespace SACDumont.Cobros
         string strConcepto = "";
         DataSet dsTemp = new DataSet("Movimiento");
         basSql sql = new basSql();
+       
 
         protected override void Nuevo()
         {
@@ -42,31 +45,24 @@ namespace SACDumont.Cobros
         }
         protected override void Cerrar()
         {
+            basGlobals.listaCobros = new List<MovimientoCobros>();
+            basGlobals.listMovimientos = new List<Movimientos>();
+            basGlobals.listaProductos = new List<MovimientosProductos>();
             this.Close();
         }
         protected override void Deshabilitar()
         {
             // Implementar la lógica para deshabilitar el movimiento
         }
-        protected override void QuitarRecargo()
-        {
-            // Implementar la lógica para quitar el recargo del movimiento
-        }
 
         private void CargarAlumnos()
         {
-            cboAlumnos.SqlQuery = $@"SELECT al.matricula, al.apmaterno + ' ' + al.apmaterno + ' ' + al.nombre AS Alumno, cat.valor AS Grado, cat.descripcion AS DescripcionGrado, 
-                                    ins.id_grupo AS Grupo, catG.descripcion AS DescripcionGrupo 
-                                    FROM alumnos al
-                                    INNER JOIN inscripciones ins ON al.matricula = ins.matricula
-                                    LEFT JOIN catalogos cat ON cat.valor = ins.id_grado AND cat.tipo_catalogo = 'Grado' 
-                                    LEFT JOIN catalogos catG ON catG.valor = ins.id_grupo AND catG.tipo_catalogo = 'Grupo' 
-                                    WHERE ins.id_ciclo = {basGlobals.iCiclo}";
-            cboAlumnos.Inicializar();
+            //cboAlumnos.Inicializar();
         }
         private void CargarMenu()
         {
             btAddTutor.Visible = false;
+            btQuitarRecargo.Visible = false;
         }
         public frmMovimiento(DataSet dsMov)
         {
@@ -99,6 +95,7 @@ namespace SACDumont.Cobros
         {
             if (dsTemp == null)
             {
+                basGlobals.dsMovimiento = sql.GetMovimientoDetalle(0);
                 return;
             }
 
@@ -108,18 +105,13 @@ namespace SACDumont.Cobros
                 lbIDMovimiento.Text = row["id_registros"].ToString();
                 cboAlumnos.matricula = Convert.ToInt32(row["matricula"].ToString());
                 cboAlumnos.Enabled = false;
-                txCosto.Text = Convert.ToDecimal(row["Total"]).ToString("C");
-                txFechaVencimiento.Text = Convert.ToDateTime(row["Fecha"]).ToString("dd/MM/yyyy");
+                txImporte.Text = Convert.ToDecimal(row["Total"]).ToString("C");
                 txImportePte.Text = Convert.ToDecimal(row["MontoPendiente"]).ToString("C");
                 txTotal.Text = Convert.ToDecimal(row["Total"]).ToString("C");
-                nPorcDescuento.Value = Convert.ToDecimal(row["Descuento"]);
+                //nPorcDescuento.Value = Convert.ToDecimal(row["Descuento"]);
                 txDescuento.Text = Convert.ToDecimal(row["MontoDescuento"]).ToString("C");
                 txBeca.Text = Convert.ToDecimal(row["BecaDescuento"]).ToString("C");
-                txRecargo.Text = Convert.ToDecimal(row["MontoRecargo"]).ToString("C");
-                comboProductos1.Text = row["Producto"].ToString();
-                comboProductos1.Enabled = false;
-                cboCatalogos.Text = row["FormaPago"].ToString();
-                cboCatalogos.Enabled = false;
+                //txRecargo.Text = Convert.ToDecimal(row["MontoRecargo"]).ToString("C");
                 dgvCobros.DataSource = dsTemp.Tables["Cobros"];
                 dgvCobros.Columns["id_cobro"].Visible = false;
                 dgvCobros.Columns["FormaPago"].HeaderText = "Forma de Pago";
@@ -133,8 +125,19 @@ namespace SACDumont.Cobros
                 dgvProductos.Columns["Producto"].HeaderText = "Producto";
                 dgvProductos.Columns["cantidad"].HeaderText = "Qty";
                 dgvProductos.Columns["cantidad"].DefaultCellStyle.Format = "N0";
+                dgvProductos.Columns["monto"].HeaderText = "Monto";
+                dgvProductos.Columns["monto"].DefaultCellStyle.Format = "C2";
+                dgvProductos.Columns["monto_recargo"].HeaderText = "Recargo";
+                dgvProductos.Columns["monto_recargo"].DefaultCellStyle.Format = "C2";
                 dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvProductos.RowHeadersVisible = false;
+                if (row["Estatus"].ToString() == "Liquidado")
+                {
+                    btDeleteProducto.Enabled = false;
+                    btNewProducto.Enabled = false;
+                    btDeletePago.Enabled = false;
+                    btNewPago.Enabled = false;
+                }
             }
 
         }
@@ -164,29 +167,114 @@ namespace SACDumont.Cobros
             //ValidaTipoMovimiento();
         }
 
-        private void comboProductos1_OnCobroSeleccionado_1(DataRow obj)
-        {
-            txCosto.Text = Convert.ToDecimal(obj["precio"]).ToString("C");
-            txFechaVencimiento.Text = Convert.ToDateTime(obj["fecha_vencimiento"]).ToString("dd/MM/yyyy");
-            txImporte.Enabled = true;
-            cboCatalogos.Enabled = true; 
-            cboCatalogos.Inicializar();
-        }
-
         private void cboAlumnos_OnAlumnoSeleccionado(DataRow obj)
         {
             idMatricula = Convert.ToInt32(obj["matricula"]);
             idGrado = Convert.ToInt32(obj["Grado"]);
             idGrupo = Convert.ToInt32(obj["Grupo"]);
             this.cboAlumnos.Size = new Size(398, 21);
-
-            comboProductos1.SqlQuery = $@"SELECT p.id_producto, p.descripcion, p.concepto, pc.fecha_vencimiento, pc.precio FROM productos p 
-                                        INNER JOIN producto_ciclo pc ON pc.id_producto = p.id_producto
-                                        LEFT JOIN movimiento_productos mp ON mp.id_producto = p.id_producto
-                                        LEFT JOIN movimientos m ON m.id_registros = mp.id_movimiento 
-                                        WHERE pc.id_ciclo = {basGlobals.iCiclo} AND pc.id_grupo = {idGrupo} AND mp.id_producto IS NULL AND p.concepto = '{strConcepto}'";
-            comboProductos1.Inicializar();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (cboAlumnos.matricula == 0)
+            {
+                MessageBox.Show("Debe seleccionar un alumno antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            frmCobroProducto frmCobro = new frmCobroProducto(idGrupo,strConcepto);
+            frmCobro.Text = "Agregar Producto";
+            frmCobro.ShowDialog();
+            if (basGlobals.listaProductos.Count > 0)
+            {
+                dgvProductos.DataSource = basGlobals.listaProductos;
+                dgvProductos.Columns["id_movimiento"].Visible = false;
+                dgvProductos.Columns["id_producto"].Visible = false;
+                dgvProductos.Columns["id"].Visible = false;
+                dgvProductos.Columns["descriptionProducto"].HeaderText = "Producto";
+                dgvProductos.Columns["cantidad"].HeaderText = "Qty";
+                dgvProductos.Columns["cantidad"].DefaultCellStyle.Format = "N0";
+                dgvProductos.Columns["monto"].HeaderText = "Monto";
+                dgvProductos.Columns["monto"].DefaultCellStyle.Format = "C2";
+                dgvProductos.Columns["monto_recargo"].HeaderText = "Recargo";
+                dgvProductos.Columns["monto_recargo"].DefaultCellStyle.Format = "C2";
+
+                dgvProductos.Columns["descriptionProducto"].Width = 220;
+                dgvProductos.Columns["cantidad"].Width = 30;
+                dgvProductos.Columns["monto"].Width = 110;
+                dgvProductos.Columns["monto_recargo"].Width = 110;
+                dgvProductos.RowHeadersVisible = false;
+
+                txImporte.Text = basGlobals.listaProductos.Sum(p => p.monto).ToString();
+                txImporte.Text = Convert.ToDecimal(txImporte.Text).ToString("C2");
+                txRecargo.Text = basGlobals.listaProductos.Sum(p => p.monto_recargo).ToString();
+                txRecargo.Text = Convert.ToDecimal(txRecargo.Text).ToString("C2");
+                txTotal.Text = (Convert.ToDecimal(txImporte.Text.Replace("$", "").Replace(",", "").Trim()) + Convert.ToDecimal(txRecargo.Text.Replace("$", "").Replace(",", "").Trim())).ToString("C2");
+                txImportePte.Text = txTotal.Text;
+                txImportePte.ForeColor = Color.Red;
+                dgvProductos.Refresh();
+            }
+        }
+
+        private void btNewPago_Click(object sender, EventArgs e)
+        {
+            decimal decImportePte = 0;
+
+            if (dgvProductos.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay ningun Producto para cobrar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (basGlobals.listaCobros.Count > 0)
+            {
+                decImportePte = (Convert.ToDecimal(txTotal.Text.Replace("$", "").Replace(",", "").Trim()) - Convert.ToDecimal(basGlobals.listaCobros.Sum(p => p.monto).ToString()));
+                txImportePte.Text = decImportePte.ToString("C2");
+
+            }
+            else
+            {
+                decImportePte = (Convert.ToDecimal(txTotal.Text.Replace("$", "").Replace(",", "").Trim()));
+                txImportePte.Text = decImportePte.ToString("C2");
+            }
+
+            frmMovimientoCobro frmMovimientoCobro = new frmMovimientoCobro(decImportePte);
+            frmMovimientoCobro.Text = "Agregar Cobro";
+            frmMovimientoCobro.ShowDialog();
+            if (basGlobals.listaCobros.Count > 0)
+            {
+                dgvCobros.DataSource = null;
+                dgvCobros.DataSource = basGlobals.listaCobros;
+                dgvCobros.Columns["id_cobro"].Visible = false;
+                dgvCobros.Columns["id_movimiento"].Visible = false;
+                dgvCobros.Columns["tipopago"].Visible = false;
+                dgvCobros.Columns["descripcionPago"].HeaderText = "Forma de Pago";
+                dgvCobros.Columns["monto"].HeaderText = "Monto";
+                dgvCobros.Columns["monto"].DefaultCellStyle.Format = "C2";
+                dgvCobros.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvCobros.RowHeadersVisible = false;
+                dgvCobros.Refresh();
+            }
+
+            if (decImportePte > 0)
+            {
+                txImportePte.ForeColor = Color.Red;
+            }
+            else
+            {
+                txImportePte.ForeColor = Color.Black;
+            }
+           
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboAlumnos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+        }
     }
 }

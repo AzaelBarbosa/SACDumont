@@ -1,4 +1,7 @@
-﻿ using System;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using SACDumont.Clases;
+using SACDumont.modulos;
+ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SACDumont.Clases;
 
 namespace SACDumont.Controles
 {
@@ -47,6 +49,17 @@ namespace SACDumont.Controles
         }
         public void Inicializar()
         {
+            SqlQuery = $@"SELECT al.matricula, al.appaterno + ' ' + al.apmaterno + ' ' + al.nombre AS Alumno, cat.valor AS Grado, cat.descripcion AS DescripcionGrado, 
+                                    ins.id_grupo AS Grupo, catG.descripcion AS DescripcionGrupo 
+                                    FROM alumnos al
+                                    INNER JOIN inscripciones ins ON al.matricula = ins.matricula
+                                    LEFT JOIN catalogos cat ON cat.valor = ins.id_grado AND cat.tipo_catalogo = 'Grado' 
+                                    LEFT JOIN catalogos catG ON catG.valor = ins.id_grupo AND catG.tipo_catalogo = 'Grupo' 
+                                    WHERE ins.id_ciclo = {basGlobals.iCiclo}";
+            if (txProducto.Text.Length > 0)
+            {
+                SqlQuery = SqlQuery + $@" AND (al.appaterno + ' ' + al.apmaterno + ' ' + al.nombre LIKE '%{txProducto.Text}%')";
+            }
             CargarDatos();
         }
 
@@ -62,6 +75,7 @@ namespace SACDumont.Controles
             dgv.Columns["Alumno"].HeaderText = "Alumno";
             dgv.Columns["Grado"].HeaderText = "Grado";
             dgv.Columns["Grupo"].HeaderText = "Grupo";
+            
             AjustarAlturaPanel(dgv);
         }
 
@@ -89,12 +103,7 @@ namespace SACDumont.Controles
 
         private void txProducto_Click(object sender, EventArgs e)
         {
-            if (popup == null || popup.IsDisposed)
-            {
-                popup = CrearNuevoPopup();
-            }
-            popup.Show();
-            popup.BringToFront();
+           
         }
 
         private Form CrearNuevoPopup()
@@ -120,13 +129,12 @@ namespace SACDumont.Controles
                 ReadOnly = true,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
                 MultiSelect = false,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells,
             };
             form.Controls.Add(grid);
             grid.DataSource = _datos;
             FormatoCeldas(grid);
             AjustarAlturaPanel(grid);
-
             var screenPoint = this.PointToScreen(new Point(txProducto.Left, txProducto.Bottom));
             form.Location = screenPoint;
 
@@ -146,5 +154,19 @@ namespace SACDumont.Controles
             return form;
         }
 
+        private void txProducto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true;
+                this.Inicializar();
+                if (popup == null || popup.IsDisposed)
+                {
+                    popup = CrearNuevoPopup();
+                }
+                popup.Show();
+                popup.BringToFront();
+            }
+        }
     }
 }

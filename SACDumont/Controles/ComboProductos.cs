@@ -28,6 +28,10 @@ namespace SACDumont.Controles
 
         public void Inicializar()
         {
+            if (txProducto.Text.Length > 0)
+            {
+                SqlQuery = SqlQuery + $@" AND (p.descripcion LIKE '%{txProducto.Text}%')";
+            }
             CargarDatos();
         }
 
@@ -38,12 +42,7 @@ namespace SACDumont.Controles
 
         private void txProducto_Click(object sender, EventArgs e)
         {
-            if (popup == null || popup.IsDisposed)
-            {
-                popup = CrearNuevoPopup();
-            }
-            popup.Show();
-            popup.BringToFront();
+       
         }
 
         public void CargarDatos()
@@ -116,7 +115,7 @@ namespace SACDumont.Controles
                 ReadOnly = true,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
                 MultiSelect = false,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells,
             };
             form.Controls.Add(grid);
 
@@ -145,5 +144,19 @@ namespace SACDumont.Controles
             return form;
         }
 
+        private void txProducto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true;
+                this.Inicializar();
+                if (popup == null || popup.IsDisposed)
+                {
+                    popup = CrearNuevoPopup();
+                }
+                popup.Show();
+                popup.BringToFront();
+            }
+        }
     }
 }

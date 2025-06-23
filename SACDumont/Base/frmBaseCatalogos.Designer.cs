@@ -186,14 +186,14 @@
 
         #endregion
         public System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem btNew;
-        private System.Windows.Forms.ToolStripMenuItem btDelete;
-        private System.Windows.Forms.ToolStripMenuItem btAcciones;
-        private System.Windows.Forms.ToolStripMenuItem btSave;
         public System.Windows.Forms.ToolStripMenuItem btAddTutor;
         protected internal System.Windows.Forms.ToolStripMenuItem btCerrar;
-        private System.Windows.Forms.ToolStripMenuItem btDeshabilitar;
         protected internal System.Windows.Forms.ToolStripMenuItem btQuitarRecargo;
         private System.Windows.Forms.ImageList imageList1;
+        public System.Windows.Forms.ToolStripMenuItem btNew;
+        public System.Windows.Forms.ToolStripMenuItem btDelete;
+        public System.Windows.Forms.ToolStripMenuItem btAcciones;
+        public System.Windows.Forms.ToolStripMenuItem btSave;
+        public System.Windows.Forms.ToolStripMenuItem btDeshabilitar;
     }
 }

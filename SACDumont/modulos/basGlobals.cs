@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SACDumont.Models;
 
 namespace SACDumont.modulos
 {
@@ -16,6 +18,12 @@ namespace SACDumont.modulos
         public static int tipoMovimiento;
         public static int estatusMovimiento;
         public static string sConcepto;
+        public static DataSet dsMovimiento;
+        public static DataSet dsMovimientoProductos;
+        public static DataSet dsMovimientoPagos;
+        public static List<MovimientosProductos> listaProductos = new List<MovimientosProductos>();
+        public static List<Movimientos> listMovimientos = new List<Movimientos>();
+        public static List<MovimientoCobros> listaCobros = new List<MovimientoCobros>();
     }
 
     public enum Perfiles

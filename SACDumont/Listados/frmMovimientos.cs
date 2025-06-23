@@ -48,7 +48,7 @@ namespace SACDumont.Listados
         private void CargarMovimientos()
         {
             dtMovimientos = sqlServer.ExecSQLReturnDT($@"SELECT m.id_registros ,m.fechahora AS Fecha, p.descripcion AS Producto, a.apmaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, 
-                                                        m.montoTotal AS Total, (SELECT SUM(monto) FROM cobros WHERE id_movimiento = m.id_registros) - m.montoTotal AS MontoPendiente, m.porcentaje_descuento AS Descuento, m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento,m.monto_recargo AS MontoRecargo,
+                                                        m.montoTotal AS Total, (SELECT SUM(monto) FROM cobros WHERE id_movimiento = m.id_registros) - m.montoTotal AS MontoPendiente, m.porcentaje_descuento AS Descuento, m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento,
                                                         catP.descripcion AS FormaPago, catE.descripcion AS Estatus
                                                         FROM movimientos m
                                                         INNER JOIN movimiento_productos mp ON m.id_registros = mp.id_movimiento
@@ -85,8 +85,8 @@ namespace SACDumont.Listados
             dgvMovimientos.Columns["MontoDescuento"].DefaultCellStyle.Format = "C2";
             dgvMovimientos.Columns["BecaDescuento"].HeaderText = "Beca Descuento";
             dgvMovimientos.Columns["BecaDescuento"].DefaultCellStyle.Format = "C2";
-            dgvMovimientos.Columns["MontoRecargo"].HeaderText = "Monto Recargo";
-            dgvMovimientos.Columns["MontoRecargo"].DefaultCellStyle.Format = "C2";
+            //dgvMovimientos.Columns["MontoRecargo"].HeaderText = "Monto Recargo";
+            //dgvMovimientos.Columns["MontoRecargo"].DefaultCellStyle.Format = "C2";
 
             dgvMovimientos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvMovimientos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
