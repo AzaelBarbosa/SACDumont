@@ -28,7 +28,6 @@ namespace SACDumont.Controles
                 txProducto.Tag = value;
                 if (value != null)
                 {
-                    this.Inicializar();
                     DataRow row = _datos.AsEnumerable().FirstOrDefault(r => r.Field<int>("matricula") == value);
                     if (row != null)
                     {
