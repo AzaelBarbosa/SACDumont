@@ -142,7 +142,7 @@ namespace SACDumont
         private void btCobroProducts_Click(object sender, EventArgs e)
         {
             basGlobals.tipoMovimiento = (int)TipoMovimiento.Producto;
-            basGlobals.sConcepto = Conceptos.PRODUCTOS.ToString();
+            basGlobals.sConcepto = Conceptos.PRODUCTO.ToString();
             AbrirUnicoFormularioHijo<frmMovimientos>();
         }
     }
