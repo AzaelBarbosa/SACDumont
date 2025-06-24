@@ -21,9 +21,9 @@ namespace SACDumont.modulos
         public static DataSet dsMovimiento;
         public static DataSet dsMovimientoProductos;
         public static DataSet dsMovimientoPagos;
-        public static List<MovimientosProductos> listaProductos = new List<MovimientosProductos>();
-        public static List<Movimientos> listMovimientos = new List<Movimientos>();
-        public static List<MovimientoCobros> listaCobros = new List<MovimientoCobros>();
+        public static List<movimiento_productos> listaProductos = new List<movimiento_productos>();
+        public static Movimientos Movimiento = new Movimientos();
+        public static List<cobros> listaCobros = new List<cobros>();
     }
 
     public enum Perfiles

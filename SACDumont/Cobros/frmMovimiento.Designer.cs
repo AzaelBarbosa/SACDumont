@@ -93,10 +93,10 @@
             // 
             // txImporte
             // 
+            this.txImporte.Enabled = false;
             this.txImporte.Location = new System.Drawing.Point(3, 44);
             this.txImporte.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txImporte.Name = "txImporte";
-            this.txImporte.ReadOnly = true;
             this.txImporte.Size = new System.Drawing.Size(72, 21);
             this.txImporte.TabIndex = 31;
             this.txImporte.Text = "0";
@@ -113,11 +113,11 @@
             // 
             // txTotal
             // 
+            this.txTotal.Enabled = false;
             this.txTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txTotal.Location = new System.Drawing.Point(315, 44);
             this.txTotal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txTotal.Name = "txTotal";
-            this.txTotal.ReadOnly = true;
             this.txTotal.Size = new System.Drawing.Size(83, 21);
             this.txTotal.TabIndex = 5;
             this.txTotal.Text = "0";
@@ -125,12 +125,12 @@
             // 
             // txImportePte
             // 
+            this.txImportePte.Enabled = false;
             this.txImportePte.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txImportePte.ForeColor = System.Drawing.Color.Red;
             this.txImportePte.Location = new System.Drawing.Point(406, 44);
             this.txImportePte.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txImportePte.Name = "txImportePte";
-            this.txImportePte.ReadOnly = true;
             this.txImportePte.Size = new System.Drawing.Size(107, 21);
             this.txImportePte.TabIndex = 6;
             this.txImportePte.Text = "0";
@@ -147,10 +147,10 @@
             // 
             // txBeca
             // 
+            this.txBeca.Enabled = false;
             this.txBeca.Location = new System.Drawing.Point(159, 44);
             this.txBeca.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txBeca.Name = "txBeca";
-            this.txBeca.ReadOnly = true;
             this.txBeca.Size = new System.Drawing.Size(66, 21);
             this.txBeca.TabIndex = 29;
             this.txBeca.Text = "0";
@@ -177,10 +177,10 @@
             // 
             // txRecargo
             // 
+            this.txRecargo.Enabled = false;
             this.txRecargo.Location = new System.Drawing.Point(233, 44);
             this.txRecargo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txRecargo.Name = "txRecargo";
-            this.txRecargo.ReadOnly = true;
             this.txRecargo.Size = new System.Drawing.Size(74, 21);
             this.txRecargo.TabIndex = 2;
             this.txRecargo.Text = "0";
@@ -197,10 +197,10 @@
             // 
             // txDescuento
             // 
-            this.txDescuento.Location = new System.Drawing.Point(79, 44);
+            this.txDescuento.Enabled = false;
+            this.txDescuento.Location = new System.Drawing.Point(82, 44);
             this.txDescuento.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txDescuento.Name = "txDescuento";
-            this.txDescuento.ReadOnly = true;
             this.txDescuento.Size = new System.Drawing.Size(72, 21);
             this.txDescuento.TabIndex = 3;
             this.txDescuento.Text = "0";
@@ -208,7 +208,7 @@
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(76, 17);
+            this.label7.Location = new System.Drawing.Point(81, 17);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(75, 27);
@@ -219,11 +219,14 @@
             // 
             this.dgvProductos.AllowUserToAddRows = false;
             this.dgvProductos.AllowUserToDeleteRows = false;
+            this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProductos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProductos.Location = new System.Drawing.Point(3, 17);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.ReadOnly = true;
+            this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProductos.Size = new System.Drawing.Size(479, 245);
             this.dgvProductos.TabIndex = 3;
             // 
@@ -276,11 +279,14 @@
             // 
             this.dgvCobros.AllowUserToAddRows = false;
             this.dgvCobros.AllowUserToDeleteRows = false;
+            this.dgvCobros.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvCobros.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvCobros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCobros.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCobros.Location = new System.Drawing.Point(3, 17);
             this.dgvCobros.Name = "dgvCobros";
             this.dgvCobros.ReadOnly = true;
+            this.dgvCobros.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCobros.Size = new System.Drawing.Size(476, 156);
             this.dgvCobros.TabIndex = 3;
             // 
@@ -326,6 +332,7 @@
             this.btDeleteProducto.Size = new System.Drawing.Size(25, 25);
             this.btDeleteProducto.TabIndex = 48;
             this.btDeleteProducto.UseVisualStyleBackColor = true;
+            this.btDeleteProducto.Click += new System.EventHandler(this.btDeleteProducto_Click);
             // 
             // btDeletePago
             // 
@@ -336,6 +343,7 @@
             this.btDeletePago.Size = new System.Drawing.Size(25, 25);
             this.btDeletePago.TabIndex = 50;
             this.btDeletePago.UseVisualStyleBackColor = true;
+            this.btDeletePago.Click += new System.EventHandler(this.btDeletePago_Click);
             // 
             // btNewPago
             // 

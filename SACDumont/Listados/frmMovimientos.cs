@@ -26,8 +26,9 @@ namespace SACDumont.Listados
         basSql sql = new basSql();
         protected override void Nuevo()
         {
-            frmMovimiento frmMovimiento = new frmMovimiento(null);
+            frmMovimiento frmMovimiento = new frmMovimiento(0);
             frmMovimiento.ShowDialog();
+            CargarMovimientos();
         }
         protected override void Guardar()
         {
@@ -49,15 +50,14 @@ namespace SACDumont.Listados
         {
             dtMovimientos = sqlServer.ExecSQLReturnDT($@"SELECT m.id_registros ,m.fechahora AS Fecha, p.descripcion AS Producto, a.apmaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, 
                                                         m.montoTotal AS Total, (SELECT SUM(monto) FROM cobros WHERE id_movimiento = m.id_registros) - m.montoTotal AS MontoPendiente, m.porcentaje_descuento AS Descuento, m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento,
-                                                        catP.descripcion AS FormaPago, catE.descripcion AS Estatus
+                                                        catE.descripcion AS Estatus
                                                         FROM movimientos m
                                                         INNER JOIN movimiento_productos mp ON m.id_registros = mp.id_movimiento
                                                         INNER JOIN productos p ON p.id_producto = mp.id_producto
                                                         INNER JOIN alumnos a ON a.matricula = m.id_matricula
                                                         INNER JOIN inscripciones i ON i.matricula = a.matricula
                                                         LEFT JOIN catalogos cat ON cat.valor = i.id_grado AND cat.tipo_catalogo = 'Grado' 
-                                                        LEFT JOIN catalogos catG ON catG.valor = i.id_grupo AND catG.tipo_catalogo = 'Grupo' 
-                                                        LEFT JOIN catalogos catP ON catP.valor = m.id_tipopago AND catP.tipo_catalogo = 'TipoPago' 
+                                                        LEFT JOIN catalogos catG ON catG.valor = i.id_grupo AND catG.tipo_catalogo = 'Grupo'
                                                         LEFT JOIN catalogos catE ON catE.valor = m.id_estatusmovimiento AND catE.tipo_catalogo = 'EstatusMovimiento'
                                                         WHERE m.id_ciclo = {basGlobals.iCiclo} AND p.concepto = '{basGlobals.sConcepto}'", "Movimientos");
             dgvMovimientos.DataSource = dtMovimientos;
@@ -76,7 +76,6 @@ namespace SACDumont.Listados
             dgvMovimientos.Columns["MontoPendiente"].DefaultCellStyle.Format = "C2";
             dgvMovimientos.Columns["Total"].HeaderText = "Total";
             dgvMovimientos.Columns["Total"].DefaultCellStyle.Format = "C2";
-            dgvMovimientos.Columns["FormaPago"].HeaderText = "Forma de Pago";
             dgvMovimientos.Columns["Estatus"].HeaderText = "Estatus";
             dgvMovimientos.Columns["Producto"].HeaderText = "Producto";
             dgvMovimientos.Columns["Descuento"].HeaderText = "Descuento";
@@ -85,8 +84,6 @@ namespace SACDumont.Listados
             dgvMovimientos.Columns["MontoDescuento"].DefaultCellStyle.Format = "C2";
             dgvMovimientos.Columns["BecaDescuento"].HeaderText = "Beca Descuento";
             dgvMovimientos.Columns["BecaDescuento"].DefaultCellStyle.Format = "C2";
-            //dgvMovimientos.Columns["MontoRecargo"].HeaderText = "Monto Recargo";
-            //dgvMovimientos.Columns["MontoRecargo"].DefaultCellStyle.Format = "C2";
 
             dgvMovimientos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvMovimientos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
@@ -115,8 +112,8 @@ namespace SACDumont.Listados
            
             if (dgvMovimientos.SelectedRows.Count == 0) return;
             {
-                DataSet ds = sql.GetMovimientoDetalle(Convert.ToInt32(row["id_registros"].ToString()));
-                frmMovimiento frm = new frmMovimiento(ds);
+                //DataSet ds = sql.GetMovimientoDetalle(Convert.ToInt32(row["id_registros"].ToString()));
+                frmMovimiento frm = new frmMovimiento((int)row["id_registros"]);
                 frm.ShowDialog();
                 CargarMovimientos();
             }
