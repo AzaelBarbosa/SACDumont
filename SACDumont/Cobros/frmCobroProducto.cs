@@ -25,7 +25,7 @@ namespace SACDumont.Cobros
         string strProducto = "Producto";
         decimal decPrecio = 0;
         basGlobals basGlobals = new basGlobals();
-        MovimientosProductos productos;
+        movimiento_productos productos;
         protected override void Nuevo()
         {
 
@@ -47,7 +47,7 @@ namespace SACDumont.Cobros
                     return;
                 }
 
-                productos = new MovimientosProductos
+                productos = new movimiento_productos
                 {
                     id_producto = Convert.ToInt32(comboProductos1.IdProductoSeleccionado),
                     descriptionProducto = comboProductos1.Descripcion,

@@ -19,7 +19,7 @@ namespace SACDumont.Cobros
     {
         decimal importePendiente = 0;
         decimal importeFrente = 0;
-        MovimientoCobros movimientoCobros;
+        cobros movimientoCobros;
         protected override void Guardar()
         {
             // Implementar la lógica para guardar el movimiento  
@@ -27,7 +27,18 @@ namespace SACDumont.Cobros
             string rawText = txCosto.Text.Replace("$", "").Replace(",", "").Trim();
             decimal.TryParse(rawText, out total);
 
-            movimientoCobros = new MovimientoCobros
+            if (total <= 0)
+            {
+                MessageBox.Show("El monto debe ser mayor a cero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (total > importePendiente)
+            {
+                MessageBox.Show("El monto ingresado no puede ser mayor al importe pendiente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            movimientoCobros = new cobros
             {
                 id_movimiento = 0,
                 monto = total,
