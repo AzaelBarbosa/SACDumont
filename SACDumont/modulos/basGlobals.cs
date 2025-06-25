@@ -62,7 +62,7 @@ namespace SACDumont.modulos
     {
         INSCRIPCION,
         COLEGIATURA,
-        PRODUCTOS,
+        PRODUCTO,
         OTROS
     }
 

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.btInscripcion = new System.Windows.Forms.ToolStripMenuItem();
             this.btNuevoIngreso = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,6 +101,7 @@
             this.btNuevoIngreso.Name = "btNuevoIngreso";
             this.btNuevoIngreso.Size = new System.Drawing.Size(180, 22);
             this.btNuevoIngreso.Text = "Nuevo Ingreso";
+            this.btNuevoIngreso.Click += new System.EventHandler(this.btNuevoIngreso_Click);
             // 
             // btReinscripcion
             // 
@@ -122,7 +124,7 @@
             // 
             this.btCobroColegiatura.Image = global::SACDumont.Properties.Resources.salario_del_usuario;
             this.btCobroColegiatura.Name = "btCobroColegiatura";
-            this.btCobroColegiatura.Size = new System.Drawing.Size(180, 22);
+            this.btCobroColegiatura.Size = new System.Drawing.Size(135, 22);
             this.btCobroColegiatura.Text = "Colegiatura";
             this.btCobroColegiatura.Click += new System.EventHandler(this.btCobroColegiatura_Click);
             // 
@@ -130,7 +132,7 @@
             // 
             this.btCobroInscripcion.Image = global::SACDumont.Properties.Resources.salario__1_;
             this.btCobroInscripcion.Name = "btCobroInscripcion";
-            this.btCobroInscripcion.Size = new System.Drawing.Size(180, 22);
+            this.btCobroInscripcion.Size = new System.Drawing.Size(135, 22);
             this.btCobroInscripcion.Text = "Inscripcion";
             this.btCobroInscripcion.Click += new System.EventHandler(this.btCobroInscripcion_Click);
             // 
@@ -138,7 +140,7 @@
             // 
             this.btCobroProducts.Image = global::SACDumont.Properties.Resources.salario;
             this.btCobroProducts.Name = "btCobroProducts";
-            this.btCobroProducts.Size = new System.Drawing.Size(180, 22);
+            this.btCobroProducts.Size = new System.Drawing.Size(135, 22);
             this.btCobroProducts.Text = "Productos";
             this.btCobroProducts.Click += new System.EventHandler(this.btCobroProducts_Click);
             // 
@@ -375,6 +377,7 @@
             this.ClientSize = new System.Drawing.Size(981, 617);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;

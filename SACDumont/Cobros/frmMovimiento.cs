@@ -171,7 +171,7 @@ namespace SACDumont.Cobros
         #region Métodos Privados
         private void CargarAlumnos()
         {
-            //cboAlumnos.Inicializar();
+            cboAlumnos.Inicializar();
         }
         private void CargarMenu()
         {
@@ -255,6 +255,13 @@ namespace SACDumont.Cobros
                     btNewProducto.Enabled = false;
                     btDeletePago.Enabled = false;
                     btNewPago.Enabled = false;
+                }
+                else if (basGlobals.Movimiento.id_estatusmovimiento == (int)modulos.EstatusMovimiento.Abono)
+                {
+                    btDeleteProducto.Enabled = false;
+                    btNewProducto.Enabled = false;
+                    btDeletePago.Enabled = true;
+                    btNewPago.Enabled = true;
                 }
             }
 

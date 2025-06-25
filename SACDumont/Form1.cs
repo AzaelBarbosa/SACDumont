@@ -12,10 +12,11 @@ using SACDumont.Otros;
 using SACDumont.Clases;
 using SACDumont.Modulos;
 using SACDumont.modulos;
+using SACDumont.Catalogos;
 
 namespace SACDumont
 {
-    public partial class frmMain: Form
+    public partial class frmMain : Form
     {
         basFunctions basFunctions = new basFunctions();
         basConfiguracion basConfig = new basConfiguracion();
@@ -31,10 +32,10 @@ namespace SACDumont
 
         private void btSalir_Click(object sender, EventArgs e)
         {
-            Environment.Exit(0);                                                                          
+            Environment.Exit(0);
         }
 
- 
+
         public void AbrirFormularioHijo<T>() where T : Form, new()
         {
             // Verifica si ya está abierto
@@ -74,12 +75,12 @@ namespace SACDumont
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-           
-          
+
+
             DataTable dtConfig = sqlServer.ExecSQLReturnDT("SELECT * FROM config", "Config");
             DataTable dtCiclo = sqlServer.ExecSQLReturnDT("SELECT * FROM ciclos_escolares WHERE GETDATE() BETWEEN fecha_inicio AND fecha_fin", "Ciclos");
 
-           if (!basFunctions.DataVacio(dtConfig))
+            if (!basFunctions.DataVacio(dtConfig))
             {
                 basConfig.SetConfig(int.Parse(dtCiclo.Rows[0]["id_ciclo"].ToString()), bool.Parse(dtConfig.Rows[0]["aplicar_recargos"].ToString()), bool.Parse(dtConfig.Rows[0]["aplicar_promociones"].ToString()), int.Parse(dtConfig.Rows[0]["porcentaje_recargo"].ToString()), int.Parse(dtConfig.Rows[0]["dias_tolerancia"].ToString()));
                 basConfiguracion.InformacionHeader = basConfiguracion.InformacionHeader + " || Ciclo Escolar: " + dtCiclo.Rows[0]["ciclo"].ToString();
@@ -98,7 +99,7 @@ namespace SACDumont
 
         private void btConfiguracion_Click(object sender, EventArgs e)
         {
-         
+
         }
 
         private void btCatalogosProducto_Click(object sender, EventArgs e)
@@ -142,8 +143,15 @@ namespace SACDumont
         private void btCobroProducts_Click(object sender, EventArgs e)
         {
             basGlobals.tipoMovimiento = (int)TipoMovimiento.Producto;
-            basGlobals.sConcepto = Conceptos.PRODUCTOS.ToString();
+            basGlobals.sConcepto = Conceptos.PRODUCTO.ToString();
             AbrirUnicoFormularioHijo<frmMovimientos>();
+        }
+
+        private void btNuevoIngreso_Click(object sender, EventArgs e)
+        {
+            frmCatAlumnos frmCatAlumnos = new frmCatAlumnos(0);
+            frmCatAlumnos.Text = "Nuevo Ingreso de Alumno";
+            frmCatAlumnos.ShowDialog();
         }
     }
 }

@@ -14,7 +14,30 @@ namespace SACDumont.Controles
 {
     public partial class ComboCatalogos : UserControl
     {
-        public int? IDValor { get; set; }
+        public int? IDValor
+        {
+            get
+            {
+                return Convert.ToInt32(cboCatalogos.Tag);
+            }
+            set
+            {
+                cboCatalogos.Tag = value;
+                if (value != null)
+                {
+                    DataRow row = _datos.AsEnumerable().FirstOrDefault(r => r.Field<int>("valor") == value);
+                    if (row != null)
+                    {
+                        cboCatalogos.Text = row["descripcion"].ToString();
+                    }
+                }
+                else
+                {
+                    cboCatalogos.Text = string.Empty;
+                    cboCatalogos.SelectedIndex = -1;
+                }
+            }
+        }
         public string Descripcion { get; set; }
         public string TipoCatalogo { get; set; }
 

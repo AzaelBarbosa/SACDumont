@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.btCancelar = new System.Windows.Forms.Button();
             this.btEntrar = new System.Windows.Forms.Button();
             this.cboUsuarios = new System.Windows.Forms.ComboBox();
@@ -96,7 +97,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::SACDumont.Properties.Resources.Logosinfondo;
+            this.pictureBox1.Image = global::SACDumont.Properties.Resources.logoNuevo;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(125, 117);
@@ -117,6 +118,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmLogin";
