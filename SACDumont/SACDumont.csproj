@@ -185,6 +185,12 @@
     <Compile Include="Catalogos\frmCatProducto.Designer.cs">
       <DependentUpon>frmCatProducto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Catalogos\frmCatPromocion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\frmCatPromocion.Designer.cs">
+      <DependentUpon>frmCatPromocion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Catalogos\frmCatTutores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -265,6 +271,12 @@
     <Compile Include="Listados\frmProductos.Designer.cs">
       <DependentUpon>frmProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados\frmPromociones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\frmPromociones.Designer.cs">
+      <DependentUpon>frmPromociones.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listados\frmTutores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -320,6 +332,9 @@
     <EmbeddedResource Include="Catalogos\frmCatProducto.resx">
       <DependentUpon>frmCatProducto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\frmCatPromocion.resx">
+      <DependentUpon>frmCatPromocion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Catalogos\frmCatTutores.resx">
       <DependentUpon>frmCatTutores.cs</DependentUpon>
     </EmbeddedResource>
@@ -358,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\frmProductos.resx">
       <DependentUpon>frmProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\frmPromociones.resx">
+      <DependentUpon>frmPromociones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\frmTutores.resx">
       <DependentUpon>frmTutores.cs</DependentUpon>

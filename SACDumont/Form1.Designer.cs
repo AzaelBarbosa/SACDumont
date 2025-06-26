@@ -43,6 +43,7 @@
             this.btCatalogosAlumnos = new System.Windows.Forms.ToolStripMenuItem();
             this.btCatalogosTutores = new System.Windows.Forms.ToolStripMenuItem();
             this.btCatalogosUsuarios = new System.Windows.Forms.ToolStripMenuItem();
+            this.promocionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btReportes = new System.Windows.Forms.ToolStripMenuItem();
             this.btReimpresionTickets = new System.Windows.Forms.ToolStripMenuItem();
             this.btRptAcdemicos = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,14 +100,14 @@
             // btNuevoIngreso
             // 
             this.btNuevoIngreso.Name = "btNuevoIngreso";
-            this.btNuevoIngreso.Size = new System.Drawing.Size(180, 22);
+            this.btNuevoIngreso.Size = new System.Drawing.Size(151, 22);
             this.btNuevoIngreso.Text = "Nuevo Ingreso";
             this.btNuevoIngreso.Click += new System.EventHandler(this.btNuevoIngreso_Click);
             // 
             // btReinscripcion
             // 
             this.btReinscripcion.Name = "btReinscripcion";
-            this.btReinscripcion.Size = new System.Drawing.Size(180, 22);
+            this.btReinscripcion.Size = new System.Drawing.Size(151, 22);
             this.btReinscripcion.Text = "Reinscripcion";
             // 
             // btCobros
@@ -150,7 +151,8 @@
             this.btCatalogosProducto,
             this.btCatalogosAlumnos,
             this.btCatalogosTutores,
-            this.btCatalogosUsuarios});
+            this.btCatalogosUsuarios,
+            this.promocionesToolStripMenuItem});
             this.btCatalogos.Image = global::SACDumont.Properties.Resources.libro_y_lapiz;
             this.btCatalogos.Name = "btCatalogos";
             this.btCatalogos.Size = new System.Drawing.Size(88, 20);
@@ -160,7 +162,7 @@
             // 
             this.btCatalogosProducto.Image = global::SACDumont.Properties.Resources.caja_de_entrega;
             this.btCatalogosProducto.Name = "btCatalogosProducto";
-            this.btCatalogosProducto.Size = new System.Drawing.Size(128, 22);
+            this.btCatalogosProducto.Size = new System.Drawing.Size(180, 22);
             this.btCatalogosProducto.Text = "Productos";
             this.btCatalogosProducto.Click += new System.EventHandler(this.btCatalogosProducto_Click);
             // 
@@ -168,7 +170,7 @@
             // 
             this.btCatalogosAlumnos.Image = global::SACDumont.Properties.Resources.estudiante_universitario;
             this.btCatalogosAlumnos.Name = "btCatalogosAlumnos";
-            this.btCatalogosAlumnos.Size = new System.Drawing.Size(128, 22);
+            this.btCatalogosAlumnos.Size = new System.Drawing.Size(180, 22);
             this.btCatalogosAlumnos.Text = "Alumnos";
             this.btCatalogosAlumnos.Click += new System.EventHandler(this.btCatalogosAlumnos_Click);
             // 
@@ -176,7 +178,7 @@
             // 
             this.btCatalogosTutores.Image = global::SACDumont.Properties.Resources.tutor;
             this.btCatalogosTutores.Name = "btCatalogosTutores";
-            this.btCatalogosTutores.Size = new System.Drawing.Size(128, 22);
+            this.btCatalogosTutores.Size = new System.Drawing.Size(180, 22);
             this.btCatalogosTutores.Text = "Tutores";
             this.btCatalogosTutores.Click += new System.EventHandler(this.btCatalogosTutores_Click);
             // 
@@ -184,8 +186,15 @@
             // 
             this.btCatalogosUsuarios.Image = global::SACDumont.Properties.Resources.silueta_de_multiples_usuarios;
             this.btCatalogosUsuarios.Name = "btCatalogosUsuarios";
-            this.btCatalogosUsuarios.Size = new System.Drawing.Size(128, 22);
+            this.btCatalogosUsuarios.Size = new System.Drawing.Size(180, 22);
             this.btCatalogosUsuarios.Text = "Usuarios";
+            // 
+            // promocionesToolStripMenuItem
+            // 
+            this.promocionesToolStripMenuItem.Name = "promocionesToolStripMenuItem";
+            this.promocionesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.promocionesToolStripMenuItem.Text = "Promociones";
+            this.promocionesToolStripMenuItem.Click += new System.EventHandler(this.promocionesToolStripMenuItem_Click);
             // 
             // btReportes
             // 
@@ -434,6 +443,7 @@
         private System.Windows.Forms.ToolStripMenuItem generalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cambiarCicloToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem promocionesToolStripMenuItem;
     }
 }
 

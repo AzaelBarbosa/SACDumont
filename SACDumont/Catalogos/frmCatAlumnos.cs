@@ -16,6 +16,7 @@ using static ClosedXML.Excel.XLPredefinedFormat;
 using SACDumont.Listados;
 using SACDumont.Otros;
 using SACDumont.Models;
+using SACDumont.modulos;
 
 namespace SACDumont.Catalogos
 {
@@ -128,7 +129,7 @@ namespace SACDumont.Catalogos
                             db.PromocionesAlumnos.Add(promocion);
                         }
                         db.SaveChanges();
-                        if (MessageBox.Show("Alumno registrado correctamente con matrícula " + intMatricula + Environment.NewLine + Environment.NewLine + "¿Desea agregar un tutor?", "Guardado", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        if (MessageBox.Show("Alumno registrado correctamente con matrícula " + intMatricula + Environment.NewLine + Environment.NewLine + "¿Desea agregar un tutor?", "Guardado", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             frmCatAlumnos frm = new frmCatAlumnos(intMatricula);
                             frm.ShowDialog();
@@ -404,11 +405,24 @@ namespace SACDumont.Catalogos
                 basFunctions.CargarCatalogo(cmbEstadoNac, "estados", "Id", "Nombre", "WHERE PaisId = " + paisId);
             }
         }
+
+        private void CargarPromociones()
+        {
+            List<Promociones> listPromos = new List<Promociones>();
+            using (var db = new DumontContext())
+            {
+                listPromos = db.Promociones.Where(t => t.id_ciclo == basGlobals.iCiclo).ToList();
+                cboPromocion.DataSource = listPromos;
+                cboPromocion.DisplayMember = "descripcion";
+                cboPromocion.ValueMember = "id_promocion";
+            }
+        }
         #endregion
 
         #region Eventos del Formulario
         private void frmCatAlumnos_Load(object sender, EventArgs e)
         {
+            CargarPromociones();
             basFunctions.CargarCatalogo(cmbEstado, "estados", "Id", "Nombre", "WHERE PaisId = 1");
             basFunctions.CargarCatalogo(cmbPais, "paises", "Id", "Nombre");
             CargarComboSexo();

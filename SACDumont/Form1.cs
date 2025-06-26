@@ -153,5 +153,10 @@ namespace SACDumont
             frmCatAlumnos.Text = "Nuevo Ingreso de Alumno";
             frmCatAlumnos.ShowDialog();
         }
+
+        private void promocionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AbrirUnicoFormularioHijo<frmPromociones>();
+        }
     }
 }
