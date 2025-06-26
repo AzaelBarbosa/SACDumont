@@ -147,6 +147,7 @@
             // txtCurp
             // 
             this.txtCurp.Location = new System.Drawing.Point(225, 155);
+            this.txtCurp.MaxLength = 20;
             this.txtCurp.Name = "txtCurp";
             this.txtCurp.Size = new System.Drawing.Size(257, 20);
             this.txtCurp.TabIndex = 15;
@@ -542,14 +543,14 @@
             // 
             this.cboPromocion.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboPromocion.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboPromocion.Location = new System.Drawing.Point(59, 40);
+            this.cboPromocion.Location = new System.Drawing.Point(6, 61);
             this.cboPromocion.Name = "cboPromocion";
-            this.cboPromocion.Size = new System.Drawing.Size(135, 21);
+            this.cboPromocion.Size = new System.Drawing.Size(188, 21);
             this.cboPromocion.TabIndex = 32;
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(1, 43);
+            this.label3.Location = new System.Drawing.Point(7, 42);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(117, 27);
