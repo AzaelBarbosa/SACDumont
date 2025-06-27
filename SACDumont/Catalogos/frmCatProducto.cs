@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SACDumont.Base;
 using SACDumont.Clases;
+using SACDumont.Models;
+using SACDumont.modulos;
 using SACDumont.Modulos;
 using SACDumont.Otros;
 
@@ -19,9 +21,13 @@ namespace SACDumont.Catalogos
         #region "Variables"
         DataTable dtProductos = new DataTable("Productos");
         DataTable dtProductosCiclo = new DataTable("ProductoCiclo");
+        Productos productos = new Productos();
+        Producto_Ciclo producto_Ciclo = new Producto_Ciclo();
         int idProducto = 0;
+        public int idGrupo = 0;
         basFunctions basFunctions = new basFunctions();
         sqlServer sqlServer = new sqlServer();
+        bool bolEstatus = false;
         #endregion
 
         #region "Métodos Virtuales"
@@ -41,65 +47,126 @@ namespace SACDumont.Catalogos
             bool esNuevo = idProducto == 0;
             int idProd = esNuevo ? 0 : Convert.ToInt32(idProducto);
 
-            if (esNuevo)
+            if (idProducto == 0)
             {
+                using (DumontContext db = new DumontContext())
+                {
+                    productos.id_producto = 0;
+                    productos.descripcion = txDescripcion.Text;
+                    productos.concepto = txConcepto.Text;
+                    productos.estado = true;
 
-                dtProductos = sqlServer.ExecSQLReturnDT("SELECT * FROM productos WHERE 1=0");
-                dtProductosCiclo = sqlServer.ExecSQLReturnDT("SELECT * FROM producto_ciclo WHERE 1=0");
-                DataRow newRow = dtProductos.NewRow();
-                DataRow newRowCiclo = dtProductosCiclo.NewRow();
-                newRow["id_producto"] = 0; // Placeholder
-                newRowCiclo["id"] = 0; // Placeholder
-                AsignarValoresProducto(newRow);
-                dtProductos.Rows.Add(newRow);
-                sqlServer.InsertByDataTable(ref dtProductos, "productos");
+                    db.Entry(productos).State = System.Data.Entity.EntityState.Added;
+                    int result = db.SaveChanges();
+                    if (result == 1)
+                    {
+                        producto_Ciclo.precio = Convert.ToDecimal(txtCosto.Text);
+                        producto_Ciclo.id_ciclo = basGlobals.iCiclo;
+                        producto_Ciclo.fecha_vencimiento = dtFechaVenci.Value;
+                        producto_Ciclo.id_grupo = (int)cboGrupo.IDValor;
 
-                // Obtener la matrícula generada
-                int nuevoProducto = Convert.ToInt32(dtProductos.Rows[0]["id_producto"]);
-                lbProductoID.Text = nuevoProducto.ToString();
+                        db.Entry(producto_Ciclo).State = System.Data.Entity.EntityState.Added;
+                        db.SaveChanges();
+                    }
 
-                //Guardo relacion Costo Ciclo
-                AsignarValoresProductoCiclo(newRowCiclo);
-                dtProductosCiclo.Rows.Add(newRowCiclo);
-                sqlServer.InsertByDataTable(ref dtProductosCiclo, "producto_ciclo");
-                
+                }
+
                 //Registrar el nuevo producto
-                basFunctions.Registrar(basConfiguracion.UserID, "Productos", "Alta", nuevoProducto, "Se registró un nuevo producto: " + dtProductos.Rows[0]["descripcion"]);
-                MessageBox.Show("Producto registrado correctamente con ID " + nuevoProducto);
+                basFunctions.Registrar(basConfiguracion.UserID, "Productos", "Alta", productos.id_producto, $"Se registró un nuevo producto: {productos.descripcion}");
+                MessageBox.Show("Producto registrado correctamente con ID " + productos.id_producto, "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
-                
+
             }
             else
             {
-                dtProductos = sqlServer.ExecSQLReturnDT($"SELECT * FROM productos WHERE id_producto = {idProducto}");
-                dtProductosCiclo = sqlServer.ExecSQLReturnDT($"SELECT * FROM producto_ciclo WHERE id_producto = {idProducto} AND id_ciclo = {basConfiguracion.IdCiclo}");
-                if (dtProductos.Rows.Count == 0)
+
+                using (DumontContext db = new DumontContext())
                 {
-                    MessageBox.Show("No se encontró el producto para actualizar.");
-                    return;
+                    productos = db.Productos.Find(idProducto);
+                    if (productos != null)
+                    {
+                        productos.id_producto = 0;
+                        productos.descripcion = txDescripcion.Text;
+                        productos.concepto = txConcepto.Text;
+
+                        db.Entry(productos).State = System.Data.Entity.EntityState.Modified;
+
+                        producto_Ciclo = db.ProductoCiclo.FirstOrDefault(t => t.id_producto == idProducto && t.id_ciclo == basGlobals.iCiclo);
+
+                        if (producto_Ciclo != null)
+                        {
+                            producto_Ciclo.precio = Convert.ToDecimal(txtCosto.Text);
+                            producto_Ciclo.id_ciclo = basGlobals.iCiclo;
+                            producto_Ciclo.fecha_vencimiento = dtFechaVenci.Value;
+                            producto_Ciclo.id_grupo = (int)cboGrupo.IDValor;
+
+                            db.Entry(producto_Ciclo).State = System.Data.Entity.EntityState.Modified;
+                        }
+
+                        var result = db.SaveChanges();
+                        if (result != 0)
+                        {
+                            basFunctions.Registrar(basConfiguracion.UserID, "Productos", "Editar", productos.id_producto, $"Se modifico el producto: {productos.descripcion}");
+                            MessageBox.Show("Producto actualizado correctamente.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
                 }
-
-                DataRow existingRow = dtProductos.Rows[0];
-                DataRow existingRowCiclo = dtProductosCiclo.Rows[0];
-                AsignarValoresProducto(existingRow);
-                AsignarValoresProductoCiclo(existingRowCiclo);
-                //existingRow.SetModified(); // importante
-
-                sqlServer.InsertByDataTable(ref dtProductos, "alumnos");
-                sqlServer.InsertByDataTable(ref dtProductosCiclo, "producto_ciclo");
-                basFunctions.Registrar(basConfiguracion.UserID, "Productos", "Editar", idProducto);
-                MessageBox.Show("Producto actualizado correctamente.");
             }
         }
         protected override void Eliminar()
         {
             // Implementar la lógica para eliminar el registro de producto
+
+            using (var db = new DumontContext())
+            {
+                List<movimiento_productos> listaMov = db.MovimientoProductos.Where(t => t.id_producto == idProducto).ToList();
+                if (listaMov.Count > 0)
+                {
+                    MessageBox.Show("El producto que desea eliminar ya se encuentra asignado a uno o mas movimientos." + Environment.NewLine + "No es posible eliminar el Producto", "ATENCION", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                productos = db.Productos.Find(idProducto);
+                producto_Ciclo = db.ProductoCiclo.FirstOrDefault(t => t.id_producto == idProducto && t.id_ciclo == basGlobals.iCiclo);
+                if (MessageBox.Show($"Esta por eliminar el producto:" + Environment.NewLine + Environment.NewLine + $"{productos.descripcion}" + Environment.NewLine + "¿Desea Continuar?", "Productos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    db.Productos.Remove(productos);
+                    db.Entry(productos).State = System.Data.Entity.EntityState.Deleted;
+                    db.ProductoCiclo.Remove(producto_Ciclo);
+                    db.Entry(producto_Ciclo).State = System.Data.Entity.EntityState.Deleted;
+                    var result = db.SaveChanges();
+                    if (result == 1)
+                    {
+                        MessageBox.Show("Promocion eliminada correctamente.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
+                }
+            }
         }
         protected override void Acciones()
         {
             frmAcciones frm = new frmAcciones("Acciones", idProducto);
             frm.Text = "Acciones Producto";
             frm.ShowDialog();
+        }
+        protected override void Deshabilitar()
+        {
+            using (var db = new DumontContext())
+            {
+                productos = db.Productos.Find(idProducto);
+                productos.estado = false;
+                db.SaveChanges();
+                this.Close();
+            }
+        }
+        protected override void Habilitar()
+        {
+            using (var db = new DumontContext())
+            {
+                productos = db.Productos.Find(idProducto);
+                productos.estado = true;
+                db.SaveChanges();
+                this.Close();
+            }
         }
         protected override void Cerrar()
         {
@@ -110,47 +177,13 @@ namespace SACDumont.Catalogos
 
         #region "Métodos"
 
-        private void CargarProductos()
-        {
-            // Implementar la lógica para cargar los productos en el DataTable
-        }
-
-        private void AsignarValoresProducto(DataRow row)
-        {
-            var valores = new Dictionary<string, object>
-            {
-                ["descripcion"] = txDescripcion.Text,
-                ["concepto"] = txConcepto.Text,
-                ["estado"] = chkActivo.Checked
-            };
-
-            foreach (var item in valores)
-            {
-                row[item.Key] = item.Value ?? DBNull.Value;
-            }
-        }
-
-        private void AsignarValoresProductoCiclo(DataRow row)
-        {
-            var valores = new Dictionary<string, object>
-            {
-                ["id_producto"] = idProducto,
-                ["id_ciclo"] = basConfiguracion.IdCiclo,
-                ["precio"] = txtCosto.Text,
-                ["fecha_vencimiento"] = dtFechaVenci.Value
-            };
-            foreach (var item in valores)
-            {
-                row[item.Key] = item.Value ?? DBNull.Value;
-            }
-        }
         private void LimpiarControles()
         {
             txDescripcion.Text = string.Empty;
             txConcepto.Text = string.Empty;
             txtCosto.Text = string.Empty;
         }
-        private void CargarProducto(int idProducto)
+        private void CargarProducto()
         {
             if (idProducto == 0)
             {
@@ -162,20 +195,35 @@ namespace SACDumont.Catalogos
             else
             {
                 // Cargar el registro de producto existente
-                string sSQL = "SELECT * FROM productos WHERE id_producto = " + idProducto;
-                dtProductos = sqlServer.ExecSQLReturnDT(sSQL, "Productos");
-                this.Text = "Editar Producto";
-                if (dtProductos.Rows.Count > 0)
+                using (DumontContext db = new DumontContext())
                 {
-                    DataRow row = dtProductos.Rows[0];
-                    AsignarValoresProducto(row);
+                    productos = db.Productos.Find(idProducto);
+                    producto_Ciclo = db.ProductoCiclo.FirstOrDefault(t => t.id_producto == idProducto && t.id_ciclo == basGlobals.iCiclo && t.id_grupo == idGrupo);
+                    if (productos != null)
+                    {
+                        txDescripcion.Text = productos.descripcion.ToString();
+                        txConcepto.Text = productos.concepto.ToString();
+                        txtCosto.Text = producto_Ciclo.precio.ToString("C2");
+                        dtFechaVenci.Value = producto_Ciclo.fecha_vencimiento;
+                        cboGrupo.IDValor = producto_Ciclo.id_grupo;
+                        lbProductoID.Text = productos.id_producto.ToString();
+                        bolEstatus = productos.estado;
+                    }
                 }
-                lbProductoID.Text = idProducto.ToString();
             }
         }
         private void CargarMenu()
         {
             btAddTutor.Visible = false;
+            btQuitarRecargo.Visible = false;
+            if (bolEstatus)
+            {
+                btHabilitar.Visible = false;
+            }
+            else
+            {
+                btDeshabilitar.Visible = false;
+            }
         }
         #endregion
 
@@ -187,8 +235,9 @@ namespace SACDumont.Catalogos
 
         private void frmCatProducto_Load(object sender, EventArgs e)
         {
+            cboGrupo.Inicializar();
+            CargarProducto();
             CargarMenu();
-            CargarProducto(idProducto);
         }
     }
 }

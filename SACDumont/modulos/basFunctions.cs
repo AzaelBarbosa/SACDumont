@@ -36,20 +36,20 @@ namespace SACDumont.Modulos
                 string dbLocalUser = config.Usuario;
                 string dbLocalPassword = config.Contrasena;
 
-                    // Se establecen los parámetros de conexión a SQL Server
-                    sqlServer.Init(300, dbLocalName, dbLocalHost, dbLocalUser, dbLocalPassword);
+                // Se establecen los parámetros de conexión a SQL Server
+                sqlServer.Init(300, dbLocalName, dbLocalHost, dbLocalUser, dbLocalPassword);
 
-                    // Ejecutar consulta de prueba
-                    sqlServer.ExecSQL("USE " + dbLocalName);
+                // Ejecutar consulta de prueba
+                sqlServer.ExecSQL("USE " + dbLocalName);
 
-                    // Obtener número de sucursal
-                    sSQL = "SELECT TOP 1 * FROM Usuarios";
-                    //dtPaso = sqlServer.ExecSQLReturnDT(sSQL);
-                    if (dtPaso != null && dtPaso.Rows.Count > 0)
-                    {
-                        // Procesamiento adicional si es necesario
-                    }
-                
+                // Obtener número de sucursal
+                sSQL = "SELECT TOP 1 * FROM Usuarios";
+                //dtPaso = sqlServer.ExecSQLReturnDT(sSQL);
+                if (dtPaso != null && dtPaso.Rows.Count > 0)
+                {
+                    // Procesamiento adicional si es necesario
+                }
+
             }
             catch (Exception ex)
             {
@@ -105,10 +105,10 @@ namespace SACDumont.Modulos
         public void InsertarHistorial(string sAccion)
         {
             string sSQL;
-           
-                sSQL = "INSERT INTO LogFallas (idUsuario, Descripcion) VALUES(" + basConfiguracion.UserID + ",'" + sAccion + "')";
-                sqlServer.ExecSQL(sSQL);
-           
+
+            sSQL = "INSERT INTO LogFallas (idUsuario, Descripcion) VALUES(" + basConfiguracion.UserID + ",'" + sAccion + "')";
+            sqlServer.ExecSQL(sSQL);
+
         }
 
         public bool DataVacio(DataTable dt)
@@ -155,14 +155,14 @@ namespace SACDumont.Modulos
 
         public static void CargarCatalogo(ComboBox combo, string tabla, string campoClave, string campoTexto, string whereClause = "")
         {
-                DataTable dt = new DataTable();
+            DataTable dt = new DataTable();
             dt = sqlServer.ExecSQLReturnDT($"SELECT {campoClave}, {campoTexto} FROM {tabla} {whereClause} ORDER BY {campoTexto}", "Catalogos");
 
-                combo.DataSource = dt;
-                combo.DisplayMember = campoTexto;
-                combo.ValueMember = campoClave;
-                combo.DropDownStyle = ComboBoxStyle.DropDown;
-                combo.SelectedIndex = -1;
+            combo.DataSource = dt;
+            combo.DisplayMember = campoTexto;
+            combo.ValueMember = campoClave;
+            combo.DropDownStyle = ComboBoxStyle.DropDown;
+            combo.SelectedIndex = -1;
         }
 
         public static void CargarCatalogoGeneral(ComboBox combo, string tipoCatalogo)
@@ -214,9 +214,9 @@ namespace SACDumont.Modulos
 
                 if (r == DialogResult.Yes)
                 {
-                    
+
                     sqlServer.ExecSQL($"INSERT INTO {tabla} ({campoTexto}, PaisId) VALUES ('{texto}',{idDependiente})");
-               
+
                     // Recargar
                     CargarCatalogo(combo, tabla, combo.ValueMember, combo.DisplayMember);
                     combo.SelectedIndex = combo.FindStringExact(texto);
@@ -237,8 +237,8 @@ namespace SACDumont.Modulos
         {
             try
             {
-               string sql = $"INSERT INTO acciones (fecha, id_usuario, modulo, tipo_accion, entidad_id, descripcion) VALUES (GETDATE(), {usuario}, '{modulo}', '{tipoAccion}', {entidadId}, '{descripcion}')";
-               sqlServer.ExecSQL(sql);
+                string sql = $"INSERT INTO acciones (fecha, id_usuario, modulo, tipo_accion, entidad_id, descripcion) VALUES (GETDATE(), {usuario}, '{modulo}', '{tipoAccion}', {entidadId}, '{descripcion}')";
+                sqlServer.ExecSQL(sql);
             }
             catch (Exception ex)
             {
@@ -253,7 +253,7 @@ namespace SACDumont.Modulos
             {
                 DataTable dtAcciones = new DataTable();
                 string sql = $"SELECT acc.fecha as Fecha, us.nombre_usuario, acc.tipo_accion AS [Tipo Movimiento], acc.descripcion AS Descripcion  FROM acciones acc INNER JOIN usuarios us ON acc.id_usuario = us.id_usuario WHERE acc.modulo = '{modulo}' AND acc.entidad_id = {entidadId} ORDER BY acc.fecha";
-                dtAcciones = sqlServer.ExecSQLReturnDT(sql,"Acciones");
+                dtAcciones = sqlServer.ExecSQLReturnDT(sql, "Acciones");
                 dgvAcciones.DataSource = dtAcciones;
                 dgvAcciones.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             }
@@ -281,5 +281,12 @@ namespace SACDumont.Modulos
         {
             return ObtenerPin() == pinIngresado;
         }
+
+        public static void CenterSpinnerOverGrid(Form form, PictureBox picture)
+        {
+            picture.Left = (form.ClientSize.Width - picture.Width) / 2;
+            picture.Top = (form.ClientSize.Height - picture.Height) / 2;
+        }
+
     }
 }
