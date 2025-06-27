@@ -20,6 +20,7 @@ namespace SACDumont.Base
         protected virtual void AgregarTutor() { }
         protected virtual void Cerrar() { }
         protected virtual void Deshabilitar() { }
+        protected virtual void Habilitar() { }
         protected virtual void QuitarRecargo() { }
         protected virtual void Acciones() { }
         public frmBaseCatalogos()
@@ -70,6 +71,11 @@ namespace SACDumont.Base
         private void btQuitarRecargo_Click(object sender, EventArgs e)
         {
             QuitarRecargo();
+        }
+
+        private void btHabilitar_Click(object sender, EventArgs e)
+        {
+            Habilitar();
         }
     }
 }

@@ -41,6 +41,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="AdvancedDataGridView, Version=1.2.30115.18, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DG.AdvancedDataGridView.1.2.30115.18\lib\net40\AdvancedDataGridView.dll</HintPath>
+    </Reference>
     <Reference Include="ClosedXML, Version=0.104.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.104.2\lib\netstandard2.0\ClosedXML.dll</HintPath>
     </Reference>
@@ -135,6 +138,7 @@
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp">
@@ -234,6 +238,7 @@
     <Compile Include="Controles\ComboProductos.Designer.cs">
       <DependentUpon>ComboProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dtos\ProductoDTO.cs" />
     <Compile Include="DumontContext.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -421,6 +426,9 @@
     <Content Include="Reportes\TicketMovimient.frx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\spinner.gif" />
+    <None Include="Resources\flecha-hacia-arriba.png" />
+    <None Include="Resources\flecha-hacia-abajo.png" />
     <None Include="Resources\logoNuevo.png" />
     <None Include="Resources\agregar.png" />
   </ItemGroup>

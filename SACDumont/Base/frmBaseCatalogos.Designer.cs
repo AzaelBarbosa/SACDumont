@@ -34,6 +34,7 @@
             this.btNew = new System.Windows.Forms.ToolStripMenuItem();
             this.btSave = new System.Windows.Forms.ToolStripMenuItem();
             this.btDeshabilitar = new System.Windows.Forms.ToolStripMenuItem();
+            this.btHabilitar = new System.Windows.Forms.ToolStripMenuItem();
             this.btDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.btQuitarRecargo = new System.Windows.Forms.ToolStripMenuItem();
             this.btAddTutor = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +51,7 @@
             this.btNew,
             this.btSave,
             this.btDeshabilitar,
+            this.btHabilitar,
             this.btDelete,
             this.btQuitarRecargo,
             this.btAddTutor,
@@ -83,13 +85,23 @@
             // 
             // btDeshabilitar
             // 
-            this.btDeshabilitar.Image = global::SACDumont.Properties.Resources.bajausuario;
+            this.btDeshabilitar.Image = global::SACDumont.Properties.Resources.flecha_hacia_abajo;
             this.btDeshabilitar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btDeshabilitar.Name = "btDeshabilitar";
             this.btDeshabilitar.Size = new System.Drawing.Size(81, 51);
             this.btDeshabilitar.Text = "Deshabilitar";
             this.btDeshabilitar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btDeshabilitar.Click += new System.EventHandler(this.btDeshabilitar_Click);
+            // 
+            // btHabilitar
+            // 
+            this.btHabilitar.Image = global::SACDumont.Properties.Resources.flecha_hacia_arriba;
+            this.btHabilitar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btHabilitar.Name = "btHabilitar";
+            this.btHabilitar.Size = new System.Drawing.Size(64, 51);
+            this.btHabilitar.Text = "Habilitar";
+            this.btHabilitar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btHabilitar.Click += new System.EventHandler(this.btHabilitar_Click);
             // 
             // btDelete
             // 
@@ -195,5 +207,6 @@
         public System.Windows.Forms.ToolStripMenuItem btAcciones;
         public System.Windows.Forms.ToolStripMenuItem btSave;
         public System.Windows.Forms.ToolStripMenuItem btDeshabilitar;
+        public System.Windows.Forms.ToolStripMenuItem btHabilitar;
     }
 }

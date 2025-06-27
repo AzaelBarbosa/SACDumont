@@ -157,6 +157,9 @@ namespace SACDumont.Models
         public decimal precio { get; set; }
         public DateTime fecha_vencimiento { get; set; }
         public int id_grupo { get; set; }
+
+        public virtual Productos Producto { get; set; }
+        public virtual Ciclos_Escolares CicloEscolar { get; set; }
     }
     public class Ciclos_Escolares
     {
@@ -165,6 +168,8 @@ namespace SACDumont.Models
         public string ciclo { get; set; }
         public DateTime fecha_inicio { get; set; }
         public DateTime fecha_fin { get; set; }
+
+        public virtual ICollection<Producto_Ciclo> ProductoCiclos { get; set; }
     }
     public class Acciones
     {
@@ -188,7 +193,7 @@ namespace SACDumont.Models
         public int id_grupo { get; set; }
     }
 
-    public class  Usuarios
+    public class Usuarios
     {
         [Key]
         public int id_usuario { get; set; }
@@ -202,8 +207,17 @@ namespace SACDumont.Models
         public string nombre_usuario { get; set; }
     }
 
+    public class catalogos
+    {
+        [Key]
+        public int id_catalogo { get; set; }
+        public string tipo_catalogo { get; set; }
+        public string descripcion { get; set; }
+        public int valor { get; set; }
+    }
+
     internal class clsModels
     {
-       
+
     }
 }
