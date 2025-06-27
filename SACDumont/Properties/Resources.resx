@@ -130,6 +130,9 @@
   <data name="cumpleanos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cumpleanos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="flecha-hacia-arriba" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flecha-hacia-arriba.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="factura" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\factura.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -141,9 +144,6 @@
   </data>
   <data name="libro-y-lapiz" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\libro-y-lapiz.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="facturacion" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\facturacion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -196,11 +196,17 @@
   <data name="caja-de-entrega" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\caja-de-entrega.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="lista-de-asistentes" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lista-de-asistentes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="facturacion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\facturacion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flecha-hacia-abajo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flecha-hacia-abajo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="actividad" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\actividad.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lista-de-asistentes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lista-de-asistentes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="salario-bajo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\salario-bajo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,6 +220,9 @@
   <data name="administrativo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\administrativo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="logoNuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logoNuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="salario-del-usuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\salario-del-usuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -223,7 +232,7 @@
   <data name="nuevousuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\nuevousuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="logoNuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logoNuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="spinner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\spinner.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

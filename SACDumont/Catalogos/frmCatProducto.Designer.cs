@@ -35,9 +35,10 @@
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblApPaterno = new System.Windows.Forms.Label();
             this.lblApMaterno = new System.Windows.Forms.Label();
-            this.chkActivo = new System.Windows.Forms.CheckBox();
             this.dtFechaVenci = new System.Windows.Forms.DateTimePicker();
             this.lblFechaNac = new System.Windows.Forms.Label();
+            this.cboGrupo = new SACDumont.Controles.ComboCatalogos();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbProductoID
@@ -45,7 +46,7 @@
             this.lbProductoID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbProductoID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbProductoID.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lbProductoID.Location = new System.Drawing.Point(382, 235);
+            this.lbProductoID.Location = new System.Drawing.Point(343, 248);
             this.lbProductoID.Name = "lbProductoID";
             this.lbProductoID.Size = new System.Drawing.Size(100, 23);
             this.lbProductoID.TabIndex = 34;
@@ -56,14 +57,14 @@
             // 
             this.txConcepto.Location = new System.Drawing.Point(12, 94);
             this.txConcepto.Name = "txConcepto";
-            this.txConcepto.Size = new System.Drawing.Size(361, 20);
+            this.txConcepto.Size = new System.Drawing.Size(438, 20);
             this.txConcepto.TabIndex = 57;
             // 
             // txDescripcion
             // 
             this.txDescripcion.Location = new System.Drawing.Point(12, 144);
             this.txDescripcion.Name = "txDescripcion";
-            this.txDescripcion.Size = new System.Drawing.Size(361, 20);
+            this.txDescripcion.Size = new System.Drawing.Size(438, 20);
             this.txDescripcion.TabIndex = 59;
             // 
             // txtCosto
@@ -97,40 +98,51 @@
             this.lblApMaterno.TabIndex = 60;
             this.lblApMaterno.Text = "Costo:";
             // 
-            // chkActivo
-            // 
-            this.chkActivo.Checked = true;
-            this.chkActivo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActivo.Location = new System.Drawing.Point(12, 231);
-            this.chkActivo.Name = "chkActivo";
-            this.chkActivo.Size = new System.Drawing.Size(100, 24);
-            this.chkActivo.TabIndex = 68;
-            this.chkActivo.Text = "Activo";
-            // 
             // dtFechaVenci
             // 
             this.dtFechaVenci.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFechaVenci.Location = new System.Drawing.Point(188, 194);
+            this.dtFechaVenci.Location = new System.Drawing.Point(164, 194);
             this.dtFechaVenci.Name = "dtFechaVenci";
-            this.dtFechaVenci.Size = new System.Drawing.Size(185, 20);
+            this.dtFechaVenci.Size = new System.Drawing.Size(144, 20);
             this.dtFechaVenci.TabIndex = 70;
             // 
             // lblFechaNac
             // 
-            this.lblFechaNac.Location = new System.Drawing.Point(188, 174);
+            this.lblFechaNac.Location = new System.Drawing.Point(164, 174);
             this.lblFechaNac.Name = "lblFechaNac";
             this.lblFechaNac.Size = new System.Drawing.Size(168, 23);
             this.lblFechaNac.TabIndex = 69;
             this.lblFechaNac.Text = "Fecha Vencimiento:";
             // 
+            // cboGrupo
+            // 
+            this.cboGrupo.Descripcion = null;
+            this.cboGrupo.IDValor = 0;
+            this.cboGrupo.Location = new System.Drawing.Point(315, 194);
+            this.cboGrupo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.cboGrupo.Name = "cboGrupo";
+            this.cboGrupo.Size = new System.Drawing.Size(134, 21);
+            this.cboGrupo.TabIndex = 71;
+            this.cboGrupo.TipoCatalogo = "Grupo";
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(315, 174);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(117, 27);
+            this.label1.TabIndex = 72;
+            this.label1.Text = "Grupo:";
+            // 
             // frmCatProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 267);
+            this.ClientSize = new System.Drawing.Size(455, 280);
+            this.Controls.Add(this.cboGrupo);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dtFechaVenci);
             this.Controls.Add(this.lblFechaNac);
-            this.Controls.Add(this.chkActivo);
             this.Controls.Add(this.txConcepto);
             this.Controls.Add(this.txDescripcion);
             this.Controls.Add(this.txtCosto);
@@ -148,9 +160,10 @@
             this.Controls.SetChildIndex(this.txtCosto, 0);
             this.Controls.SetChildIndex(this.txDescripcion, 0);
             this.Controls.SetChildIndex(this.txConcepto, 0);
-            this.Controls.SetChildIndex(this.chkActivo, 0);
             this.Controls.SetChildIndex(this.lblFechaNac, 0);
             this.Controls.SetChildIndex(this.dtFechaVenci, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.cboGrupo, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,8 +178,9 @@
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblApPaterno;
         private System.Windows.Forms.Label lblApMaterno;
-        private System.Windows.Forms.CheckBox chkActivo;
         private System.Windows.Forms.DateTimePicker dtFechaVenci;
         private System.Windows.Forms.Label lblFechaNac;
+        private Controles.ComboCatalogos cboGrupo;
+        private System.Windows.Forms.Label label1;
     }
 }

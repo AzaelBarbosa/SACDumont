@@ -28,6 +28,7 @@ namespace SACDumont
         public DbSet<Acciones> Acciones { get; set; }
         public DbSet<Inscripciones> Inscripciones { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
+        public DbSet<catalogos> Catalogos { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

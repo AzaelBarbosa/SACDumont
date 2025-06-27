@@ -253,6 +253,26 @@ namespace SACDumont.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap flecha_hacia_abajo {
+            get {
+                object obj = ResourceManager.GetObject("flecha-hacia-abajo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap flecha_hacia_arriba {
+            get {
+                object obj = ResourceManager.GetObject("flecha-hacia-arriba", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap guardar {
             get {
                 object obj = ResourceManager.GetObject("guardar", resourceCulture);
@@ -406,6 +426,16 @@ namespace SACDumont.Properties {
         internal static System.Drawing.Bitmap silueta_de_multiples_usuarios {
             get {
                 object obj = ResourceManager.GetObject("silueta-de-multiples-usuarios", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap spinner {
+            get {
+                object obj = ResourceManager.GetObject("spinner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
