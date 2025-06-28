@@ -41,6 +41,8 @@ namespace SACDumont.Catalogos
                     Usuarios.reset_contrasena = true;
                     Usuarios.contrasena = "12345";
                     Usuarios.id_perfil = (int)cboPerfiles.SelectedValue;
+                    Usuarios.estatus = true;
+                    Usuarios.fecha_alta = DateTime.Now;
 
                     db.Usuarios.Add(Usuarios);
 
@@ -218,9 +220,10 @@ namespace SACDumont.Catalogos
 
         private void frmCatUsuarios_Load(object sender, EventArgs e)
         {
+            CargarUsuario();
             CargarMenu();
             CargarPerfiles();
-            CargarUsuario();
+
         }
 
         #endregion

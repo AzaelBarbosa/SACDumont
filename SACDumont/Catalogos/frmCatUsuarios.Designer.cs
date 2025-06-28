@@ -105,7 +105,7 @@
             this.lbIdPromo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbIdPromo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbIdPromo.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lbIdPromo.Location = new System.Drawing.Point(355, 245);
+            this.lbIdPromo.Location = new System.Drawing.Point(440, 265);
             this.lbIdPromo.Name = "lbIdPromo";
             this.lbIdPromo.Size = new System.Drawing.Size(100, 23);
             this.lbIdPromo.TabIndex = 80;
@@ -116,7 +116,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 277);
+            this.ClientSize = new System.Drawing.Size(552, 297);
             this.Controls.Add(this.lbIdPromo);
             this.Controls.Add(this.cboPerfiles);
             this.Controls.Add(this.label3);
