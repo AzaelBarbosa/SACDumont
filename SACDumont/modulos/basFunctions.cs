@@ -288,5 +288,29 @@ namespace SACDumont.Modulos
             picture.Top = (form.ClientSize.Height - picture.Height) / 2;
         }
 
+        public static DataTable ConvertToDataTable<T>(List<T> items)
+        {
+            var dataTable = new DataTable(typeof(T).Name);
+            var propiedades = typeof(T).GetProperties();
+
+            foreach (var prop in propiedades)
+            {
+                Type colType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+                dataTable.Columns.Add(prop.Name, colType);
+            }
+
+            foreach (var item in items)
+            {
+                var values = new object[propiedades.Length];
+                for (int i = 0; i < propiedades.Length; i++)
+                {
+                    values[i] = propiedades[i].GetValue(item, null);
+                }
+                dataTable.Rows.Add(values);
+            }
+
+            return dataTable;
+        }
+
     }
 }

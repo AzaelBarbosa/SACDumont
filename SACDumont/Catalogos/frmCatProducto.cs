@@ -216,6 +216,7 @@ namespace SACDumont.Catalogos
         {
             btAddTutor.Visible = false;
             btQuitarRecargo.Visible = false;
+            btResetPass.Visible = false;
             if (bolEstatus)
             {
                 btHabilitar.Visible = false;

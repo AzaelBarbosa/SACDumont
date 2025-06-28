@@ -422,6 +422,7 @@ namespace SACDumont.Catalogos
         #region Eventos del Formulario
         private void frmCatAlumnos_Load(object sender, EventArgs e)
         {
+            btResetPass.Visible = false;
             CargarPromociones();
             basFunctions.CargarCatalogo(cmbEstado, "estados", "Id", "Nombre", "WHERE PaisId = 1");
             basFunctions.CargarCatalogo(cmbPais, "paises", "Id", "Nombre");

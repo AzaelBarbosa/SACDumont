@@ -188,6 +188,7 @@
             this.btCatalogosUsuarios.Name = "btCatalogosUsuarios";
             this.btCatalogosUsuarios.Size = new System.Drawing.Size(180, 22);
             this.btCatalogosUsuarios.Text = "Usuarios";
+            this.btCatalogosUsuarios.Click += new System.EventHandler(this.btCatalogosUsuarios_Click);
             // 
             // promocionesToolStripMenuItem
             // 
