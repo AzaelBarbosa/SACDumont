@@ -167,11 +167,11 @@ namespace SACDumont.Catalogos
             {
                 if (Usuarios.estatus)
                 {
-                    btHabilitar.Visible = false;
+                    btDeshabilitar.Visible = false;
                 }
                 else
                 {
-                    btDeshabilitar.Visible = false;
+                    btHabilitar.Visible = false;
                 }
             }
         }
