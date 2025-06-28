@@ -30,7 +30,7 @@ namespace SACDumont.Catalogos
         #region "Métodos Virtuales"
         protected override void Nuevo()
         {
-            frmCatTutores frm = new frmCatTutores(0,0);
+            frmCatTutores frm = new frmCatTutores(0, 0);
             frm.ShowDialog();
         }
         protected override void Guardar()
@@ -68,7 +68,7 @@ namespace SACDumont.Catalogos
                 lbTutorID.Text = nuevoId.ToString();
 
                 basFunctions.Registrar(basConfiguracion.UserID, "Alumnos", "Alta", nuevoId);
-                MessageBox.Show("Tutor registrado correctamente con ID " + nuevoId, "SAC Dumont",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("Tutor registrado correctamente con ID " + nuevoId, "SAC Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             else
@@ -230,7 +230,11 @@ namespace SACDumont.Catalogos
             CargarComboSexo();
             CargarTutor(idTutor);
             btAddTutor.Visible = false;
-            
+            btResetPass.Visible = false;
+            btHabilitar.Visible = false;
+            btDeshabilitar.Visible = false;
+            btQuitarRecargo.Visible = false;
+
         }
     }
 }

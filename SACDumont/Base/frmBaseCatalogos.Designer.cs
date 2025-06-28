@@ -35,6 +35,7 @@
             this.btSave = new System.Windows.Forms.ToolStripMenuItem();
             this.btDeshabilitar = new System.Windows.Forms.ToolStripMenuItem();
             this.btHabilitar = new System.Windows.Forms.ToolStripMenuItem();
+            this.btResetPass = new System.Windows.Forms.ToolStripMenuItem();
             this.btDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.btQuitarRecargo = new System.Windows.Forms.ToolStripMenuItem();
             this.btAddTutor = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +53,7 @@
             this.btSave,
             this.btDeshabilitar,
             this.btHabilitar,
+            this.btResetPass,
             this.btDelete,
             this.btQuitarRecargo,
             this.btAddTutor,
@@ -59,7 +61,7 @@
             this.btCerrar});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(697, 55);
+            this.menuStrip1.Size = new System.Drawing.Size(788, 55);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -102,6 +104,16 @@
             this.btHabilitar.Text = "Habilitar";
             this.btHabilitar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btHabilitar.Click += new System.EventHandler(this.btHabilitar_Click);
+            // 
+            // btResetPass
+            // 
+            this.btResetPass.Image = global::SACDumont.Properties.Resources.bloquear;
+            this.btResetPass.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btResetPass.Name = "btResetPass";
+            this.btResetPass.Size = new System.Drawing.Size(126, 51);
+            this.btResetPass.Text = "Resetear Contraseña";
+            this.btResetPass.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btResetPass.Click += new System.EventHandler(this.btResetPass_Click);
             // 
             // btDelete
             // 
@@ -179,7 +191,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(697, 622);
+            this.ClientSize = new System.Drawing.Size(788, 622);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
@@ -208,5 +220,6 @@
         public System.Windows.Forms.ToolStripMenuItem btSave;
         public System.Windows.Forms.ToolStripMenuItem btDeshabilitar;
         public System.Windows.Forms.ToolStripMenuItem btHabilitar;
+        public System.Windows.Forms.ToolStripMenuItem btResetPass;
     }
 }

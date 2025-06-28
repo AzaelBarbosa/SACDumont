@@ -20,7 +20,6 @@ namespace SACDumont.Catalogos
         #region Variables
         int idPromocion = 0;
         Promociones Promocion = new Promociones();
-
         #endregion
 
         #region Metodos Virtuales
@@ -83,14 +82,23 @@ namespace SACDumont.Catalogos
             // Implementar la lógica para eliminar el registro de alumno
             using (var db = new DumontContext())
             {
-                Promocion = db.Promociones.Find(idPromocion);
-                db.Promociones.Remove(Promocion);
-                db.Entry(Promocion).State = System.Data.Entity.EntityState.Deleted;
-                var result = db.SaveChanges();
-                if (result == 1)
+                List<Promociones_Alumnos> listaPromo = db.PromocionesAlumnos.Where(t => t.id_promocion == idPromocion).ToList();
+                if (listaPromo.Count > 0)
                 {
-                    MessageBox.Show("Promocion eliminada correctamente.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
+                    MessageBox.Show("El producto que desea eliminar ya se encuentra asignado a uno o mas movimientos." + Environment.NewLine + "No es posible eliminar el Producto", "ATENCION", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (MessageBox.Show($"Esta por eliminar la promocion:" + Environment.NewLine + Environment.NewLine + $"{Promocion.descripcion}" + Environment.NewLine + "¿Desea Continuar?", "Promocion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Promocion = db.Promociones.Find(idPromocion);
+                    db.Promociones.Remove(Promocion);
+                    db.Entry(Promocion).State = System.Data.Entity.EntityState.Deleted;
+                    var result = db.SaveChanges();
+                    if (result == 1)
+                    {
+                        MessageBox.Show("Promocion eliminada correctamente.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
                 }
             }
         }
@@ -119,6 +127,9 @@ namespace SACDumont.Catalogos
         {
             btQuitarRecargo.Visible = false;
             btAddTutor.Visible = false;
+            btResetPass.Visible = false;
+            btHabilitar.Visible = false;
+            btDeshabilitar.Visible = false;
         }
 
         private void CargarPromocion()

@@ -216,6 +216,13 @@ namespace SACDumont.Models
         public int valor { get; set; }
     }
 
+    public class perfiles
+    {
+        [Key]
+        public int id_perfil { get; set; }
+        public string descripcion { get; set; }
+        public bool estatus { get; set; }
+    }
     internal class clsModels
     {
 

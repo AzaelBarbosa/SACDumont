@@ -158,5 +158,10 @@ namespace SACDumont
         {
             AbrirUnicoFormularioHijo<frmPromociones>();
         }
+
+        private void btCatalogosUsuarios_Click(object sender, EventArgs e)
+        {
+            AbrirUnicoFormularioHijo<frmUsuarios>();
+        }
     }
 }

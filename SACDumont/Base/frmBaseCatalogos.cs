@@ -23,6 +23,7 @@ namespace SACDumont.Base
         protected virtual void Habilitar() { }
         protected virtual void QuitarRecargo() { }
         protected virtual void Acciones() { }
+        protected virtual void ResetContrasena() { }
         public frmBaseCatalogos()
         {
             InitializeComponent();
@@ -76,6 +77,11 @@ namespace SACDumont.Base
         private void btHabilitar_Click(object sender, EventArgs e)
         {
             Habilitar();
+        }
+
+        private void btResetPass_Click(object sender, EventArgs e)
+        {
+            ResetContrasena();
         }
     }
 }
