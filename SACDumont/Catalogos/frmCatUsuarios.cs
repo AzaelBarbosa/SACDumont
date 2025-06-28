@@ -116,6 +116,7 @@ namespace SACDumont.Catalogos
                 db.Entry(Usuarios).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 basFunctions.Registrar(basConfiguracion.UserID, "Usuario", "Editar", idUsuario, $"Se deshabilito Usuario: {Usuarios.nombre_usuario}");
+                this.Close();
             }
         }
         protected override void Habilitar()
@@ -129,6 +130,7 @@ namespace SACDumont.Catalogos
                 db.Entry(Usuarios).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 basFunctions.Registrar(basConfiguracion.UserID, "Usuario", "Editar", idUsuario, $"Se habilito Usuario: {Usuarios.nombre_usuario}");
+                this.Close();
             }
         }
         protected override void ResetContrasena()
