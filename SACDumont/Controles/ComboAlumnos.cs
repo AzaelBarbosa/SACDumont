@@ -1,7 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Wordprocessing;
 using SACDumont.Clases;
 using SACDumont.modulos;
- using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +19,9 @@ namespace SACDumont.Controles
 
         public event Action<DataRow> OnAlumnoSeleccionado;
         public int? idGrado { get; set; }
-        public int? matricula { get
+        public int? matricula
+        {
+            get
             {
                 return Convert.ToInt32(txProducto.Tag);
             }
@@ -52,11 +54,12 @@ namespace SACDumont.Controles
             if (string.IsNullOrEmpty(SqlQuery))
             {
                 SqlQuery = $@"SELECT al.matricula, al.appaterno + ' ' + al.apmaterno + ' ' + al.nombre AS Alumno, cat.valor AS Grado, cat.descripcion AS DescripcionGrado, 
-                                    ins.id_grupo AS Grupo, catG.descripcion AS DescripcionGrupo 
+                                    ins.id_grupo AS Grupo, catG.descripcion AS DescripcionGrupo, ce.ciclo  
                                     FROM alumnos al
                                     INNER JOIN inscripciones ins ON al.matricula = ins.matricula
                                     LEFT JOIN catalogos cat ON cat.valor = ins.id_grado AND cat.tipo_catalogo = 'Grado' 
                                     LEFT JOIN catalogos catG ON catG.valor = ins.id_grupo AND catG.tipo_catalogo = 'Grupo' 
+                                    LEFT JOIN ciclos_escolares ce ON ins.id_ciclo = ce.id_ciclo
                                     WHERE ins.id_ciclo = {basGlobals.iCiclo}";
             }
             if (txProducto.Text.Length > 0)
@@ -78,7 +81,7 @@ namespace SACDumont.Controles
             dgv.Columns["Alumno"].HeaderText = "Alumno";
             dgv.Columns["Grado"].HeaderText = "Grado";
             dgv.Columns["Grupo"].HeaderText = "Grupo";
-            
+
             AjustarAlturaPanel(dgv);
         }
 
@@ -106,7 +109,7 @@ namespace SACDumont.Controles
 
         private void txProducto_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private Form CrearNuevoPopup()

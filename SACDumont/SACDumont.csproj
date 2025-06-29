@@ -201,6 +201,12 @@
     <Compile Include="Catalogos\frmCatTutores.Designer.cs">
       <DependentUpon>frmCatTutores.cs</DependentUpon>
     </Compile>
+    <Compile Include="Catalogos\frmCatUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\frmCatUsuarios.Designer.cs">
+      <DependentUpon>frmCatUsuarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Clases\sqlServer.cs" />
     <Compile Include="Cobros\frmCobroProducto.cs">
       <SubType>Form</SubType>
@@ -239,6 +245,7 @@
       <DependentUpon>ComboProductos.cs</DependentUpon>
     </Compile>
     <Compile Include="Dtos\ProductoDTO.cs" />
+    <Compile Include="Dtos\UsuariosDTO.cs" />
     <Compile Include="DumontContext.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -288,6 +295,12 @@
     <Compile Include="Listados\frmTutores.Designer.cs">
       <DependentUpon>frmTutores.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados\frmUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\frmUsuarios.Designer.cs">
+      <DependentUpon>frmUsuarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\clsModels.cs" />
     <Compile Include="modulos\basConfiguracion.cs" />
     <Compile Include="modulos\basFunctions.cs" />
@@ -317,6 +330,12 @@
     <Compile Include="Otros\frmPopup.Designer.cs">
       <DependentUpon>frmPopup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Otros\frmReinscripcion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Otros\frmReinscripcion.Designer.cs">
+      <DependentUpon>frmReinscripcion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Base\frmBaseCatalogos.resx">
@@ -342,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Catalogos\frmCatTutores.resx">
       <DependentUpon>frmCatTutores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\frmCatUsuarios.resx">
+      <DependentUpon>frmCatUsuarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cobros\frmCobroProducto.resx">
       <DependentUpon>frmCobroProducto.cs</DependentUpon>
@@ -385,6 +407,9 @@
     <EmbeddedResource Include="Listados\frmTutores.resx">
       <DependentUpon>frmTutores.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\frmUsuarios.resx">
+      <DependentUpon>frmUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmAcciones.resx">
       <DependentUpon>frmAcciones.cs</DependentUpon>
     </EmbeddedResource>
@@ -396,6 +421,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmPopup.resx">
       <DependentUpon>frmPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Otros\frmReinscripcion.resx">
+      <DependentUpon>frmReinscripcion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

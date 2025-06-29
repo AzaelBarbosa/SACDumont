@@ -59,14 +59,6 @@ namespace SACDumont.Cobros
 
                 basGlobals.listaProductos.Add(productos);
 
-                //basGlobals.dsMovimiento.Tables[1].Rows.Add(
-                //    strConceptoProducto,
-                //    strProducto,
-                //    nCantidad.Value,
-                //    0,
-                //    total,
-                //    Convert.ToDecimal(txRecargo.Text.Replace("$", "").Replace(",", "").Trim())
-                //);
                 this.Close();
             }
             else

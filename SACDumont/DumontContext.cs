@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using SACDumont.Models; // Assuming you have a Models namespace for your entity models
+using SACDumont.Models;
+using SACDumont.modulos; // Assuming you have a Models namespace for your entity models
 
 namespace SACDumont
 {
@@ -29,6 +30,7 @@ namespace SACDumont
         public DbSet<Inscripciones> Inscripciones { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<catalogos> Catalogos { get; set; }
+        public DbSet<perfiles> Perfiles { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -73,10 +73,10 @@ namespace SACDumont.Cobros
                 id_estatusmovimiento = (int)modulos.EstatusMovimiento.Liquidado; // Si no hay saldo pendiente, el estatus es Liquidado
             }
 
-                 using (var db = new DumontContext())
-                 {
-                 if (idMovimiento > 0)
-                 {
+            using (var db = new DumontContext())
+            {
+                if (idMovimiento > 0)
+                {
                     var mov = db.Movimientos.Find(idMovimiento);
                     if (mov != null)
                     {
@@ -97,7 +97,19 @@ namespace SACDumont.Cobros
                             }
                         }
 
-                        db.SaveChanges(); // 🔥 EF genera los INSERT automáticamente para productos y cobros);
+                        var result = db.SaveChanges(); // 🔥 EF genera los INSERT automáticamente para productos y cobros);
+                        if (result != 0)
+                        {
+                            basFunctions.Registrar(basConfiguracion.UserID, "Movimiento", "Editar", idMovimiento, $"Se realizaron cambios al Movimiento con ID: {idMovimiento}");
+                            if (id_estatusmovimiento == (int)modulos.EstatusMovimiento.Liquidado)
+                            {
+                                basFunctions.Registrar(basConfiguracion.UserID, "Movimiento", "Liquidacion", idMovimiento, $"Se liquido el Movimiento con ID: {idMovimiento}");
+                            }
+                            else if (id_estatusmovimiento == (int)modulos.EstatusMovimiento.Abono)
+                            {
+                                basFunctions.Registrar(basConfiguracion.UserID, "Movimiento", "Abono", idMovimiento, $"Se realizo un abono al Movimiento con ID: {idMovimiento}");
+                            }
+                        }
                     }
 
                     else
@@ -107,47 +119,63 @@ namespace SACDumont.Cobros
                     }
 
                 }
-                    else
+                else
+                {
+                    var nuevo = new Movimientos
                     {
-                        var nuevo = new Movimientos
-                        {
-                            id_registros = 0, // Se asignará automáticamente por la base de datos
-                            id_matricula = (int)cboAlumnos.matricula,
-                            id_usuario = idGrupo,
-                            fechahora = DateTime.Now,
-                            id_ciclo = basGlobals.iCiclo,
-                            montoTotal = basGlobals.listaProductos.Sum(p => p.monto) + basGlobals.listaProductos.Sum(c => c.monto_recargo),
-                            porcentaje_descuento = 0, // Asignar el valor correspondiente si se aplica descuento
-                            monto_descuento = 0, // Asignar el valor correspondiente si se aplica descuento
-                            beca_descuento = 0, // Asignar el valor correspondiente si se aplica beca
-                            id_tipomovimiento = basGlobals.tipoMovimiento, // Asignar el estatus correspondiente
-                            digitoscuenta = "0",
-                            id_estatusmovimiento = id_estatusmovimiento, // Asignar el estatus correspondiente
+                        id_registros = 0, // Se asignará automáticamente por la base de datos
+                        id_matricula = (int)cboAlumnos.matricula,
+                        id_usuario = idGrupo,
+                        fechahora = DateTime.Now,
+                        id_ciclo = basGlobals.iCiclo,
+                        montoTotal = basGlobals.listaProductos.Sum(p => p.monto) + basGlobals.listaProductos.Sum(c => c.monto_recargo),
+                        porcentaje_descuento = 0, // Asignar el valor correspondiente si se aplica descuento
+                        monto_descuento = 0, // Asignar el valor correspondiente si se aplica descuento
+                        beca_descuento = 0, // Asignar el valor correspondiente si se aplica beca
+                        id_tipomovimiento = basGlobals.tipoMovimiento, // Asignar el estatus correspondiente
+                        digitoscuenta = "0",
+                        id_estatusmovimiento = id_estatusmovimiento, // Asignar el estatus correspondiente
 
-                        };
+                    };
 
-                        db.Movimientos.Add(nuevo);
-                        db.SaveChanges(); // 🔥 EF genera el INSERT automáticamente
-
-                        db.MovimientoProductos.AddRange(basGlobals.listaProductos.Select(p => new movimiento_productos
-                        {
-                            id_movimiento = (int)nuevo.id_registros,
-                            id_producto = p.id_producto,
-                            descriptionProducto = p.descriptionProducto,
-                            cantidad = p.cantidad,
-                            monto = p.monto,
-                            monto_recargo = p.monto_recargo
-                        }));
-                        db.MovimientoCobros.AddRange(basGlobals.listaCobros.Select(c => new cobros
-                        {
-                            id_movimiento = (int)nuevo.id_registros,
-                            monto = c.monto,
-                            tipopago = c.tipopago,
-                            descripcionPago = c.descripcionPago
-                        }));
-                        db.SaveChanges(); // 🔥 EF genera los INSERT automáticamente para productos y cobros
+                    db.Movimientos.Add(nuevo);
+                    var result = db.SaveChanges(); // 🔥 EF genera el INSERT automáticamente
+                    if (result != 0)
+                    {
+                        idMovimiento = (int)nuevo.id_registros;
+                        basFunctions.Registrar(basConfiguracion.UserID, "Movimiento", "Alta", idMovimiento, $"Se realizo un nuevo Movimiento con ID: {idMovimiento}");
                     }
-                 }
+
+                    db.MovimientoProductos.AddRange(basGlobals.listaProductos.Select(p => new movimiento_productos
+                    {
+                        id_movimiento = (int)nuevo.id_registros,
+                        id_producto = p.id_producto,
+                        descriptionProducto = p.descriptionProducto,
+                        cantidad = p.cantidad,
+                        monto = p.monto,
+                        monto_recargo = p.monto_recargo
+                    }));
+                    db.MovimientoCobros.AddRange(basGlobals.listaCobros.Select(c => new cobros
+                    {
+                        id_movimiento = (int)nuevo.id_registros,
+                        monto = c.monto,
+                        tipopago = c.tipopago,
+                        descripcionPago = c.descripcionPago
+                    }));
+                    var result2 = db.SaveChanges(); // 🔥 EF genera los INSERT automáticamente para productos y cobros
+                    if (result2 != 0)
+                    {
+                        if (id_estatusmovimiento == (int)modulos.EstatusMovimiento.Liquidado)
+                        {
+                            basFunctions.Registrar(basConfiguracion.UserID, "Movimiento", "Liquidacion", idMovimiento, $"Se liquido el Movimiento con ID: {idMovimiento}");
+                        }
+                        else if (id_estatusmovimiento == (int)modulos.EstatusMovimiento.Abono)
+                        {
+                            basFunctions.Registrar(basConfiguracion.UserID, "Movimiento", "Abono", idMovimiento, $"Se realizo un abono al Movimiento con ID: {idMovimiento}");
+                        }
+                    }
+                }
+            }
             this.Close();
         }
         protected override void Eliminar()
@@ -224,7 +252,7 @@ namespace SACDumont.Cobros
                 txImporte.Text = (basGlobals.listaProductos.Sum(p => p.monto)).ToString("C2");
                 txRecargo.Text = (basGlobals.listaProductos.Sum(p => p.monto_recargo)).ToString("C2");
                 txImportePte.Text = (basGlobals.Movimiento.montoTotal - basGlobals.listaCobros.Sum(p => p.monto)).ToString("C2");
-                txTotal.Text = ( basGlobals.Movimiento.montoTotal).ToString("C");
+                txTotal.Text = (basGlobals.Movimiento.montoTotal).ToString("C");
                 txDescuento.Text = (basGlobals.Movimiento.monto_descuento).ToString("C");
                 txBeca.Text = (basGlobals.Movimiento.beca_descuento).ToString("C");
                 dgvCobros.DataSource = basGlobals.listaCobros;
@@ -294,7 +322,7 @@ namespace SACDumont.Cobros
                 MessageBox.Show("Debe seleccionar un alumno antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            frmCobroProducto frmCobro = new frmCobroProducto(idGrupo,strConcepto);
+            frmCobroProducto frmCobro = new frmCobroProducto(idGrupo, strConcepto);
             frmCobro.Text = "Agregar Producto";
             frmCobro.ShowDialog();
             if (basGlobals.listaProductos.Count > 0)
@@ -389,7 +417,7 @@ namespace SACDumont.Cobros
             {
                 txImportePte.ForeColor = Color.Black;
             }
-           
+
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -399,7 +427,7 @@ namespace SACDumont.Cobros
 
         private void cboAlumnos_KeyPress(object sender, KeyPressEventArgs e)
         {
-           
+
         }
 
         private void btDeleteProducto_Click(object sender, EventArgs e)
