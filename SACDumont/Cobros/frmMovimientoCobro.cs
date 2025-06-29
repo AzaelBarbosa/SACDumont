@@ -65,10 +65,12 @@ namespace SACDumont.Cobros
         {
             this.btNew.Visible = false;
             this.btDeshabilitar.Visible = false;
+            this.btHabilitar.Visible = false;
             this.btAcciones.Visible = false;
             this.btAddTutor.Visible = false;
             this.btDelete.Visible = false;
             this.btQuitarRecargo.Visible = false;
+            this.btResetPass.Visible = false;
         }
 
         private void frmMovimientoCobro_Load(object sender, EventArgs e)

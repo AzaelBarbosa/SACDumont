@@ -163,5 +163,12 @@ namespace SACDumont
         {
             AbrirUnicoFormularioHijo<frmUsuarios>();
         }
+
+        private void btReinscripcion_Click(object sender, EventArgs e)
+        {
+            frmReinscripcion frmReinscripcion = new frmReinscripcion();
+            frmReinscripcion.Text = "Reinscrpcion de Alumno";
+            frmReinscripcion.ShowDialog();
+        }
     }
 }
