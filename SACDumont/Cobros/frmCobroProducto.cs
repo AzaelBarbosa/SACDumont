@@ -122,7 +122,7 @@ namespace SACDumont.Cobros
             comboProductos1.SqlQuery = $@"SELECT p.id_producto, p.descripcion, p.concepto, pc.fecha_vencimiento, pc.precio FROM productos p   
                                            INNER JOIN producto_ciclo pc ON pc.id_producto = p.id_producto  
                                            LEFT JOIN movimiento_productos mp ON mp.id_producto = p.id_producto  
-                                           LEFT JOIN movimientos m ON m.id_registros = mp.id_movimiento   
+                                           LEFT JOIN movimientos m ON m.id_movimiento = mp.id_movimiento   
                                            WHERE pc.id_ciclo = {basGlobals.iCiclo} AND pc.id_grupo in (0,{idGrupo}) AND p.concepto = '{strConcepto}'";
             comboProductos1.Inicializar();
         }

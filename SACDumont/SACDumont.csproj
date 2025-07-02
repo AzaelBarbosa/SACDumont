@@ -245,6 +245,7 @@
       <DependentUpon>ComboProductos.cs</DependentUpon>
     </Compile>
     <Compile Include="Dtos\ProductoDTO.cs" />
+    <Compile Include="Dtos\ReportesDTO.cs" />
     <Compile Include="Dtos\UsuariosDTO.cs" />
     <Compile Include="DumontContext.cs" />
     <Compile Include="Form1.cs">

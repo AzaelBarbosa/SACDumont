@@ -45,7 +45,9 @@
             this.dgvMovimientos.ReadOnly = true;
             this.dgvMovimientos.Size = new System.Drawing.Size(800, 391);
             this.dgvMovimientos.TabIndex = 5;
+            this.dgvMovimientos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMovimientos_CellClick);
             this.dgvMovimientos.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMovimientos_CellContentDoubleClick);
+            this.dgvMovimientos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMovimientos_CellDoubleClick);
             this.dgvMovimientos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvMovimientos_CellFormatting);
             // 
             // frmMovimientos
