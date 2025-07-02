@@ -170,5 +170,12 @@ namespace SACDumont
             frmReinscripcion.Text = "Reinscrpcion de Alumno";
             frmReinscripcion.ShowDialog();
         }
+
+        private void btRptAcdemicosAlumnos_Click(object sender, EventArgs e)
+        {
+            frmPopup frmPopup = new frmPopup();
+            frmPopup.Text = "Reporte Listado de Alumnos";
+            frmPopup.ShowDialog();
+        }
     }
 }

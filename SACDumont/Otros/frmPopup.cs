@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SACDumont.Base;
+using SACDumont.Modulos;
 
 namespace SACDumont.Otros
 {
@@ -20,7 +21,10 @@ namespace SACDumont.Otros
         {
             try
             {
-             
+                if (cboGrupo.IDValor != 0)
+                {
+                    basFunctions.AlumnosExportarYMostrarPDF((int)cboGrupo.IDValor, (int)cboGrado.IDValor);
+                }
             }
             catch (Exception ex)
             {
@@ -35,7 +39,9 @@ namespace SACDumont.Otros
 
         private void frmPopup_Load(object sender, EventArgs e)
         {
-
+            guardarToolStripMenuItem.Text = "Imprimir";
+            cboGrado.Inicializar();
+            cboGrupo.Inicializar();
         }
     }
 }
