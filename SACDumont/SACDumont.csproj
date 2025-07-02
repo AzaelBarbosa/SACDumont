@@ -455,6 +455,9 @@
     <Content Include="Reportes\TicketMovimient.frx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Reportes\Alumnos.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\spinner.gif" />
     <None Include="Resources\flecha-hacia-arriba.png" />
     <None Include="Resources\flecha-hacia-abajo.png" />

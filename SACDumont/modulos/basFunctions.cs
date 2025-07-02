@@ -19,6 +19,7 @@ using static SACDumont.Modulos.basConfiguracion;
 using FastReport;
 using FastReport.Export.PdfSimple;
 using System.Data.Entity;
+using SACDumont.modulos;
 
 namespace SACDumont.Modulos
 {
@@ -397,6 +398,55 @@ namespace SACDumont.Modulos
             };
 
             Process.Start(psi);
+        }
+
+        public static void AlumnosExportarYMostrarPDF(int idGrupo, int idGrado)
+        {
+            // 1. Crear DataTable
+            DataTable dataTable = new DataTable();
+            List<AlumnosDTO> alumnosDTO = new List<AlumnosDTO>();
+            using (var db = new DumontContext())
+            {
+                var lista = db.Inscripciones
+                  .Where(m => m.id_ciclo == basGlobals.iCiclo && m.id_grupo == idGrupo && m.id_grado == idGrado)
+                  .Include(m => m.Alumnos)
+                  .Select(m => new AlumnosDTO
+                  {
+                      Grupo = db.Catalogos.Where(c => c.valor == idGrupo && c.tipo_catalogo == "Grupo").Select(c => c.descripcion).FirstOrDefault(),
+                      Grado = db.Catalogos.Where(c => c.valor == idGrado && c.tipo_catalogo == "Grado").Select(c => c.descripcion).FirstOrDefault(),
+                      Alumno = db.Alumnos
+                                  .Where(a => a.matricula == m.matricula)
+                                  .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
+                                  .FirstOrDefault()
+                  })
+                  .ToList();
+
+                alumnosDTO = lista;
+            }
+
+            dataTable = basFunctions.ConvertToDataTable(alumnosDTO);
+            // 2. Cargar el reporte
+            string rutaFrx = Path.Combine(Application.StartupPath, "Reportes", "Alumnos.frx");
+            Report report = new Report();
+            report.Load(rutaFrx);
+            report.RegisterData(dataTable, "TicketData");
+            report.GetDataSource("TicketData").Enabled = true;
+
+            // 3. Forzar carga de Microsoft.CSharp
+            System.Runtime.CompilerServices.RuntimeHelpers
+                .RunClassConstructor(typeof(Microsoft.CSharp.RuntimeBinder.Binder).TypeHandle);
+
+            // 4. Preparar y exportar
+            report.Prepare();
+            string rutaPDF = Path.Combine(Application.StartupPath, "Ticket.pdf");
+            report.Export(new PDFSimpleExport(), rutaPDF);
+
+            // 5. Abrir visor PDF predeterminado
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = rutaPDF,
+                UseShellExecute = true
+            });
         }
 
     }

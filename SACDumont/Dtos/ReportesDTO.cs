@@ -21,4 +21,13 @@ namespace SACDumont.Dtos
         public string Ciclo { get; set; }
         public decimal MontoPendiente { get; set; }
     }
+
+    public class AlumnosDTO
+    {
+        public string Alumno { get; set; }
+        public string Grado { get; set; }
+        public string Grupo { get; set; }
+        public string Ciclo { get; set; }
+    }
+
 }
