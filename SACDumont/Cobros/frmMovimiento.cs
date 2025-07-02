@@ -123,7 +123,7 @@ namespace SACDumont.Cobros
                 {
                     var nuevo = new Movimientos
                     {
-                        id_registros = 0, // Se asignará automáticamente por la base de datos
+                        id_movimiento = 0, // Se asignará automáticamente por la base de datos
                         id_matricula = (int)cboAlumnos.matricula,
                         id_usuario = idGrupo,
                         fechahora = DateTime.Now,
@@ -142,13 +142,13 @@ namespace SACDumont.Cobros
                     var result = db.SaveChanges(); // 🔥 EF genera el INSERT automáticamente
                     if (result != 0)
                     {
-                        idMovimiento = (int)nuevo.id_registros;
+                        idMovimiento = (int)nuevo.id_movimiento;
                         basFunctions.Registrar(basConfiguracion.UserID, "Movimiento", "Alta", idMovimiento, $"Se realizo un nuevo Movimiento con ID: {idMovimiento}");
                     }
 
                     db.MovimientoProductos.AddRange(basGlobals.listaProductos.Select(p => new movimiento_productos
                     {
-                        id_movimiento = (int)nuevo.id_registros,
+                        id_movimiento = (int)nuevo.id_movimiento,
                         id_producto = p.id_producto,
                         descriptionProducto = p.descriptionProducto,
                         cantidad = p.cantidad,
@@ -157,7 +157,7 @@ namespace SACDumont.Cobros
                     }));
                     db.MovimientoCobros.AddRange(basGlobals.listaCobros.Select(c => new cobros
                     {
-                        id_movimiento = (int)nuevo.id_registros,
+                        id_movimiento = (int)nuevo.id_movimiento,
                         monto = c.monto,
                         tipopago = c.tipopago,
                         descripcionPago = c.descripcionPago
@@ -246,7 +246,7 @@ namespace SACDumont.Cobros
 
             if (movimiento != null)
             {
-                lbIDMovimiento.Text = basGlobals.Movimiento.id_registros.ToString();
+                lbIDMovimiento.Text = basGlobals.Movimiento.id_movimiento.ToString();
                 cboAlumnos.matricula = (int)basGlobals.Movimiento.id_matricula;
                 cboAlumnos.Enabled = false;
                 txImporte.Text = (basGlobals.listaProductos.Sum(p => p.monto)).ToString("C2");

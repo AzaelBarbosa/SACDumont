@@ -18,6 +18,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.CSharp;
+using SACDumont.Dtos;
+using System.Data.Entity;
 
 namespace SACDumont.Listados
 {
@@ -30,6 +32,7 @@ namespace SACDumont.Listados
         int tipoMovimiento = basGlobals.tipoMovimiento;
         int estatusMovimiento = basGlobals.estatusMovimiento;
         basSql sql = new basSql();
+        int idMov = 0;
         #endregion
 
         #region Propiedades
@@ -61,11 +64,11 @@ namespace SACDumont.Listados
         #region Eventos
         private void CargarMovimientos()
         {
-            dtMovimientos = sqlServer.ExecSQLReturnDT($@"SELECT m.id_registros ,m.fechahora AS Fecha, p.descripcion AS Producto, a.apmaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, 
-                                                        m.montoTotal AS Total, m.montoTotal - (SELECT SUM(monto) FROM cobros WHERE id_movimiento = m.id_registros) AS MontoPendiente, m.porcentaje_descuento AS Descuento, m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento,
+            dtMovimientos = sqlServer.ExecSQLReturnDT($@"SELECT m.id_movimiento ,m.fechahora AS Fecha, p.descripcion AS Producto, a.apmaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, 
+                                                        m.montoTotal AS Total, m.montoTotal - (SELECT SUM(monto) FROM cobros WHERE id_movimiento = m.id_movimiento) AS MontoPendiente, m.porcentaje_descuento AS Descuento, m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento,
                                                         catE.descripcion AS Estatus
                                                         FROM movimientos m
-                                                        INNER JOIN movimiento_productos mp ON m.id_registros = mp.id_movimiento
+                                                        INNER JOIN movimiento_productos mp ON m.id_movimiento = mp.id_movimiento
                                                         INNER JOIN productos p ON p.id_producto = mp.id_producto
                                                         INNER JOIN alumnos a ON a.matricula = m.id_matricula
                                                         INNER JOIN inscripciones i ON i.matricula = a.matricula
@@ -80,7 +83,7 @@ namespace SACDumont.Listados
 
         private void FormatGrid()
         {
-            dgvMovimientos.Columns["id_registros"].Visible = false;
+            dgvMovimientos.Columns["id_movimiento"].Visible = false;
             dgvMovimientos.Columns["Fecha"].HeaderText = "Fecha";
             dgvMovimientos.Columns["Alumno"].HeaderText = "Alumno";
             dgvMovimientos.Columns["Grado"].HeaderText = "Grado";
@@ -122,11 +125,10 @@ namespace SACDumont.Listados
         private void dgvMovimientos_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var row = ((DataRowView)dgvMovimientos.SelectedRows[0].DataBoundItem).Row;
-           
+
             if (dgvMovimientos.SelectedRows.Count == 0) return;
             {
-                //DataSet ds = sql.GetMovimientoDetalle(Convert.ToInt32(row["id_registros"].ToString()));
-                frmMovimiento frm = new frmMovimiento((int)row["id_registros"]);
+                frmMovimiento frm = new frmMovimiento((int)row["id_movimiento"]);
                 frm.ShowDialog();
                 CargarMovimientos();
             }
@@ -160,41 +162,13 @@ namespace SACDumont.Listados
             }
             if (dgvMovimientos.Columns[e.ColumnIndex].Name == "MontoPendiente" && e.Value != null)
             {
-                decimal decMonto  = (decimal)e.Value;
+                decimal decMonto = (decimal)e.Value;
 
                 if (decMonto > 0)
                 {
                     e.CellStyle.ForeColor = Color.Red;
                 }
             }
-        }
-
-        private void MostrarReporte()
-        {
-            // 1. Crear el DataTable con los datos del ticket
-            DataTable dt = new DataTable("TicketData");
-            dt.Columns.Add("Producto", typeof(string));
-            dt.Columns.Add("Cantidad", typeof(int));
-            dt.Columns.Add("PrecioUnitario", typeof(decimal));
-            dt.Columns.Add("Total", typeof(decimal));
-
-            // 2. Agregar datos de ejemplo (puedes reemplazar por tu lógica real)
-            dt.Rows.Add("Inscripción", 1, 500, 500);
-            dt.Rows.Add("Cuota Septiembre", 1, 800, 800);
-            dt.Rows.Add("Uniforme", 2, 300, 600);
-
-            // 3. Cargar el reporte
-            Report report = new Report();
-            report.Load(@"C:\Ruta\al\archivo\TicketDataSource_Only.frx"); // ⚠️ Ajusta la ruta
-
-            // 4. Registrar el DataTable
-            report.RegisterData(dt, "TicketData");
-
-            // 5. Habilitar el datasource (si no tiene diseño aún)
-            report.GetDataSource("TicketData").Enabled = true;
-
-            // 6. Mostrar el reporte
-            report.Save(@"C:\Ruta\al\archivo\TicketDataSource_Only.frx"); // ⚠️ Ajusta la ruta
         }
 
         private void ExportarYMostrarPDF()
@@ -236,22 +210,51 @@ namespace SACDumont.Listados
 
         private void ExportareImprimirSinAbrir()
         {
-            // 1. Crear DataTable
-            DataTable dt = new DataTable("TicketData");
-            dt.Columns.Add("Producto", typeof(string));
-            dt.Columns.Add("Cantidad", typeof(int));
-            dt.Columns.Add("PrecioUnitario", typeof(decimal));
-            dt.Columns.Add("Total", typeof(decimal));
-            dt.Columns.Add("Recargo", typeof(decimal));
-            dt.Rows.Add("Inscripción", 1, 500, 600, 100);
-            dt.Rows.Add("Cuota Septiembre", 1, 800, 800, 0);
-            dt.Rows.Add("Uniforme", 2, 300, 600, 0);
+            if (idMov == 0) return;
 
+            DataTable dataTable = new DataTable();
+            List<ReportesDTO> reportesDTO = new List<ReportesDTO>();
+            using (var db = new DumontContext())
+            {
+                var lista = db.Movimientos
+                  .Where(m => m.id_movimiento == idMov)
+                  .Include(m => m.MovimientosProductos)
+                  .Include(m => m.MovimientosCobros)
+                  .SelectMany(m => m.MovimientosProductos, (m, mp) => new ReportesDTO
+                  {
+                      Producto = db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
+                      Cantidad = mp.cantidad,
+                      PrecioUnitario = mp.cantidad * mp.monto,
+                      Total = mp.monto + mp.monto_recargo,
+                      Recargo = mp.monto_recargo,
+                      Folio = m.id_movimiento,
+                      Fecha = m.fechahora,
+                      Grupo = db.Catalogos.Where(c => c.valor == m.id_ciclo && c.tipo_catalogo == "Grupo").Select(c => c.descripcion).FirstOrDefault(),
+                      Matricula = m.id_matricula,
+                      Alumno = db.Alumnos
+                                  .Where(a => a.matricula == m.id_matricula)
+                                  .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
+                                  .FirstOrDefault(),
+                      MontoPendiente = m.montoTotal - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                  })
+                  .ToList();
+
+                reportesDTO = lista;
+            }
+
+            dataTable = basFunctions.ConvertToDataTable(reportesDTO);
             // 2. Cargar el reporte
             string rutaFrx = Path.Combine(Application.StartupPath, "Reportes", "TicketMovimient.frx");
             Report report = new Report();
             report.Load(rutaFrx);
-            report.RegisterData(dt, "TicketData");
+
+            report.SetParameterValue("pFolio", reportesDTO[0].Folio);
+            report.SetParameterValue("pFecha", reportesDTO[0].Fecha);
+            report.SetParameterValue("pGrupo", reportesDTO[0].Grupo);
+            report.SetParameterValue("pMatricula", reportesDTO[0].Matricula);
+            report.SetParameterValue("pAlumno", reportesDTO[0].Alumno);
+
+            report.RegisterData(dataTable, "TicketData");
             report.GetDataSource("TicketData").Enabled = true;
 
             // 3. Forzar carga de Microsoft.CSharp
@@ -286,7 +289,27 @@ namespace SACDumont.Listados
             Process.Start(psi);
         }
 
+        private void dgvMovimientos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = ((DataRowView)dgvMovimientos.SelectedRows[0].DataBoundItem).Row;
 
+            if (dgvMovimientos.SelectedRows.Count == 0) return;
+            {
+                idMov = (int)row["id_movimiento"];
+            }
+        }
+
+        private void dgvMovimientos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = ((DataRowView)dgvMovimientos.SelectedRows[0].DataBoundItem).Row;
+
+            if (dgvMovimientos.SelectedRows.Count == 0) return;
+            {
+                frmMovimiento frm = new frmMovimiento((int)row["id_movimiento"]);
+                frm.ShowDialog();
+                CargarMovimientos();
+            }
+        }
     }
     #endregion
 }

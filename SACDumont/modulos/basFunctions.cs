@@ -1,18 +1,24 @@
-﻿using System;
+﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Math;
+using FastReport.Export.PdfSimple;
+using SACDumont.Clases;
+using SACDumont.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SACDumont.Clases;
-using System.IO;
-using System.Data.SqlClient;
-using System.Security.Cryptography;
-using ClosedXML.Excel;
 using static SACDumont.Modulos.basConfiguracion;
-using DocumentFormat.OpenXml.Math;
-using System.Security.RightsManagement;
+using FastReport;
+using FastReport.Export.PdfSimple;
+using System.Data.Entity;
 
 namespace SACDumont.Modulos
 {
@@ -310,6 +316,87 @@ namespace SACDumont.Modulos
             }
 
             return dataTable;
+        }
+
+        public static void ExportareImprimirSinAbrir(int idMov)
+        {
+            if (idMov == 0) return;
+
+            DataTable dataTable = new DataTable();
+            List<ReportesDTO> reportesDTO = new List<ReportesDTO>();
+            using (var db = new DumontContext())
+            {
+                var lista = db.Movimientos
+                  .Where(m => m.id_movimiento == idMov)
+                  .Include(m => m.MovimientosProductos)
+                  .Include(m => m.MovimientosCobros)
+                  .SelectMany(m => m.MovimientosProductos, (m, mp) => new ReportesDTO
+                  {
+                      Producto = db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
+                      Cantidad = mp.cantidad,
+                      PrecioUnitario = mp.cantidad * mp.monto,
+                      Total = mp.monto + mp.monto_recargo,
+                      Recargo = mp.monto_recargo,
+                      Folio = m.id_movimiento,
+                      Fecha = m.fechahora,
+                      Grupo = db.Catalogos.Where(c => c.valor == m.id_ciclo && c.tipo_catalogo == "Grupo").Select(c => c.descripcion).FirstOrDefault(),
+                      Matricula = m.id_matricula,
+                      Alumno = db.Alumnos
+                                  .Where(a => a.matricula == m.id_matricula)
+                                  .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
+                                  .FirstOrDefault(),
+                      MontoPendiente = m.montoTotal - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                  })
+                  .ToList();
+
+                reportesDTO = lista;
+            }
+
+            dataTable = basFunctions.ConvertToDataTable(reportesDTO);
+            // 2. Cargar el reporte
+            string rutaFrx = Path.Combine(Application.StartupPath, "Reportes", "TicketMovimient.frx");
+            Report report = new Report();
+            report.Load(rutaFrx);
+
+            report.SetParameterValue("pFolio", reportesDTO[0].Folio);
+            report.SetParameterValue("pFecha", reportesDTO[0].Fecha);
+            report.SetParameterValue("pGrupo", reportesDTO[0].Grupo);
+            report.SetParameterValue("pMatricula", reportesDTO[0].Matricula);
+            report.SetParameterValue("pAlumno", reportesDTO[0].Alumno);
+
+            report.RegisterData(dataTable, "TicketData");
+            report.GetDataSource("TicketData").Enabled = true;
+
+            // 3. Forzar carga de Microsoft.CSharp
+            System.Runtime.CompilerServices.RuntimeHelpers
+                .RunClassConstructor(typeof(Microsoft.CSharp.RuntimeBinder.Binder).TypeHandle);
+
+            // 4. Preparar y exportar
+            report.Prepare();
+            string rutaPDF = Path.Combine(Application.StartupPath, "Ticket.pdf");
+            report.Export(new PDFSimpleExport(), rutaPDF);
+
+            string rutaSumatra = Path.Combine(Application.StartupPath, "SumatraPDF.exe");
+
+            if (!File.Exists(rutaSumatra))
+            {
+                MessageBox.Show("No se encontró SumatraPDF.exe. Asegúrate de colocarlo junto a la aplicación.");
+                return;
+            }
+
+            var nombreImpresora = "Microsoft Print to PDF";
+            var psi = new ProcessStartInfo
+            {
+                FileName = rutaSumatra,
+                Arguments = nombreImpresora == ""
+                    ? $"-print-to-default \"{rutaPDF}\""
+                    : $"-print-to \"{nombreImpresora}\" \"{rutaPDF}\"",
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                WindowStyle = ProcessWindowStyle.Hidden
+            };
+
+            Process.Start(psi);
         }
 
     }

@@ -20,6 +20,7 @@ namespace SACDumont.Models
 
         [NotMapped]
         public string descriptionProducto { get; set; }
+
     }
 
     public class cobros
@@ -37,7 +38,7 @@ namespace SACDumont.Models
     public class Movimientos
     {
         [Key]
-        public int id_registros { get; set; }
+        public int id_movimiento { get; set; }
         public int id_tipomovimiento { get; set; }
         public int id_estatusmovimiento { get; set; }
         public DateTime fechahora { get; set; }
@@ -49,6 +50,8 @@ namespace SACDumont.Models
         public decimal porcentaje_descuento { get; set; }
         public decimal monto_descuento { get; set; }
         public decimal beca_descuento { get; set; }
+        public virtual ICollection<movimiento_productos> MovimientosProductos { get; set; }
+        public virtual ICollection<cobros> MovimientosCobros { get; set; }
     }
 
     public class Becas
