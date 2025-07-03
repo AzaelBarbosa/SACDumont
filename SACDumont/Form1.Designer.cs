@@ -67,6 +67,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tlUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.ciclosEscolaresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -213,7 +214,7 @@
             // 
             this.btReimpresionTickets.Image = global::SACDumont.Properties.Resources.factura;
             this.btReimpresionTickets.Name = "btReimpresionTickets";
-            this.btReimpresionTickets.Size = new System.Drawing.Size(180, 22);
+            this.btReimpresionTickets.Size = new System.Drawing.Size(179, 22);
             this.btReimpresionTickets.Text = "Reimpresion Tickets";
             // 
             // btRptAcdemicos
@@ -224,28 +225,28 @@
             this.btRptAcdemicosAlumnos});
             this.btRptAcdemicos.Image = global::SACDumont.Properties.Resources.academic;
             this.btRptAcdemicos.Name = "btRptAcdemicos";
-            this.btRptAcdemicos.Size = new System.Drawing.Size(180, 22);
+            this.btRptAcdemicos.Size = new System.Drawing.Size(179, 22);
             this.btRptAcdemicos.Text = "Academicos";
             // 
             // btRptAcdemicosAsistencia
             // 
             this.btRptAcdemicosAsistencia.Image = global::SACDumont.Properties.Resources.contrato;
             this.btRptAcdemicosAsistencia.Name = "btRptAcdemicosAsistencia";
-            this.btRptAcdemicosAsistencia.Size = new System.Drawing.Size(180, 22);
+            this.btRptAcdemicosAsistencia.Size = new System.Drawing.Size(168, 22);
             this.btRptAcdemicosAsistencia.Text = "Lista Asistencia";
             // 
             // btRptAcdemicosCumple
             // 
             this.btRptAcdemicosCumple.Image = global::SACDumont.Properties.Resources.cumpleanos;
             this.btRptAcdemicosCumple.Name = "btRptAcdemicosCumple";
-            this.btRptAcdemicosCumple.Size = new System.Drawing.Size(180, 22);
+            this.btRptAcdemicosCumple.Size = new System.Drawing.Size(168, 22);
             this.btRptAcdemicosCumple.Text = "Lista Cumpleaños";
             // 
             // btRptAcdemicosAlumnos
             // 
             this.btRptAcdemicosAlumnos.Image = global::SACDumont.Properties.Resources.contrato;
             this.btRptAcdemicosAlumnos.Name = "btRptAcdemicosAlumnos";
-            this.btRptAcdemicosAlumnos.Size = new System.Drawing.Size(180, 22);
+            this.btRptAcdemicosAlumnos.Size = new System.Drawing.Size(168, 22);
             this.btRptAcdemicosAlumnos.Text = "Lista Alumnos";
             this.btRptAcdemicosAlumnos.Click += new System.EventHandler(this.btRptAcdemicosAlumnos_Click);
             // 
@@ -259,7 +260,7 @@
             this.btRptAdministrativoActividad});
             this.btRptAdministrativo.Image = global::SACDumont.Properties.Resources.administrativo;
             this.btRptAdministrativo.Name = "btRptAdministrativo";
-            this.btRptAdministrativo.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativo.Size = new System.Drawing.Size(179, 22);
             this.btRptAdministrativo.Text = "Administrtivo";
             // 
             // btRptAdministrativoCorte
@@ -268,26 +269,26 @@
             this.btRptAdministrativoCorteDirio,
             this.btRptAdministrativoCorteFecha});
             this.btRptAdministrativoCorte.Name = "btRptAdministrativoCorte";
-            this.btRptAdministrativoCorte.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoCorte.Size = new System.Drawing.Size(167, 22);
             this.btRptAdministrativoCorte.Text = "Corte";
             // 
             // btRptAdministrativoCorteDirio
             // 
             this.btRptAdministrativoCorteDirio.Name = "btRptAdministrativoCorteDirio";
-            this.btRptAdministrativoCorteDirio.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoCorteDirio.Size = new System.Drawing.Size(126, 22);
             this.btRptAdministrativoCorteDirio.Text = "Diario";
             // 
             // btRptAdministrativoCorteFecha
             // 
             this.btRptAdministrativoCorteFecha.Name = "btRptAdministrativoCorteFecha";
-            this.btRptAdministrativoCorteFecha.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoCorteFecha.Size = new System.Drawing.Size(126, 22);
             this.btRptAdministrativoCorteFecha.Text = "Por Fecha";
             // 
             // btRptAdministrativoBecas
             // 
             this.btRptAdministrativoBecas.Image = global::SACDumont.Properties.Resources.beca_educativa;
             this.btRptAdministrativoBecas.Name = "btRptAdministrativoBecas";
-            this.btRptAdministrativoBecas.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoBecas.Size = new System.Drawing.Size(167, 22);
             this.btRptAdministrativoBecas.Text = "Becas";
             this.btRptAdministrativoBecas.Visible = false;
             // 
@@ -295,7 +296,7 @@
             // 
             this.btRptAdministrativoFacturas.Image = global::SACDumont.Properties.Resources.facturacion;
             this.btRptAdministrativoFacturas.Name = "btRptAdministrativoFacturas";
-            this.btRptAdministrativoFacturas.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoFacturas.Size = new System.Drawing.Size(167, 22);
             this.btRptAdministrativoFacturas.Text = "Facturas";
             this.btRptAdministrativoFacturas.Visible = false;
             // 
@@ -303,7 +304,7 @@
             // 
             this.btRptAdministrativoUniformes.Image = global::SACDumont.Properties.Resources.camisa;
             this.btRptAdministrativoUniformes.Name = "btRptAdministrativoUniformes";
-            this.btRptAdministrativoUniformes.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoUniformes.Size = new System.Drawing.Size(167, 22);
             this.btRptAdministrativoUniformes.Text = "Uniformes";
             this.btRptAdministrativoUniformes.Visible = false;
             // 
@@ -311,7 +312,7 @@
             // 
             this.btRptAdministrativoActividad.Image = global::SACDumont.Properties.Resources.lista_de_asistentes;
             this.btRptAdministrativoActividad.Name = "btRptAdministrativoActividad";
-            this.btRptAdministrativoActividad.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoActividad.Size = new System.Drawing.Size(167, 22);
             this.btRptAdministrativoActividad.Text = "Actividad Usuario";
             this.btRptAdministrativoActividad.Visible = false;
             // 
@@ -319,6 +320,7 @@
             // 
             this.btConfiguracion.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.generalToolStripMenuItem,
+            this.ciclosEscolaresToolStripMenuItem,
             this.cambiarCicloToolStripMenuItem});
             this.btConfiguracion.Image = global::SACDumont.Properties.Resources.configuracion_del_documento;
             this.btConfiguracion.Name = "btConfiguracion";
@@ -329,14 +331,14 @@
             // generalToolStripMenuItem
             // 
             this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
-            this.generalToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.generalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.generalToolStripMenuItem.Text = "General";
             this.generalToolStripMenuItem.Click += new System.EventHandler(this.generalToolStripMenuItem_Click);
             // 
             // cambiarCicloToolStripMenuItem
             // 
             this.cambiarCicloToolStripMenuItem.Name = "cambiarCicloToolStripMenuItem";
-            this.cambiarCicloToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.cambiarCicloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cambiarCicloToolStripMenuItem.Text = "Cambiar Ciclo";
             this.cambiarCicloToolStripMenuItem.Click += new System.EventHandler(this.cambiarCicloToolStripMenuItem_Click);
             // 
@@ -385,6 +387,13 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // ciclosEscolaresToolStripMenuItem
+            // 
+            this.ciclosEscolaresToolStripMenuItem.Name = "ciclosEscolaresToolStripMenuItem";
+            this.ciclosEscolaresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ciclosEscolaresToolStripMenuItem.Text = "Ciclos Escolares";
+            this.ciclosEscolaresToolStripMenuItem.Click += new System.EventHandler(this.ciclosEscolaresToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -451,6 +460,7 @@
         private System.Windows.Forms.ToolStripMenuItem cambiarCicloToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem promocionesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ciclosEscolaresToolStripMenuItem;
     }
 }
 

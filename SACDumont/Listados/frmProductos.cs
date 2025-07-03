@@ -231,5 +231,10 @@ namespace SACDumont.Listados
                 FormatGrid();
             }
         }
+
+        private void dgvProductos_Resize(object sender, EventArgs e)
+        {
+            basFunctions.CenterSpinnerOverGrid(this, pbSpinner);
+        }
     }
 }

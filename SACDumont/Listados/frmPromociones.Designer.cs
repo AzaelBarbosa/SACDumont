@@ -56,6 +56,7 @@
             this.Name = "frmPromociones";
             this.Text = "frmPromociones";
             this.Load += new System.EventHandler(this.frmPromociones_Load);
+            this.Resize += new System.EventHandler(this.frmPromociones_Resize);
             this.Controls.SetChildIndex(this.dgvPromociones, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPromociones)).EndInit();
             this.ResumeLayout(false);

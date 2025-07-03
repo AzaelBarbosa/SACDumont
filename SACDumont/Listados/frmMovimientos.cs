@@ -310,6 +310,11 @@ namespace SACDumont.Listados
                 CargarMovimientos();
             }
         }
+
+        private void dgvMovimientos_Resize(object sender, EventArgs e)
+        {
+            basFunctions.CenterSpinnerOverGrid(this, pbSpinner);
+        }
     }
     #endregion
 }

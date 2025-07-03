@@ -120,6 +120,7 @@
             this.dgvProductos.TabIndex = 8;
             this.dgvProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellClick);
             this.dgvProductos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellDoubleClick);
+            this.dgvProductos.Resize += new System.EventHandler(this.dgvProductos_Resize);
             // 
             // frmProductos
             // 
