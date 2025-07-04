@@ -55,11 +55,21 @@
             this.btDeleteProducto = new System.Windows.Forms.Button();
             this.btDeletePago = new System.Windows.Forms.Button();
             this.btNewPago = new System.Windows.Forms.Button();
+            this.gbInformacion = new System.Windows.Forms.GroupBox();
+            this.lbPromocion = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lbGradoActual = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lbGrupoActual = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lbBeca = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.gbProductos.SuspendLayout();
             this.gbCobros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCobros)).BeginInit();
+            this.gbInformacion.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -85,7 +95,7 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.txDescuento);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Location = new System.Drawing.Point(19, 572);
+            this.groupBox2.Location = new System.Drawing.Point(19, 651);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(520, 82);
             this.groupBox2.TabIndex = 42;
@@ -213,7 +223,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(75, 27);
             this.label7.TabIndex = 26;
-            this.label7.Text = "Descuento:";
+            this.label7.Text = "Promocion:";
             // 
             // dgvProductos
             // 
@@ -234,7 +244,7 @@
             // 
             this.lbIDMovimiento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbIDMovimiento.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lbIDMovimiento.Location = new System.Drawing.Point(434, 657);
+            this.lbIDMovimiento.Location = new System.Drawing.Point(434, 735);
             this.lbIDMovimiento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbIDMovimiento.Name = "lbIDMovimiento";
             this.lbIDMovimiento.Size = new System.Drawing.Size(101, 23);
@@ -258,7 +268,7 @@
             // gbProductos
             // 
             this.gbProductos.Controls.Add(this.dgvProductos);
-            this.gbProductos.Location = new System.Drawing.Point(16, 119);
+            this.gbProductos.Location = new System.Drawing.Point(16, 198);
             this.gbProductos.Name = "gbProductos";
             this.gbProductos.Size = new System.Drawing.Size(485, 265);
             this.gbProductos.TabIndex = 45;
@@ -268,7 +278,7 @@
             // gbCobros
             // 
             this.gbCobros.Controls.Add(this.dgvCobros);
-            this.gbCobros.Location = new System.Drawing.Point(19, 390);
+            this.gbCobros.Location = new System.Drawing.Point(19, 469);
             this.gbCobros.Name = "gbCobros";
             this.gbCobros.Size = new System.Drawing.Size(482, 176);
             this.gbCobros.TabIndex = 46;
@@ -294,7 +304,7 @@
             // 
             this.btNewProducto.ImageKey = "3.png";
             this.btNewProducto.ImageList = this.imageList1;
-            this.btNewProducto.Location = new System.Drawing.Point(504, 136);
+            this.btNewProducto.Location = new System.Drawing.Point(504, 215);
             this.btNewProducto.Name = "btNewProducto";
             this.btNewProducto.Size = new System.Drawing.Size(25, 25);
             this.btNewProducto.TabIndex = 47;
@@ -327,7 +337,7 @@
             // 
             this.btDeleteProducto.ImageKey = "4.png";
             this.btDeleteProducto.ImageList = this.imageList1;
-            this.btDeleteProducto.Location = new System.Drawing.Point(504, 167);
+            this.btDeleteProducto.Location = new System.Drawing.Point(504, 246);
             this.btDeleteProducto.Name = "btDeleteProducto";
             this.btDeleteProducto.Size = new System.Drawing.Size(25, 25);
             this.btDeleteProducto.TabIndex = 48;
@@ -338,7 +348,7 @@
             // 
             this.btDeletePago.ImageKey = "4.png";
             this.btDeletePago.ImageList = this.imageList1;
-            this.btDeletePago.Location = new System.Drawing.Point(507, 438);
+            this.btDeletePago.Location = new System.Drawing.Point(507, 517);
             this.btDeletePago.Name = "btDeletePago";
             this.btDeletePago.Size = new System.Drawing.Size(25, 25);
             this.btDeletePago.TabIndex = 50;
@@ -349,18 +359,113 @@
             // 
             this.btNewPago.ImageKey = "3.png";
             this.btNewPago.ImageList = this.imageList1;
-            this.btNewPago.Location = new System.Drawing.Point(507, 407);
+            this.btNewPago.Location = new System.Drawing.Point(507, 486);
             this.btNewPago.Name = "btNewPago";
             this.btNewPago.Size = new System.Drawing.Size(25, 25);
             this.btNewPago.TabIndex = 49;
             this.btNewPago.UseVisualStyleBackColor = true;
             this.btNewPago.Click += new System.EventHandler(this.btNewPago_Click);
             // 
+            // gbInformacion
+            // 
+            this.gbInformacion.Controls.Add(this.lbBeca);
+            this.gbInformacion.Controls.Add(this.label12);
+            this.gbInformacion.Controls.Add(this.lbPromocion);
+            this.gbInformacion.Controls.Add(this.label4);
+            this.gbInformacion.Controls.Add(this.lbGradoActual);
+            this.gbInformacion.Controls.Add(this.label9);
+            this.gbInformacion.Controls.Add(this.lbGrupoActual);
+            this.gbInformacion.Controls.Add(this.label10);
+            this.gbInformacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbInformacion.Location = new System.Drawing.Point(12, 104);
+            this.gbInformacion.Name = "gbInformacion";
+            this.gbInformacion.Size = new System.Drawing.Size(520, 88);
+            this.gbInformacion.TabIndex = 51;
+            this.gbInformacion.TabStop = false;
+            this.gbInformacion.Text = "Informacion:";
+            // 
+            // lbPromocion
+            // 
+            this.lbPromocion.AutoSize = true;
+            this.lbPromocion.Location = new System.Drawing.Point(320, 29);
+            this.lbPromocion.Name = "lbPromocion";
+            this.lbPromocion.Size = new System.Drawing.Size(26, 15);
+            this.lbPromocion.TabIndex = 5;
+            this.lbPromocion.Text = "N/A";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(193, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(121, 15);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Promocion Activa:";
+            // 
+            // lbGradoActual
+            // 
+            this.lbGradoActual.AutoSize = true;
+            this.lbGradoActual.Location = new System.Drawing.Point(108, 60);
+            this.lbGradoActual.Name = "lbGradoActual";
+            this.lbGradoActual.Size = new System.Drawing.Size(26, 15);
+            this.lbGradoActual.TabIndex = 3;
+            this.lbGradoActual.Text = "N/A";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(9, 60);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(93, 15);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Grado Actual:";
+            // 
+            // lbGrupoActual
+            // 
+            this.lbGrupoActual.AutoSize = true;
+            this.lbGrupoActual.Location = new System.Drawing.Point(108, 29);
+            this.lbGrupoActual.Name = "lbGrupoActual";
+            this.lbGrupoActual.Size = new System.Drawing.Size(26, 15);
+            this.lbGrupoActual.TabIndex = 1;
+            this.lbGrupoActual.Text = "N/A";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(9, 29);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(93, 15);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Grupo Actual:";
+            // 
+            // lbBeca
+            // 
+            this.lbBeca.AutoSize = true;
+            this.lbBeca.Location = new System.Drawing.Point(320, 60);
+            this.lbBeca.Name = "lbBeca";
+            this.lbBeca.Size = new System.Drawing.Size(26, 15);
+            this.lbBeca.TabIndex = 7;
+            this.lbBeca.Text = "N/A";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(193, 60);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(43, 15);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "Beca:";
+            // 
             // frmMovimiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 689);
+            this.ClientSize = new System.Drawing.Size(555, 767);
+            this.Controls.Add(this.gbInformacion);
             this.Controls.Add(this.btDeletePago);
             this.Controls.Add(this.btNewPago);
             this.Controls.Add(this.btDeleteProducto);
@@ -386,12 +491,15 @@
             this.Controls.SetChildIndex(this.btDeleteProducto, 0);
             this.Controls.SetChildIndex(this.btNewPago, 0);
             this.Controls.SetChildIndex(this.btDeletePago, 0);
+            this.Controls.SetChildIndex(this.gbInformacion, 0);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.gbProductos.ResumeLayout(false);
             this.gbCobros.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCobros)).EndInit();
+            this.gbInformacion.ResumeLayout(false);
+            this.gbInformacion.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -423,5 +531,14 @@
         private System.Windows.Forms.Button btNewPago;
         private System.Windows.Forms.TextBox txImporte;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox gbInformacion;
+        private System.Windows.Forms.Label lbPromocion;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbGradoActual;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lbGrupoActual;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lbBeca;
+        private System.Windows.Forms.Label label12;
     }
 }

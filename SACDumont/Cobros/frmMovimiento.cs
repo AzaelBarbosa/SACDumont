@@ -27,6 +27,8 @@ namespace SACDumont.Cobros
         int idMatricula = 0;
         int idGrado = 0;
         int idGrupo = 0;
+        decimal beca = 0;
+        decimal promocion = 0;
         string strConcepto = "";
         DataSet dsTemp = new DataSet("Movimiento");
         basSql sql = new basSql();
@@ -312,6 +314,12 @@ namespace SACDumont.Cobros
             idMatricula = Convert.ToInt32(obj["matricula"]);
             idGrado = Convert.ToInt32(obj["Grado"]);
             idGrupo = Convert.ToInt32(obj["Grupo"]);
+            beca = Convert.ToDecimal(obj["porcentaje_beca"]);
+            promocion = Convert.ToDecimal(obj["porcentaje_promocion"]);
+            lbGradoActual.Text = Convert.ToString(obj["DescripcionGrado"]);
+            lbGrupoActual.Text = Convert.ToString(obj["DescripcionGrupo"]);
+            lbBeca.Text = Convert.ToString(obj["porcentaje_beca"]);
+            lbPromocion.Text = Convert.ToString(obj["Promocion"]);
             this.cboAlumnos.Size = new Size(398, 21);
         }
 
@@ -350,7 +358,9 @@ namespace SACDumont.Cobros
                 txImporte.Text = Convert.ToDecimal(txImporte.Text).ToString("C2");
                 txRecargo.Text = basGlobals.listaProductos.Sum(p => p.monto_recargo).ToString();
                 txRecargo.Text = Convert.ToDecimal(txRecargo.Text).ToString("C2");
-                txTotal.Text = (Convert.ToDecimal(txImporte.Text.Replace("$", "").Replace(",", "").Trim()) + Convert.ToDecimal(txRecargo.Text.Replace("$", "").Replace(",", "").Trim())).ToString("C2");
+                txBeca.Text = ((beca / 100m) * basGlobals.listaProductos.Sum(p => p.monto)).ToString("C2");
+                txDescuento.Text = ((promocion / 100m) * basGlobals.listaProductos.Sum(p => p.monto)).ToString("C2");
+                txTotal.Text = (Convert.ToDecimal(txImporte.Text.Replace("$", "").Replace(",", "").Trim()) + Convert.ToDecimal(txRecargo.Text.Replace("$", "").Replace(",", "").Trim()) - Convert.ToDecimal(txBeca.Text.Replace("$", "").Replace(",", "").Trim()) - Convert.ToDecimal(txDescuento.Text.Replace("$", "").Replace(",", "").Trim())).ToString("C2");
                 txImportePte.Text = txTotal.Text;
                 txImportePte.ForeColor = Color.Red;
             }

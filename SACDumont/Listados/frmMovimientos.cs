@@ -274,7 +274,7 @@ namespace SACDumont.Listados
                 return;
             }
 
-            var nombreImpresora = "Microsoft Print to PDF";
+            var nombreImpresora = "RECIBOS";
             var psi = new ProcessStartInfo
             {
                 FileName = rutaSumatra,

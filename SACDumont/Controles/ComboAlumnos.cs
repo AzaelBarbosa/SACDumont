@@ -54,12 +54,17 @@ namespace SACDumont.Controles
             if (string.IsNullOrEmpty(SqlQuery))
             {
                 SqlQuery = $@"SELECT al.matricula, al.appaterno + ' ' + al.apmaterno + ' ' + al.nombre AS Alumno, cat.valor AS Grado, cat.descripcion AS DescripcionGrado, 
-                                    ins.id_grupo AS Grupo, catG.descripcion AS DescripcionGrupo, ce.ciclo  
+                                    ins.id_grupo AS Grupo, catG.descripcion AS DescripcionGrupo, ce.ciclo, ISNULL(pr.descripcion, 'N/A') AS Promocion, 
+                                    ISNULL(pr.porcentaje_promocion, 0) AS porcentaje_promocion, 
+                                    ISNULL(be.porcentaje_beca, 0) AS porcentaje_beca
                                     FROM alumnos al
                                     INNER JOIN inscripciones ins ON al.matricula = ins.matricula
                                     LEFT JOIN catalogos cat ON cat.valor = ins.id_grado AND cat.tipo_catalogo = 'Grado' 
                                     LEFT JOIN catalogos catG ON catG.valor = ins.id_grupo AND catG.tipo_catalogo = 'Grupo' 
                                     LEFT JOIN ciclos_escolares ce ON ins.id_ciclo = ce.id_ciclo
+			                        LEFT JOIN promociones_alumnos pral ON pral.matricula = al.matricula
+									LEFT JOIN Promociones pr ON pr.id_promocion = pral.id_promocion AND pr.id_ciclo = ins.id_ciclo
+									LEFT JOIN Becas be ON be.id_matricula = al.matricula AND be.id_ciclo = ins.id_ciclo
                                     WHERE ins.id_ciclo = {basGlobals.iCiclo}";
             }
             if (txProducto.Text.Length > 0)
