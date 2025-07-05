@@ -62,12 +62,15 @@ namespace SACDumont.modulos
     {
         INSCRIPCION,
         COLEGIATURA,
-        PRODUCTO,
-        OTROS
+        ARTICULO,
+        UNIFORMES,
+        EVENTOS,
+        GRADUACION
     }
 
     public enum Grados
     {
+        Maternal = 0,
         PreEscolar = 1,
         Primaria = 2,
         Secundaria = 3
