@@ -85,7 +85,6 @@ namespace SACDumont.Catalogos
                     productos = db.Productos.Find(idProducto);
                     if (productos != null)
                     {
-                        productos.id_producto = 0;
                         productos.descripcion = txDescripcion.Text;
                         productos.concepto = txConcepto.Text;
 

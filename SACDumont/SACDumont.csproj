@@ -16,6 +16,22 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>Z:\Publicados\Dumont\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,6 +54,18 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>LogoIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>2D2564D03C202A219920190ABF5C144AF8D971CB</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>SACDumont_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
@@ -244,6 +272,7 @@
     <Compile Include="Controles\ComboProductos.Designer.cs">
       <DependentUpon>ComboProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dtos\GeneralDTO.cs" />
     <Compile Include="Dtos\ProductoDTO.cs" />
     <Compile Include="Dtos\ReportesDTO.cs" />
     <Compile Include="Dtos\UsuariosDTO.cs" />
@@ -271,6 +300,12 @@
     </Compile>
     <Compile Include="Listados\frmAlumnos.Designer.cs">
       <DependentUpon>frmAlumnos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\frmCiclosEscolares.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\frmCiclosEscolares.Designer.cs">
+      <DependentUpon>frmCiclosEscolares.cs</DependentUpon>
     </Compile>
     <Compile Include="Listados\frmMovimientos.cs">
       <SubType>Form</SubType>
@@ -324,6 +359,12 @@
     </Compile>
     <Compile Include="Otros\frmConfig.Designer.cs">
       <DependentUpon>frmConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Otros\frmCrearCiclos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Otros\frmCrearCiclos.Designer.cs">
+      <DependentUpon>frmCrearCiclos.cs</DependentUpon>
     </Compile>
     <Compile Include="Otros\frmPopup.cs">
       <SubType>Form</SubType>
@@ -396,6 +437,9 @@
     <EmbeddedResource Include="Listados\frmAlumnos.resx">
       <DependentUpon>frmAlumnos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\frmCiclosEscolares.resx">
+      <DependentUpon>frmCiclosEscolares.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\frmMovimientos.resx">
       <DependentUpon>frmMovimientos.cs</DependentUpon>
     </EmbeddedResource>
@@ -419,6 +463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmConfig.resx">
       <DependentUpon>frmConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Otros\frmCrearCiclos.resx">
+      <DependentUpon>frmCrearCiclos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmPopup.resx">
       <DependentUpon>frmPopup.cs</DependentUpon>
@@ -485,7 +532,18 @@
   <ItemGroup>
     <None Include="Resources\reportes.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\apagar.png" />
   </ItemGroup>

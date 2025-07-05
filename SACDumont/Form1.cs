@@ -177,5 +177,10 @@ namespace SACDumont
             frmPopup.Text = "Reporte Listado de Alumnos";
             frmPopup.ShowDialog();
         }
+
+        private void ciclosEscolaresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AbrirUnicoFormularioHijo<frmCiclosEscolares>();
+        }
     }
 }

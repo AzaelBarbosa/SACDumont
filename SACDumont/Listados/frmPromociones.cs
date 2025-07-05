@@ -1,5 +1,8 @@
 ﻿using SACDumont.Base;
+using SACDumont.Catalogos;
 using SACDumont.Models;
+using SACDumont.modulos;
+using SACDumont.Modulos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,8 +12,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SACDumont.Catalogos;
-using SACDumont.modulos;
 
 namespace SACDumont.Listados
 {
@@ -135,6 +136,11 @@ namespace SACDumont.Listados
                 var promocionSeleccionada = listaPromociones[e.RowIndex];
                 idPromocion = promocionSeleccionada.id_promocion;
             }
+        }
+
+        private void frmPromociones_Resize(object sender, EventArgs e)
+        {
+
         }
     }
 }
