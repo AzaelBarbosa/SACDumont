@@ -25,13 +25,13 @@ namespace SACDumont.Controles
         public string SqlQuery { get; set; }
 
         DataTable _datos = new DataTable();
-
+        BindingSource bs = new BindingSource();
         public void Inicializar()
         {
-            if (txProducto.Text.Length > 0)
-            {
-                SqlQuery = SqlQuery + $@" AND (p.descripcion LIKE '%{txProducto.Text}%')";
-            }
+            //if (txProducto.Text.Length > 0)
+            //{
+            //    SqlQuery = SqlQuery + $@" AND (p.descripcion LIKE '%{txProducto.Text}%')";
+            //}
             CargarDatos();
         }
 
@@ -42,21 +42,22 @@ namespace SACDumont.Controles
 
         private void txProducto_Click(object sender, EventArgs e)
         {
-       
+
         }
 
         public void CargarDatos()
         {
             _datos.Clear();
             _datos = sqlServer.ExecSQLReturnDT(SqlQuery, "Productos");
+            bs.DataSource = _datos;
         }
 
         private void FormatoCeldas(DataGridView dgv)
         {
             dgv.Columns["descripcion"].HeaderText = "Descripción";
-            
+
             dgv.Columns["concepto"].HeaderText = "Concepto";
-            
+
             dgv.Columns["fecha_vencimiento"].HeaderText = "Fecha Vencimiento";
             dgv.Columns["precio"].HeaderText = "Precio";
             dgv.Columns["id_producto"].Visible = false;
@@ -119,13 +120,13 @@ namespace SACDumont.Controles
             };
             form.Controls.Add(grid);
 
-            grid.DataSource = _datos;
+            grid.DataSource = bs;
             FormatoCeldas(grid);
             AjustarAlturaPanel(grid);
 
             var screenPoint = this.PointToScreen(new Point(txProducto.Left, txProducto.Bottom));
             form.Location = screenPoint;
-       
+
             grid.CellDoubleClick += (s, e) =>
             {
                 if (grid.SelectedRows.Count == 0) return;
@@ -149,7 +150,6 @@ namespace SACDumont.Controles
             if (e.KeyChar == (char)Keys.Enter)
             {
                 e.Handled = true;
-                this.Inicializar();
                 if (popup == null || popup.IsDisposed)
                 {
                     popup = CrearNuevoPopup();
@@ -157,6 +157,13 @@ namespace SACDumont.Controles
                 popup.Show();
                 popup.BringToFront();
             }
+        }
+
+        private void txProducto_TextChanged(object sender, EventArgs e)
+        {
+            string texto = txProducto.Text.ToLower();
+
+            bs.Filter = $"descripcion LIKE '%{txProducto.Text}%'";
         }
     }
 }

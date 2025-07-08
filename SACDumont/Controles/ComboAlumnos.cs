@@ -45,6 +45,7 @@ namespace SACDumont.Controles
         public string SqlQuery { get; set; }
 
         DataTable _datos = new DataTable();
+        BindingSource bd = new BindingSource();
         public ComboAlumnos()
         {
             InitializeComponent();
@@ -67,10 +68,10 @@ namespace SACDumont.Controles
 									LEFT JOIN Becas be ON be.id_matricula = al.matricula AND be.id_ciclo = ins.id_ciclo
                                     WHERE ins.id_ciclo = {basGlobals.iCiclo}";
             }
-            if (txProducto.Text.Length > 0)
-            {
-                SqlQuery = SqlQuery + $@" AND (al.appaterno + ' ' + al.apmaterno + ' ' + al.nombre LIKE '%{txProducto.Text}%')";
-            }
+            //if (txProducto.Text.Length > 0)
+            //{
+            //    SqlQuery = SqlQuery + $@" AND (al.appaterno + ' ' + al.apmaterno + ' ' + al.nombre LIKE '%{txProducto.Text}%')";
+            //}
             CargarDatos();
         }
 
@@ -78,6 +79,7 @@ namespace SACDumont.Controles
         {
             _datos.Clear();
             _datos = sqlServer.ExecSQLReturnDT(SqlQuery, "Productos");
+            bd.DataSource = _datos;
         }
 
         private void FormatoCeldas(DataGridView dgv)
@@ -143,7 +145,7 @@ namespace SACDumont.Controles
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells,
             };
             form.Controls.Add(grid);
-            grid.DataSource = _datos;
+            grid.DataSource = bd;
             FormatoCeldas(grid);
             AjustarAlturaPanel(grid);
             var screenPoint = this.PointToScreen(new Point(txProducto.Left, txProducto.Bottom));
@@ -178,6 +180,18 @@ namespace SACDumont.Controles
                 popup.Show();
                 popup.BringToFront();
             }
+        }
+
+        private void txProducto_TextChanged(object sender, EventArgs e)
+        {
+            string texto = txProducto.Text.ToLower();
+
+            bd.Filter = $"Alumno LIKE '%{txProducto.Text}%'";
+        }
+
+        private void txProducto_Enter(object sender, EventArgs e)
+        {
+    
         }
     }
 }

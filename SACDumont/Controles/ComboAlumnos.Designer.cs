@@ -40,6 +40,8 @@
             this.txProducto.Size = new System.Drawing.Size(514, 20);
             this.txProducto.TabIndex = 40;
             this.txProducto.Click += new System.EventHandler(this.txProducto_Click);
+            this.txProducto.TextChanged += new System.EventHandler(this.txProducto_TextChanged);
+            this.txProducto.Enter += new System.EventHandler(this.txProducto_Enter);
             this.txProducto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txProducto_KeyPress);
             // 
             // ComboAlumnos
