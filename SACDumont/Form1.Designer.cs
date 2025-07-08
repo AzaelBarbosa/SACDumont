@@ -38,6 +38,9 @@
             this.btCobroColegiatura = new System.Windows.Forms.ToolStripMenuItem();
             this.btCobroInscripcion = new System.Windows.Forms.ToolStripMenuItem();
             this.btCobroProducts = new System.Windows.Forms.ToolStripMenuItem();
+            this.uniformesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eventosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.graduacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btCatalogos = new System.Windows.Forms.ToolStripMenuItem();
             this.btCatalogosProducto = new System.Windows.Forms.ToolStripMenuItem();
             this.btCatalogosAlumnos = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,9 +71,9 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tlUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.uniformesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eventosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.graduacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btPrinterTickets = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.btDefinirImpresora = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -104,14 +107,14 @@
             // btNuevoIngreso
             // 
             this.btNuevoIngreso.Name = "btNuevoIngreso";
-            this.btNuevoIngreso.Size = new System.Drawing.Size(180, 22);
+            this.btNuevoIngreso.Size = new System.Drawing.Size(151, 22);
             this.btNuevoIngreso.Text = "Nuevo Ingreso";
             this.btNuevoIngreso.Click += new System.EventHandler(this.btNuevoIngreso_Click);
             // 
             // btReinscripcion
             // 
             this.btReinscripcion.Name = "btReinscripcion";
-            this.btReinscripcion.Size = new System.Drawing.Size(180, 22);
+            this.btReinscripcion.Size = new System.Drawing.Size(151, 22);
             this.btReinscripcion.Text = "Reinscripcion";
             this.btReinscripcion.Click += new System.EventHandler(this.btReinscripcion_Click);
             // 
@@ -152,6 +155,27 @@
             this.btCobroProducts.Size = new System.Drawing.Size(180, 22);
             this.btCobroProducts.Text = "Articulos";
             this.btCobroProducts.Click += new System.EventHandler(this.btCobroProducts_Click);
+            // 
+            // uniformesToolStripMenuItem
+            // 
+            this.uniformesToolStripMenuItem.Name = "uniformesToolStripMenuItem";
+            this.uniformesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.uniformesToolStripMenuItem.Text = "Uniformes";
+            this.uniformesToolStripMenuItem.Click += new System.EventHandler(this.uniformesToolStripMenuItem_Click);
+            // 
+            // eventosToolStripMenuItem
+            // 
+            this.eventosToolStripMenuItem.Name = "eventosToolStripMenuItem";
+            this.eventosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eventosToolStripMenuItem.Text = "Eventos";
+            this.eventosToolStripMenuItem.Click += new System.EventHandler(this.eventosToolStripMenuItem_Click);
+            // 
+            // graduacionToolStripMenuItem
+            // 
+            this.graduacionToolStripMenuItem.Name = "graduacionToolStripMenuItem";
+            this.graduacionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.graduacionToolStripMenuItem.Text = "Graduacion";
+            this.graduacionToolStripMenuItem.Click += new System.EventHandler(this.graduacionToolStripMenuItem_Click);
             // 
             // btCatalogos
             // 
@@ -220,7 +244,7 @@
             // 
             this.btReimpresionTickets.Image = global::SACDumont.Properties.Resources.factura;
             this.btReimpresionTickets.Name = "btReimpresionTickets";
-            this.btReimpresionTickets.Size = new System.Drawing.Size(180, 22);
+            this.btReimpresionTickets.Size = new System.Drawing.Size(179, 22);
             this.btReimpresionTickets.Text = "Reimpresion Tickets";
             // 
             // btRptAcdemicos
@@ -231,7 +255,7 @@
             this.btRptAcdemicosAlumnos});
             this.btRptAcdemicos.Image = global::SACDumont.Properties.Resources.academic;
             this.btRptAcdemicos.Name = "btRptAcdemicos";
-            this.btRptAcdemicos.Size = new System.Drawing.Size(180, 22);
+            this.btRptAcdemicos.Size = new System.Drawing.Size(179, 22);
             this.btRptAcdemicos.Text = "Academicos";
             // 
             // btRptAcdemicosAsistencia
@@ -266,7 +290,7 @@
             this.btRptAdministrativoActividad});
             this.btRptAdministrativo.Image = global::SACDumont.Properties.Resources.administrativo;
             this.btRptAdministrativo.Name = "btRptAdministrativo";
-            this.btRptAdministrativo.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativo.Size = new System.Drawing.Size(179, 22);
             this.btRptAdministrativo.Text = "Administrtivo";
             // 
             // btRptAdministrativoCorte
@@ -327,7 +351,9 @@
             this.btConfiguracion.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.generalToolStripMenuItem,
             this.ciclosEscolaresToolStripMenuItem,
-            this.cambiarCicloToolStripMenuItem});
+            this.cambiarCicloToolStripMenuItem,
+            this.btPrinterTickets,
+            this.btDefinirImpresora});
             this.btConfiguracion.Image = global::SACDumont.Properties.Resources.configuracion_del_documento;
             this.btConfiguracion.Name = "btConfiguracion";
             this.btConfiguracion.Size = new System.Drawing.Size(111, 20);
@@ -337,21 +363,21 @@
             // generalToolStripMenuItem
             // 
             this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
-            this.generalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generalToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.generalToolStripMenuItem.Text = "General";
             this.generalToolStripMenuItem.Click += new System.EventHandler(this.generalToolStripMenuItem_Click);
             // 
             // ciclosEscolaresToolStripMenuItem
             // 
             this.ciclosEscolaresToolStripMenuItem.Name = "ciclosEscolaresToolStripMenuItem";
-            this.ciclosEscolaresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ciclosEscolaresToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.ciclosEscolaresToolStripMenuItem.Text = "Ciclos Escolares";
             this.ciclosEscolaresToolStripMenuItem.Click += new System.EventHandler(this.ciclosEscolaresToolStripMenuItem_Click);
             // 
             // cambiarCicloToolStripMenuItem
             // 
             this.cambiarCicloToolStripMenuItem.Name = "cambiarCicloToolStripMenuItem";
-            this.cambiarCicloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cambiarCicloToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.cambiarCicloToolStripMenuItem.Text = "Cambiar Ciclo";
             this.cambiarCicloToolStripMenuItem.Click += new System.EventHandler(this.cambiarCicloToolStripMenuItem_Click);
             // 
@@ -401,26 +427,24 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // uniformesToolStripMenuItem
+            // btPrinterTickets
             // 
-            this.uniformesToolStripMenuItem.Name = "uniformesToolStripMenuItem";
-            this.uniformesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.uniformesToolStripMenuItem.Text = "Uniformes";
-            this.uniformesToolStripMenuItem.Click += new System.EventHandler(this.uniformesToolStripMenuItem_Click);
+            this.btPrinterTickets.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBox1});
+            this.btPrinterTickets.Name = "btPrinterTickets";
+            this.btPrinterTickets.Size = new System.Drawing.Size(204, 22);
+            this.btPrinterTickets.Text = "Definir Impresora Tickets";
             // 
-            // eventosToolStripMenuItem
+            // toolStripComboBox1
             // 
-            this.eventosToolStripMenuItem.Name = "eventosToolStripMenuItem";
-            this.eventosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.eventosToolStripMenuItem.Text = "Eventos";
-            this.eventosToolStripMenuItem.Click += new System.EventHandler(this.eventosToolStripMenuItem_Click);
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 23);
             // 
-            // graduacionToolStripMenuItem
+            // btDefinirImpresora
             // 
-            this.graduacionToolStripMenuItem.Name = "graduacionToolStripMenuItem";
-            this.graduacionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.graduacionToolStripMenuItem.Text = "Graduacion";
-            this.graduacionToolStripMenuItem.Click += new System.EventHandler(this.graduacionToolStripMenuItem_Click);
+            this.btDefinirImpresora.Name = "btDefinirImpresora";
+            this.btDefinirImpresora.Size = new System.Drawing.Size(204, 22);
+            this.btDefinirImpresora.Text = "Definir Impresora";
             // 
             // frmMain
             // 
@@ -491,6 +515,9 @@
         private System.Windows.Forms.ToolStripMenuItem uniformesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eventosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem graduacionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btPrinterTickets;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripMenuItem btDefinirImpresora;
     }
 }
 

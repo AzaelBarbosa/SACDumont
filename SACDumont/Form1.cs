@@ -76,7 +76,8 @@ namespace SACDumont
         private void frmMain_Load(object sender, EventArgs e)
         {
 
-
+            basFunctions.AgregaImpresorasTickets(btPrinterTickets);
+            basFunctions.AgregaImpresoras(btDefinirImpresora);
             DataTable dtConfig = sqlServer.ExecSQLReturnDT("SELECT * FROM config", "Config");
             DataTable dtCiclo = sqlServer.ExecSQLReturnDT("SELECT * FROM ciclos_escolares WHERE GETDATE() BETWEEN fecha_inicio AND fecha_fin", "Ciclos");
 

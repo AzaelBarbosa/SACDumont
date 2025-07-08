@@ -1,13 +1,18 @@
 ﻿using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Math;
+using FastReport;
+using FastReport.Export.PdfSimple;
 using FastReport.Export.PdfSimple;
 using SACDumont.Clases;
 using SACDumont.Dtos;
+using SACDumont.modulos;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -16,10 +21,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SACDumont.Modulos.basConfiguracion;
-using FastReport;
-using FastReport.Export.PdfSimple;
-using System.Data.Entity;
-using SACDumont.modulos;
 
 namespace SACDumont.Modulos
 {
@@ -449,5 +450,102 @@ namespace SACDumont.Modulos
             });
         }
 
+        public static void AgregaImpresorasTickets(ToolStripMenuItem impresoraMenu)
+        {
+            impresoraMenu.DropDownItems.Clear();
+
+            int maxImpresoras = 15;
+            int index = 0;
+
+            foreach (string printer in PrinterSettings.InstalledPrinters)
+            {
+                if (index >= maxImpresoras) break;
+
+                ToolStripMenuItem item = new ToolStripMenuItem
+                {
+                    Text = printer,
+                    Name = printer
+                };
+
+                // Asigna evento click
+                item.Click += (sender, e) =>
+                {
+                    // Desmarca todas
+                    foreach (ToolStripMenuItem mi in impresoraMenu.DropDownItems)
+                        mi.Checked = false;
+
+                    // Marca la seleccionada
+                    item.Checked = true;
+
+                    // Guarda el nombre seleccionado
+                    basConfiguracion.PrinterTiockets = item.Name;
+
+                    MessageBox.Show($"Impresora seleccionada: {basConfiguracion.PrinterTiockets}", "Seleccionada");
+                };
+
+                impresoraMenu.DropDownItems.Add(item);
+                index++;
+            }
+
+            // Oculta extras
+            for (int j = index; j < maxImpresoras; j++)
+            {
+                ToolStripMenuItem item = new ToolStripMenuItem
+                {
+                    Text = $"(Vacío {j + 1})",
+                    Visible = false
+                };
+                impresoraMenu.DropDownItems.Add(item);
+            }
+        }
+
+        public static void AgregaImpresoras(ToolStripMenuItem impresoraMenu)
+        {
+            impresoraMenu.DropDownItems.Clear();
+
+            int maxImpresoras = 15;
+            int index = 0;
+
+            foreach (string printer in PrinterSettings.InstalledPrinters)
+            {
+                if (index >= maxImpresoras) break;
+
+                ToolStripMenuItem item = new ToolStripMenuItem
+                {
+                    Text = printer,
+                    Name = printer
+                };
+
+                // Asigna evento click
+                item.Click += (sender, e) =>
+                {
+                    // Desmarca todas
+                    foreach (ToolStripMenuItem mi in impresoraMenu.DropDownItems)
+                        mi.Checked = false;
+
+                    // Marca la seleccionada
+                    item.Checked = true;
+
+                    // Guarda el nombre seleccionado
+                    basConfiguracion.Printer = item.Name;
+
+                    MessageBox.Show($"Impresora seleccionada: {basConfiguracion.Printer}", "Seleccionada");
+                };
+
+                impresoraMenu.DropDownItems.Add(item);
+                index++;
+            }
+
+            // Oculta extras
+            for (int j = index; j < maxImpresoras; j++)
+            {
+                ToolStripMenuItem item = new ToolStripMenuItem
+                {
+                    Text = $"(Vacío {j + 1})",
+                    Visible = false
+                };
+                impresoraMenu.DropDownItems.Add(item);
+            }
+        }
     }
 }

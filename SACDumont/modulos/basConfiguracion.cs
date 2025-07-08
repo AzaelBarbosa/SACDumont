@@ -34,6 +34,8 @@ namespace SACDumont.Modulos
         public static int PorcentajeRecargo;
         public static int DiasTolerancia;
         public static string InformacionHeader;
+        public static string PrinterTiockets;
+        public static string Printer;
 
         private static readonly string clave = "CoDumont12345678"; // 16 caracteres
         private static readonly string iv = "CoDuVector123456";      // 16 caracteres
@@ -47,7 +49,7 @@ namespace SACDumont.Modulos
 
         public void SetConfig(int idCiclo, bool bRecargos, bool bPromociones, int porcentajeRecargo, int diasTolerancia)
         {
-            
+
             basConfiguracion.IdCiclo = idCiclo;
             basConfiguracion.Recargos = bRecargos;
             basConfiguracion.Promociones = bPromociones;
