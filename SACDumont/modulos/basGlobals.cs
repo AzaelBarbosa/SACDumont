@@ -44,7 +44,9 @@ namespace SACDumont.modulos
         Colegiatura = 2,
         Inscripcion = 3,
         Producto = 1,
-        Otros = 4
+        Uniformes = 4,
+        Eventos = 5,
+        Graduacion = 6
     }
 
     public enum EstatusMovimiento

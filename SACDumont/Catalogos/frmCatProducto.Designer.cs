@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.lbProductoID = new System.Windows.Forms.Label();
-            this.txConcepto = new System.Windows.Forms.TextBox();
             this.txDescripcion = new System.Windows.Forms.TextBox();
             this.txtCosto = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
@@ -39,6 +38,7 @@
             this.lblFechaNac = new System.Windows.Forms.Label();
             this.cboGrupo = new SACDumont.Controles.ComboCatalogos();
             this.label1 = new System.Windows.Forms.Label();
+            this.cboConcepto = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lbProductoID
@@ -52,13 +52,6 @@
             this.lbProductoID.TabIndex = 34;
             this.lbProductoID.Text = "lbProductoID";
             this.lbProductoID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txConcepto
-            // 
-            this.txConcepto.Location = new System.Drawing.Point(12, 94);
-            this.txConcepto.Name = "txConcepto";
-            this.txConcepto.Size = new System.Drawing.Size(438, 20);
-            this.txConcepto.TabIndex = 57;
             // 
             // txDescripcion
             // 
@@ -134,16 +127,25 @@
             this.label1.TabIndex = 72;
             this.label1.Text = "Grupo:";
             // 
+            // cboConcepto
+            // 
+            this.cboConcepto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboConcepto.FormattingEnabled = true;
+            this.cboConcepto.Location = new System.Drawing.Point(12, 93);
+            this.cboConcepto.Name = "cboConcepto";
+            this.cboConcepto.Size = new System.Drawing.Size(437, 21);
+            this.cboConcepto.TabIndex = 73;
+            // 
             // frmCatProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 280);
+            this.Controls.Add(this.cboConcepto);
             this.Controls.Add(this.cboGrupo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtFechaVenci);
             this.Controls.Add(this.lblFechaNac);
-            this.Controls.Add(this.txConcepto);
             this.Controls.Add(this.txDescripcion);
             this.Controls.Add(this.txtCosto);
             this.Controls.Add(this.lblNombre);
@@ -159,11 +161,11 @@
             this.Controls.SetChildIndex(this.lblNombre, 0);
             this.Controls.SetChildIndex(this.txtCosto, 0);
             this.Controls.SetChildIndex(this.txDescripcion, 0);
-            this.Controls.SetChildIndex(this.txConcepto, 0);
             this.Controls.SetChildIndex(this.lblFechaNac, 0);
             this.Controls.SetChildIndex(this.dtFechaVenci, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.cboGrupo, 0);
+            this.Controls.SetChildIndex(this.cboConcepto, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -172,7 +174,6 @@
         #endregion
 
         private System.Windows.Forms.Label lbProductoID;
-        private System.Windows.Forms.TextBox txConcepto;
         private System.Windows.Forms.TextBox txDescripcion;
         private System.Windows.Forms.TextBox txtCosto;
         private System.Windows.Forms.Label lblNombre;
@@ -182,5 +183,6 @@
         private System.Windows.Forms.Label lblFechaNac;
         private Controles.ComboCatalogos cboGrupo;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cboConcepto;
     }
 }
