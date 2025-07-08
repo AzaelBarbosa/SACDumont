@@ -40,7 +40,7 @@ namespace SACDumont.Catalogos
         protected override void Guardar()
         {
             // Validaciones...
-            if (txConcepto.Text == "") { MessageBox.Show("El campo Concepto es obligatorio."); txConcepto.Focus(); return; }
+            if (cboConcepto.Text == "") { MessageBox.Show("El campo Concepto es obligatorio."); cboConcepto.Focus(); return; }
             if (txDescripcion.Text == "") { MessageBox.Show("El campo Descripcion es obligatorio."); txDescripcion.Focus(); return; }
             if (txtCosto.Text == "") { MessageBox.Show("El campo Costo es obligatorio."); txtCosto.Focus(); return; }
 
@@ -53,13 +53,14 @@ namespace SACDumont.Catalogos
                 {
                     productos.id_producto = 0;
                     productos.descripcion = txDescripcion.Text;
-                    productos.concepto = txConcepto.Text;
+                    productos.concepto = cboConcepto.Text;
                     productos.estado = true;
 
                     db.Entry(productos).State = System.Data.Entity.EntityState.Added;
                     int result = db.SaveChanges();
                     if (result == 1)
                     {
+                        producto_Ciclo.id_producto = productos.id_producto;
                         producto_Ciclo.precio = Convert.ToDecimal(txtCosto.Text);
                         producto_Ciclo.id_ciclo = basGlobals.iCiclo;
                         producto_Ciclo.fecha_vencimiento = dtFechaVenci.Value;
@@ -86,7 +87,7 @@ namespace SACDumont.Catalogos
                     if (productos != null)
                     {
                         productos.descripcion = txDescripcion.Text;
-                        productos.concepto = txConcepto.Text;
+                        productos.concepto = cboConcepto.Text;
 
                         db.Entry(productos).State = System.Data.Entity.EntityState.Modified;
 
@@ -179,7 +180,7 @@ namespace SACDumont.Catalogos
         private void LimpiarControles()
         {
             txDescripcion.Text = string.Empty;
-            txConcepto.Text = string.Empty;
+            cboConcepto.Text = string.Empty;
             txtCosto.Text = string.Empty;
         }
         private void CargarProducto()
@@ -201,7 +202,7 @@ namespace SACDumont.Catalogos
                     if (productos != null)
                     {
                         txDescripcion.Text = productos.descripcion.ToString();
-                        txConcepto.Text = productos.concepto.ToString();
+                        cboConcepto.Text = productos.concepto.ToString();
                         txtCosto.Text = producto_Ciclo.precio.ToString("C2");
                         dtFechaVenci.Value = producto_Ciclo.fecha_vencimiento;
                         cboGrupo.IDValor = producto_Ciclo.id_grupo;
@@ -225,6 +226,11 @@ namespace SACDumont.Catalogos
                 btDeshabilitar.Visible = false;
             }
         }
+
+        private void CargarCombo()
+        {
+            cboConcepto.DataSource = Enum.GetValues(typeof(Conceptos));
+        }
         #endregion
 
         public frmCatProducto(int idProducto)
@@ -238,6 +244,7 @@ namespace SACDumont.Catalogos
             cboGrupo.Inicializar();
             CargarProducto();
             CargarMenu();
+            CargarCombo();
         }
     }
 }

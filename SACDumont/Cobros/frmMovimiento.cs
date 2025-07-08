@@ -229,9 +229,17 @@ namespace SACDumont.Cobros
             {
                 strConcepto = "PRODUCTO";
             }
-            else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Otros)
+            else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Uniformes)
             {
-                strConcepto = "OTROS";
+                strConcepto = "UNIFORMES";
+            }
+            else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Eventos)
+            {
+                strConcepto = "EVENTOS";
+            }
+            else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Graduacion)
+            {
+                strConcepto = "GRADUACION";
             }
         }
 

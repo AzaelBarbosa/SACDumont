@@ -143,7 +143,7 @@ namespace SACDumont
         private void btCobroProducts_Click(object sender, EventArgs e)
         {
             basGlobals.tipoMovimiento = (int)TipoMovimiento.Producto;
-            basGlobals.sConcepto = Conceptos.PRODUCTO.ToString();
+            basGlobals.sConcepto = Conceptos.ARTICULO.ToString();
             AbrirUnicoFormularioHijo<frmMovimientos>();
         }
 
@@ -181,6 +181,27 @@ namespace SACDumont
         private void ciclosEscolaresToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AbrirUnicoFormularioHijo<frmCiclosEscolares>();
+        }
+
+        private void uniformesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            basGlobals.tipoMovimiento = (int)TipoMovimiento.Uniformes;
+            basGlobals.sConcepto = Conceptos.UNIFORMES.ToString();
+            AbrirUnicoFormularioHijo<frmMovimientos>();
+        }
+
+        private void eventosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            basGlobals.tipoMovimiento = (int)TipoMovimiento.Eventos;
+            basGlobals.sConcepto = Conceptos.EVENTOS.ToString();
+            AbrirUnicoFormularioHijo<frmMovimientos>();
+        }
+
+        private void graduacionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            basGlobals.tipoMovimiento = (int)TipoMovimiento.Graduacion;
+            basGlobals.sConcepto = Conceptos.GRADUACION.ToString();
+            AbrirUnicoFormularioHijo<frmMovimientos>();
         }
     }
 }
