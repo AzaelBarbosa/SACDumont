@@ -50,8 +50,10 @@ namespace SACDumont.Models
         public decimal porcentaje_descuento { get; set; }
         public decimal monto_descuento { get; set; }
         public decimal beca_descuento { get; set; }
+        public bool confirmado { get; set; }
         public virtual ICollection<movimiento_productos> MovimientosProductos { get; set; }
         public virtual ICollection<cobros> MovimientosCobros { get; set; }
+
     }
 
     public class Becas

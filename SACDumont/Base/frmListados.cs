@@ -20,6 +20,12 @@ namespace SACDumont.Base
         protected virtual void Imprimir() { }
         protected virtual void Cerrar() { }
 
+        protected virtual void CargarComboFiltro() { }
+
+        protected virtual void Busqueda() { }
+
+        protected virtual void BusquedaCombo() { }
+
         public frmListados()
         {
             InitializeComponent();
@@ -48,6 +54,21 @@ namespace SACDumont.Base
         private void cerrarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Cerrar();
+        }
+
+        private void cboFiltros_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarComboFiltro();
+        }
+
+        private void txBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            Busqueda();
+        }
+
+        private void cboBusqueda_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BusquedaCombo();
         }
     }
 }

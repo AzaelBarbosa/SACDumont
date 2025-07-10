@@ -62,9 +62,9 @@ namespace SACDumont.modulos
             DataTable dsTemp = new DataTable("Temp");
 
             //Movimiento
-            strSQL = $@"SELECT a.matricula, m.id_movimiento ,m.fechahora AS Fecha, a.apmaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, p.descripcion AS Descripcion, 
+            strSQL = $@"SELECT a.matricula, m.id_movimiento ,m.fechahora AS Fecha, a.appaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, p.descripcion AS Descripcion, 
                         m.montoTotal - (SELECT SUM(monto) FROM cobros WHERE id_movimiento = m.id_movimiento) AS MontoPendiente, m.montoTotal AS Total, catE.descripcion AS Estatus, p.descripcion AS Producto, m.porcentaje_descuento AS Descuento,
-                        m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento, m.digitoscuenta, m.id_ciclo, m.id_usuario, m.id_tipomovimiento, m.id_estatusmovimiento
+                        m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento, m.digitoscuenta, m.id_ciclo, m.id_usuario, m.id_tipomovimiento, m.id_estatusmovimiento, m.confirmado
                         FROM movimientos m
                         INNER JOIN movimiento_productos mp ON m.id_movimiento = mp.id_movimiento
                         INNER JOIN productos p ON p.id_producto = mp.id_producto
@@ -91,7 +91,8 @@ namespace SACDumont.modulos
                     montoTotal = Convert.ToDecimal(row["Total"]),
                     porcentaje_descuento = Convert.ToDecimal(row["Descuento"]),
                     monto_descuento = Convert.ToDecimal(row["MontoDescuento"]),
-                    beca_descuento = Convert.ToDecimal(row["BecaDescuento"])
+                    beca_descuento = Convert.ToDecimal(row["BecaDescuento"]),
+                    confirmado = Convert.ToBoolean(row["confirmado"])
                 };
             }
 

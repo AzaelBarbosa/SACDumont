@@ -3,6 +3,7 @@ using SACDumont.Catalogos;
 using SACDumont.Clases;
 using SACDumont.Dtos;
 using SACDumont.Models;
+using SACDumont.modulos;
 using SACDumont.Modulos;
 using SACDumont.Otros;
 using System;
@@ -72,6 +73,88 @@ namespace SACDumont.Listados
             this.Close();
         }
 
+        protected override void CargarComboFiltro()
+        {
+            if (cboFiltros.SelectedIndex >= 0)
+            {
+                string selectedFilter = cboFiltros.SelectedItem.ToString();
+                if (selectedFilter == "Estado")
+                {
+                    txBusqueda.Visible = false;
+                    cboBusqueda.Visible = true;
+                    cboBusqueda.Items.Clear();
+                    cboBusqueda.Items.Add("Todos");
+                    cboBusqueda.Items.Add("Activo");
+                    cboBusqueda.Items.Add("Inactivo");
+                    cboBusqueda.SelectedIndex = -1; // Seleccionar el primer elemento por defecto
+                }
+                else if (selectedFilter == "Concepto")
+                {
+                    txBusqueda.Visible = false;
+                    cboBusqueda.Visible = true;
+                    cboBusqueda.Items.Clear();
+                    cboBusqueda.Items.Add("Todos");
+                    cboBusqueda.Items.AddRange(Enum.GetNames(typeof(Conceptos)));
+                    cboBusqueda.SelectedIndex = -1; // Seleccionar el primer elemento por defecto
+                }
+                else
+                {
+                    txBusqueda.Visible = true;
+                    cboBusqueda.Visible = false;
+                }
+            }
+            else
+            {
+                txBusqueda.Visible = false;
+                cboBusqueda.Visible = false;
+            }
+        }
+
+        protected override void Busqueda()
+        {
+            string texto = txBusqueda.Text.ToLower();
+            if (cboFiltros.SelectedItem == null) return;
+            string campoSeleccionado = cboFiltros.SelectedItem.ToString();
+
+            bs.Filter = $"{campoSeleccionado} LIKE '%{texto}%'";
+        }
+
+        protected override void BusquedaCombo()
+        {
+            string campoSeleccionado = cboFiltros.SelectedItem.ToString();
+            if (campoSeleccionado == "Todos")
+            {
+                bs.Filter = "";
+                return;
+            }
+            if (campoSeleccionado == "Estado")
+            {
+                if (cboBusqueda.SelectedItem == null || cboBusqueda.SelectedItem.ToString() == "Todos")
+                {
+                    bs.Filter = "";
+                    return;
+                }
+                else if (cboBusqueda.SelectedItem.ToString() == "Activo")
+                {
+                    bs.Filter = $"{campoSeleccionado} = {true}";
+                }
+                else if (cboBusqueda.SelectedItem.ToString() == "Inactivo")
+                {
+                    bs.Filter = $"{campoSeleccionado} = {false}";
+                }
+            }
+            else if (campoSeleccionado == "Concepto")
+            {
+
+                if (cboBusqueda.SelectedItem.ToString() == "Todos")
+                {
+                    bs.Filter = "";
+                    return;
+                }
+                bs.Filter = $"{campoSeleccionado} LIKE '%{cboBusqueda.SelectedItem.ToString()}%'";
+            }
+        }
+
         public frmProductos()
         {
             InitializeComponent();
@@ -136,17 +219,20 @@ namespace SACDumont.Listados
 
         private void CargarElementosBusqueda()
         {
+            var ignorar = new[] { "Id_Producto", "Id_Grupo", "Costo" };
 
             var propiedades = typeof(ProductoDTO)
-           .GetProperties()
-           .Select(p => p.Name)
-           .ToList();
+                 .GetProperties()
+                 .Select(p => p.Name)
+                 .Where(nombre => !ignorar.Contains(nombre))
+                 .ToList();
 
             foreach (var item in propiedades)
             {
-                cboFiltros.Items.Add(item.ToString());
+               this.cboFiltros.Items.Add(item.ToString());
             }
         }
+
 
         private void CargarMenu()
         {

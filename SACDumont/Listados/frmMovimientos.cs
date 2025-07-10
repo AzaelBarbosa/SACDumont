@@ -1,15 +1,19 @@
 ﻿using FastReport;
 using FastReport.Export.PdfSimple;
+using Microsoft.CSharp;
 using SACDumont.Base;
 using SACDumont.Catalogos;
 using SACDumont.Clases;
 using SACDumont.Cobros;
+using SACDumont.Dtos;
+using SACDumont.Models;
 using SACDumont.modulos;
 using SACDumont.Modulos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -17,9 +21,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.CSharp;
-using SACDumont.Dtos;
-using System.Data.Entity;
 
 namespace SACDumont.Listados
 {
@@ -33,18 +34,22 @@ namespace SACDumont.Listados
         int estatusMovimiento = basGlobals.estatusMovimiento;
         basSql sql = new basSql();
         int idMov = 0;
+        BindingSource bs = new BindingSource();
         #endregion
 
         #region Propiedades
         protected override void Nuevo()
         {
+            basGlobals.Movimiento = new Movimientos();
+            basGlobals.listaProductos = new List<movimiento_productos>();
+            basGlobals.listaCobros = new List<cobros>();
             frmMovimiento frmMovimiento = new frmMovimiento(0);
             frmMovimiento.ShowDialog();
             CargarMovimientos();
         }
         protected override void Guardar()
         {
-            // Implementar la lógica para guardar el movimiento
+
         }
         protected override void Eliminar()
         {
@@ -59,14 +64,95 @@ namespace SACDumont.Listados
         {
             this.Close();
         }
+
+        protected override void CargarComboFiltro()
+        {
+            if (cboFiltros.SelectedIndex >= 0)
+            {
+                string selectedFilter = cboFiltros.SelectedItem.ToString();
+                if (selectedFilter == "confirmado")
+                {
+                    txBusqueda.Visible = false;
+                    cboBusqueda.Visible = true;
+                    cboBusqueda.Items.Clear();
+                    cboBusqueda.Items.Add("Todos");
+                    cboBusqueda.Items.Add("Pendiente Confirmar");
+                    cboBusqueda.Items.Add("Confirmado");
+                    cboBusqueda.SelectedIndex = -1; // Seleccionar el primer elemento por defecto
+                }
+                else if (selectedFilter == "Estatus")
+                {
+                    txBusqueda.Visible = false;
+                    cboBusqueda.Visible = true;
+                    cboBusqueda.Items.Clear();
+                    cboBusqueda.Items.Add("Todos");
+                    cboBusqueda.Items.Add("Pendiente");
+                    cboBusqueda.Items.Add("Liquidado");
+                    cboBusqueda.Items.Add("Cancelado");
+                    cboBusqueda.Items.Add("Abono");
+                    cboBusqueda.SelectedIndex = -1; // Seleccionar el primer elemento por defecto
+                }
+                else
+                {
+                    txBusqueda.Visible = true;
+                    cboBusqueda.Visible = false;
+                }
+            }
+            else
+            {
+                txBusqueda.Visible = false;
+                cboBusqueda.Visible = false;
+            }
+        }
+
+        protected override void Busqueda()
+        {
+            string texto = txBusqueda.Text.ToLower();
+            if (cboFiltros.SelectedItem == null) return;
+            string campoSeleccionado = cboFiltros.SelectedItem.ToString();
+
+            bs.Filter = $"{campoSeleccionado} LIKE '%{texto}%'";
+        }
+
+        protected override void BusquedaCombo()
+        {
+            string campoSeleccionado = cboFiltros.SelectedItem.ToString();
+            if (campoSeleccionado == "Todos")
+            {
+                bs.Filter = "";
+                return;
+            }
+            if (campoSeleccionado == "confirmado")
+            {
+                if (cboBusqueda.SelectedItem.ToString() == "Todos")
+                {
+                    bs.Filter = "";
+                    return;
+                }
+
+                bool valor = cboBusqueda.SelectedItem.ToString() == "Confirmado" ? true : false;
+
+                bs.Filter = $"{campoSeleccionado} = {valor}";
+            }
+            else if (campoSeleccionado == "Estatus")
+            {
+
+                if (cboBusqueda.SelectedItem.ToString() == "Todos")
+                {
+                    bs.Filter = "";
+                    return;
+                }
+                bs.Filter = $"{campoSeleccionado} LIKE '%{cboBusqueda.SelectedItem.ToString()}%'";
+            }
+        }
         #endregion
 
         #region Eventos
         private void CargarMovimientos()
         {
-            dtMovimientos = sqlServer.ExecSQLReturnDT($@"SELECT m.id_movimiento ,m.fechahora AS Fecha, p.descripcion AS Producto, a.apmaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, 
+            dtMovimientos = sqlServer.ExecSQLReturnDT($@"SELECT m.id_movimiento ,m.fechahora AS Fecha, p.descripcion AS Producto, a.appaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, 
                                                         m.montoTotal AS Total, m.montoTotal - (SELECT SUM(monto) FROM cobros WHERE id_movimiento = m.id_movimiento) AS MontoPendiente, m.porcentaje_descuento AS Descuento, m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento,
-                                                        catE.descripcion AS Estatus
+                                                        catE.descripcion AS Estatus, m.confirmado
                                                         FROM movimientos m
                                                         INNER JOIN movimiento_productos mp ON m.id_movimiento = mp.id_movimiento
                                                         INNER JOIN productos p ON p.id_producto = mp.id_producto
@@ -76,7 +162,8 @@ namespace SACDumont.Listados
                                                         LEFT JOIN catalogos catG ON catG.valor = i.id_grupo AND catG.tipo_catalogo = 'Grupo'
                                                         LEFT JOIN catalogos catE ON catE.valor = m.id_estatusmovimiento AND catE.tipo_catalogo = 'EstatusMovimiento'
                                                         WHERE m.id_ciclo = {basGlobals.iCiclo} AND p.concepto = '{basGlobals.sConcepto}'", "Movimientos");
-            dgvMovimientos.DataSource = dtMovimientos;
+            bs.DataSource = dtMovimientos;
+            dgvMovimientos.DataSource = bs;
             FormatGrid();
             dgvMovimientos.Refresh();
         }
@@ -93,6 +180,7 @@ namespace SACDumont.Listados
             dgvMovimientos.Columns["Total"].HeaderText = "Total";
             dgvMovimientos.Columns["Total"].DefaultCellStyle.Format = "C2";
             dgvMovimientos.Columns["Estatus"].HeaderText = "Estatus";
+            dgvMovimientos.Columns["confirmado"].HeaderText = "Confirmado";
             dgvMovimientos.Columns["Producto"].HeaderText = "Producto";
             dgvMovimientos.Columns["Descuento"].HeaderText = "Descuento";
             dgvMovimientos.Columns["Descuento"].DefaultCellStyle.Format = "P0";
@@ -104,12 +192,32 @@ namespace SACDumont.Listados
             dgvMovimientos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvMovimientos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             dgvMovimientos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMovimientos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvMovimientos.MultiSelect = false;
+            dgvMovimientos.ReadOnly = true;
+            bs.Sort = "Fecha DESC"; // O ASC para ascendente
+            //dgvMovimientos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //dgvMovimientos.MultiSelect = false;
+
         }
         private void CargarMenu()
         {
+            reporteToolStripMenuItem.Visible = false;
             guardarToolStripMenuItem.Visible = false;
+        }
+
+        private void CargarElementosBusqueda()
+        {
+            var ignorar = new[] { "id_movimiento", "BecaDescuento", "MontoDescuento", "Descuento", "Total", "MontoPendiente", "Fecha" };
+
+            var propiedades = typeof(MovimientosDTO)
+                 .GetProperties()
+                 .Select(p => p.Name)
+                 .Where(nombre => !ignorar.Contains(nombre))
+                 .ToList();
+
+            foreach (var item in propiedades)
+            {
+                cboFiltros.Items.Add(item.ToString());
+            }
         }
         public frmMovimientos()
         {
@@ -119,6 +227,7 @@ namespace SACDumont.Listados
         private void frmMovimientos_Load(object sender, EventArgs e)
         {
             CargarMenu();
+            CargarElementosBusqueda();
             CargarMovimientos();
         }
 
@@ -291,21 +400,25 @@ namespace SACDumont.Listados
 
         private void dgvMovimientos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var row = ((DataRowView)dgvMovimientos.SelectedRows[0].DataBoundItem).Row;
-
-            if (dgvMovimientos.SelectedRows.Count == 0) return;
+            if (e.RowIndex >= 0)
             {
-                idMov = (int)row["id_movimiento"];
+                // Obtener la fila
+                DataGridViewRow fila = dgvMovimientos.Rows[e.RowIndex];
+
+                // Obtener el valor de la columna "ID" (puedes usar el índice también)
+                idMov = (int)fila.Cells["id_movimiento"].Value;
             }
         }
 
         private void dgvMovimientos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var row = ((DataRowView)dgvMovimientos.SelectedRows[0].DataBoundItem).Row;
-
-            if (dgvMovimientos.SelectedRows.Count == 0) return;
+            if (e.RowIndex >= 0)
             {
-                frmMovimiento frm = new frmMovimiento((int)row["id_movimiento"]);
+                // Obtener la fila
+                DataGridViewRow fila = dgvMovimientos.Rows[e.RowIndex];
+
+                // Obtener el valor de la columna "ID" (puedes usar el índice también)
+                frmMovimiento frm = new frmMovimiento((int)fila.Cells["id_movimiento"].Value);
                 frm.ShowDialog();
                 CargarMovimientos();
             }

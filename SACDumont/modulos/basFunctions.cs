@@ -260,7 +260,7 @@ namespace SACDumont.Modulos
             try
             {
                 DataTable dtAcciones = new DataTable();
-                string sql = $"SELECT acc.fecha as Fecha, us.nombre_usuario, acc.tipo_accion AS [Tipo Movimiento], acc.descripcion AS Descripcion  FROM acciones acc INNER JOIN usuarios us ON acc.id_usuario = us.id_usuario WHERE acc.modulo = '{modulo}' AND acc.entidad_id = {entidadId} ORDER BY acc.fecha";
+                string sql = $"SELECT acc.fecha as Fecha, us.nombre_usuario AS Usuario, acc.tipo_accion AS [Tipo Movimiento], acc.descripcion AS Descripcion  FROM acciones acc INNER JOIN usuarios us ON acc.id_usuario = us.id_usuario WHERE acc.modulo = '{modulo}' AND acc.entidad_id = {entidadId} ORDER BY acc.fecha";
                 dtAcciones = sqlServer.ExecSQLReturnDT(sql, "Acciones");
                 dgvAcciones.DataSource = dtAcciones;
                 dgvAcciones.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";

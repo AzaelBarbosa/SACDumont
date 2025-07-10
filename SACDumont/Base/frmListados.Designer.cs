@@ -34,7 +34,14 @@
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSearch = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.cboFiltros = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.txBusqueda = new System.Windows.Forms.ToolStripTextBox();
+            this.cboBusqueda = new System.Windows.Forms.ToolStripComboBox();
             this.menuStrip1.SuspendLayout();
+            this.tsSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -103,11 +110,57 @@
             this.cerrarToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cerrarToolStripMenuItem.Click += new System.EventHandler(this.cerrarToolStripMenuItem_Click);
             // 
+            // tsSearch
+            // 
+            this.tsSearch.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
+            this.cboFiltros,
+            this.toolStripSeparator1,
+            this.txBusqueda,
+            this.cboBusqueda});
+            this.tsSearch.Location = new System.Drawing.Point(0, 59);
+            this.tsSearch.Name = "tsSearch";
+            this.tsSearch.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.tsSearch.Size = new System.Drawing.Size(982, 25);
+            this.tsSearch.TabIndex = 9;
+            this.tsSearch.Text = "toolStrip1";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(62, 22);
+            this.toolStripLabel1.Text = "Busqueda:";
+            // 
+            // cboFiltros
+            // 
+            this.cboFiltros.Name = "cboFiltros";
+            this.cboFiltros.Size = new System.Drawing.Size(170, 25);
+            this.cboFiltros.SelectedIndexChanged += new System.EventHandler(this.cboFiltros_SelectedIndexChanged);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // txBusqueda
+            // 
+            this.txBusqueda.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txBusqueda.Name = "txBusqueda";
+            this.txBusqueda.Size = new System.Drawing.Size(400, 25);
+            this.txBusqueda.TextChanged += new System.EventHandler(this.txBusqueda_TextChanged);
+            // 
+            // cboBusqueda
+            // 
+            this.cboBusqueda.Name = "cboBusqueda";
+            this.cboBusqueda.Size = new System.Drawing.Size(121, 25);
+            this.cboBusqueda.SelectedIndexChanged += new System.EventHandler(this.cboBusqueda_SelectedIndexChanged);
+            // 
             // frmListados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 822);
+            this.Controls.Add(this.tsSearch);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -117,6 +170,8 @@
             this.Load += new System.EventHandler(this.frmListados_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tsSearch.ResumeLayout(false);
+            this.tsSearch.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,5 +184,11 @@
         protected internal System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
         protected internal System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         protected internal System.Windows.Forms.ToolStripMenuItem reporteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        public System.Windows.Forms.ToolStripComboBox cboFiltros;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        public System.Windows.Forms.ToolStripTextBox txBusqueda;
+        public System.Windows.Forms.ToolStripComboBox cboBusqueda;
+        public System.Windows.Forms.ToolStrip tsSearch;
     }
 }
