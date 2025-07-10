@@ -89,12 +89,12 @@ namespace SACDumont.Cobros
                         if (mov != null)
                         {
                             mov.porcentaje_descuento = 0;
-                            mov.monto_descuento = 0;
-                            mov.beca_descuento = 0;
+                            mov.monto_descuento = Convert.ToDecimal(txDescuento.Text.Replace("$", "").Replace(",", "").Trim());
+                            mov.beca_descuento = Convert.ToDecimal(txBeca.Text.Replace("$", "").Replace(",", "").Trim());
                             mov.digitoscuenta = "0";
                             mov.id_estatusmovimiento = id_estatusmovimiento;
                             mov.montoTotal = basGlobals.listaProductos.Sum(p => p.monto) + basGlobals.listaProductos.Sum(c => c.monto_recargo);
-                            mov.confirmado = chConfirmar.Checked;
+                            mov.confirmado = basConfiguracion.Transferencias == true ? false : chConfirmar.Checked;
 
                             foreach (var item in basGlobals.listaCobros)
                             {
@@ -138,8 +138,8 @@ namespace SACDumont.Cobros
                             id_ciclo = basGlobals.iCiclo,
                             montoTotal = basGlobals.listaProductos.Sum(p => p.monto) + basGlobals.listaProductos.Sum(c => c.monto_recargo),
                             porcentaje_descuento = 0, // Asignar el valor correspondiente si se aplica descuento
-                            monto_descuento = 0, // Asignar el valor correspondiente si se aplica descuento
-                            beca_descuento = 0, // Asignar el valor correspondiente si se aplica beca
+                            monto_descuento = Convert.ToDecimal(txDescuento.Text.Replace("$", "").Replace(",", "").Trim()), // Asignar el valor correspondiente si se aplica descuento
+                            beca_descuento = Convert.ToDecimal(txBeca.Text.Replace("$", "").Replace(",", "").Trim()), // Asignar el valor correspondiente si se aplica beca
                             id_tipomovimiento = basGlobals.tipoMovimiento, // Asignar el estatus correspondiente
                             digitoscuenta = "0",
                             id_estatusmovimiento = id_estatusmovimiento, // Asignar el estatus correspondiente
