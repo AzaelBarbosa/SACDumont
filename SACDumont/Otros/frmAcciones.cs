@@ -57,8 +57,15 @@ namespace SACDumont.Otros
             guardarToolStripMenuItem.Visible = false;
             eliminarToolStripMenuItem.Visible = false;
             reporteToolStripMenuItem.Visible = false;
+            tsSearch.Visible = false;
         }
 
+        private void FormatGrid()
+        {
+            dgvAcciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvAcciones.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvAcciones.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+        }
         #endregion
 
         public frmAcciones(string modulo, int entidadId)
@@ -72,6 +79,7 @@ namespace SACDumont.Otros
         {
             CargarAcciones();
             basFunctions.CargarAcciones(ref dgvAcciones, modulo, entidadId);
+            FormatGrid();
         }
     }
 }

@@ -273,6 +273,7 @@
       <DependentUpon>ComboProductos.cs</DependentUpon>
     </Compile>
     <Compile Include="Dtos\GeneralDTO.cs" />
+    <Compile Include="Dtos\MovimientosDTO.cs" />
     <Compile Include="Dtos\ProductoDTO.cs" />
     <Compile Include="Dtos\ReportesDTO.cs" />
     <Compile Include="Dtos\UsuariosDTO.cs" />

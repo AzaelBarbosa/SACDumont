@@ -70,6 +70,33 @@ namespace SACDumont.Listados
             this.Close();
         }
 
+        protected override void CargarComboFiltro()
+        {
+            if (cboFiltros.SelectedIndex >= 0)
+            {
+                txBusqueda.Visible = true;
+                cboBusqueda.Visible = false;
+            }
+            else
+            {
+                txBusqueda.Visible = false;
+                cboBusqueda.Visible = false;
+            }
+        }
+
+        protected override void Busqueda()
+        {
+            string texto = txBusqueda.Text.ToLower();
+            if (cboFiltros.SelectedItem == null) return;
+            string campoSeleccionado = cboFiltros.SelectedItem.ToString();
+
+            bs.Filter = $"{campoSeleccionado} LIKE '%{texto}%'";
+        }
+
+        protected override void BusquedaCombo()
+        {
+
+        }
         #endregion
 
         #region Metodos Privados

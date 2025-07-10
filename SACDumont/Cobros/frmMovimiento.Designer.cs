@@ -56,14 +56,15 @@
             this.btDeletePago = new System.Windows.Forms.Button();
             this.btNewPago = new System.Windows.Forms.Button();
             this.gbInformacion = new System.Windows.Forms.GroupBox();
+            this.lbBeca = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.lbPromocion = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lbGradoActual = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.lbGrupoActual = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.lbBeca = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.chConfirmar = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.gbProductos.SuspendLayout();
@@ -244,7 +245,7 @@
             // 
             this.lbIDMovimiento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbIDMovimiento.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lbIDMovimiento.Location = new System.Drawing.Point(434, 735);
+            this.lbIDMovimiento.Location = new System.Drawing.Point(424, 735);
             this.lbIDMovimiento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbIDMovimiento.Name = "lbIDMovimiento";
             this.lbIDMovimiento.Size = new System.Drawing.Size(101, 23);
@@ -384,6 +385,25 @@
             this.gbInformacion.TabStop = false;
             this.gbInformacion.Text = "Informacion:";
             // 
+            // lbBeca
+            // 
+            this.lbBeca.AutoSize = true;
+            this.lbBeca.Location = new System.Drawing.Point(320, 60);
+            this.lbBeca.Name = "lbBeca";
+            this.lbBeca.Size = new System.Drawing.Size(26, 15);
+            this.lbBeca.TabIndex = 7;
+            this.lbBeca.Text = "N/A";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(193, 60);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(43, 15);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "Beca:";
+            // 
             // lbPromocion
             // 
             this.lbPromocion.AutoSize = true;
@@ -441,30 +461,22 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "Grupo Actual:";
             // 
-            // lbBeca
+            // chConfirmar
             // 
-            this.lbBeca.AutoSize = true;
-            this.lbBeca.Location = new System.Drawing.Point(320, 60);
-            this.lbBeca.Name = "lbBeca";
-            this.lbBeca.Size = new System.Drawing.Size(26, 15);
-            this.lbBeca.TabIndex = 7;
-            this.lbBeca.Text = "N/A";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(193, 60);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(43, 15);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "Beca:";
+            this.chConfirmar.AutoSize = true;
+            this.chConfirmar.Location = new System.Drawing.Point(19, 739);
+            this.chConfirmar.Name = "chConfirmar";
+            this.chConfirmar.Size = new System.Drawing.Size(90, 19);
+            this.chConfirmar.TabIndex = 52;
+            this.chConfirmar.Text = "Confirmado";
+            this.chConfirmar.UseVisualStyleBackColor = true;
             // 
             // frmMovimiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 767);
+            this.ClientSize = new System.Drawing.Size(545, 767);
+            this.Controls.Add(this.chConfirmar);
             this.Controls.Add(this.gbInformacion);
             this.Controls.Add(this.btDeletePago);
             this.Controls.Add(this.btNewPago);
@@ -492,6 +504,7 @@
             this.Controls.SetChildIndex(this.btNewPago, 0);
             this.Controls.SetChildIndex(this.btDeletePago, 0);
             this.Controls.SetChildIndex(this.gbInformacion, 0);
+            this.Controls.SetChildIndex(this.chConfirmar, 0);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
@@ -540,5 +553,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lbBeca;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox chConfirmar;
     }
 }

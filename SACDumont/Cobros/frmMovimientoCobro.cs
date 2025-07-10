@@ -37,6 +37,16 @@ namespace SACDumont.Cobros
                 MessageBox.Show("El monto ingresado no puede ser mayor al importe pendiente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (cboCatalogos.IDValor == 0)
+            {
+                MessageBox.Show("Por favor seleccione el tipo de pago.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (cboCatalogos.IDValor == 3)
+            {
+                basConfiguracion.Transferencias = true;
+            }
 
             movimientoCobros = new cobros
             {

@@ -36,6 +36,7 @@ namespace SACDumont.Modulos
         public static string InformacionHeader;
         public static string PrinterTiockets;
         public static string Printer;
+        public static bool Transferencias;
 
         private static readonly string clave = "CoDumont12345678"; // 16 caracteres
         private static readonly string iv = "CoDuVector123456";      // 16 caracteres
