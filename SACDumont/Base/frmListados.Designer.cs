@@ -40,8 +40,10 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.txBusqueda = new System.Windows.Forms.ToolStripTextBox();
             this.cboBusqueda = new System.Windows.Forms.ToolStripComboBox();
+            this.pbSpinner = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.tsSearch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSpinner)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -155,11 +157,27 @@
             this.cboBusqueda.Size = new System.Drawing.Size(121, 25);
             this.cboBusqueda.SelectedIndexChanged += new System.EventHandler(this.cboBusqueda_SelectedIndexChanged);
             // 
+            // pbSpinner
+            // 
+            this.pbSpinner.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbSpinner.BackColor = System.Drawing.Color.Transparent;
+            this.pbSpinner.Image = global::SACDumont.Properties.Resources.spinner;
+            this.pbSpinner.Location = new System.Drawing.Point(423, 242);
+            this.pbSpinner.Name = "pbSpinner";
+            this.pbSpinner.Size = new System.Drawing.Size(115, 115);
+            this.pbSpinner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbSpinner.TabIndex = 13;
+            this.pbSpinner.TabStop = false;
+            this.pbSpinner.Visible = false;
+            // 
             // frmListados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 822);
+            this.Controls.Add(this.pbSpinner);
             this.Controls.Add(this.tsSearch);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -168,10 +186,12 @@
             this.Name = "frmListados";
             this.Text = "frmListados";
             this.Load += new System.EventHandler(this.frmListados_Load);
+            this.Resize += new System.EventHandler(this.frmListados_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tsSearch.ResumeLayout(false);
             this.tsSearch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSpinner)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,5 +210,6 @@
         public System.Windows.Forms.ToolStripTextBox txBusqueda;
         public System.Windows.Forms.ToolStripComboBox cboBusqueda;
         public System.Windows.Forms.ToolStrip tsSearch;
+        public System.Windows.Forms.PictureBox pbSpinner;
     }
 }

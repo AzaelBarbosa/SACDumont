@@ -1,5 +1,6 @@
 ﻿using SACDumont.Base;
 using SACDumont.Catalogos;
+using SACDumont.Dtos;
 using SACDumont.Models;
 using SACDumont.modulos;
 using SACDumont.Modulos;
@@ -75,18 +76,28 @@ namespace SACDumont.Listados
         {
             reporteToolStripMenuItem.Visible = false;
             guardarToolStripMenuItem.Visible = false;
+            tsSearch.Visible = false;
         }
 
-        private void CargarPromociones()
+        private async void CargarPromociones()
         {
             // Aquí se cargarían las promociones desde la base de datos o cualquier otra fuente
             // Por ejemplo:
+            pbSpinner.Visible = true;
+            pbSpinner.BringToFront();
+
             using (var db = new DumontContext())
             {
-                listaPromociones = db.Promociones.Where(t => t.id_ciclo == basGlobals.iCiclo).ToList();
+                listaPromociones = await Task.Run(() =>
+                {
+                    var lista = db.Promociones.Where(t => t.id_ciclo == basGlobals.iCiclo).ToList();
+
+                    return lista;
+                });
             }
-            // Asignar la lista al DataGridView o cualquier otro control que se utilice para mostrar los datos
+
             dgvPromociones.DataSource = listaPromociones;
+            pbSpinner.Visible = false;
             FormatoGrid();
         }
 

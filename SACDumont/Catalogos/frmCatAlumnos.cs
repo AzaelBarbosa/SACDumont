@@ -1,22 +1,24 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using SACDumont.Base;
+using SACDumont.Clases;
+using SACDumont.Dtos;
+using SACDumont.Listados;
+using SACDumont.Models;
+using SACDumont.modulos;
+using SACDumont.Modulos;
+using SACDumont.Otros;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SACDumont.Base;
-using SACDumont.Clases;
-using SACDumont.Modulos;
-using System.Data.SqlClient;
-using DocumentFormat.OpenXml.Wordprocessing;
 using static ClosedXML.Excel.XLPredefinedFormat;
-using SACDumont.Listados;
-using SACDumont.Otros;
-using SACDumont.Models;
-using SACDumont.modulos;
 
 namespace SACDumont.Catalogos
 {
@@ -30,8 +32,8 @@ namespace SACDumont.Catalogos
         sqlServer sqlServer = new sqlServer();
         Becas becas = new Becas();
         Promociones Promociones = new Promociones();
-        Tutores tutores = new Tutores();
-        Tutores_Alumnos tutores_alumnos = new Tutores_Alumnos();
+        List<TutorAlumnoDTO> tutores = new List<TutorAlumnoDTO>();
+        List<Tutores_Alumnos> tutores_alumnos = new List<Tutores_Alumnos>();
         Inscripciones inscripciones = new Inscripciones();
         Alumnos alumnos = new Alumnos();
         int intMatricula = 0;
@@ -85,8 +87,7 @@ namespace SACDumont.Catalogos
                         telefono1 = txtTel1.Text,
                         telefono2 = txtTel2.Text,
                         telefono3 = txtTel3.Text,
-                        email = txtEmail.Text,
-                        activo = chkActivo.Checked
+                        email = txtEmail.Text
 
                     };
 
@@ -173,7 +174,7 @@ namespace SACDumont.Catalogos
                     alumno.telefono2 = txtTel2.Text;
                     alumno.telefono3 = txtTel3.Text;
                     alumno.email = txtEmail.Text;
-                    alumno.activo = chkActivo.Checked;
+                    alumno.activo = true;
                     // Guardar los cambios
 
                     db.Entry(alumno).State = System.Data.Entity.EntityState.Modified;
@@ -249,8 +250,8 @@ namespace SACDumont.Catalogos
         }
         protected override void AgregarTutor()
         {
-            frmCatTutores frm = new frmCatTutores(intMatricula);
-            frm.Text = "Agregar Tutor";
+            frmAsignarTutor frm = new frmAsignarTutor(intMatricula);
+            frm.Text = $"Asignar Tutor para alumno: {intMatricula}";
             frm.ShowDialog();
         }
         protected override void Cerrar()
@@ -292,29 +293,28 @@ namespace SACDumont.Catalogos
             {
                 using (var db = new DumontContext())
                 {
-                    var alumno = db.Alumnos.Find(matricula);
+                    alumnos = db.Alumnos.Find(matricula);
                     intMatricula = matricula;
                     lbMatricula.Text = matricula.ToString();
                     this.Text = "Modificar Alumno: " + matricula;
                     // Limpiar los campos
-                    txtNombre.Text = alumno.nombre;
-                    txtApPaterno.Text = alumno.appaterno;
-                    txtApMaterno.Text = alumno.apmaterno;
-                    txtCurp.Text = alumno.curp;
-                    txtCalle.Text = alumno.calle;
-                    txtColonia.Text = alumno.colonia;
-                    txtCiudad.Text = alumno.ciudad;
-                    cmbPais.SelectedValue = alumno.pais_nacimiento;
-                    cmbEstado.SelectedValue = alumno.estado;
+                    txtNombre.Text = alumnos.nombre;
+                    txtApPaterno.Text = alumnos.appaterno;
+                    txtApMaterno.Text = alumnos.apmaterno;
+                    txtCurp.Text = alumnos.curp;
+                    txtCalle.Text = alumnos.calle;
+                    txtColonia.Text = alumnos.colonia;
+                    txtCiudad.Text = alumnos.ciudad;
+                    cmbPais.SelectedValue = alumnos.pais_nacimiento;
+                    cmbEstado.SelectedValue = alumnos.estado;
                     CargaEstadosNacimiento();
-                    cmbEstadoNac.SelectedValue = alumno.estado_nacimiento;
-                    dtpFechaNac.Value = alumno.fecha_nacimiento;
-                    cmbSexo.SelectedItem = alumno.sexo;
-                    txtTel1.Text = alumno.telefono1;
-                    txtTel2.Text = alumno.telefono2;
-                    txtTel3.Text = alumno.telefono3;
-                    txtEmail.Text = alumno.email;
-                    chkActivo.Checked = alumno.activo;
+                    cmbEstadoNac.SelectedValue = alumnos.estado_nacimiento;
+                    dtpFechaNac.Value = alumnos.fecha_nacimiento;
+                    cmbSexo.SelectedItem = alumnos.sexo;
+                    txtTel1.Text = alumnos.telefono1;
+                    txtTel2.Text = alumnos.telefono2;
+                    txtTel3.Text = alumnos.telefono3;
+                    txtEmail.Text = alumnos.email;
 
                     // Cargar los grados y grupos
                     var inscripcion = db.Inscripciones.FirstOrDefault(i => i.matricula == matricula && i.id_ciclo == basConfiguracion.IdCiclo);
@@ -359,7 +359,27 @@ namespace SACDumont.Catalogos
                     }
 
                     // Validar si el alumno tiene tutores
+                    tutores = db.TutoresAlumnos
+                  .Where(m => m.matricula == intMatricula).ToList().Select(m => new TutorAlumnoDTO
+                  {
+                      NombreTutor = db.Tutores.Where(tu => tu.id_tutor == m.id_tutor).Select(tu => tu.apmaterno + " " + tu.apmaterno + " " + tu.nombre).FirstOrDefault(),
+                      IdTutor = m.id_tutor,
+                      IdAlumno = m.matricula,
+                      Parentesco = db.Catalogos.Where(c => c.valor == m.parentesco && c.tipo_catalogo == "Parentesco").Select(c => c.descripcion).FirstOrDefault()
+                  }).ToList();
 
+                    if (tutores.Count > 0)
+                    {
+                        dtTutores = new DataTable();
+                        dtTutores = basFunctions.ConvertToDataTable(tutores);
+                        dgvTutors.DataSource = dtTutores;
+                        dgvTutors.Columns["IdTutor"].Visible = false;
+                        dgvTutors.Columns["IdAlumno"].Visible = false;
+                        dgvTutors.Columns["NombreTutor"].HeaderText = "Nombre del Tutor";
+                        dgvTutors.Columns["Parentesco"].HeaderText = "Parentesco";
+                        dgvTutors.Columns["Parentesco"].Width = 150;
+                        dgvTutors.Columns["NombreTutor"].Width = 250;
+                    }
                 }
             }
         }
@@ -385,8 +405,8 @@ namespace SACDumont.Catalogos
             {
                 if (MessageBox.Show("El Alumno no tiene tutores asignados. ¿Desea agregar un tutor?", "Agregar Tutor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    frmCatTutores frm = new frmCatTutores(intMatricula);
-                    frm.Text = "Agregar Tutor";
+                    frmAsignarTutor frm = new frmAsignarTutor(intMatricula);
+                    frm.Text = "Asignar Tutor a alumno";
                     frm.ShowDialog();
                 }
             }
@@ -417,12 +437,37 @@ namespace SACDumont.Catalogos
                 cboPromocion.ValueMember = "id_promocion";
             }
         }
+
+        private void CargarMenu()
+        {
+
+            btQuitarRecargo.Visible = false;
+            btResetPass.Visible = false;
+
+            if (intMatricula == 0)
+            {
+                btHabilitar.Visible = false;
+                btDeshabilitar.Visible = false;
+            }
+            else
+            {
+                if (alumnos.activo)
+                {
+                    btHabilitar.Visible = false;
+                    btDeshabilitar.Visible = true;
+                }
+                else
+                {
+                    btDeshabilitar.Visible = false;
+                    btHabilitar.Visible = true;
+                }
+            }
+        }
         #endregion
 
         #region Eventos del Formulario
         private void frmCatAlumnos_Load(object sender, EventArgs e)
         {
-            btResetPass.Visible = false;
             CargarPromociones();
             basFunctions.CargarCatalogo(cmbEstado, "estados", "Id", "Nombre", "WHERE PaisId = 1");
             basFunctions.CargarCatalogo(cmbPais, "paises", "Id", "Nombre");
@@ -430,6 +475,8 @@ namespace SACDumont.Catalogos
             cboGrado.Inicializar();
             cboGrupo.Inicializar();
             CargarAlumno(intMatricula); // Cargar un nuevo registro vacío
+            CargarMenu();
+
             if (intMatricula != 0)
             {
                 ValidaTutores();
