@@ -44,7 +44,6 @@
             this.txtTel2 = new System.Windows.Forms.TextBox();
             this.txtTel3 = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
-            this.chkActivo = new System.Windows.Forms.CheckBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblApPaterno = new System.Windows.Forms.Label();
             this.lblApMaterno = new System.Windows.Forms.Label();
@@ -78,6 +77,8 @@
             this.gbPromocion = new System.Windows.Forms.GroupBox();
             this.cboPromocion = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dgvTutors = new System.Windows.Forms.DataGridView();
             this.gbAlumno.SuspendLayout();
             this.gbDomicilio.SuspendLayout();
             this.gbAcademicos.SuspendLayout();
@@ -85,6 +86,8 @@
             this.gbBecado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nPorBeca)).BeginInit();
             this.gbPromocion.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTutors)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNombre
@@ -213,16 +216,6 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(360, 20);
             this.txtEmail.TabIndex = 31;
-            // 
-            // chkActivo
-            // 
-            this.chkActivo.Checked = true;
-            this.chkActivo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActivo.Location = new System.Drawing.Point(488, 153);
-            this.chkActivo.Name = "chkActivo";
-            this.chkActivo.Size = new System.Drawing.Size(88, 24);
-            this.chkActivo.TabIndex = 32;
-            this.chkActivo.Text = "Activo";
             // 
             // lblNombre
             // 
@@ -357,7 +350,7 @@
             this.lbMatricula.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbMatricula.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbMatricula.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lbMatricula.Location = new System.Drawing.Point(490, 671);
+            this.lbMatricula.Location = new System.Drawing.Point(496, 845);
             this.lbMatricula.Name = "lbMatricula";
             this.lbMatricula.Size = new System.Drawing.Size(100, 23);
             this.lbMatricula.TabIndex = 33;
@@ -366,7 +359,6 @@
             // 
             // gbAlumno
             // 
-            this.gbAlumno.Controls.Add(this.chkActivo);
             this.gbAlumno.Controls.Add(this.txtNombre);
             this.gbAlumno.Controls.Add(this.txtApPaterno);
             this.gbAlumno.Controls.Add(this.txtApMaterno);
@@ -557,10 +549,33 @@
             this.label3.TabIndex = 65;
             this.label3.Text = "Promoción:";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.dgvTutors);
+            this.groupBox1.Location = new System.Drawing.Point(12, 673);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(582, 165);
+            this.groupBox1.TabIndex = 69;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Tutores";
+            // 
+            // dgvTutors
+            // 
+            this.dgvTutors.AllowUserToAddRows = false;
+            this.dgvTutors.AllowUserToDeleteRows = false;
+            this.dgvTutors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTutors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvTutors.Location = new System.Drawing.Point(3, 16);
+            this.dgvTutors.Name = "dgvTutors";
+            this.dgvTutors.ReadOnly = true;
+            this.dgvTutors.Size = new System.Drawing.Size(576, 146);
+            this.dgvTutors.TabIndex = 0;
+            // 
             // frmCatAlumnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(602, 698);
+            this.ClientSize = new System.Drawing.Size(608, 872);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbFinanciero);
             this.Controls.Add(this.gbAcademicos);
             this.Controls.Add(this.gbDomicilio);
@@ -574,6 +589,7 @@
             this.Controls.SetChildIndex(this.gbDomicilio, 0);
             this.Controls.SetChildIndex(this.gbAcademicos, 0);
             this.Controls.SetChildIndex(this.gbFinanciero, 0);
+            this.Controls.SetChildIndex(this.groupBox1, 0);
             this.gbAlumno.ResumeLayout(false);
             this.gbAlumno.PerformLayout();
             this.gbDomicilio.ResumeLayout(false);
@@ -583,6 +599,8 @@
             this.gbBecado.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nPorBeca)).EndInit();
             this.gbPromocion.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTutors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -593,7 +611,6 @@
           txtColonia, txtCiudad, txtTel1, txtTel2, txtTel3, txtEmail;
         private System.Windows.Forms.DateTimePicker dtpFechaNac;
         private System.Windows.Forms.ComboBox cmbSexo, cmbPais, cmbEstadoNac, cmbEstado;
-        private System.Windows.Forms.CheckBox chkActivo;
 
         private System.Windows.Forms.Label lblNombre, lblApPaterno, lblApMaterno, lblFechaNac, lblSexo,
             lblPais, lblEstadoNac, lblCurp, lblCalle, lblColonia, lblCiudad,
@@ -615,5 +632,7 @@
         private System.Windows.Forms.CheckBox chPromocion;
         private System.Windows.Forms.GroupBox gbBecado;
         private System.Windows.Forms.GroupBox gbPromocion;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridView dgvTutors;
     }
 }

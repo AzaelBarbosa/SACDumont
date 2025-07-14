@@ -28,28 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pbSpinner = new System.Windows.Forms.PictureBox();
             this.cboFiltros = new System.Windows.Forms.ToolStripComboBox();
             this.txBusqueda = new System.Windows.Forms.ToolStripTextBox();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSpinner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbSpinner
-            // 
-            this.pbSpinner.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbSpinner.BackColor = System.Drawing.Color.Transparent;
-            this.pbSpinner.Image = global::SACDumont.Properties.Resources.spinner;
-            this.pbSpinner.Location = new System.Drawing.Point(386, 274);
-            this.pbSpinner.Name = "pbSpinner";
-            this.pbSpinner.Size = new System.Drawing.Size(25, 115);
-            this.pbSpinner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbSpinner.TabIndex = 4;
-            this.pbSpinner.TabStop = false;
-            this.pbSpinner.Visible = false;
             // 
             // cboFiltros
             // 
@@ -87,15 +70,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 621);
             this.Controls.Add(this.dgvProductos);
-            this.Controls.Add(this.pbSpinner);
             this.Name = "frmProductos";
             this.Text = "frmProductos";
             this.Load += new System.EventHandler(this.frmProductos_Load);
             this.ResizeEnd += new System.EventHandler(this.frmProductos_ResizeEnd);
             this.Resize += new System.EventHandler(this.frmProductos_Resize);
-            this.Controls.SetChildIndex(this.pbSpinner, 0);
             this.Controls.SetChildIndex(this.dgvProductos, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.pbSpinner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -103,7 +83,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.PictureBox pbSpinner;
         private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.ToolStripComboBox cboFiltros;
         private System.Windows.Forms.ToolStripTextBox txBusqueda;

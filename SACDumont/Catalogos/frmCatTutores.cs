@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SACDumont.Base;
 using SACDumont.Clases;
+using SACDumont.Models;
 using SACDumont.Modulos;
 
 namespace SACDumont.Catalogos
@@ -18,6 +19,8 @@ namespace SACDumont.Catalogos
         DataTable dtTutores = new DataTable("Tutores");
         DataTable dtTutAlumno = new DataTable("TutoresAlumnos");
         basFunctions basFunctions = new basFunctions();
+        Tutores tutores = new Tutores();
+        Tutores_Alumnos tutoresAlumnos = new Tutores_Alumnos();
         int matricula = 0;
         int idTutor = 0;
         public frmCatTutores(int matricula = 0, int idTutor = 0)
@@ -43,51 +46,88 @@ namespace SACDumont.Catalogos
             if (cmbEstado.SelectedIndex == -1) { MessageBox.Show("El campo Estado Nacimiento es obligatorio."); cmbEstado.Focus(); return; }
             if (txtTel1.Text == "") { MessageBox.Show("El campo Teléfono 1 es obligatorio."); txtTel1.Focus(); return; }
             if (txtTel1.Text.Length < 10) { MessageBox.Show("El campo Teléfono 1 debe tener al menos 10 dígitos."); txtTel1.Focus(); return; }
-            if (cboParentesco.SelectedIndex == -1) { MessageBox.Show("El campo Parentesco es obligatorio."); cboParentesco.Focus(); return; }
 
             bool esNuevo = idTutor == 0;
             int idTut = esNuevo ? 0 : Convert.ToInt32(idTutor);
 
-            if (esNuevo)
+            if (idTutor == 0)
             {
-                dtTutores = sqlServer.ExecSQLReturnDT("SELECT * FROM tutores WHERE 1=0");
-                dtTutAlumno = sqlServer.ExecSQLReturnDT("SELECT * FROM tutores_alumnos WHERE 1=0");
-                DataRow newRow = dtTutores.NewRow();
-                DataRow newRowTutAlum = dtTutAlumno.NewRow();
-                newRow["id_tutor"] = 0; // Placeholder
+                using (var db = new DumontContext())
+                {
+                    tutores = new Tutores
+                    {
+                        nombre = txtNombre.Text,
+                        appaterno = txtApPaterno.Text,
+                        apmaterno = txtApMaterno.Text,
+                        rfc = txRFC.Text,
+                        calle = txtCalle.Text,
+                        colonia = txtColonia.Text,
+                        ciudad = txtCiudad.Text,
+                        estado = Convert.ToInt32(cmbEstado.SelectedValue),
+                        sexo = cmbSexo.SelectedValue.ToString(),
+                        telefono1 = txtTel1.Text,
+                        telefono2 = txtTel2.Text,
+                        telefono3 = txtTel3.Text,
+                        fecha_nacimiento = dtpFechaNac.Value,
+                        factura = chFactura.Checked,
+                        fecha_alta = DateTime.Now,
+                        acivo = true
+                    };
 
-                AsignarValoresTutor(newRow);
-                AsignarValoresTutorAlumno(newRowTutAlum);
-                dtTutores.Rows.Add(newRow);
-                dtTutAlumno.Rows.Add(newRowTutAlum);
-                sqlServer.InsertByDataTable(ref dtTutores, "tutores");
-                sqlServer.InsertByDataTable(ref dtTutAlumno, "tutores_alumnos");
+                    db.Tutores.Add(tutores);
+                    db.SaveChanges();
+                    idTut = tutores.id_tutor;
 
-                // Obtener la matrícula generada
-                int nuevoId = Convert.ToInt32(dtTutores.Rows[0]["id_tutor"]);
-                lbTutorID.Text = nuevoId.ToString();
+                    tutoresAlumnos = new Tutores_Alumnos
+                    {
+                        id_tutor = idTut,
+                        matricula = matricula,
+                        parentesco = Convert.ToInt32(cboParentesco.SelectedValue)
+                    };
+                    db.TutoresAlumnos.Add(tutoresAlumnos);
+                    db.SaveChanges();
 
-                basFunctions.Registrar(basConfiguracion.UserID, "Alumnos", "Alta", nuevoId);
-                MessageBox.Show("Tutor registrado correctamente con ID " + nuevoId, "SAC Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                    lbTutorID.Text = idTut.ToString();
+
+                    basFunctions.Registrar(basConfiguracion.UserID, "Tutores", "Alta", idTut);
+                    MessageBox.Show("Tutor registrado correctamente con ID " + idTut, "SAC Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
             }
             else
             {
-                dtTutores = sqlServer.ExecSQLReturnDT($"SELECT * FROM tutores WHERE id_tutor = {idTutor}");
-                if (dtTutores.Rows.Count == 0)
+                using (var db = new DumontContext())
                 {
-                    MessageBox.Show("No se encontró el tutor para actualizar.");
-                    return;
+                    tutores = db.Tutores.Find(idTutor);
+                    if (tutores == null)
+                    {
+                        MessageBox.Show("No se encontró el tutor para actualizar.");
+                        return;
+                    }
+
+
+                    tutores.nombre = txtNombre.Text;
+                    tutores.appaterno = txtApPaterno.Text;
+                    tutores.apmaterno = txtApMaterno.Text;
+                    tutores.rfc = txRFC.Text;
+                    tutores.calle = txtCalle.Text;
+                    tutores.colonia = txtColonia.Text;
+                    tutores.ciudad = txtCiudad.Text;
+                    tutores.estado = Convert.ToInt32(cmbEstado.SelectedValue);
+                    tutores.sexo = (string)cmbSexo.SelectedValue;
+                    tutores.telefono1 = txtTel1.Text;
+                    tutores.telefono2 = txtTel2.Text;
+                    tutores.telefono3 = txtTel3.Text;
+                    tutores.fecha_nacimiento = dtpFechaNac.Value;
+                    tutores.factura = chFactura.Checked;
+
+                    db.Entry(tutores).State = System.Data.Entity.EntityState.Modified; // Importante para actualizar el registro
+                    db.SaveChanges();
+
+                    basFunctions.Registrar(basConfiguracion.UserID, "Tutores", "Editar", idTutor);
+                    MessageBox.Show("Tutor actualizado correctamente.", "SAC Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
                 }
-
-                DataRow existingRow = dtTutores.Rows[0];
-                AsignarValoresTutor(existingRow);
-                //existingRow.SetModified(); // importante
-
-                sqlServer.InsertByDataTable(ref dtTutores, "tutores");
-                basFunctions.Registrar(basConfiguracion.UserID, "Alumnos", "Editar", idTutor);
-                MessageBox.Show("Tutor actualizado correctamente.", "SAC Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
             }
         }
         protected override void Eliminar()
@@ -129,29 +169,32 @@ namespace SACDumont.Catalogos
             }
             else
             {
-                // Cargar el registro de alumno existente
-                string sSQL = "SELECT * FROM Tutores WHERE id_tutor = " + idTutor;
-                DataTable dtAlumno = sqlServer.ExecSQLReturnDT(sSQL, "Tutores");
-                btAddTutor.Visible = false;
-                if (dtAlumno.Rows.Count > 0)
+                using (var db = new DumontContext())
                 {
-                    DataRow row = dtAlumno.Rows[0];
-                    lbTutorID.Text = row["id_tutor"].ToString();
-                    this.Text = "Modificar Tutor: " + row["nombre"].ToString() + " " + row["appaterno"].ToString() + " " + row["apmaterno"].ToString();
-                    txtNombre.Text = row["nombre"].ToString();
-                    txtApPaterno.Text = row["appaterno"].ToString();
-                    txtApMaterno.Text = row["apmaterno"].ToString();
-                    txRFC.Text = row["curp"].ToString();
-                    txtCalle.Text = row["calle"].ToString();
-                    txtColonia.Text = row["colonia"].ToString();
-                    txtCiudad.Text = row["ciudad"].ToString();
-                    cmbEstado.SelectedValue = Convert.ToInt32(row["estado"]);
-                    dtpFechaNac.Value = Convert.ToDateTime(row["fecha_nacimiento"]);
-                    cmbSexo.SelectedItem = row["sexo"].ToString();
-                    txtTel1.Text = row["telefono1"].ToString();
-                    txtTel2.Text = row["telefono2"].ToString();
-                    txtTel3.Text = row["telefono3"].ToString();
-                    chFactura.Checked = Convert.ToBoolean(row["factura"]);
+                    tutores = db.Tutores.Find(idTutor);
+                    if (tutores == null)
+                    {
+                        MessageBox.Show("No se encontró el tutor con ID " + idTutor, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    lbTutorID.Text = tutores.id_tutor.ToString();
+                    this.Text = "Modificar Tutor: " + tutores.nombre + " " + tutores.appaterno + " " + tutores.apmaterno;
+                    txtNombre.Text = tutores.nombre;
+                    txtApPaterno.Text = tutores.appaterno;
+                    txtApMaterno.Text = tutores.apmaterno;
+                    txRFC.Text = tutores.rfc;
+                    txtCalle.Text = tutores.calle;
+                    txtColonia.Text = tutores.colonia;
+                    txtCiudad.Text = tutores.ciudad;
+                    cmbEstado.SelectedValue = tutores.estado;
+                    dtpFechaNac.Value = tutores.fecha_nacimiento;
+                    cmbSexo.SelectedValue = tutores.sexo.ToString();
+                    txtTel1.Text = tutores.telefono1;
+                    txtTel2.Text = tutores.telefono2;
+                    txtTel3.Text = tutores.telefono3;
+                    chFactura.Checked = tutores.factura;
+                    btAddTutor.Visible = false;
+
                 }
             }
         }
@@ -213,15 +256,19 @@ namespace SACDumont.Catalogos
 
         private void frmCatTutores_Load(object sender, EventArgs e)
         {
-            if (matricula == 0)
-            {
-                cboAlumnos.Visible = true;
-                lbNombreAlumno.Visible = true;
-            }
-            else
+            if (matricula == 0 && idTutor > 0)
             {
                 cboAlumnos.Visible = false;
                 lbNombreAlumno.Visible = false;
+                cboParentesco.Visible = false;
+                label3.Visible = false;
+            }
+            else if (matricula > 0)
+            {
+                cboAlumnos.Visible = false;
+                lbNombreAlumno.Visible = false;
+                cboParentesco.Visible = true;
+                label3.Visible = true;
             }
 
             basFunctions.CargarCatalogo(cmbEstado, "estados", "Id", "Nombre", "WHERE PaisId = 1");

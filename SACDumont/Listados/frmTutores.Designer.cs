@@ -36,13 +36,16 @@
             // 
             this.dgvTutores.AllowUserToAddRows = false;
             this.dgvTutores.AllowUserToDeleteRows = false;
+            this.dgvTutores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTutores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTutores.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvTutores.Location = new System.Drawing.Point(0, 59);
+            this.dgvTutores.Location = new System.Drawing.Point(0, 84);
             this.dgvTutores.Name = "dgvTutores";
             this.dgvTutores.ReadOnly = true;
-            this.dgvTutores.Size = new System.Drawing.Size(862, 542);
+            this.dgvTutores.Size = new System.Drawing.Size(862, 517);
             this.dgvTutores.TabIndex = 2;
+            this.dgvTutores.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTutores_CellClick);
+            this.dgvTutores.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTutores_CellDoubleClick);
             // 
             // frmTutores
             // 

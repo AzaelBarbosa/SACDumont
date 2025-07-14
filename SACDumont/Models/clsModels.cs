@@ -108,7 +108,7 @@ namespace SACDumont.Models
         public string telefono3 { get; set; }
         public string email { get; set; }
         public bool activo { get; set; }
-        public DateTime fecha_alta { get; set; }
+        public DateTime? fecha_alta { get; set; }
         public virtual ICollection<Inscripciones> Inscripciones { get; set; }
 
     }
@@ -121,9 +121,7 @@ namespace SACDumont.Models
         public string appaterno { get; set; }
         public string apmaterno { get; set; }
         public DateTime fecha_nacimiento { get; set; }
-        public int pais_nacimiento { get; set; }
-        public int estado_nacimiento { get; set; }
-        public char sexo { get; set; }
+        public string sexo { get; set; }
         public string rfc { get; set; }
         public string calle { get; set; }
         public string colonia { get; set; }
@@ -133,7 +131,7 @@ namespace SACDumont.Models
         public string telefono2 { get; set; }
         public string telefono3 { get; set; }
         public string denomsocial { get; set; }
-        public bool activo { get; set; }
+        public bool acivo { get; set; }
         public bool factura { get; set; }
         public DateTime fecha_alta { get; set; }
     }

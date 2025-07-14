@@ -33,9 +33,7 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
-            this.pbSpinner = new System.Windows.Forms.PictureBox();
             this.dgvMovimientos = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSpinner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovimientos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,21 +74,6 @@
             this.ContentPanel.AutoScroll = true;
             this.ContentPanel.Size = new System.Drawing.Size(761, 341);
             // 
-            // pbSpinner
-            // 
-            this.pbSpinner.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbSpinner.BackColor = System.Drawing.Color.Transparent;
-            this.pbSpinner.Image = global::SACDumont.Properties.Resources.spinner;
-            this.pbSpinner.Location = new System.Drawing.Point(351, 201);
-            this.pbSpinner.Name = "pbSpinner";
-            this.pbSpinner.Size = new System.Drawing.Size(101, 115);
-            this.pbSpinner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbSpinner.TabIndex = 12;
-            this.pbSpinner.TabStop = false;
-            this.pbSpinner.Visible = false;
-            // 
             // dgvMovimientos
             // 
             this.dgvMovimientos.AllowUserToAddRows = false;
@@ -99,9 +82,9 @@
             this.dgvMovimientos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dgvMovimientos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMovimientos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvMovimientos.Location = new System.Drawing.Point(0, 59);
+            this.dgvMovimientos.Location = new System.Drawing.Point(0, 84);
             this.dgvMovimientos.Name = "dgvMovimientos";
-            this.dgvMovimientos.Size = new System.Drawing.Size(786, 391);
+            this.dgvMovimientos.Size = new System.Drawing.Size(786, 366);
             this.dgvMovimientos.TabIndex = 5;
             this.dgvMovimientos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMovimientos_CellClick);
             this.dgvMovimientos.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMovimientos_CellContentDoubleClick);
@@ -115,13 +98,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(786, 450);
             this.Controls.Add(this.dgvMovimientos);
-            this.Controls.Add(this.pbSpinner);
             this.Name = "frmMovimientos";
             this.Text = "frmMovimientos";
             this.Load += new System.EventHandler(this.frmMovimientos_Load);
-            this.Controls.SetChildIndex(this.pbSpinner, 0);
             this.Controls.SetChildIndex(this.dgvMovimientos, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.pbSpinner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovimientos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -135,7 +115,6 @@
         private System.Windows.Forms.ToolStripPanel RightToolStripPanel;
         private System.Windows.Forms.ToolStripPanel LeftToolStripPanel;
         private System.Windows.Forms.ToolStripContentPanel ContentPanel;
-        private System.Windows.Forms.PictureBox pbSpinner;
         private System.Windows.Forms.DataGridView dgvMovimientos;
     }
 }

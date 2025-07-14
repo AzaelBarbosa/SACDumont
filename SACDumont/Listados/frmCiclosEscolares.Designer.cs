@@ -28,26 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pbSpinner = new System.Windows.Forms.PictureBox();
             this.dgvCiclos = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSpinner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCiclos)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbSpinner
-            // 
-            this.pbSpinner.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbSpinner.BackColor = System.Drawing.Color.Transparent;
-            this.pbSpinner.Image = global::SACDumont.Properties.Resources.spinner;
-            this.pbSpinner.Location = new System.Drawing.Point(351, 201);
-            this.pbSpinner.Name = "pbSpinner";
-            this.pbSpinner.Size = new System.Drawing.Size(115, 115);
-            this.pbSpinner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbSpinner.TabIndex = 15;
-            this.pbSpinner.TabStop = false;
-            this.pbSpinner.Visible = false;
             // 
             // dgvCiclos
             // 
@@ -57,10 +40,10 @@
             this.dgvCiclos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dgvCiclos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCiclos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCiclos.Location = new System.Drawing.Point(0, 59);
+            this.dgvCiclos.Location = new System.Drawing.Point(0, 84);
             this.dgvCiclos.Name = "dgvCiclos";
             this.dgvCiclos.ReadOnly = true;
-            this.dgvCiclos.Size = new System.Drawing.Size(800, 391);
+            this.dgvCiclos.Size = new System.Drawing.Size(800, 366);
             this.dgvCiclos.TabIndex = 13;
             this.dgvCiclos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCiclos_CellClick);
             this.dgvCiclos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCiclos_CellDoubleClick);
@@ -71,14 +54,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dgvCiclos);
-            this.Controls.Add(this.pbSpinner);
             this.Name = "frmCiclosEscolares";
             this.Text = "frmCiclosEscolares";
             this.Load += new System.EventHandler(this.frmCiclosEscolares_Load);
             this.Resize += new System.EventHandler(this.frmCiclosEscolares_Resize);
-            this.Controls.SetChildIndex(this.pbSpinner, 0);
             this.Controls.SetChildIndex(this.dgvCiclos, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.pbSpinner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCiclos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -86,8 +66,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pbSpinner;
         private System.Windows.Forms.DataGridView dgvCiclos;
     }
 }

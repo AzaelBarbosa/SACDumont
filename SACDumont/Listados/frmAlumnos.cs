@@ -1,4 +1,9 @@
-﻿using System;
+﻿using SACDumont.Base;
+using SACDumont.Catalogos;
+using SACDumont.Clases;
+using SACDumont.Dtos;
+using SACDumont.Modulos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,16 +12,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SACDumont.Base;
-using SACDumont.Catalogos;
-using SACDumont.Clases;
 
 namespace SACDumont.Listados
 {
     public partial class frmAlumnos : frmListados
     {
         DataTable dtAlumnos = new DataTable("Alumnos");
-
+        BindingSource bs = new BindingSource();
+        List<AlumnoDTO> listaAlumnos = new List<AlumnoDTO>();
+        int idAlumno = 0;
         protected override void Nuevo()
         {
             frmCatAlumnos frmCatAlumnos = new frmCatAlumnos(0);
@@ -39,6 +43,66 @@ namespace SACDumont.Listados
         {
             this.Close();
         }
+
+        protected override void CargarComboFiltro()
+        {
+            if (cboFiltros.SelectedIndex >= 0)
+            {
+                string selectedFilter = cboFiltros.SelectedItem.ToString();
+                if (selectedFilter == "Activo")
+                {
+                    txBusqueda.Visible = false;
+                    cboBusqueda.Visible = true;
+                    cboBusqueda.Items.Clear();
+                    cboBusqueda.Items.Add("Todos");
+                    cboBusqueda.Items.Add("Activos");
+                    cboBusqueda.Items.Add("Inactivos");
+                    cboBusqueda.SelectedIndex = -1; // Seleccionar el primer elemento por defecto
+                }
+                else
+                {
+                    txBusqueda.Visible = true;
+                    cboBusqueda.Visible = false;
+                }
+            }
+            else
+            {
+                txBusqueda.Visible = false;
+                cboBusqueda.Visible = false;
+            }
+        }
+
+        protected override void Busqueda()
+        {
+            string texto = txBusqueda.Text.ToLower();
+            if (cboFiltros.SelectedItem == null) return;
+            string campoSeleccionado = cboFiltros.SelectedItem.ToString();
+
+            bs.Filter = $"{campoSeleccionado} LIKE '%{texto}%'";
+        }
+
+        protected override void BusquedaCombo()
+        {
+            string campoSeleccionado = cboFiltros.SelectedItem.ToString();
+            if (campoSeleccionado == "Todos")
+            {
+                bs.Filter = "";
+                return;
+            }
+            if (campoSeleccionado == "Activo")
+            {
+                if (cboBusqueda.SelectedItem.ToString() == "Todos")
+                {
+                    bs.Filter = "";
+                    return;
+                }
+
+                bool valor = cboBusqueda.SelectedItem.ToString() == "Activo" ? true : false;
+
+                bs.Filter = $"{campoSeleccionado} = {valor}";
+            }
+        }
+
         public frmAlumnos()
         {
             InitializeComponent();
@@ -47,6 +111,7 @@ namespace SACDumont.Listados
         private void frmAlumnos_Load(object sender, EventArgs e)
         {
             CargarMenu();
+            CargarElementosBusqueda();
             CargarAlumnos();
         }
 
@@ -76,16 +141,74 @@ namespace SACDumont.Listados
             }
         }
 
-        private void CargarAlumnos()
+        private async void CargarAlumnos()
         {
-            dtAlumnos = sqlServer.ExecSQLReturnDT("SELECT a.matricula AS Matricula, a.appaterno + ' ' + a.apmaterno + ' ' + a.nombre AS [Nombre Alumno], A.fecha_nacimiento AS [Fecha Nacimiento],\r\np.Nombre AS [Pais Nacimiento], e2.Nombre AS [Estado Nacimiento], a.sexo AS [Sexo], a.curp AS [CURP], a.calle + ' ' + a.colonia + ', ' + a.ciudad + ', ' + e.Nombre AS [Domicilio],\r\na.telefono1 AS [Telefono 1], a.telefono2 AS [Telefono 2], a.telefono3 AS [Telefono 3], a.email AS [Correo], a.activo AS [Estatus]\r\nFROM alumnos a\r\nINNER JOIN paises p ON a.pais_nacimiento = p.Id\r\nINNER JOIN estados e ON a.estado = e.Id\t\r\nINNER JOIN estados e2 ON a.estado_nacimiento = e2.Id\t\r\nLEFT JOIN tutores_alumnos ta ON ta.matricula = a.matricula\r\nLEFT JOIN tutores t ON t.id_tutor = ta.id_tutor", "Alumnos");
-            dgvAlumnos.DataSource = dtAlumnos;
-            dgvAlumnos.Refresh();
+            Cursor.Current = Cursors.WaitCursor;
+            pbSpinner.Visible = true;
+            pbSpinner.BringToFront();
+
+            using (var db = new DumontContext())
+            {
+
+                listaAlumnos = await Task.Run(() =>
+                {
+                    var lista = db.Alumnos.ToList().Select(a => new AlumnoDTO
+                    {
+                        Matricula = a.matricula,
+                        NombreCompleto = $"{a.appaterno} {a.apmaterno} {a.nombre}",
+                        FechaNacimiento = a.fecha_nacimiento,
+                        Sexo = a.sexo,
+                        Telefono1 = a.telefono1,
+                        Telefono2 = a.telefono2,
+                        CorreoElectronico = a.email,
+                        Activo = a.activo
+                    }).ToList();
+
+                    return lista;
+                });
+            }
+
+            dtAlumnos = basFunctions.ConvertToDataTable(listaAlumnos);
+            bs.DataSource = dtAlumnos;
+            dgvAlumnos.DataSource = bs;
+            FormatGrid();
+            pbSpinner.Visible = false;
+        }
+
+        private void FormatGrid()
+        {
+            dgvAlumnos.Columns["Matricula"].HeaderText = "Matrícula";
+            dgvAlumnos.Columns["NombreCompleto"].HeaderText = "Nombre Completo";
+            dgvAlumnos.Columns["FechaNacimiento"].HeaderText = "Fecha Nacimiento";
+            dgvAlumnos.Columns["Sexo"].HeaderText = "Sexo";
+            dgvAlumnos.Columns["Telefono1"].HeaderText = "Teléfono 1";
+            dgvAlumnos.Columns["Telefono2"].HeaderText = "Teléfono 2";
+            dgvAlumnos.Columns["CorreoElectronico"].HeaderText = "Correo Electrónico";
+            dgvAlumnos.Columns["Activo"].HeaderText = "Activo";
+            dgvAlumnos.Columns["Grado"].Visible = false;
+            dgvAlumnos.Columns["Grupo"].Visible = false; // Si no se usa, ocultar estas columnas
+        }
+
+        private void CargarElementosBusqueda()
+        {
+            var ignorar = new[] { "Telefono1", "Telefono2", "CorreoElectronico", "Sexo", "FechaNacimiento" };
+
+            var propiedades = typeof(AlumnoDTO)
+                 .GetProperties()
+                 .Select(p => p.Name)
+                 .Where(nombre => !ignorar.Contains(nombre))
+                 .ToList();
+
+            foreach (var item in propiedades)
+            {
+                cboFiltros.Items.Add(item.ToString());
+            }
         }
 
         private void CargarMenu()
         {
             guardarToolStripMenuItem.Visible = false;
+            reporteToolStripMenuItem.Visible = false;
         }
     }
 }

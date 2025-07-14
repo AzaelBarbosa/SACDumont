@@ -39,10 +39,10 @@
             this.dgvPromociones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPromociones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPromociones.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPromociones.Location = new System.Drawing.Point(0, 59);
+            this.dgvPromociones.Location = new System.Drawing.Point(0, 84);
             this.dgvPromociones.Name = "dgvPromociones";
             this.dgvPromociones.ReadOnly = true;
-            this.dgvPromociones.Size = new System.Drawing.Size(800, 391);
+            this.dgvPromociones.Size = new System.Drawing.Size(800, 366);
             this.dgvPromociones.TabIndex = 4;
             this.dgvPromociones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPromociones_CellClick);
             this.dgvPromociones.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPromociones_CellDoubleClick);

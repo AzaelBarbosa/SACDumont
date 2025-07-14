@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SACDumont.Modulos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -69,6 +70,11 @@ namespace SACDumont.Base
         private void cboBusqueda_SelectedIndexChanged(object sender, EventArgs e)
         {
             BusquedaCombo();
+        }
+
+        private void frmListados_Resize(object sender, EventArgs e)
+        {
+            basFunctions.CenterSpinnerOverGrid(this, pbSpinner);
         }
     }
 }
