@@ -36,20 +36,22 @@ namespace SACDumont.Otros
             if (dtpFechaInicio.Value > dtpFechaFin.Value) { MessageBox.Show("La fecha de inicio no puede ser mayor a la fecha final.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
             if (dtpFechaFin.Value < dtpFechaInicio.Value) { MessageBox.Show("La fecha final no puede ser menor a la fecha inicial.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
 
-            using (var db = new DumontContext())
+            if (idCiclo > 0)
             {
-                Ciclos_Escolares = new Ciclos_Escolares()
+                using (var db = new DumontContext())
                 {
-                    ciclo = txDescripcion.Text,
-                    fecha_fin = dtpFechaFin.Value,
-                    fecha_inicio = dtpFechaInicio.Value,
-                    id_ciclo = 0
-                };
+                    Ciclos_Escolares = db.CiclosEscolares.Find(idCiclo);
+                    if (Ciclos_Escolares == null)
+                    {
+                        MessageBox.Show("El ciclo escolar no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    Ciclos_Escolares.ciclo = txDescripcion.Text;
+                    Ciclos_Escolares.fecha_inicio = dtpFechaInicio.Value;
+                    Ciclos_Escolares.fecha_fin = dtpFechaFin.Value;
+                    db.Entry(Ciclos_Escolares).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
 
-                db.Entry(Ciclos_Escolares).State = System.Data.Entity.EntityState.Added;
-                var result = db.SaveChanges();
-                if (result == 1)
-                {
                     productos = db.Productos.Where(p => p.estado == true).ToList();
                     foreach (var producto in productos)
                     {
@@ -61,6 +63,8 @@ namespace SACDumont.Otros
                                 id_producto = producto.id_producto,
                                 id_ciclo = Ciclos_Escolares.id_ciclo,
                                 precio = db.ProductoCiclo.Where(pc => pc.id_producto == producto.id_producto && pc.id_ciclo == basConfiguracion.IdCicloActual).Select(pc => pc.precio).FirstOrDefault(),
+                                fecha_vencimiento = DateTime.Now.AddYears(100), // Asignar una fecha de vencimiento por defecto
+                                id_grupo = db.ProductoCiclo.Where(pc => pc.id_producto == producto.id_producto && pc.id_ciclo == basConfiguracion.IdCicloActual).Select(pc => pc.id_grupo).FirstOrDefault(),
                             });
                         }
                     }
@@ -71,8 +75,52 @@ namespace SACDumont.Otros
                         db.Dispose();
                     }
                 }
-                MessageBox.Show("Ciclo Escolar creado correctamente", "Ciclo Escolar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Ciclo Escolar actualizado correctamente {Environment.NewLine} Recuerde revisar las fechas de Vencimiento de los productos.", "Ciclo Escolar", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
+                return;
+            }
+            else
+            {
+                using (var db = new DumontContext())
+                {
+                    Ciclos_Escolares = new Ciclos_Escolares()
+                    {
+                        ciclo = txDescripcion.Text,
+                        fecha_fin = dtpFechaFin.Value,
+                        fecha_inicio = dtpFechaInicio.Value,
+                        id_ciclo = 0
+                    };
+
+                    db.Entry(Ciclos_Escolares).State = System.Data.Entity.EntityState.Added;
+                    var result = db.SaveChanges();
+                    if (result == 1)
+                    {
+                        productos = db.Productos.Where(p => p.estado == true).ToList();
+                        foreach (var producto in productos)
+                        {
+                            var prodExiste = db.ProductoCiclo.Where(pc => pc.id_producto == producto.id_producto && pc.id_ciclo == Ciclos_Escolares.id_ciclo).FirstOrDefault();
+                            if (prodExiste == null)
+                            {
+                                productoCiclo.Add(new Producto_Ciclo()
+                                {
+                                    id_producto = producto.id_producto,
+                                    id_ciclo = Ciclos_Escolares.id_ciclo,
+                                    precio = db.ProductoCiclo.Where(pc => pc.id_producto == producto.id_producto && pc.id_ciclo == basConfiguracion.IdCicloActual).Select(pc => pc.precio).FirstOrDefault(),
+                                    fecha_vencimiento = DateTime.Now.AddYears(100), // Asignar una fecha de vencimiento por defecto
+                                    id_grupo = db.ProductoCiclo.Where(pc => pc.id_producto == producto.id_producto && pc.id_ciclo == basConfiguracion.IdCicloActual).Select(pc => pc.id_grupo).FirstOrDefault(),
+                                });
+                            }
+                        }
+                        if (productoCiclo.Count > 0)
+                        {
+                            db.ProductoCiclo.AddRange(productoCiclo);
+                            db.SaveChanges();
+                            db.Dispose();
+                        }
+                    }
+                    MessageBox.Show($"Ciclo Escolar creado correctamente. {Environment.NewLine} No olvide revisar las fechas de vencimiento y precios de los productos que requieran.", "Ciclo Escolar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
             }
         }
         protected override void Eliminar()
