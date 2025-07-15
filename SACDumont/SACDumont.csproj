@@ -392,6 +392,12 @@
     <Compile Include="Otros\frmReinscripcion.Designer.cs">
       <DependentUpon>frmReinscripcion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Otros\frmTransferenciaAlumnos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Otros\frmTransferenciaAlumnos.Designer.cs">
+      <DependentUpon>frmTransferenciaAlumnos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SACContext.cs" />
@@ -493,6 +499,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmReinscripcion.resx">
       <DependentUpon>frmReinscripcion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Otros\frmTransferenciaAlumnos.resx">
+      <DependentUpon>frmTransferenciaAlumnos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

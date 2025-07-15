@@ -22,7 +22,6 @@ namespace SACDumont.Otros
         {
             try
             {
-                basConfiguracion.IdCiclo = int.Parse(cboCiclos.SelectedValue.ToString());
                 basGlobals.iCiclo = int.Parse(cboCiclos.SelectedValue.ToString());
                 basConfiguracion.InformacionHeader = "SAC - DUMONT || " + basConfiguracion.Nombre + " || Ciclo: " + cboCiclos.Text;
                 MessageBox.Show("Cambio de ciclo exitoso.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);

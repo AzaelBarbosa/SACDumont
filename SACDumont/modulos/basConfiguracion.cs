@@ -28,7 +28,8 @@ namespace SACDumont.Modulos
         public static int Linea;
         public static int TipoActividad;
         public static int TipoPermiso;
-        public static int IdCiclo;
+
+        public static int IdCicloActual;
         public static bool Recargos;
         public static bool Promociones;
         public static int PorcentajeRecargo;
@@ -51,7 +52,7 @@ namespace SACDumont.Modulos
         public void SetConfig(int idCiclo, bool bRecargos, bool bPromociones, int porcentajeRecargo, int diasTolerancia)
         {
 
-            basConfiguracion.IdCiclo = idCiclo;
+            basConfiguracion.IdCicloActual = idCiclo;
             basConfiguracion.Recargos = bRecargos;
             basConfiguracion.Promociones = bPromociones;
             basConfiguracion.PorcentajeRecargo = porcentajeRecargo;

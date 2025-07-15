@@ -22,7 +22,7 @@ namespace SACDumont.Cobros
         #region Variables
 
         DataTable dtMovimiento = new DataTable("Movimiento");
-        int idCiclo = basConfiguracion.IdCiclo;
+        int idCiclo = basGlobals.iCiclo;
         int id_estatusmovimiento = (int)modulos.EstatusMovimiento.Liquidado;
         int idMovimiento = 0;
         int idMatricula = 0;

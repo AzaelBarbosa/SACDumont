@@ -229,7 +229,7 @@ namespace SACDumont.Listados
 
             foreach (var item in propiedades)
             {
-               this.cboFiltros.Items.Add(item.ToString());
+                this.cboFiltros.Items.Add(item.ToString());
             }
         }
 
@@ -243,7 +243,7 @@ namespace SACDumont.Listados
         private void frmProductos_Load(object sender, EventArgs e)
         {
             // Cargar el ciclo escolar activo
-            idCiclo = basConfiguracion.IdCiclo;
+            idCiclo = basGlobals.iCiclo;
             basFunctions.CenterSpinnerOverGrid(this, pbSpinner);
             CargarProductos();
             CargarElementosBusqueda();

@@ -29,7 +29,7 @@ namespace SACDumont.Listados
         #region Variables
         DataTable dtMovimientos = new DataTable("Movimientos");
         basGlobals basGlobals = new basGlobals();
-        int idCiclo = basConfiguracion.IdCiclo;
+        int idCiclo = basGlobals.iCiclo;
         int tipoMovimiento = basGlobals.tipoMovimiento;
         int estatusMovimiento = basGlobals.estatusMovimiento;
         basSql sql = new basSql();
@@ -383,7 +383,7 @@ namespace SACDumont.Listados
                 return;
             }
 
-            var nombreImpresora = "RECIBOS";
+            var nombreImpresora = basConfiguracion.PrinterTiockets;
             var psi = new ProcessStartInfo
             {
                 FileName = rutaSumatra,

@@ -20,6 +20,8 @@ namespace SACDumont.Otros
         #region Variables
         int idCiclo = 0;
         Ciclos_Escolares Ciclos_Escolares = new Ciclos_Escolares();
+        List<Productos> productos = new List<Productos>();
+        List<Producto_Ciclo> productoCiclo = new List<Producto_Ciclo>();
         #endregion
 
         #region Metodos Virtuales
@@ -48,9 +50,29 @@ namespace SACDumont.Otros
                 var result = db.SaveChanges();
                 if (result == 1)
                 {
-                    MessageBox.Show("Ciclo Escolar creado correctamente", "Ciclo Escolar", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
+                    productos = db.Productos.Where(p => p.estado == true).ToList();
+                    foreach (var producto in productos)
+                    {
+                        var prodExiste = db.ProductoCiclo.Where(pc => pc.id_producto == producto.id_producto && pc.id_ciclo == Ciclos_Escolares.id_ciclo).FirstOrDefault();
+                        if (prodExiste == null)
+                        {
+                            productoCiclo.Add(new Producto_Ciclo()
+                            {
+                                id_producto = producto.id_producto,
+                                id_ciclo = Ciclos_Escolares.id_ciclo,
+                                precio = db.ProductoCiclo.Where(pc => pc.id_producto == producto.id_producto && pc.id_ciclo == basConfiguracion.IdCicloActual).Select(pc => pc.precio).FirstOrDefault(),
+                            });
+                        }
+                    }
+                    if (productoCiclo.Count > 0)
+                    {
+                        db.ProductoCiclo.AddRange(productoCiclo);
+                        db.SaveChanges();
+                        db.Dispose();
+                    }
                 }
+                MessageBox.Show("Ciclo Escolar creado correctamente", "Ciclo Escolar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
             }
         }
         protected override void Eliminar()

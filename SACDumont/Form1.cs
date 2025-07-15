@@ -204,5 +204,12 @@ namespace SACDumont
             basGlobals.sConcepto = Conceptos.GRADUACION.ToString();
             AbrirUnicoFormularioHijo<frmMovimientos>();
         }
+
+        private void trasnferirAlumnosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTransferenciaAlumnos frmPopup = new frmTransferenciaAlumnos();
+            frmPopup.Text = "Trasnferencia de Alumnos";
+            frmPopup.ShowDialog();
+        }
     }
 }
