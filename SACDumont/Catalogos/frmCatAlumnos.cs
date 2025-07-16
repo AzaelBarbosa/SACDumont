@@ -102,9 +102,10 @@ namespace SACDumont.Catalogos
                         var inscripcion = new Inscripciones
                         {
                             matricula = intMatricula,
-                            id_ciclo = basConfiguracion.IdCiclo,
+                            id_ciclo = basGlobals.iCiclo,
                             id_grado = (int)cboGrado.IDValor,
-                            id_grupo = (int)cboGrupo.IDValor
+                            id_grupo = (int)cboGrupo.IDValor,
+                            tipo_inscripcion = "N"
                         };
                         db.Inscripciones.Add(inscripcion);
 
@@ -113,7 +114,7 @@ namespace SACDumont.Catalogos
                             var beca = new Becas
                             {
                                 id_matricula = intMatricula,
-                                id_ciclo = basConfiguracion.IdCiclo,
+                                id_ciclo = basGlobals.iCiclo,
                                 porcentaje_beca = Convert.ToDecimal(nPorBeca.Value)
                             };
                             db.Becas.Add(beca);
@@ -210,7 +211,7 @@ namespace SACDumont.Catalogos
 
                     }
 
-                    var becaExistente = db.Becas.FirstOrDefault(b => b.id_matricula == intMatricula && b.id_ciclo == basConfiguracion.IdCiclo);
+                    var becaExistente = db.Becas.FirstOrDefault(b => b.id_matricula == intMatricula && b.id_ciclo == basGlobals.iCiclo);
                     if (becaExistente == null)
                     {
                         if (chBecado.Checked)
@@ -218,7 +219,7 @@ namespace SACDumont.Catalogos
                             var beca = new Becas
                             {
                                 id_matricula = intMatricula,
-                                id_ciclo = basConfiguracion.IdCiclo,
+                                id_ciclo = basGlobals.iCiclo,
                                 porcentaje_beca = Convert.ToDecimal(nPorBeca.Value)
                             };
                             db.Becas.Add(beca);
@@ -317,7 +318,7 @@ namespace SACDumont.Catalogos
                     txtEmail.Text = alumnos.email;
 
                     // Cargar los grados y grupos
-                    var inscripcion = db.Inscripciones.FirstOrDefault(i => i.matricula == matricula && i.id_ciclo == basConfiguracion.IdCiclo);
+                    var inscripcion = db.Inscripciones.FirstOrDefault(i => i.matricula == matricula && i.id_ciclo == basGlobals.iCiclo);
                     if (inscripcion != null)
                     {
                         cboGrado.IDValor = inscripcion.id_grado;
@@ -330,7 +331,7 @@ namespace SACDumont.Catalogos
                     }
 
                     // Cargar las becas y promociones
-                    var beca = db.Becas.FirstOrDefault(b => b.id_matricula == matricula && b.id_ciclo == basConfiguracion.IdCiclo);
+                    var beca = db.Becas.FirstOrDefault(b => b.id_matricula == matricula && b.id_ciclo == basGlobals.iCiclo);
                     if (beca != null)
                     {
                         chBecado.Checked = true;

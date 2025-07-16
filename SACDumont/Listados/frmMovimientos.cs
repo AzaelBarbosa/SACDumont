@@ -29,7 +29,7 @@ namespace SACDumont.Listados
         #region Variables
         DataTable dtMovimientos = new DataTable("Movimientos");
         basGlobals basGlobals = new basGlobals();
-        int idCiclo = basConfiguracion.IdCiclo;
+        int idCiclo = basGlobals.iCiclo;
         int tipoMovimiento = basGlobals.tipoMovimiento;
         int estatusMovimiento = basGlobals.estatusMovimiento;
         basSql sql = new basSql();
@@ -58,6 +58,11 @@ namespace SACDumont.Listados
         protected override void Imprimir()
         {
             // Implementar la lógica para imprimir el listado de movimientos
+            if (basConfiguracion.PrinterTiockets == null)
+            {
+                MessageBox.Show("Debe configurar una impresora para tickets en la configuración del sistema.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             ExportareImprimirSinAbrir();
         }
         protected override void Cerrar()
@@ -200,7 +205,7 @@ namespace SACDumont.Listados
         }
         private void CargarMenu()
         {
-            reporteToolStripMenuItem.Visible = false;
+            //reporteToolStripMenuItem.Visible = false;
             guardarToolStripMenuItem.Visible = false;
         }
 
@@ -383,7 +388,7 @@ namespace SACDumont.Listados
                 return;
             }
 
-            var nombreImpresora = "RECIBOS";
+            var nombreImpresora = basConfiguracion.PrinterTiockets;
             var psi = new ProcessStartInfo
             {
                 FileName = rutaSumatra,

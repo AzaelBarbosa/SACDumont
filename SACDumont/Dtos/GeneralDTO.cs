@@ -50,4 +50,24 @@ namespace SACDumont.Dtos
 
         public bool Activo { get; set; }
     }
+
+    public class AlumnoSACDTO
+    {
+        public bool Seleccionado { get; set; }
+        public int Matriula { get; set; }
+        public string nombreCompleto { get; set; }
+        public string nombre { get; set; }
+        public string appaterno { get; set; }
+        public string apmaterno { get; set; }
+        public DateTime FechaNacimiento { get; set; }
+        public string curp { get; set; }
+        public string calle { get; set; }
+        public string colonia { get; set; }
+        public string ciudad { get; set; }
+        public string telefono1 { get; set; }
+        public string telefono2 { get; set; }
+        public string email { get; set; }
+        public DateTime fechaalta { get; set; }
+        public bool activo { get; set; }
+    }
 }

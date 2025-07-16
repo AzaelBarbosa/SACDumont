@@ -65,15 +65,16 @@
             this.generalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ciclosEscolaresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarCicloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btPrinterTickets = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.btDefinirImpresora = new System.Windows.Forms.ToolStripMenuItem();
             this.btCerarSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.btSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tlUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btPrinterTickets = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
-            this.btDefinirImpresora = new System.Windows.Forms.ToolStripMenuItem();
+            this.trasnferirAlumnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -136,7 +137,7 @@
             // 
             this.btCobroColegiatura.Image = global::SACDumont.Properties.Resources.salario_del_usuario;
             this.btCobroColegiatura.Name = "btCobroColegiatura";
-            this.btCobroColegiatura.Size = new System.Drawing.Size(180, 22);
+            this.btCobroColegiatura.Size = new System.Drawing.Size(135, 22);
             this.btCobroColegiatura.Text = "Colegiatura";
             this.btCobroColegiatura.Click += new System.EventHandler(this.btCobroColegiatura_Click);
             // 
@@ -144,7 +145,7 @@
             // 
             this.btCobroInscripcion.Image = global::SACDumont.Properties.Resources.salario__1_;
             this.btCobroInscripcion.Name = "btCobroInscripcion";
-            this.btCobroInscripcion.Size = new System.Drawing.Size(180, 22);
+            this.btCobroInscripcion.Size = new System.Drawing.Size(135, 22);
             this.btCobroInscripcion.Text = "Inscripcion";
             this.btCobroInscripcion.Click += new System.EventHandler(this.btCobroInscripcion_Click);
             // 
@@ -152,28 +153,28 @@
             // 
             this.btCobroProducts.Image = global::SACDumont.Properties.Resources.salario;
             this.btCobroProducts.Name = "btCobroProducts";
-            this.btCobroProducts.Size = new System.Drawing.Size(180, 22);
+            this.btCobroProducts.Size = new System.Drawing.Size(135, 22);
             this.btCobroProducts.Text = "Articulos";
             this.btCobroProducts.Click += new System.EventHandler(this.btCobroProducts_Click);
             // 
             // uniformesToolStripMenuItem
             // 
             this.uniformesToolStripMenuItem.Name = "uniformesToolStripMenuItem";
-            this.uniformesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.uniformesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.uniformesToolStripMenuItem.Text = "Uniformes";
             this.uniformesToolStripMenuItem.Click += new System.EventHandler(this.uniformesToolStripMenuItem_Click);
             // 
             // eventosToolStripMenuItem
             // 
             this.eventosToolStripMenuItem.Name = "eventosToolStripMenuItem";
-            this.eventosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eventosToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.eventosToolStripMenuItem.Text = "Eventos";
             this.eventosToolStripMenuItem.Click += new System.EventHandler(this.eventosToolStripMenuItem_Click);
             // 
             // graduacionToolStripMenuItem
             // 
             this.graduacionToolStripMenuItem.Name = "graduacionToolStripMenuItem";
-            this.graduacionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.graduacionToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.graduacionToolStripMenuItem.Text = "Graduacion";
             this.graduacionToolStripMenuItem.Click += new System.EventHandler(this.graduacionToolStripMenuItem_Click);
             // 
@@ -194,7 +195,7 @@
             // 
             this.btCatalogosProducto.Image = global::SACDumont.Properties.Resources.caja_de_entrega;
             this.btCatalogosProducto.Name = "btCatalogosProducto";
-            this.btCatalogosProducto.Size = new System.Drawing.Size(180, 22);
+            this.btCatalogosProducto.Size = new System.Drawing.Size(144, 22);
             this.btCatalogosProducto.Text = "Productos";
             this.btCatalogosProducto.Click += new System.EventHandler(this.btCatalogosProducto_Click);
             // 
@@ -202,7 +203,7 @@
             // 
             this.btCatalogosAlumnos.Image = global::SACDumont.Properties.Resources.estudiante_universitario;
             this.btCatalogosAlumnos.Name = "btCatalogosAlumnos";
-            this.btCatalogosAlumnos.Size = new System.Drawing.Size(180, 22);
+            this.btCatalogosAlumnos.Size = new System.Drawing.Size(144, 22);
             this.btCatalogosAlumnos.Text = "Alumnos";
             this.btCatalogosAlumnos.Click += new System.EventHandler(this.btCatalogosAlumnos_Click);
             // 
@@ -210,7 +211,7 @@
             // 
             this.btCatalogosTutores.Image = global::SACDumont.Properties.Resources.tutor;
             this.btCatalogosTutores.Name = "btCatalogosTutores";
-            this.btCatalogosTutores.Size = new System.Drawing.Size(180, 22);
+            this.btCatalogosTutores.Size = new System.Drawing.Size(144, 22);
             this.btCatalogosTutores.Text = "Tutores";
             this.btCatalogosTutores.Click += new System.EventHandler(this.btCatalogosTutores_Click);
             // 
@@ -218,14 +219,14 @@
             // 
             this.btCatalogosUsuarios.Image = global::SACDumont.Properties.Resources.silueta_de_multiples_usuarios;
             this.btCatalogosUsuarios.Name = "btCatalogosUsuarios";
-            this.btCatalogosUsuarios.Size = new System.Drawing.Size(180, 22);
+            this.btCatalogosUsuarios.Size = new System.Drawing.Size(144, 22);
             this.btCatalogosUsuarios.Text = "Usuarios";
             this.btCatalogosUsuarios.Click += new System.EventHandler(this.btCatalogosUsuarios_Click);
             // 
             // promocionesToolStripMenuItem
             // 
             this.promocionesToolStripMenuItem.Name = "promocionesToolStripMenuItem";
-            this.promocionesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.promocionesToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.promocionesToolStripMenuItem.Text = "Promociones";
             this.promocionesToolStripMenuItem.Click += new System.EventHandler(this.promocionesToolStripMenuItem_Click);
             // 
@@ -353,7 +354,8 @@
             this.ciclosEscolaresToolStripMenuItem,
             this.cambiarCicloToolStripMenuItem,
             this.btPrinterTickets,
-            this.btDefinirImpresora});
+            this.btDefinirImpresora,
+            this.trasnferirAlumnosToolStripMenuItem});
             this.btConfiguracion.Image = global::SACDumont.Properties.Resources.configuracion_del_documento;
             this.btConfiguracion.Name = "btConfiguracion";
             this.btConfiguracion.Size = new System.Drawing.Size(111, 20);
@@ -380,6 +382,25 @@
             this.cambiarCicloToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.cambiarCicloToolStripMenuItem.Text = "Cambiar Ciclo";
             this.cambiarCicloToolStripMenuItem.Click += new System.EventHandler(this.cambiarCicloToolStripMenuItem_Click);
+            // 
+            // btPrinterTickets
+            // 
+            this.btPrinterTickets.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBox1});
+            this.btPrinterTickets.Name = "btPrinterTickets";
+            this.btPrinterTickets.Size = new System.Drawing.Size(204, 22);
+            this.btPrinterTickets.Text = "Definir Impresora Tickets";
+            // 
+            // toolStripComboBox1
+            // 
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 23);
+            // 
+            // btDefinirImpresora
+            // 
+            this.btDefinirImpresora.Name = "btDefinirImpresora";
+            this.btDefinirImpresora.Size = new System.Drawing.Size(204, 22);
+            this.btDefinirImpresora.Text = "Definir Impresora";
             // 
             // btCerarSesion
             // 
@@ -427,24 +448,12 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btPrinterTickets
+            // trasnferirAlumnosToolStripMenuItem
             // 
-            this.btPrinterTickets.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripComboBox1});
-            this.btPrinterTickets.Name = "btPrinterTickets";
-            this.btPrinterTickets.Size = new System.Drawing.Size(204, 22);
-            this.btPrinterTickets.Text = "Definir Impresora Tickets";
-            // 
-            // toolStripComboBox1
-            // 
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 23);
-            // 
-            // btDefinirImpresora
-            // 
-            this.btDefinirImpresora.Name = "btDefinirImpresora";
-            this.btDefinirImpresora.Size = new System.Drawing.Size(204, 22);
-            this.btDefinirImpresora.Text = "Definir Impresora";
+            this.trasnferirAlumnosToolStripMenuItem.Name = "trasnferirAlumnosToolStripMenuItem";
+            this.trasnferirAlumnosToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.trasnferirAlumnosToolStripMenuItem.Text = "Trasnferir Alumnos";
+            this.trasnferirAlumnosToolStripMenuItem.Click += new System.EventHandler(this.trasnferirAlumnosToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -518,6 +527,7 @@
         private System.Windows.Forms.ToolStripMenuItem btPrinterTickets;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.Windows.Forms.ToolStripMenuItem btDefinirImpresora;
+        private System.Windows.Forms.ToolStripMenuItem trasnferirAlumnosToolStripMenuItem;
     }
 }
 

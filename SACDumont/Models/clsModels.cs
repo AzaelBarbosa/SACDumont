@@ -196,6 +196,7 @@ namespace SACDumont.Models
         public int id_ciclo { get; set; }
         public int id_grado { get; set; }
         public int id_grupo { get; set; }
+        public string tipo_inscripcion { get; set; }
 
         [ForeignKey("matricula")]
         public virtual Alumnos Alumnos { get; set; }
