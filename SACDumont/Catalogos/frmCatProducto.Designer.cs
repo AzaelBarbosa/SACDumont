@@ -39,6 +39,8 @@
             this.cboGrupo = new SACDumont.Controles.ComboCatalogos();
             this.label1 = new System.Windows.Forms.Label();
             this.cboConcepto = new System.Windows.Forms.ComboBox();
+            this.txAbreviatura = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbProductoID
@@ -58,14 +60,14 @@
             this.txDescripcion.Location = new System.Drawing.Point(12, 144);
             this.txDescripcion.Name = "txDescripcion";
             this.txDescripcion.Size = new System.Drawing.Size(438, 20);
-            this.txDescripcion.TabIndex = 59;
+            this.txDescripcion.TabIndex = 2;
             // 
             // txtCosto
             // 
             this.txtCosto.Location = new System.Drawing.Point(12, 194);
             this.txtCosto.Name = "txtCosto";
             this.txtCosto.Size = new System.Drawing.Size(145, 20);
-            this.txtCosto.TabIndex = 61;
+            this.txtCosto.TabIndex = 3;
             // 
             // lblNombre
             // 
@@ -97,7 +99,7 @@
             this.dtFechaVenci.Location = new System.Drawing.Point(164, 194);
             this.dtFechaVenci.Name = "dtFechaVenci";
             this.dtFechaVenci.Size = new System.Drawing.Size(144, 20);
-            this.dtFechaVenci.TabIndex = 70;
+            this.dtFechaVenci.TabIndex = 4;
             // 
             // lblFechaNac
             // 
@@ -115,7 +117,7 @@
             this.cboGrupo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cboGrupo.Name = "cboGrupo";
             this.cboGrupo.Size = new System.Drawing.Size(134, 21);
-            this.cboGrupo.TabIndex = 71;
+            this.cboGrupo.TabIndex = 5;
             this.cboGrupo.TipoCatalogo = "Grupo";
             // 
             // label1
@@ -133,14 +135,31 @@
             this.cboConcepto.FormattingEnabled = true;
             this.cboConcepto.Location = new System.Drawing.Point(12, 93);
             this.cboConcepto.Name = "cboConcepto";
-            this.cboConcepto.Size = new System.Drawing.Size(437, 21);
-            this.cboConcepto.TabIndex = 73;
+            this.cboConcepto.Size = new System.Drawing.Size(205, 21);
+            this.cboConcepto.TabIndex = 0;
+            // 
+            // txAbreviatura
+            // 
+            this.txAbreviatura.Location = new System.Drawing.Point(223, 94);
+            this.txAbreviatura.Name = "txAbreviatura";
+            this.txAbreviatura.Size = new System.Drawing.Size(227, 20);
+            this.txAbreviatura.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(223, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 23);
+            this.label2.TabIndex = 74;
+            this.label2.Text = "Abreviatura:";
             // 
             // frmCatProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 280);
+            this.Controls.Add(this.txAbreviatura);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.cboConcepto);
             this.Controls.Add(this.cboGrupo);
             this.Controls.Add(this.label1);
@@ -166,6 +185,8 @@
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.cboGrupo, 0);
             this.Controls.SetChildIndex(this.cboConcepto, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.txAbreviatura, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,5 +205,7 @@
         private Controles.ComboCatalogos cboGrupo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cboConcepto;
+        private System.Windows.Forms.TextBox txAbreviatura;
+        private System.Windows.Forms.Label label2;
     }
 }

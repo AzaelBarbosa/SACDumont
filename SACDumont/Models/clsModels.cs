@@ -152,6 +152,7 @@ namespace SACDumont.Models
         public DateTime fecha_alta { get; set; }
         public string concepto { get; set; }
         public bool estado { get; set; }
+        public string abreviatura { get; set; }
     }
     public class Producto_Ciclo
     {
@@ -232,6 +233,19 @@ namespace SACDumont.Models
         public string descripcion { get; set; }
         public bool estatus { get; set; }
     }
+
+    public class permisos_perfiles
+    {
+        [Key]
+        public int id_permiso { get; set; }
+        public int id_perfil { get; set; }
+        public bool inscripcion { get; set; }
+        public bool cobros { get; set; }
+        public bool catalogos { get; set; }
+        public bool reportes { get; set; }
+        public bool configuracion { get; set; }
+    }
+
     internal class clsModels
     {
 

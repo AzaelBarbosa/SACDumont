@@ -8,6 +8,7 @@ namespace SACDumont.Dtos
 {
     public class ProductoDTO
     {
+        public string Abrv { get; set; }
         public string Concepto { get; set; }
         public string Descripcion { get; set; }
         public decimal Costo { get; set; }

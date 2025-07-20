@@ -31,6 +31,7 @@ namespace SACDumont
         public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<catalogos> Catalogos { get; set; }
         public DbSet<perfiles> Perfiles { get; set; }
+        public DbSet<permisos_perfiles> PermisosPerfiles { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

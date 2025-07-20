@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,7 @@ namespace SACDumont.Cobros
         decimal decPrecio = 0;
         basGlobals basGlobals = new basGlobals();
         movimiento_productos productos;
+        int idAlumno = 0;
         protected override void Nuevo()
         {
 
@@ -109,11 +111,12 @@ namespace SACDumont.Cobros
             }
         }
 
-        public frmCobroProducto(int idGrupo, string strConcepto)
+        public frmCobroProducto(int idGrupo, string strConcepto, int idAlumno)
         {
             InitializeComponent();
             this.idGrupo = idGrupo;
             this.strConcepto = strConcepto;
+            this.idAlumno = idAlumno;
         }
 
         private void frmCobroProducto_Load(object sender, EventArgs e)
@@ -144,8 +147,31 @@ namespace SACDumont.Cobros
             }
         }
 
+        private bool ValidarYaCobrado()
+        {
+            using (var db = new DumontContext())
+            {
+                bool productoYaRegistrado = db.Movimientos
+                .Where(m => m.id_matricula == idAlumno && m.id_ciclo == basGlobals.iCiclo)
+                .SelectMany(m => m.MovimientosProductos)
+                .Any(mp => mp.id_producto == comboProductos1.IdProductoSeleccionado);
+
+                return productoYaRegistrado;
+            }
+        }
+
         private void comboProductos1_OnCobroSeleccionado(DataRow obj)
         {
+
+         if (strConcepto == Conceptos.COLEGIATURA.ToString() |  strConcepto == Conceptos.INSCRIPCION.ToString())
+            {
+                if (ValidarYaCobrado())
+                {
+                    MessageBox.Show("El producto seleccionado ya fue cobrado", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+         
             nCantidad.Enabled = true;
             DateTime fechaVencimiento = Convert.ToDateTime(obj["fecha_vencimiento"]);
             txCosto.Text = Convert.ToDecimal(obj["precio"]).ToString("C");

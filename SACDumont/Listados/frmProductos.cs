@@ -173,6 +173,7 @@ namespace SACDumont.Listados
                   .Where(prc => prc.id_ciclo == idCiclo)
                   .Select(prc => new ProductoDTO
                   {
+                      Abrv = prc.Producto.abreviatura,
                       Concepto = prc.Producto.concepto,
                       Descripcion = prc.Producto.descripcion,
                       Estado = prc.Producto.estado,
