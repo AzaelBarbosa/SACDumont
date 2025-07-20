@@ -54,6 +54,7 @@ namespace SACDumont.Catalogos
                     productos.id_producto = 0;
                     productos.descripcion = txDescripcion.Text;
                     productos.concepto = cboConcepto.Text;
+                    productos.abreviatura = txAbreviatura.Text;
                     productos.estado = true;
 
                     db.Entry(productos).State = System.Data.Entity.EntityState.Added;
@@ -88,6 +89,7 @@ namespace SACDumont.Catalogos
                     {
                         productos.descripcion = txDescripcion.Text;
                         productos.concepto = cboConcepto.Text;
+                        productos.abreviatura = txAbreviatura.Text.ToUpper();
 
                         db.Entry(productos).State = System.Data.Entity.EntityState.Modified;
 
@@ -95,7 +97,7 @@ namespace SACDumont.Catalogos
 
                         if (producto_Ciclo != null)
                         {
-                            producto_Ciclo.precio = Convert.ToDecimal(txtCosto.Text);
+                            producto_Ciclo.precio = Convert.ToDecimal(txtCosto.Text.Replace("$", "").Replace(",", ""));
                             producto_Ciclo.id_ciclo = basGlobals.iCiclo;
                             producto_Ciclo.fecha_vencimiento = dtFechaVenci.Value;
                             producto_Ciclo.id_grupo = (int)cboGrupo.IDValor;
@@ -182,6 +184,7 @@ namespace SACDumont.Catalogos
             txDescripcion.Text = string.Empty;
             cboConcepto.Text = string.Empty;
             txtCosto.Text = string.Empty;
+            txAbreviatura.Text = string.Empty;
         }
         private void CargarProducto()
         {
@@ -201,6 +204,7 @@ namespace SACDumont.Catalogos
                     producto_Ciclo = db.ProductoCiclo.FirstOrDefault(t => t.id_producto == idProducto && t.id_ciclo == basGlobals.iCiclo && t.id_grupo == idGrupo);
                     if (productos != null)
                     {
+                        txAbreviatura.Text = productos.abreviatura ?? " ";
                         txDescripcion.Text = productos.descripcion.ToString();
                         cboConcepto.Text = productos.concepto.ToString();
                         txtCosto.Text = producto_Ciclo.precio.ToString("C2");

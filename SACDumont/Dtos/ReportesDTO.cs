@@ -30,4 +30,13 @@ namespace SACDumont.Dtos
         public string Ciclo { get; set; }
     }
 
+    public class CorteDiarioDTO
+    {
+        public decimal MontoEfectivo { get; set; }
+        public decimal MontoTransferencia { get; set; }
+        public decimal MontoTarjeta { get; set; }
+        public DateTime Fecha { get; set; }
+
+    }
+
 }
