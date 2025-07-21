@@ -179,7 +179,8 @@ namespace SACDumont.Listados
                       Estado = prc.Producto.estado,
                       Id_Producto = prc.Producto.id_producto,
                       Costo = prc.precio,
-                      Id_Grupo = prc.id_grupo
+                      Id_Grupo = prc.id_grupo,
+                      FechaVencimiento = prc.fecha_vencimiento
                   })
                   .ToList();
 
@@ -194,7 +195,8 @@ namespace SACDumont.Listados
                 }
                 pbSpinner.Visible = false;
                 Cursor.Current = Cursors.Default;
-                bs.DataSource = datos.ToList();
+                dtProductos = basFunctions.ConvertToDataTable(datos);
+                bs.DataSource = dtProductos;
                 listaProductos = datos.ToList();
                 listaProductosCopy = datos.ToList();
                 dgvProductos.DataSource = bs;
@@ -214,6 +216,7 @@ namespace SACDumont.Listados
             dgvProductos.Columns["Grupo"].HeaderText = "Grupo";
             dgvProductos.Columns["Descripcion"].HeaderText = "Nombre del Producto";
             dgvProductos.Columns["Costo"].HeaderText = "Costo";
+            dgvProductos.Columns["FechaVencimiento"].HeaderText = "Fecha de Vencimiento";
             dgvProductos.Columns["Costo"].DefaultCellStyle.Format = "C2";
             dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -253,12 +256,13 @@ namespace SACDumont.Listados
 
         private void dgvProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.RowIndex < listaProductos.Count)
+            if (e.RowIndex >= 0)
             {
-                var productoSeleccionado = listaProductos[e.RowIndex];
-                frmCatProducto frmCatProducto = new frmCatProducto(productoSeleccionado.Id_Producto);
-                frmCatProducto.idGrupo = productoSeleccionado.Id_Grupo;
-                frmCatProducto.Text = $"Edicion de Promocion: {productoSeleccionado.Descripcion}";
+                DataGridViewRow fila = dgvProductos.Rows[e.RowIndex];
+                idProducto = int.Parse(fila.Cells["Id_Producto"].Value?.ToString());
+                frmCatProducto frmCatProducto = new frmCatProducto(idProducto);
+                frmCatProducto.idGrupo = int.Parse(fila.Cells["Id_Grupo"].Value?.ToString());
+                frmCatProducto.Text = $"Edicion de Producto: {fila.Cells["Descripcion"].Value?.ToString()}";
                 frmCatProducto.ShowDialog();
                 CargarProductos(); // Recargar la lista después de editar
             }
@@ -266,10 +270,10 @@ namespace SACDumont.Listados
 
         private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.RowIndex < listaProductos.Count)
+            if (e.RowIndex >= 0)
             {
-                var promocionSeleccionada = listaProductos[e.RowIndex];
-                idProducto = promocionSeleccionada.Id_Producto;
+                DataGridViewRow fila = dgvProductos.Rows[e.RowIndex];
+                idProducto = int.Parse(fila.Cells["Id_Producto"].Value?.ToString());
             }
         }
 

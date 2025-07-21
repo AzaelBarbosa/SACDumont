@@ -29,8 +29,13 @@
         private void InitializeComponent()
         {
             this.dgvAlumnos = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSpinner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlumnos)).BeginInit();
             this.SuspendLayout();
+            // 
+            // pbSpinner
+            // 
+            this.pbSpinner.Location = new System.Drawing.Point(437, 306);
             // 
             // dgvAlumnos
             // 
@@ -39,11 +44,12 @@
             this.dgvAlumnos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAlumnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAlumnos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvAlumnos.Location = new System.Drawing.Point(0, 59);
+            this.dgvAlumnos.Location = new System.Drawing.Point(0, 84);
             this.dgvAlumnos.Name = "dgvAlumnos";
             this.dgvAlumnos.ReadOnly = true;
-            this.dgvAlumnos.Size = new System.Drawing.Size(989, 669);
+            this.dgvAlumnos.Size = new System.Drawing.Size(989, 644);
             this.dgvAlumnos.TabIndex = 2;
+            this.dgvAlumnos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAlumnos_CellClick);
             this.dgvAlumnos.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAlumnos_CellContentDoubleClick);
             // 
             // frmAlumnos
@@ -57,7 +63,9 @@
             this.Activated += new System.EventHandler(this.frmAlumnos_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmAlumnos_FormClosed);
             this.Load += new System.EventHandler(this.frmAlumnos_Load);
+            this.Controls.SetChildIndex(this.pbSpinner, 0);
             this.Controls.SetChildIndex(this.dgvAlumnos, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.pbSpinner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlumnos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -360,7 +360,7 @@ namespace SACDumont.Cobros
                 MessageBox.Show("Debe seleccionar un alumno antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            frmCobroProducto frmCobro = new frmCobroProducto(idGrupo, strConcepto);
+            frmCobroProducto frmCobro = new frmCobroProducto(idGrupo, strConcepto, (int)cboAlumnos.matricula);
             frmCobro.Text = "Agregar Producto";
             frmCobro.ShowDialog();
             if (basGlobals.listaProductos.Count > 0)

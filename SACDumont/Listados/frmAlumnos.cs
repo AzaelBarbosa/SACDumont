@@ -2,6 +2,8 @@
 using SACDumont.Catalogos;
 using SACDumont.Clases;
 using SACDumont.Dtos;
+using SACDumont.Models;
+using SACDumont.modulos;
 using SACDumont.Modulos;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,8 @@ namespace SACDumont.Listados
         DataTable dtAlumnos = new DataTable("Alumnos");
         BindingSource bs = new BindingSource();
         List<AlumnoDTO> listaAlumnos = new List<AlumnoDTO>();
+        Alumnos alumnos = new Alumnos();
+        List<Tutores_Alumnos> tutoresAlumnos = new List<Tutores_Alumnos>();
         int idAlumno = 0;
         protected override void Nuevo()
         {
@@ -33,7 +37,33 @@ namespace SACDumont.Listados
         }
         protected override void Eliminar()
         {
-            // Implementar la lógica para eliminar el registro de alumno
+            using (var db = new DumontContext())
+            {
+                List<Movimientos> listaMov = db.Movimientos.Where(t => t.id_matricula == idAlumno).ToList();
+                if (listaMov.Count > 0)
+                {
+                    MessageBox.Show("El Alumno que desea eliminar ya se tiene asignados uno o mas movimientos." + Environment.NewLine + "No es posible eliminar Al Alumno", "ATENCION", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                alumnos = db.Alumnos.Find(idAlumno);
+                tutoresAlumnos = db.TutoresAlumnos.Where(t => t.matricula == idAlumno).ToList();
+                if (MessageBox.Show($"Esta por eliminar al Alumno:" + Environment.NewLine + Environment.NewLine + $"{alumnos.appaterno ?? ""} {alumnos.apmaterno ?? ""} {alumnos.nombre ?? ""}" + Environment.NewLine + "¿Desea Continuar?", "Alumnos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    db.Alumnos.Remove(alumnos);
+                    db.Entry(alumnos).State = System.Data.Entity.EntityState.Deleted;
+                    if (tutoresAlumnos.Count > 0)
+                    {
+                        db.TutoresAlumnos.RemoveRange(tutoresAlumnos);
+                        db.Entry(tutoresAlumnos).State = System.Data.Entity.EntityState.Deleted;
+                    }
+                    var result = db.SaveChanges();
+                    if (result == 1)
+                    {
+                        MessageBox.Show("Alumno eliminado correctamente.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        CargarAlumnos();
+                    }
+                }
+            }
         }
         protected override void Imprimir()
         {
@@ -162,7 +192,7 @@ namespace SACDumont.Listados
                         Telefono2 = a.telefono2,
                         CorreoElectronico = a.email,
                         Activo = a.activo
-                    }).ToList();
+                    }).OrderByDescending(a => a.Activo).ThenBy(a => a.NombreCompleto).ToList();
 
                     return lista;
                 });
@@ -209,6 +239,15 @@ namespace SACDumont.Listados
         {
             guardarToolStripMenuItem.Visible = false;
             reporteToolStripMenuItem.Visible = false;
+        }
+
+        private void dgvAlumnos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow fila = dgvAlumnos.Rows[e.RowIndex];
+                idAlumno = int.Parse(fila.Cells["Matricula"].Value?.ToString());
+            }
         }
     }
 }

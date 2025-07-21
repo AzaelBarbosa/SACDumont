@@ -52,9 +52,9 @@ namespace SACDumont.Catalogos
                 using (DumontContext db = new DumontContext())
                 {
                     productos.id_producto = 0;
-                    productos.descripcion = txDescripcion.Text;
+                    productos.descripcion = txDescripcion.Text.ToUpper();
                     productos.concepto = cboConcepto.Text;
-                    productos.abreviatura = txAbreviatura.Text;
+                    productos.abreviatura = txAbreviatura.Text.ToUpper();
                     productos.estado = true;
 
                     db.Entry(productos).State = System.Data.Entity.EntityState.Added;
@@ -87,7 +87,7 @@ namespace SACDumont.Catalogos
                     productos = db.Productos.Find(idProducto);
                     if (productos != null)
                     {
-                        productos.descripcion = txDescripcion.Text;
+                        productos.descripcion = txDescripcion.Text.ToUpper();
                         productos.concepto = cboConcepto.Text;
                         productos.abreviatura = txAbreviatura.Text.ToUpper();
 
@@ -146,7 +146,7 @@ namespace SACDumont.Catalogos
         }
         protected override void Acciones()
         {
-            frmAcciones frm = new frmAcciones("Acciones", idProducto);
+            frmAcciones frm = new frmAcciones("Productos", idProducto);
             frm.Text = "Acciones Producto";
             frm.ShowDialog();
         }
@@ -205,7 +205,7 @@ namespace SACDumont.Catalogos
                     if (productos != null)
                     {
                         txAbreviatura.Text = productos.abreviatura ?? " ";
-                        txDescripcion.Text = productos.descripcion.ToString();
+                        txDescripcion.Text = productos.descripcion.ToString().ToUpper();
                         cboConcepto.Text = productos.concepto.ToString();
                         txtCosto.Text = producto_Ciclo.precio.ToString("C2");
                         dtFechaVenci.Value = producto_Ciclo.fecha_vencimiento;

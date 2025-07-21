@@ -144,8 +144,13 @@ namespace SACDumont.Catalogos
                 Usuarios.reset_contrasena = true;
                 db.Usuarios.Add(Usuarios);
                 db.Entry(Usuarios).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                basFunctions.Registrar(basConfiguracion.UserID, "Usuario", "Editar", idUsuario, $"Se reseteo contraseña Usuario: {Usuarios.nombre_usuario}");
+                var result = db.SaveChanges();
+                if (result > 0)
+                {
+                    MessageBox.Show("Se ah reseteado la contraseña del Usuario.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    basFunctions.Registrar(basConfiguracion.UserID, "Usuario", "Editar", idUsuario, $"Se reseteo contraseña Usuario: {Usuarios.nombre_usuario}");
+                }
+
             }
         }
         protected override void Cerrar()

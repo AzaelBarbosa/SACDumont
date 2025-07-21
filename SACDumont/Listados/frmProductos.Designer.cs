@@ -28,24 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cboFiltros = new System.Windows.Forms.ToolStripComboBox();
-            this.txBusqueda = new System.Windows.Forms.ToolStripTextBox();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
-            // 
-            // cboFiltros
-            // 
-            this.cboFiltros.Name = "cboFiltros";
-            this.cboFiltros.Size = new System.Drawing.Size(170, 25);
-            // 
-            // txBusqueda
-            // 
-            this.txBusqueda.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txBusqueda.Name = "txBusqueda";
-            this.txBusqueda.Size = new System.Drawing.Size(400, 25);
-            this.txBusqueda.Click += new System.EventHandler(this.txBusqueda_Click);
-            this.txBusqueda.TextChanged += new System.EventHandler(this.txBusqueda_TextChanged);
+
             // 
             // dgvProductos
             // 
@@ -84,7 +70,5 @@
 
         #endregion
         private System.Windows.Forms.DataGridView dgvProductos;
-        private System.Windows.Forms.ToolStripComboBox cboFiltros;
-        private System.Windows.Forms.ToolStripTextBox txBusqueda;
     }
 }
