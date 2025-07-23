@@ -41,7 +41,11 @@
             this.nCantidad = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.lbAtencion = new System.Windows.Forms.Label();
+            this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.lbTalla = new System.Windows.Forms.Label();
+            this.txTalla = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nCantidad)).BeginInit();
+            this.gbDatos.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboProductos1
@@ -70,7 +74,7 @@
             // 
             // txCosto
             // 
-            this.txCosto.Location = new System.Drawing.Point(102, 155);
+            this.txCosto.Location = new System.Drawing.Point(86, 38);
             this.txCosto.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txCosto.Name = "txCosto";
             this.txCosto.ReadOnly = true;
@@ -80,7 +84,7 @@
             // 
             // lblNombre
             // 
-            this.lblNombre.Location = new System.Drawing.Point(102, 132);
+            this.lblNombre.Location = new System.Drawing.Point(86, 15);
             this.lblNombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(80, 27);
@@ -89,7 +93,7 @@
             // 
             // txFechaVencimiento
             // 
-            this.txFechaVencimiento.Location = new System.Drawing.Point(190, 155);
+            this.txFechaVencimiento.Location = new System.Drawing.Point(174, 38);
             this.txFechaVencimiento.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txFechaVencimiento.Name = "txFechaVencimiento";
             this.txFechaVencimiento.ReadOnly = true;
@@ -98,7 +102,7 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(190, 132);
+            this.label2.Location = new System.Drawing.Point(174, 15);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(117, 27);
@@ -107,7 +111,7 @@
             // 
             // txRecargo
             // 
-            this.txRecargo.Location = new System.Drawing.Point(339, 155);
+            this.txRecargo.Location = new System.Drawing.Point(323, 38);
             this.txRecargo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txRecargo.Name = "txRecargo";
             this.txRecargo.ReadOnly = true;
@@ -118,7 +122,7 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(339, 132);
+            this.label3.Location = new System.Drawing.Point(323, 15);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 27);
@@ -127,7 +131,7 @@
             // 
             // txtTotal
             // 
-            this.txtTotal.Location = new System.Drawing.Point(427, 155);
+            this.txtTotal.Location = new System.Drawing.Point(411, 38);
             this.txtTotal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
@@ -138,7 +142,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(427, 132);
+            this.label1.Location = new System.Drawing.Point(411, 15);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 27);
@@ -148,7 +152,7 @@
             // nCantidad
             // 
             this.nCantidad.Enabled = false;
-            this.nCantidad.Location = new System.Drawing.Point(34, 156);
+            this.nCantidad.Location = new System.Drawing.Point(18, 39);
             this.nCantidad.Name = "nCantidad";
             this.nCantidad.Size = new System.Drawing.Size(61, 20);
             this.nCantidad.TabIndex = 48;
@@ -162,7 +166,7 @@
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(31, 133);
+            this.label4.Location = new System.Drawing.Point(15, 16);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 27);
@@ -182,22 +186,51 @@
             this.lbAtencion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbAtencion.Visible = false;
             // 
+            // gbDatos
+            // 
+            this.gbDatos.Controls.Add(this.nCantidad);
+            this.gbDatos.Controls.Add(this.txFechaVencimiento);
+            this.gbDatos.Controls.Add(this.txtTotal);
+            this.gbDatos.Controls.Add(this.txCosto);
+            this.gbDatos.Controls.Add(this.txRecargo);
+            this.gbDatos.Controls.Add(this.label4);
+            this.gbDatos.Controls.Add(this.label2);
+            this.gbDatos.Controls.Add(this.lblNombre);
+            this.gbDatos.Controls.Add(this.label1);
+            this.gbDatos.Controls.Add(this.label3);
+            this.gbDatos.Location = new System.Drawing.Point(16, 166);
+            this.gbDatos.Name = "gbDatos";
+            this.gbDatos.Size = new System.Drawing.Size(525, 70);
+            this.gbDatos.TabIndex = 51;
+            this.gbDatos.TabStop = false;
+            // 
+            // lbTalla
+            // 
+            this.lbTalla.Location = new System.Drawing.Point(80, 141);
+            this.lbTalla.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbTalla.Name = "lbTalla";
+            this.lbTalla.Size = new System.Drawing.Size(126, 21);
+            this.lbTalla.TabIndex = 52;
+            this.lbTalla.Text = "Talla:";
+            // 
+            // txTalla
+            // 
+            this.txTalla.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txTalla.Location = new System.Drawing.Point(138, 138);
+            this.txTalla.MaxLength = 3;
+            this.txTalla.Name = "txTalla";
+            this.txTalla.Size = new System.Drawing.Size(156, 20);
+            this.txTalla.TabIndex = 53;
+            // 
             // frmCobroProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(553, 188);
+            this.ClientSize = new System.Drawing.Size(553, 247);
+            this.Controls.Add(this.txTalla);
+            this.Controls.Add(this.lbTalla);
+            this.Controls.Add(this.gbDatos);
             this.Controls.Add(this.lbAtencion);
-            this.Controls.Add(this.nCantidad);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtTotal);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txRecargo);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txCosto);
-            this.Controls.Add(this.lblNombre);
-            this.Controls.Add(this.txFechaVencimiento);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.comboProductos1);
             this.Controls.Add(this.lbSeleccion);
             this.Name = "frmCobroProducto";
@@ -205,18 +238,13 @@
             this.Load += new System.EventHandler(this.frmCobroProducto_Load);
             this.Controls.SetChildIndex(this.lbSeleccion, 0);
             this.Controls.SetChildIndex(this.comboProductos1, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.txFechaVencimiento, 0);
-            this.Controls.SetChildIndex(this.lblNombre, 0);
-            this.Controls.SetChildIndex(this.txCosto, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.txRecargo, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.txtTotal, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.nCantidad, 0);
             this.Controls.SetChildIndex(this.lbAtencion, 0);
+            this.Controls.SetChildIndex(this.gbDatos, 0);
+            this.Controls.SetChildIndex(this.lbTalla, 0);
+            this.Controls.SetChildIndex(this.txTalla, 0);
             ((System.ComponentModel.ISupportInitialize)(this.nCantidad)).EndInit();
+            this.gbDatos.ResumeLayout(false);
+            this.gbDatos.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,5 +265,8 @@
         private System.Windows.Forms.NumericUpDown nCantidad;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbAtencion;
+        private System.Windows.Forms.GroupBox gbDatos;
+        private System.Windows.Forms.Label lbTalla;
+        private System.Windows.Forms.TextBox txTalla;
     }
 }

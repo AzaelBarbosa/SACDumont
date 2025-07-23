@@ -162,7 +162,7 @@ namespace SACDumont.Listados
                                                         INNER JOIN movimiento_productos mp ON m.id_movimiento = mp.id_movimiento
                                                         INNER JOIN productos p ON p.id_producto = mp.id_producto
                                                         INNER JOIN alumnos a ON a.matricula = m.id_matricula
-                                                        INNER JOIN inscripciones i ON i.matricula = a.matricula
+                                                        INNER JOIN inscripciones i ON i.matricula = a.matricula AND i.id_ciclo = m.id_ciclo
                                                         LEFT JOIN catalogos cat ON cat.valor = i.id_grado AND cat.tipo_catalogo = 'Grado' 
                                                         LEFT JOIN catalogos catG ON catG.valor = i.id_grupo AND catG.tipo_catalogo = 'Grupo'
                                                         LEFT JOIN catalogos catE ON catE.valor = m.id_estatusmovimiento AND catE.tipo_catalogo = 'EstatusMovimiento'

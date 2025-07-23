@@ -107,7 +107,7 @@ namespace SACDumont.modulos
 
             //Productos
             strSQL = $@"SELECT m.id_movimiento, mp.id, p.concepto AS Concepto, p.descripcion AS Producto, mp.cantidad, mp.id_movimiento, mp.monto, mp.monto_recargo,
-                        mp.id_producto        
+                        mp.id_producto, mp.talla AS Talla        
                         FROM movimientos m
                         INNER JOIN movimiento_productos mp ON m.id_movimiento = mp.id_movimiento
                         INNER JOIN productos p ON p.id_producto = mp.id_producto

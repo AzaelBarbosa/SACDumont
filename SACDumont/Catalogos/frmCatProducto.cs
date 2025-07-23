@@ -56,6 +56,7 @@ namespace SACDumont.Catalogos
                     productos.concepto = cboConcepto.Text;
                     productos.abreviatura = txAbreviatura.Text.ToUpper();
                     productos.estado = true;
+                    productos.fecha_alta = DateTime.Now;
 
                     db.Entry(productos).State = System.Data.Entity.EntityState.Added;
                     int result = db.SaveChanges();
