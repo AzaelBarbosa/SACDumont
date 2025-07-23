@@ -17,6 +17,7 @@ namespace SACDumont.Models
         public int cantidad { get; set; }
         public decimal monto { get; set; }
         public decimal monto_recargo { get; set; }
+        public string talla { get; set; }
 
         [NotMapped]
         public string descriptionProducto { get; set; }
@@ -94,15 +95,15 @@ namespace SACDumont.Models
         public string nombre { get; set; }
         public string appaterno { get; set; }
         public string apmaterno { get; set; }
-        public DateTime fecha_nacimiento { get; set; }
-        public int pais_nacimiento { get; set; }
-        public int estado_nacimiento { get; set; }
+        public DateTime? fecha_nacimiento { get; set; }
+        public int? pais_nacimiento { get; set; }
+        public int? estado_nacimiento { get; set; }
         public string sexo { get; set; }
         public string curp { get; set; }
         public string calle { get; set; }
         public string colonia { get; set; }
         public string ciudad { get; set; }
-        public int estado { get; set; }
+        public int? estado { get; set; }
         public string telefono1 { get; set; }
         public string telefono2 { get; set; }
         public string telefono3 { get; set; }
@@ -120,20 +121,20 @@ namespace SACDumont.Models
         public string nombre { get; set; }
         public string appaterno { get; set; }
         public string apmaterno { get; set; }
-        public DateTime fecha_nacimiento { get; set; }
+        public DateTime? fecha_nacimiento { get; set; }
         public string sexo { get; set; }
         public string rfc { get; set; }
         public string calle { get; set; }
         public string colonia { get; set; }
         public string ciudad { get; set; }
-        public int estado { get; set; }
+        public int? estado { get; set; }
         public string telefono1 { get; set; }
         public string telefono2 { get; set; }
         public string telefono3 { get; set; }
         public string denomsocial { get; set; }
-        public bool acivo { get; set; }
-        public bool factura { get; set; }
-        public DateTime fecha_alta { get; set; }
+        public bool? acivo { get; set; }
+        public bool? factura { get; set; }
+        public DateTime? fecha_alta { get; set; }
     }
 
     public class Tutores_Alumnos

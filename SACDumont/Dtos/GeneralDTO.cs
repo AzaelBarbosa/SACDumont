@@ -23,7 +23,7 @@ namespace SACDumont.Dtos
         public string NombreCompleto { get; set; }
         public string CorreoElectronico { get; set; }
         public string Telefono { get; set; }
-        public DateTime FechaNacimiento { get; set; }
+        public DateTime? FechaNacimiento { get; set; }
         public string Sexo { get; set; }
     }
 
@@ -39,7 +39,7 @@ namespace SACDumont.Dtos
     {
         public int Matricula { get; set; }
         public string NombreCompleto { get; set; }
-        public DateTime FechaNacimiento { get; set; }
+        public DateTime? FechaNacimiento { get; set; }
         public string CorreoElectronico { get; set; }
         public string Telefono { get; set; }
         public string Sexo { get; set; }

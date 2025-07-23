@@ -83,7 +83,7 @@ namespace SACDumont.Listados
                     NombreCompleto = $"{t.appaterno} {t.apmaterno} {t.nombre}",
                     Telefono = t.telefono1,
                     FechaNacimiento = t.fecha_nacimiento,
-                    Sexo = t.sexo.ToString()
+                    Sexo = t.sexo.ToString() ?? ""
                 }).ToList();
             }
 

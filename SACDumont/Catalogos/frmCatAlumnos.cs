@@ -306,12 +306,12 @@ namespace SACDumont.Catalogos
                     txtCalle.Text = alumnos.calle;
                     txtColonia.Text = alumnos.colonia;
                     txtCiudad.Text = alumnos.ciudad;
-                    cmbPais.SelectedValue = alumnos.pais_nacimiento;
-                    cmbEstado.SelectedValue = alumnos.estado;
+                    cmbPais.SelectedValue = alumnos.pais_nacimiento ?? 1;
+                    cmbEstado.SelectedValue = alumnos.estado ?? 0;
                     CargaEstadosNacimiento();
-                    cmbEstadoNac.SelectedValue = alumnos.estado_nacimiento;
-                    dtpFechaNac.Value = alumnos.fecha_nacimiento;
-                    cmbSexo.SelectedItem = alumnos.sexo;
+                    cmbEstadoNac.SelectedValue = alumnos.estado_nacimiento ?? 0;
+                    dtpFechaNac.Value = alumnos.fecha_nacimiento ?? System.DateTime.Now;
+                    cmbSexo.SelectedItem = alumnos.sexo ?? "M";
                     txtTel1.Text = alumnos.telefono1;
                     txtTel2.Text = alumnos.telefono2;
                     txtTel3.Text = alumnos.telefono3;
@@ -363,7 +363,7 @@ namespace SACDumont.Catalogos
                     tutores = db.TutoresAlumnos
                   .Where(m => m.matricula == intMatricula).ToList().Select(m => new TutorAlumnoDTO
                   {
-                      NombreTutor = db.Tutores.Where(tu => tu.id_tutor == m.id_tutor).Select(tu => tu.apmaterno + " " + tu.apmaterno + " " + tu.nombre).FirstOrDefault(),
+                      NombreTutor = db.Tutores.Where(tu => tu.id_tutor == m.id_tutor).Select(tu => tu.appaterno + " " + tu.apmaterno + " " + tu.nombre).FirstOrDefault(),
                       IdTutor = m.id_tutor,
                       IdAlumno = m.matricula,
                       Parentesco = db.Catalogos.Where(c => c.valor == m.parentesco && c.tipo_catalogo == "Parentesco").Select(c => c.descripcion).FirstOrDefault()

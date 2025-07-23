@@ -2,9 +2,9 @@
 using DocumentFormat.OpenXml.Math;
 using FastReport;
 using FastReport.Export.PdfSimple;
-using FastReport.Export.PdfSimple;
 using SACDumont.Clases;
 using SACDumont.Dtos;
+using SACDumont.Models;
 using SACDumont.modulos;
 using System;
 using System.Collections.Generic;
@@ -272,22 +272,27 @@ namespace SACDumont.Modulos
             }
         }
 
-        public static string ObtenerPin()
+        public static string ObtenerPin(string usuario)
         {
-            string fecha = DateTime.Now.ToString("yyyyMMdd");
-            string baseString = claveSecreta + fecha;
+            // Tiempo actual en UTC para que sea igual en todas partes
+            string fecha = DateTime.UtcNow.ToString("yyyyMMddHHmm");
 
-            // Usamos hash simple para generar PIN
-            int hash = baseString.GetHashCode();
-            hash = Math.Abs(hash);
+            // Creamos la cadena base con la clave secreta y la ventana de tiempo
+            string baseString = claveSecreta + usuario + fecha;
 
-            // Tomamos los últimos 4 dígitos como PIN
-            return (hash % 10000).ToString("D4");
+            using (SHA256 sha = SHA256.Create())
+            {
+                byte[] hashBytes = sha.ComputeHash(Encoding.UTF8.GetBytes(baseString));
+                int hash = BitConverter.ToInt32(hashBytes, 0);
+                hash = Math.Abs(hash);
+
+                return (hash % 10000).ToString("D4");
+            }
         }
 
-        public static bool ValidarPin(string pinIngresado)
+        public static bool ValidarPin(string pinIngresado, string usuario)
         {
-            return ObtenerPin() == pinIngresado;
+            return ObtenerPin(usuario) == pinIngresado;
         }
 
         public static void CenterSpinnerOverGrid(Form form, PictureBox picture)

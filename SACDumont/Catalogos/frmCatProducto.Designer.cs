@@ -48,7 +48,7 @@
             this.lbProductoID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbProductoID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbProductoID.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lbProductoID.Location = new System.Drawing.Point(343, 248);
+            this.lbProductoID.Location = new System.Drawing.Point(343, 225);
             this.lbProductoID.Name = "lbProductoID";
             this.lbProductoID.Size = new System.Drawing.Size(100, 23);
             this.lbProductoID.TabIndex = 34;
@@ -157,7 +157,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(455, 280);
+            this.ClientSize = new System.Drawing.Size(455, 257);
             this.Controls.Add(this.txAbreviatura);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cboConcepto);

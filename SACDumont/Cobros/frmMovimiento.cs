@@ -240,27 +240,27 @@ namespace SACDumont.Cobros
             // Definir las variables necesarias para el movimiento
             if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Colegiatura)
             {
-                strConcepto = "COLEGIATURA";
+                strConcepto = Conceptos.COLEGIATURA.ToString();
             }
             else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Inscripcion)
             {
-                strConcepto = "INSCRIPCION";
+                strConcepto = Conceptos.INSCRIPCION.ToString();
             }
             else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Producto)
             {
-                strConcepto = "PRODUCTO";
+                strConcepto = Conceptos.ARTICULO.ToString();
             }
             else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Uniformes)
             {
-                strConcepto = "UNIFORMES";
+                strConcepto = Conceptos.UNIFORMES.ToString();
             }
             else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Eventos)
             {
-                strConcepto = "EVENTOS";
+                strConcepto = Conceptos.EVENTOS.ToString();
             }
             else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Graduacion)
             {
-                strConcepto = "GRADUACION";
+                strConcepto = Conceptos.GRADUACION.ToString();
             }
         }
 
@@ -360,7 +360,7 @@ namespace SACDumont.Cobros
                 MessageBox.Show("Debe seleccionar un alumno antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            frmCobroProducto frmCobro = new frmCobroProducto(idGrupo, strConcepto);
+            frmCobroProducto frmCobro = new frmCobroProducto(idGrupo, strConcepto, (int)cboAlumnos.matricula);
             frmCobro.Text = "Agregar Producto";
             frmCobro.ShowDialog();
             if (basGlobals.listaProductos.Count > 0)

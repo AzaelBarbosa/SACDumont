@@ -14,6 +14,7 @@ using SACDumont.Controles;
 using SACDumont.Models;
 using SACDumont.modulos;
 using SACDumont.Modulos;
+using SACDumont.Otros;
 
 namespace SACDumont.Cobros
 {
@@ -56,7 +57,8 @@ namespace SACDumont.Cobros
                     id_movimiento = 0,
                     cantidad = Convert.ToInt32(nCantidad.Value),
                     monto = total,
-                    monto_recargo = Convert.ToDecimal(txRecargo.Text.Replace("$", "").Replace(",", "").Trim())
+                    monto_recargo = Convert.ToDecimal(txRecargo.Text.Replace("$", "").Replace(",", "").Trim()),
+                    talla = txTalla.Text
                 };
 
                 basGlobals.listaProductos.Add(productos);
@@ -84,20 +86,12 @@ namespace SACDumont.Cobros
         protected override void QuitarRecargo()
         {
             // Implementar la lógica para quitar el recargo del movimiento  
-            using (var form = new Form())
+            using (var form = new frmPinRecargos())
             {
-                form.Text = "Autorización";
-                var label = new Label() { Text = "Ingrese el PIN de autorización del día:", Dock = DockStyle.Top };
-                var textBox = new TextBox() { Dock = DockStyle.Top, PasswordChar = '*' };
-                var buttonOk = new Button() { Text = "OK", Dock = DockStyle.Bottom };
-                buttonOk.Click += (sender, e) => form.DialogResult = DialogResult.OK;
-                form.Controls.Add(label);
-                form.Controls.Add(textBox);
-                form.Controls.Add(buttonOk);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    string pin = textBox.Text;
-                    if (basFunctions.ValidarPin(pin))
+                    string pin = form.pinText;
+                    if (basFunctions.ValidarPin(pin, form.usuario))
                     {
                         MessageBox.Show("Recargo quitado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txRecargo.Text = (Convert.ToDecimal(0)).ToString("C");
@@ -122,11 +116,26 @@ namespace SACDumont.Cobros
         private void frmCobroProducto_Load(object sender, EventArgs e)
         {
             GenerarMenu();
+            if (strConcepto == Conceptos.UNIFORMES.ToString())
+            {
+                gbDatos.Location = new System.Drawing.Point(16, 166);
+                lbTalla.Visible = true;
+                txTalla.Visible = true;
+                this.Size = new System.Drawing.Size(569, 286);
+            }
+            else
+            {
+                gbDatos.Location = new System.Drawing.Point(16, 138);
+                lbTalla.Visible = false;
+                txTalla.Visible = false;
+                this.Size = new System.Drawing.Size(569, 255);
+            }
+
             comboProductos1.SqlQuery = $@"SELECT p.id_producto, p.descripcion, p.concepto, pc.fecha_vencimiento, pc.precio FROM productos p   
                                            INNER JOIN producto_ciclo pc ON pc.id_producto = p.id_producto  
                                            LEFT JOIN movimiento_productos mp ON mp.id_producto = p.id_producto  
                                            LEFT JOIN movimientos m ON m.id_movimiento = mp.id_movimiento   
-                                           WHERE pc.id_ciclo = {basGlobals.iCiclo} AND pc.id_grupo in (0,{idGrupo}) AND p.concepto = '{strConcepto}'";
+                                           WHERE pc.id_ciclo = {basGlobals.iCiclo} AND pc.id_grupo in (4,{idGrupo}) AND p.concepto = '{strConcepto}'";
             comboProductos1.Inicializar();
         }
 
@@ -137,6 +146,10 @@ namespace SACDumont.Cobros
             this.btAcciones.Visible = false;
             this.btAddTutor.Visible = false;
             this.btDelete.Visible = false;
+            this.btResetPass.Visible = false;
+            this.btHabilitar.Visible = false;
+            this.btDelete.Visible = false;
+
             if (basConfiguracion.Recargos)
             {
                 this.btQuitarRecargo.Visible = true;
@@ -163,7 +176,7 @@ namespace SACDumont.Cobros
         private void comboProductos1_OnCobroSeleccionado(DataRow obj)
         {
 
-         if (strConcepto == Conceptos.COLEGIATURA.ToString() |  strConcepto == Conceptos.INSCRIPCION.ToString())
+            if (strConcepto == Conceptos.COLEGIATURA.ToString() | strConcepto == Conceptos.INSCRIPCION.ToString())
             {
                 if (ValidarYaCobrado())
                 {
@@ -171,7 +184,7 @@ namespace SACDumont.Cobros
                     return;
                 }
             }
-         
+
             nCantidad.Enabled = true;
             DateTime fechaVencimiento = Convert.ToDateTime(obj["fecha_vencimiento"]);
             txCosto.Text = Convert.ToDecimal(obj["precio"]).ToString("C");

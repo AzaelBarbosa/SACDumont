@@ -13,6 +13,7 @@ using SACDumont.Clases;
 using SACDumont.Modulos;
 using SACDumont.modulos;
 using SACDumont.Catalogos;
+using SACDumont.Models;
 
 namespace SACDumont
 {
@@ -20,6 +21,8 @@ namespace SACDumont
     {
         basFunctions basFunctions = new basFunctions();
         basConfiguracion basConfig = new basConfiguracion();
+        permisos_perfiles permisosPerfiles = new permisos_perfiles();
+        int idPerfil = 0;
         public frmMain(DataRow drUsuario)
         {
             // Esta llamada es requerida por el diseñador
@@ -27,6 +30,7 @@ namespace SACDumont
 
             // Inicialización personalizada
             tlUsuario.Text = drUsuario["nombre_usuario"].ToString();
+            idPerfil = (int)drUsuario["id_perfil"];
             basConfiguracion.InformacionHeader = "SAC - DUMONT || " + drUsuario["nombre_usuario"].ToString();
         }
 
@@ -75,7 +79,24 @@ namespace SACDumont
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
+            using (var db = new DumontContext())
+            {
+                permisosPerfiles = db.PermisosPerfiles.Where(pf => pf.id_perfil == idPerfil).FirstOrDefault();
+                if (permisosPerfiles != null)
+                {
+                    btCatalogos.Visible = permisosPerfiles.catalogos;
+                    btInscripcion.Visible = permisosPerfiles.inscripcion;
+                    btCobros.Visible = permisosPerfiles.cobros;
+                    btReportes.Visible = permisosPerfiles.reportes;
+                    btConfiguracion.Visible = permisosPerfiles.configuracion;
 
+                }
+                else
+                {
+                    MessageBox.Show("El usuario no tiene permisos definido", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Environment.Exit(0);
+                }
+            }
             basFunctions.AgregaImpresorasTickets(btPrinterTickets);
             basFunctions.AgregaImpresoras(btDefinirImpresora);
             DataTable dtConfig = sqlServer.ExecSQLReturnDT("SELECT * FROM config", "Config");

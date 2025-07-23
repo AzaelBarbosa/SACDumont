@@ -186,13 +186,13 @@ namespace SACDumont.Catalogos
                     txtCalle.Text = tutores.calle;
                     txtColonia.Text = tutores.colonia;
                     txtCiudad.Text = tutores.ciudad;
-                    cmbEstado.SelectedValue = tutores.estado;
-                    dtpFechaNac.Value = tutores.fecha_nacimiento;
+                    cmbEstado.SelectedValue = tutores.estado ?? 0;
+                    dtpFechaNac.Value = tutores.fecha_nacimiento ?? System.DateTime.Now;
                     cmbSexo.SelectedValue = tutores.sexo.ToString();
                     txtTel1.Text = tutores.telefono1;
                     txtTel2.Text = tutores.telefono2;
                     txtTel3.Text = tutores.telefono3;
-                    chFactura.Checked = tutores.factura;
+                    chFactura.Checked = tutores.factura ?? false;
                     btAddTutor.Visible = false;
 
                 }
