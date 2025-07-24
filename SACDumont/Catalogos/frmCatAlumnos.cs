@@ -265,7 +265,26 @@ namespace SACDumont.Catalogos
             frm.Text = "Acciones Alumno";
             frm.ShowDialog();
         }
-
+        protected override void Deshabilitar()
+        {
+            using (var db = new DumontContext())
+            {
+                alumnos = db.Alumnos.Find(intMatricula);
+                alumnos.activo = false;
+                db.SaveChanges();
+                this.Close();
+            }
+        }
+        protected override void Habilitar()
+        {
+            using (var db = new DumontContext())
+            {
+                alumnos = db.Alumnos.Find(intMatricula);
+                alumnos.activo = true;
+                db.SaveChanges();
+                this.Close();
+            }
+        }
         #endregion
 
         #region "Eventos Personalizados"

@@ -145,6 +145,26 @@ namespace SACDumont.Catalogos
             this.Close();
         }
 
+        protected override void Deshabilitar()
+        {
+            using (var db = new DumontContext())
+            {
+                tutores = db.Tutores.Find(idTutor);
+                tutores.acivo = false;
+                db.SaveChanges();
+                this.Close();
+            }
+        }
+        protected override void Habilitar()
+        {
+            using (var db = new DumontContext())
+            {
+                tutores = db.Tutores.Find(idTutor);
+                tutores.acivo = true;
+                db.SaveChanges();
+                this.Close();
+            }
+        }
         #endregion
 
         #region "Metodos"

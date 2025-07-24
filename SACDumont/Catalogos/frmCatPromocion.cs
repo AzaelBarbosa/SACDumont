@@ -41,6 +41,7 @@ namespace SACDumont.Catalogos
                     Promocion.porcentaje_promocion = nPromo.Value;
                     Promocion.id_ciclo = basGlobals.iCiclo;
                     Promocion.id_promocion = 0;
+                    Promocion.activo = true;
 
                     db.Promociones.Add(Promocion);
 
@@ -112,7 +113,23 @@ namespace SACDumont.Catalogos
         }
         protected override void Deshabilitar()
         {
-            // Implementar la lógica para deshabilitar el registro
+            using (var db = new DumontContext())
+            {
+                Promocion = db.Promociones.Find(idPromocion);
+                Promocion.activo = false;
+                db.SaveChanges();
+                this.Close();
+            }
+        }
+        protected override void Habilitar()
+        {
+            using (var db = new DumontContext())
+            {
+                Promocion = db.Promociones.Find(idPromocion);
+                Promocion.activo = true;
+                db.SaveChanges();
+                this.Close();
+            }
         }
         protected override void Cerrar()
         {

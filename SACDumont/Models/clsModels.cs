@@ -78,6 +78,7 @@ namespace SACDumont.Models
         public string descripcion { get; set; }
         public DateTime? fecha_inicio { get; set; }
         public DateTime? fecha_fin { get; set; }
+        public bool activo { get; set; }
     }
 
     public class Promociones_Alumnos
