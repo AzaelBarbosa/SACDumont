@@ -327,9 +327,14 @@ namespace SACDumont.Listados
             if (idMov == 0) return;
 
             DataTable dataTable = new DataTable();
+            Movimientos mov = new Movimientos();
+            Inscripciones ins = new Inscripciones();
             List<ReportesDTO> reportesDTO = new List<ReportesDTO>();
             using (var db = new DumontContext())
             {
+                mov = db.Movimientos.Find(idMov);
+                ins = db.Inscripciones.Where(i => i.matricula == mov.id_matricula && i.id_ciclo == basGlobals.iCiclo).FirstOrDefault();
+
                 var lista = db.Movimientos
                   .Where(m => m.id_movimiento == idMov)
                   .Include(m => m.MovimientosProductos)
@@ -343,13 +348,14 @@ namespace SACDumont.Listados
                       Recargo = mp.monto_recargo,
                       Folio = m.id_movimiento,
                       Fecha = m.fechahora,
-                      Grupo = db.Catalogos.Where(c => c.valor == m.id_ciclo && c.tipo_catalogo == "Grupo").Select(c => c.descripcion).FirstOrDefault(),
+                      Grupo = db.Catalogos.Where(c => c.valor == ins.id_grupo && c.tipo_catalogo == "Grupo").Select(c => c.descripcion).FirstOrDefault(),
                       Matricula = m.id_matricula,
                       Alumno = db.Alumnos
                                   .Where(a => a.matricula == m.id_matricula)
                                   .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
                                   .FirstOrDefault(),
                       MontoPendiente = m.montoTotal - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                      MontoPagado = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
                   })
                   .ToList();
 

@@ -9,11 +9,17 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FastReport;
+using FastReport.Export.PdfSimple;
+using System.IO;
+using SACDumont.Dtos;
+using System.Data.Entity;
 
 namespace SACDumont.Cobros
 {
@@ -117,6 +123,7 @@ namespace SACDumont.Cobros
                                 {
                                     basFunctions.Registrar(basConfiguracion.UserID, "Movimiento", "Abono", idMovimiento, $"Se realizo un abono al Movimiento con ID: {idMovimiento}");
                                 }
+                                ExportareImprimirSinAbrir(idMovimiento);
                             }
                         }
 
@@ -181,6 +188,12 @@ namespace SACDumont.Cobros
                             {
                                 basFunctions.Registrar(basConfiguracion.UserID, "Movimiento", "Abono", idMovimiento, $"Se realizo un abono al Movimiento con ID: {idMovimiento}");
                             }
+                            if (basConfiguracion.PrinterTiockets == null)
+                            {
+                                MessageBox.Show("Debe configurar una impresora para tickets en la configuración del sistema.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            ExportareImprimirSinAbrir(nuevo.id_movimiento);
                         }
                     }
                 }
@@ -262,6 +275,92 @@ namespace SACDumont.Cobros
             {
                 strConcepto = Conceptos.GRADUACION.ToString();
             }
+        }
+
+        private void ExportareImprimirSinAbrir(int idMov)
+        {
+            if (idMov == 0) return;
+
+            DataTable dataTable = new DataTable();
+            Movimientos mov = new Movimientos();
+            Inscripciones ins = new Inscripciones();
+            List<ReportesDTO> reportesDTO = new List<ReportesDTO>();
+            using (var db = new DumontContext())
+            {
+                mov = db.Movimientos.Find(idMov);
+                ins = db.Inscripciones.Where(i => i.matricula == mov.id_matricula && i.id_ciclo == basGlobals.iCiclo).FirstOrDefault();
+                var lista = db.Movimientos
+                  .Where(m => m.id_movimiento == idMov)
+                  .Include(m => m.MovimientosProductos)
+                  .Include(m => m.MovimientosCobros)
+                  .SelectMany(m => m.MovimientosProductos, (m, mp) => new ReportesDTO
+                  {
+                      Producto = db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
+                      Cantidad = mp.cantidad,
+                      PrecioUnitario = mp.cantidad * mp.monto,
+                      Total = mp.monto + mp.monto_recargo,
+                      Recargo = mp.monto_recargo,
+                      Folio = m.id_movimiento,
+                      Fecha = m.fechahora,
+                      Grupo = db.Catalogos.Where(c => c.valor == ins.id_grupo && c.tipo_catalogo == "Grupo").Select(c => c.descripcion).FirstOrDefault(),
+                      Matricula = m.id_matricula,
+                      Alumno = db.Alumnos
+                                  .Where(a => a.matricula == m.id_matricula)
+                                  .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
+                                  .FirstOrDefault(),
+                      MontoPendiente = m.montoTotal - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                      MontoPagado = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                  })
+                  .ToList();
+
+                reportesDTO = lista;
+            }
+
+            dataTable = basFunctions.ConvertToDataTable(reportesDTO);
+            // 2. Cargar el reporte
+            string rutaFrx = Path.Combine(Application.StartupPath, "Reportes", "TicketMovimient.frx");
+            Report report = new Report();
+            report.Load(rutaFrx);
+
+            report.SetParameterValue("pFolio", reportesDTO[0].Folio);
+            report.SetParameterValue("pFecha", reportesDTO[0].Fecha);
+            report.SetParameterValue("pGrupo", reportesDTO[0].Grupo);
+            report.SetParameterValue("pMatricula", reportesDTO[0].Matricula);
+            report.SetParameterValue("pAlumno", reportesDTO[0].Alumno);
+
+            report.RegisterData(dataTable, "TicketData");
+            report.GetDataSource("TicketData").Enabled = true;
+
+            // 3. Forzar carga de Microsoft.CSharp
+            System.Runtime.CompilerServices.RuntimeHelpers
+                .RunClassConstructor(typeof(Microsoft.CSharp.RuntimeBinder.Binder).TypeHandle);
+
+            // 4. Preparar y exportar
+            report.Prepare();
+            string rutaPDF = Path.Combine(Application.StartupPath, "Ticket.pdf");
+            report.Export(new PDFSimpleExport(), rutaPDF);
+
+            string rutaSumatra = Path.Combine(Application.StartupPath, "SumatraPDF.exe");
+
+            if (!File.Exists(rutaSumatra))
+            {
+                MessageBox.Show("No se encontró SumatraPDF.exe. Asegúrate de colocarlo junto a la aplicación.");
+                return;
+            }
+
+            var nombreImpresora = basConfiguracion.PrinterTiockets;
+            var psi = new ProcessStartInfo
+            {
+                FileName = rutaSumatra,
+                Arguments = nombreImpresora == ""
+                    ? $"-print-to-default \"{rutaPDF}\""
+                    : $"-print-to \"{nombreImpresora}\" \"{rutaPDF}\"",
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                WindowStyle = ProcessWindowStyle.Hidden
+            };
+
+            Process.Start(psi);
         }
 
         private void VerificarMovimiento()

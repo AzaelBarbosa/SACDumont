@@ -94,7 +94,7 @@ namespace SACDumont.Catalogos
 
                         db.Entry(productos).State = System.Data.Entity.EntityState.Modified;
 
-                        producto_Ciclo = db.ProductoCiclo.FirstOrDefault(t => t.id_producto == idProducto && t.id_ciclo == basGlobals.iCiclo);
+                        producto_Ciclo = db.ProductoCiclo.FirstOrDefault(t => t.id_producto == idProducto && t.id_ciclo == basGlobals.iCiclo && t.id_grupo == idGrupo);
 
                         if (producto_Ciclo != null)
                         {
@@ -247,9 +247,9 @@ namespace SACDumont.Catalogos
         private void frmCatProducto_Load(object sender, EventArgs e)
         {
             cboGrupo.Inicializar();
+            CargarCombo();
             CargarProducto();
             CargarMenu();
-            CargarCombo();
         }
     }
 }

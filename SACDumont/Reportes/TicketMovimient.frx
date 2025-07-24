@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="06/29/2025 09:41:38" ReportInfo.Modified="07/15/2025 18:14:37" ReportInfo.CreatorVersion="2025.2.0.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/29/2025 09:41:38" ReportInfo.Modified="07/24/2025 11:56:17" ReportInfo.CreatorVersion="2025.2.0.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +30,7 @@ namespace FastReport
       <Column Name="Recargo" DataType="System.Decimal" PropName="Column"/>
       <Column Name="Recargo" Enabled="false" DataType="System.Decimal" PropName="Column1"/>
       <Column Name="MontoPendiente" DataType="System.Decimal" PropName="Column1"/>
+      <Column Name="MontoPagado" DataType="System.Decimal" PropName="Column"/>
     </TableDataSource>
     <Parameter Name="pFolio" DataType="System.Int32" AsString=""/>
     <Parameter Name="pFecha" DataType="System.DateTime" AsString=""/>
@@ -72,16 +73,18 @@ namespace FastReport
       <TextObject Name="Text38" Left="170.1" Top="9.45" Width="56.7" Height="18.9" Text="[TicketData.PrecioUnitario]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 6.75pt" Trimming="EllipsisCharacter"/>
       <TextObject Name="Text1" Left="47.25" Top="9.45" Width="122.85" Height="18.9" Text="[TicketData.Producto]" Font="Arial, 6pt"/>
     </DataBand>
-    <ReportSummaryBand Name="ReportSummary1" Top="310.4" Width="226.8" Height="47.25" CanShrink="true">
-      <TextObject Name="Text35" Left="103.95" Width="66.15" Height="18.9" Text="Recargos:" HorzAlign="Right" VertAlign="Center" Font="Microsoft Sans Serif, 9pt"/>
-      <TextObject Name="Text36" Left="170.1" Width="56.7" Height="18.9" Text="[TicketData.Recargo]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 6.75pt" Trimming="EllipsisCharacter"/>
-      <TextObject Name="Text34" Top="28.35" Width="47.25" Height="18.9" Text="Resta:" HorzAlign="Right" VertAlign="Center" Font="Microsoft Sans Serif, 9pt"/>
-      <TextObject Name="Text11" Left="170.1" Top="28.35" Width="56.7" Height="18.9" Text="[Total]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" Font="Arial, 6.75pt, style=Bold"/>
-      <TextObject Name="Text33" Left="103.95" Top="28.35" Width="66.15" Height="18.9" Text="Total:" HorzAlign="Right" VertAlign="Center" Font="Microsoft Sans Serif, 9pt"/>
-      <TextObject Name="Text37" Left="47.25" Top="28.35" Width="47.25" Height="18.9" Text="[TicketData.MontoPendiente]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 6.75pt" Trimming="EllipsisCharacter"/>
+    <ReportSummaryBand Name="ReportSummary1" Top="310.4" Width="226.8" Height="66.15" CanShrink="true">
+      <TextObject Name="Text35" Left="103.95" Top="18.9" Width="66.15" Height="18.9" Text="Recargos:" HorzAlign="Right" VertAlign="Center" Font="Microsoft Sans Serif, 9pt"/>
+      <TextObject Name="Text36" Left="170.1" Top="18.9" Width="56.7" Height="18.9" Text="[TicketData.Recargo]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 6.75pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text34" Top="47.25" Width="47.25" Height="18.9" Text="Resta:" HorzAlign="Right" VertAlign="Center" Font="Microsoft Sans Serif, 9pt"/>
+      <TextObject Name="Text11" Left="170.1" Top="47.25" Width="56.7" Height="18.9" Text="[Total]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" Font="Arial, 6.75pt, style=Bold"/>
+      <TextObject Name="Text33" Left="103.95" Top="47.25" Width="66.15" Height="18.9" Text="Total:" HorzAlign="Right" VertAlign="Center" Font="Microsoft Sans Serif, 9pt"/>
+      <TextObject Name="Text37" Left="47.25" Top="47.25" Width="56.7" Height="18.9" Text="[TicketData.MontoPendiente]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 6.75pt" Trimming="EllipsisCharacter"/>
       <LineObject Name="Line4" Width="226.8"/>
+      <TextObject Name="Text44" Left="103.95" Width="66.15" Height="18.9" Text="Monto P." HorzAlign="Right" VertAlign="Center" Font="Microsoft Sans Serif, 9pt"/>
+      <TextObject Name="Text45" Left="170.1" Width="56.7" Height="18.9" Text="[TicketData.MontoPagado]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 6.78pt" Trimming="EllipsisCharacter"/>
     </ReportSummaryBand>
-    <PageFooterBand Name="PageFooter1" Top="360.32" Width="226.8" Height="368.55" CanShrink="true">
+    <PageFooterBand Name="PageFooter1" Top="379.22" Width="226.8" Height="368.55" CanShrink="true">
       <LineObject Name="Line3" Width="226.8"/>
       <TextObject Name="Text40" Top="75.6" Width="226.8" Height="18.9" Text="__________________________________________" HorzAlign="Center" VertAlign="Center" Font="Microsoft Sans Serif, 9pt"/>
       <TextObject Name="Text41" Top="94.5" Width="226.8" Height="18.9" Text="Cajera" HorzAlign="Center" VertAlign="Center" Font="Microsoft Sans Serif, 9pt"/>
