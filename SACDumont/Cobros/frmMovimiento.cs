@@ -42,6 +42,7 @@ namespace SACDumont.Cobros
         Movimientos movimiento = new Movimientos();
         List<movimiento_productos> listaProductos = new List<movimiento_productos>();
         List<cobros> listaCobros = new List<cobros>();
+        bool impresionTicket = false;
         #endregion
 
         #region Constructores
@@ -108,6 +109,7 @@ namespace SACDumont.Cobros
                                 {
                                     item.id_movimiento = idMovimiento;
                                     db.MovimientoCobros.Add(item);
+                                    impresionTicket = true;
                                 }
                             }
 
@@ -123,7 +125,8 @@ namespace SACDumont.Cobros
                                 {
                                     basFunctions.Registrar(basConfiguracion.UserID, "Movimiento", "Abono", idMovimiento, $"Se realizo un abono al Movimiento con ID: {idMovimiento}");
                                 }
-                                ExportareImprimirSinAbrir(idMovimiento);
+
+                                if (impresionTicket) ExportareImprimirSinAbrir(idMovimiento);
                             }
                         }
 
@@ -168,7 +171,8 @@ namespace SACDumont.Cobros
                             descriptionProducto = p.descriptionProducto,
                             cantidad = p.cantidad,
                             monto = p.monto,
-                            monto_recargo = p.monto_recargo
+                            monto_recargo = p.monto_recargo,
+                            talla = p.talla
                         }));
                         db.MovimientoCobros.AddRange(basGlobals.listaCobros.Select(c => new cobros
                         {

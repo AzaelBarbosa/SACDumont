@@ -325,14 +325,55 @@ namespace SACDumont.Modulos
             return dataTable;
         }
 
-        public static void ExportareImprimirSinAbrir(int idMov)
+        public void ExportarYMostrarPDF(string reporteName, DataTable datos, string nombreDatos)
+        {
+
+            // 2. Cargar el reporte
+            string rutaFrx = Path.Combine(Application.StartupPath, "Reportes", reporteName);
+            Report report = new Report();
+            report.Load(rutaFrx);
+
+            report.RegisterData(datos, nombreDatos);
+            report.GetDataSource(nombreDatos).Enabled = true;
+
+            // 3. Forzar carga de Microsoft.CSharp
+            System.Runtime.CompilerServices.RuntimeHelpers
+                .RunClassConstructor(typeof(Microsoft.CSharp.RuntimeBinder.Binder).TypeHandle);
+
+            // 4. Preparar y exportar
+            report.Prepare();
+            string rutaPDF = Path.Combine(Application.StartupPath, "Reporte.pdf");
+            report.Export(new PDFSimpleExport(), rutaPDF);
+
+            string rutaSumatra = Path.Combine(Application.StartupPath, "PDF", "SumatraPDF.exe");
+
+            if (!File.Exists(rutaSumatra))
+            {
+                MessageBox.Show("No se encontró SumatraPDF.exe. Asegúrate de colocarlo junto a la aplicación.");
+                return;
+            }
+
+            // 5. Abrir visor PDF predeterminado
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = rutaPDF,
+                UseShellExecute = true
+            });
+        }
+
+        public void ExportareImprimirSinAbrir(int idMov)
         {
             if (idMov == 0) return;
 
             DataTable dataTable = new DataTable();
+            Movimientos mov = new Movimientos();
+            Inscripciones ins = new Inscripciones();
             List<ReportesDTO> reportesDTO = new List<ReportesDTO>();
             using (var db = new DumontContext())
             {
+                mov = db.Movimientos.Find(idMov);
+                ins = db.Inscripciones.Where(i => i.matricula == mov.id_matricula && i.id_ciclo == basGlobals.iCiclo).FirstOrDefault();
+
                 var lista = db.Movimientos
                   .Where(m => m.id_movimiento == idMov)
                   .Include(m => m.MovimientosProductos)
@@ -346,13 +387,14 @@ namespace SACDumont.Modulos
                       Recargo = mp.monto_recargo,
                       Folio = m.id_movimiento,
                       Fecha = m.fechahora,
-                      Grupo = db.Catalogos.Where(c => c.valor == m.id_ciclo && c.tipo_catalogo == "Grupo").Select(c => c.descripcion).FirstOrDefault(),
+                      Grupo = db.Catalogos.Where(c => c.valor == ins.id_grupo && c.tipo_catalogo == "Grupo").Select(c => c.descripcion).FirstOrDefault(),
                       Matricula = m.id_matricula,
                       Alumno = db.Alumnos
                                   .Where(a => a.matricula == m.id_matricula)
                                   .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
                                   .FirstOrDefault(),
                       MontoPendiente = m.montoTotal - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                      MontoPagado = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
                   })
                   .ToList();
 
@@ -383,7 +425,7 @@ namespace SACDumont.Modulos
             string rutaPDF = Path.Combine(Application.StartupPath, "Ticket.pdf");
             report.Export(new PDFSimpleExport(), rutaPDF);
 
-            string rutaSumatra = Path.Combine(Application.StartupPath, "SumatraPDF.exe");
+            string rutaSumatra = Path.Combine(Application.StartupPath, "PDF", "SumatraPDF.exe");
 
             if (!File.Exists(rutaSumatra))
             {
@@ -391,7 +433,7 @@ namespace SACDumont.Modulos
                 return;
             }
 
-            var nombreImpresora = "Microsoft Print to PDF";
+            var nombreImpresora = basConfiguracion.PrinterTiockets;
             var psi = new ProcessStartInfo
             {
                 FileName = rutaSumatra,
