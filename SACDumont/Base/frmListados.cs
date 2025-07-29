@@ -20,7 +20,7 @@ namespace SACDumont.Base
         protected virtual void Eliminar() { }
         protected virtual void Imprimir() { }
         protected virtual void Cerrar() { }
-
+        protected virtual void ImprimirTicket() { }
         protected virtual void CargarComboFiltro() { }
 
         protected virtual void Busqueda() { }
@@ -75,6 +75,11 @@ namespace SACDumont.Base
         private void frmListados_Resize(object sender, EventArgs e)
         {
             basFunctions.CenterSpinnerOverGrid(this, pbSpinner);
+        }
+
+        private void btTicketImpresora_Click(object sender, EventArgs e)
+        {
+            ImprimirTicket();
         }
     }
 }

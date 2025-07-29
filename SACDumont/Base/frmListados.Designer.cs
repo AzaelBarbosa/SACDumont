@@ -41,6 +41,7 @@
             this.txBusqueda = new System.Windows.Forms.ToolStripTextBox();
             this.cboBusqueda = new System.Windows.Forms.ToolStripComboBox();
             this.pbSpinner = new System.Windows.Forms.PictureBox();
+            this.btTicketImpresora = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tsSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSpinner)).BeginInit();
@@ -54,6 +55,7 @@
             this.guardarToolStripMenuItem,
             this.eliminarToolStripMenuItem,
             this.reporteToolStripMenuItem,
+            this.btTicketImpresora,
             this.cerrarToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -97,9 +99,10 @@
             this.reporteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.reporteToolStripMenuItem.Name = "reporteToolStripMenuItem";
             this.reporteToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
-            this.reporteToolStripMenuItem.Size = new System.Drawing.Size(60, 55);
-            this.reporteToolStripMenuItem.Text = "Reporte";
+            this.reporteToolStripMenuItem.Size = new System.Drawing.Size(119, 55);
+            this.reporteToolStripMenuItem.Text = "Reimpresion Ticket";
             this.reporteToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.reporteToolStripMenuItem.ToolTipText = "Reimpresion ticket en Impresora de Tickets";
             this.reporteToolStripMenuItem.Click += new System.EventHandler(this.reporteToolStripMenuItem_Click);
             // 
             // cerrarToolStripMenuItem
@@ -172,6 +175,18 @@
             this.pbSpinner.TabStop = false;
             this.pbSpinner.Visible = false;
             // 
+            // btTicketImpresora
+            // 
+            this.btTicketImpresora.Image = global::SACDumont.Properties.Resources.reportes;
+            this.btTicketImpresora.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btTicketImpresora.Name = "btTicketImpresora";
+            this.btTicketImpresora.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
+            this.btTicketImpresora.Size = new System.Drawing.Size(119, 55);
+            this.btTicketImpresora.Text = "Reimpresion Ticket";
+            this.btTicketImpresora.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btTicketImpresora.ToolTipText = "Se reimprime Ticket en Impresora";
+            this.btTicketImpresora.Click += new System.EventHandler(this.btTicketImpresora_Click);
+            // 
             // frmListados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -211,5 +226,6 @@
         public System.Windows.Forms.ToolStripComboBox cboBusqueda;
         public System.Windows.Forms.ToolStrip tsSearch;
         public System.Windows.Forms.PictureBox pbSpinner;
+        protected internal System.Windows.Forms.ToolStripMenuItem btTicketImpresora;
     }
 }

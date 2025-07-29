@@ -72,6 +72,16 @@ namespace SACDumont.Listados
             }
             ExportareImprimirSinAbrir();
         }
+        protected override void ImprimirTicket()
+        {
+            // Implementar la lógica para imprimir el listado de movimientos
+            if (basConfiguracion.Printer == null)
+            {
+                MessageBox.Show("Debe configurar una impresora en la configuración del sistema.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            ExportareImprimirSinAbrir();
+        }
         protected override void Cerrar()
         {
             this.Close();
