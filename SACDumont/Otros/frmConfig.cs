@@ -37,12 +37,12 @@ namespace SACDumont.Otros
                     Contrasena = txContra.Text
                 };
 
-                    basConfiguracion.GuardarConfig(config, rutaArchivo);
-                    basFunctions basFunctions = new basFunctions();
-                    basFunctions.ConectaBD();
-                    basFunctions.UpdateConfig("sp_Config_Update",chRecargos.Checked,chPromociones.Checked,int.Parse(txPorcentajeRecargo.Text), int.Parse(nDiasTolerancia.Value.ToString()));
-                    MessageBox.Show("Configuración guardada de forma segura.", "Copeland", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
+                basConfiguracion.GuardarConfig(config, rutaArchivo);
+                basFunctions basFunctions = new basFunctions();
+                basFunctions.ConectaBD();
+                basFunctions.UpdateConfig("sp_Config_Update", chRecargos.Checked, chPromociones.Checked, int.Parse(txPorcentajeRecargo.Text), int.Parse(nDiasTolerancia.Value.ToString()));
+                MessageBox.Show($"Configuración guardada de forma segura. {Environment.NewLine} Por favor reinicie el sistema para que los cambios surtan efecto.", "Copeland", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
             }
             catch (Exception ex)
             {

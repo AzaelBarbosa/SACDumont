@@ -23,7 +23,7 @@ namespace SACDumont.Otros
             try
             {
                 basGlobals.iCiclo = int.Parse(cboCiclos.SelectedValue.ToString());
-                basConfiguracion.InformacionHeader = "SAC - DUMONT || " + basConfiguracion.Nombre + " || Ciclo: " + cboCiclos.Text;
+                basConfiguracion.InformacionHeader = $"SAC - DUMONT || Usuario: {basConfiguracion.Nombre} || Fecha Ultimo Cierre: {basFunctions.RevisarFechaCierre().ToLongDateString()} || Ciclo Escolar: {cboCiclos.Text}";
                 MessageBox.Show("Cambio de ciclo exitoso.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }

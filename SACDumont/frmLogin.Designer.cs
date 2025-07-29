@@ -138,9 +138,9 @@
         private System.Windows.Forms.Button btCancelar;
         private System.Windows.Forms.Button btEntrar;
         private System.Windows.Forms.ComboBox cboUsuarios;
-        private System.Windows.Forms.TextBox txPassword;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.TextBox txPassword;
     }
 }

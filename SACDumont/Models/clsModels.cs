@@ -31,6 +31,7 @@ namespace SACDumont.Models
         public int id_movimiento { get; set; }
         public decimal monto { get; set; }
         public int tipopago { get; set; }
+        public DateTime? fechaAlta { get; set; }
 
         [NotMapped]
         public string descripcionPago { get; set; }
@@ -248,6 +249,16 @@ namespace SACDumont.Models
         public bool configuracion { get; set; }
     }
 
+    public class cierre_diario
+    {
+        [Key]
+        public int id { get; set; }
+        public DateTime fechacorte { get; set; }
+        public DateTime fechaAlta { get; set; }
+        public decimal total { get; set; }
+        public int idUsuario { get; set; }
+
+    }
     internal class clsModels
     {
 

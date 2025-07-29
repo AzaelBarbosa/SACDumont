@@ -40,6 +40,13 @@ namespace SACDumont.Listados
         #region Propiedades
         protected override void Nuevo()
         {
+
+            if (basFunctions.ValidaCierre())
+            {
+                MessageBox.Show("Ya se ah realizado el cierre, por lo cual no es posible realizar nuevos movimientos.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+
             basGlobals.Movimiento = new Movimientos();
             basGlobals.listaProductos = new List<movimiento_productos>();
             basGlobals.listaCobros = new List<cobros>();

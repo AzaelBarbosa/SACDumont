@@ -23,7 +23,9 @@ namespace SACDumont
         basConfiguracion basConfig = new basConfiguracion();
         permisos_perfiles permisosPerfiles = new permisos_perfiles();
         int idPerfil = 0;
-        public frmMain(DataRow drUsuario)
+        private frmLogin loginForm;
+        DateTime fechaCierre = DateTime.Now;
+        public frmMain(DataRow drUsuario, frmLogin frm)
         {
             // Esta llamada es requerida por el diseñador
             InitializeComponent();
@@ -31,13 +33,16 @@ namespace SACDumont
             // Inicialización personalizada
             tlUsuario.Text = drUsuario["nombre_usuario"].ToString();
             idPerfil = (int)drUsuario["id_perfil"];
-            basConfiguracion.InformacionHeader = "SAC - DUMONT || " + drUsuario["nombre_usuario"].ToString();
+            fechaCierre = basFunctions.RevisarFechaCierre();
+            basConfiguracion.InformacionHeader = $"SAC - DUMONT || Usuario: {drUsuario["nombre_usuario"].ToString()} || Fecha Ultimo Cierre: {fechaCierre.ToShortDateString()}";
+            this.loginForm = frm;
         }
 
         private void btSalir_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
         }
+
 
 
         public void AbrirFormularioHijo<T>() where T : Form, new()
@@ -231,6 +236,42 @@ namespace SACDumont
             frmTransferenciaAlumnos frmPopup = new frmTransferenciaAlumnos();
             frmPopup.Text = "Trasnferencia de Alumnos";
             frmPopup.ShowDialog();
+        }
+
+        private void btCerarSesion_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            loginForm.txPassword.Text = "";
+            loginForm.Show();
+        }
+
+        private void btCorteDiario_Click(object sender, EventArgs e)
+        {
+            decimal total = 0;
+            cierre_diario cierre_Diario;
+            if (MessageBox.Show("¿Desea realizar el cierre diario?", "Cierre Diario", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                using (var db = new DumontContext())
+                {
+                    total = db.MovimientoCobros.Where(c => c.fechaAlta == DateTime.Today)
+                        .Sum(c => (decimal?)c.monto) ?? 0;
+
+                    cierre_Diario = new cierre_diario
+                    {
+                        fechacorte = DateTime.Today,
+                        total = total,
+                        fechaAlta = DateTime.Now,
+                        idUsuario = basConfiguracion.UserID
+                    };
+
+                    db.CierreDiario.Add(cierre_Diario);
+                    var result = db.SaveChanges();
+                    if (result != 0)
+                    {
+                        MessageBox.Show("Cierre realizado con Exito", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
         }
     }
 }

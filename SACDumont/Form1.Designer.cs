@@ -75,6 +75,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tlUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btCorteDiario = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -86,6 +87,7 @@
             this.btCobros,
             this.btCatalogos,
             this.btReportes,
+            this.btCorteDiario,
             this.btConfiguracion,
             this.btCerarSesion,
             this.btSalir});
@@ -249,7 +251,7 @@
             // 
             this.btReimpresionTickets.Image = global::SACDumont.Properties.Resources.factura;
             this.btReimpresionTickets.Name = "btReimpresionTickets";
-            this.btReimpresionTickets.Size = new System.Drawing.Size(179, 22);
+            this.btReimpresionTickets.Size = new System.Drawing.Size(180, 22);
             this.btReimpresionTickets.Text = "Reimpresion Tickets";
             // 
             // btRptAcdemicos
@@ -260,28 +262,28 @@
             this.btRptAcdemicosAlumnos});
             this.btRptAcdemicos.Image = global::SACDumont.Properties.Resources.academic;
             this.btRptAcdemicos.Name = "btRptAcdemicos";
-            this.btRptAcdemicos.Size = new System.Drawing.Size(179, 22);
+            this.btRptAcdemicos.Size = new System.Drawing.Size(180, 22);
             this.btRptAcdemicos.Text = "Academicos";
             // 
             // btRptAcdemicosAsistencia
             // 
             this.btRptAcdemicosAsistencia.Image = global::SACDumont.Properties.Resources.contrato;
             this.btRptAcdemicosAsistencia.Name = "btRptAcdemicosAsistencia";
-            this.btRptAcdemicosAsistencia.Size = new System.Drawing.Size(168, 22);
+            this.btRptAcdemicosAsistencia.Size = new System.Drawing.Size(180, 22);
             this.btRptAcdemicosAsistencia.Text = "Lista Asistencia";
             // 
             // btRptAcdemicosCumple
             // 
             this.btRptAcdemicosCumple.Image = global::SACDumont.Properties.Resources.cumpleanos;
             this.btRptAcdemicosCumple.Name = "btRptAcdemicosCumple";
-            this.btRptAcdemicosCumple.Size = new System.Drawing.Size(168, 22);
+            this.btRptAcdemicosCumple.Size = new System.Drawing.Size(180, 22);
             this.btRptAcdemicosCumple.Text = "Lista Cumpleaños";
             // 
             // btRptAcdemicosAlumnos
             // 
             this.btRptAcdemicosAlumnos.Image = global::SACDumont.Properties.Resources.contrato;
             this.btRptAcdemicosAlumnos.Name = "btRptAcdemicosAlumnos";
-            this.btRptAcdemicosAlumnos.Size = new System.Drawing.Size(168, 22);
+            this.btRptAcdemicosAlumnos.Size = new System.Drawing.Size(180, 22);
             this.btRptAcdemicosAlumnos.Text = "Lista Alumnos";
             this.btRptAcdemicosAlumnos.Click += new System.EventHandler(this.btRptAcdemicosAlumnos_Click);
             // 
@@ -295,7 +297,7 @@
             this.btRptAdministrativoActividad});
             this.btRptAdministrativo.Image = global::SACDumont.Properties.Resources.administrativo;
             this.btRptAdministrativo.Name = "btRptAdministrativo";
-            this.btRptAdministrativo.Size = new System.Drawing.Size(179, 22);
+            this.btRptAdministrativo.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativo.Text = "Administrtivo";
             // 
             // btRptAdministrativoCorte
@@ -304,26 +306,26 @@
             this.btRptAdministrativoCorteDirio,
             this.btRptAdministrativoCorteFecha});
             this.btRptAdministrativoCorte.Name = "btRptAdministrativoCorte";
-            this.btRptAdministrativoCorte.Size = new System.Drawing.Size(167, 22);
+            this.btRptAdministrativoCorte.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoCorte.Text = "Corte";
             // 
             // btRptAdministrativoCorteDirio
             // 
             this.btRptAdministrativoCorteDirio.Name = "btRptAdministrativoCorteDirio";
-            this.btRptAdministrativoCorteDirio.Size = new System.Drawing.Size(126, 22);
+            this.btRptAdministrativoCorteDirio.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoCorteDirio.Text = "Diario";
             // 
             // btRptAdministrativoCorteFecha
             // 
             this.btRptAdministrativoCorteFecha.Name = "btRptAdministrativoCorteFecha";
-            this.btRptAdministrativoCorteFecha.Size = new System.Drawing.Size(126, 22);
+            this.btRptAdministrativoCorteFecha.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoCorteFecha.Text = "Por Fecha";
             // 
             // btRptAdministrativoBecas
             // 
             this.btRptAdministrativoBecas.Image = global::SACDumont.Properties.Resources.beca_educativa;
             this.btRptAdministrativoBecas.Name = "btRptAdministrativoBecas";
-            this.btRptAdministrativoBecas.Size = new System.Drawing.Size(167, 22);
+            this.btRptAdministrativoBecas.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoBecas.Text = "Becas";
             this.btRptAdministrativoBecas.Visible = false;
             // 
@@ -331,7 +333,7 @@
             // 
             this.btRptAdministrativoFacturas.Image = global::SACDumont.Properties.Resources.facturacion;
             this.btRptAdministrativoFacturas.Name = "btRptAdministrativoFacturas";
-            this.btRptAdministrativoFacturas.Size = new System.Drawing.Size(167, 22);
+            this.btRptAdministrativoFacturas.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoFacturas.Text = "Facturas";
             this.btRptAdministrativoFacturas.Visible = false;
             // 
@@ -339,7 +341,7 @@
             // 
             this.btRptAdministrativoUniformes.Image = global::SACDumont.Properties.Resources.camisa;
             this.btRptAdministrativoUniformes.Name = "btRptAdministrativoUniformes";
-            this.btRptAdministrativoUniformes.Size = new System.Drawing.Size(167, 22);
+            this.btRptAdministrativoUniformes.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoUniformes.Text = "Uniformes";
             this.btRptAdministrativoUniformes.Visible = false;
             // 
@@ -347,7 +349,7 @@
             // 
             this.btRptAdministrativoActividad.Image = global::SACDumont.Properties.Resources.lista_de_asistentes;
             this.btRptAdministrativoActividad.Name = "btRptAdministrativoActividad";
-            this.btRptAdministrativoActividad.Size = new System.Drawing.Size(167, 22);
+            this.btRptAdministrativoActividad.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoActividad.Text = "Actividad Usuario";
             this.btRptAdministrativoActividad.Visible = false;
             // 
@@ -425,6 +427,7 @@
             this.btCerarSesion.Name = "btCerarSesion";
             this.btCerarSesion.Size = new System.Drawing.Size(104, 20);
             this.btCerarSesion.Text = "Cerrar Sesion";
+            this.btCerarSesion.Click += new System.EventHandler(this.btCerarSesion_Click);
             // 
             // btSalir
             // 
@@ -464,6 +467,13 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // btCorteDiario
+            // 
+            this.btCorteDiario.Name = "btCorteDiario";
+            this.btCorteDiario.Size = new System.Drawing.Size(82, 20);
+            this.btCorteDiario.Text = "Corte Diario";
+            this.btCorteDiario.Click += new System.EventHandler(this.btCorteDiario_Click);
             // 
             // frmMain
             // 
@@ -538,6 +548,7 @@
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.Windows.Forms.ToolStripMenuItem btDefinirImpresora;
         private System.Windows.Forms.ToolStripMenuItem trasnferirAlumnosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btCorteDiario;
     }
 }
 

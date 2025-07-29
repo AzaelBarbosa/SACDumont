@@ -57,7 +57,7 @@ namespace SACDumont
             string strPassword = basFunctions.HashPassword(txPassword.Text);
             if (drPaso[0]["contrasena"].ToString() == strPassword)
             {
-                frmMain frmM = new frmMain(drPaso[0]);
+                frmMain frmM = new frmMain(drPaso[0], this);
 
                 MessageBox.Show("Bienvenido " + drPaso[0]["nombre_usuario"], "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -96,6 +96,8 @@ namespace SACDumont
                     MessageBox.Show("El Usuario ah solocitado resetar su contraseña", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     frmChangePassword frmCP = new frmChangePassword(Convert.ToInt32(drPaso[0]["id_usuario"]));
                     frmCP.ShowDialog();
+
+                    cboUsuarios.Items.Clear();
                     dtPaso = sqlServer.ExecSQLReturnDS(
                                 @"SELECT U.* 
                           FROM usuarios U 
@@ -123,7 +125,7 @@ namespace SACDumont
                 string strPassword = basFunctions.HashPassword(txPassword.Text);
                 if (drPaso[0]["contrasena"].ToString() == strPassword)
                 {
-                    frmMain frmM = new frmMain(drPaso[0]);
+                    frmMain frmM = new frmMain(drPaso[0], this);
 
                     MessageBox.Show("Bienvenido " + drPaso[0]["nombre_usuario"], "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

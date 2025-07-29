@@ -594,5 +594,29 @@ namespace SACDumont.Modulos
                 impresoraMenu.DropDownItems.Add(item);
             }
         }
+
+        public static DateTime RevisarFechaCierre()
+        {
+            cierre_diario ultimoCierre = new cierre_diario();
+            using (var db = new DumontContext())
+            {
+                ultimoCierre = db.CierreDiario
+                .OrderByDescending(t => t.id).FirstOrDefault();
+            }
+
+            return ultimoCierre.fechacorte;
+
+        }
+
+        public static bool ValidaCierre()
+        {
+            cierre_diario ultimoCierre = new cierre_diario();
+            using (var db = new DumontContext())
+            {
+                ultimoCierre = db.CierreDiario.Where(cd => cd.fechacorte == DateTime.Today).FirstOrDefault();
+            }
+
+            return ultimoCierre != null;
+        }
     }
 }

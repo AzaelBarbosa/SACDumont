@@ -32,7 +32,7 @@ namespace SACDumont
         public DbSet<catalogos> Catalogos { get; set; }
         public DbSet<perfiles> Perfiles { get; set; }
         public DbSet<permisos_perfiles> PermisosPerfiles { get; set; }
-
+        public DbSet<cierre_diario> CierreDiario { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
