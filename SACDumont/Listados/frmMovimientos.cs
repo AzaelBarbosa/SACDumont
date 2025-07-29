@@ -397,7 +397,7 @@ namespace SACDumont.Listados
             var nombreImpresora = basConfiguracion.PrinterTiockets;
             var psi = new ProcessStartInfo
             {
-                FileName = rutaSumatra,
+                FileName = rutaPDF,
                 Arguments = nombreImpresora == ""
                     ? $"-print-to-default \"{rutaPDF}\""
                     : $"-print-to \"{nombreImpresora}\" \"{rutaPDF}\"",

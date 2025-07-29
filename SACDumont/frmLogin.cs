@@ -39,11 +39,11 @@ namespace SACDumont
             basFunctions basFunc = new basFunctions();
             basFunc.ConectaBD();
 
-                dtPaso = sqlServer.ExecSQLReturnDS(
-                    @"SELECT U.* 
+            dtPaso = sqlServer.ExecSQLReturnDS(
+                @"SELECT U.* 
           FROM usuarios U 
           INNER JOIN perfiles P ON P.id_perfil = U.id_perfil",
-                    "Usuarios");
+                "Usuarios");
 
             // Llenar ComboBox
             foreach (DataRow dr in dtPaso.Tables[0].Rows)
@@ -96,12 +96,59 @@ namespace SACDumont
                     MessageBox.Show("El Usuario ah solocitado resetar su contraseña", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     frmChangePassword frmCP = new frmChangePassword(Convert.ToInt32(drPaso[0]["id_usuario"]));
                     frmCP.ShowDialog();
+                    dtPaso = sqlServer.ExecSQLReturnDS(
+                                @"SELECT U.* 
+                          FROM usuarios U 
+                          INNER JOIN perfiles P ON P.id_perfil = U.id_perfil",
+                                "Usuarios");
+
+                    // Llenar ComboBox
+                    foreach (DataRow dr in dtPaso.Tables[0].Rows)
+                    {
+                        cboUsuarios.Items.Add(dr["usuario"].ToString());
+                    }
                 }
                 else
                 {
                     btEntrar.Enabled = true;
                 }
             }
+        }
+
+        private void txPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true;
+                string strPassword = basFunctions.HashPassword(txPassword.Text);
+                if (drPaso[0]["contrasena"].ToString() == strPassword)
+                {
+                    frmMain frmM = new frmMain(drPaso[0]);
+
+                    MessageBox.Show("Bienvenido " + drPaso[0]["nombre_usuario"], "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                    basConfiguracion basConfig = new basConfiguracion();
+                    basConfig.SetUserSession(
+                       Convert.ToInt32(drPaso[0]["id_usuario"]),
+                        Convert.ToInt32(drPaso[0]["id_perfil"]),
+                        drPaso[0]["nombre_usuario"].ToString()
+                    );
+
+                    this.Hide();
+                    frmM.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Contraseña incorrecta", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    txPassword.Focus();
+                }
+            }
+        }
+
+        private void btCancelar_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

@@ -68,13 +68,13 @@
             this.btPrinterTickets = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.btDefinirImpresora = new System.Windows.Forms.ToolStripMenuItem();
+            this.trasnferirAlumnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btCerarSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.btSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tlUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.trasnferirAlumnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -159,6 +159,7 @@
             // 
             // uniformesToolStripMenuItem
             // 
+            this.uniformesToolStripMenuItem.Image = global::SACDumont.Properties.Resources.camisa1;
             this.uniformesToolStripMenuItem.Name = "uniformesToolStripMenuItem";
             this.uniformesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.uniformesToolStripMenuItem.Text = "Uniformes";
@@ -166,6 +167,7 @@
             // 
             // eventosToolStripMenuItem
             // 
+            this.eventosToolStripMenuItem.Image = global::SACDumont.Properties.Resources.evento;
             this.eventosToolStripMenuItem.Name = "eventosToolStripMenuItem";
             this.eventosToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.eventosToolStripMenuItem.Text = "Eventos";
@@ -173,6 +175,7 @@
             // 
             // graduacionToolStripMenuItem
             // 
+            this.graduacionToolStripMenuItem.Image = global::SACDumont.Properties.Resources.sombrero_de_graduacion;
             this.graduacionToolStripMenuItem.Name = "graduacionToolStripMenuItem";
             this.graduacionToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.graduacionToolStripMenuItem.Text = "Graduacion";
@@ -225,6 +228,7 @@
             // 
             // promocionesToolStripMenuItem
             // 
+            this.promocionesToolStripMenuItem.Image = global::SACDumont.Properties.Resources.promociones;
             this.promocionesToolStripMenuItem.Name = "promocionesToolStripMenuItem";
             this.promocionesToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.promocionesToolStripMenuItem.Text = "Promociones";
@@ -364,6 +368,7 @@
             // 
             // generalToolStripMenuItem
             // 
+            this.generalToolStripMenuItem.Image = global::SACDumont.Properties.Resources.detalle;
             this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
             this.generalToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.generalToolStripMenuItem.Text = "General";
@@ -371,6 +376,7 @@
             // 
             // ciclosEscolaresToolStripMenuItem
             // 
+            this.ciclosEscolaresToolStripMenuItem.Image = global::SACDumont.Properties.Resources.cicloescolar;
             this.ciclosEscolaresToolStripMenuItem.Name = "ciclosEscolaresToolStripMenuItem";
             this.ciclosEscolaresToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.ciclosEscolaresToolStripMenuItem.Text = "Ciclos Escolares";
@@ -378,6 +384,7 @@
             // 
             // cambiarCicloToolStripMenuItem
             // 
+            this.cambiarCicloToolStripMenuItem.Image = global::SACDumont.Properties.Resources.cambio;
             this.cambiarCicloToolStripMenuItem.Name = "cambiarCicloToolStripMenuItem";
             this.cambiarCicloToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.cambiarCicloToolStripMenuItem.Text = "Cambiar Ciclo";
@@ -387,6 +394,7 @@
             // 
             this.btPrinterTickets.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripComboBox1});
+            this.btPrinterTickets.Image = global::SACDumont.Properties.Resources.reimpresion;
             this.btPrinterTickets.Name = "btPrinterTickets";
             this.btPrinterTickets.Size = new System.Drawing.Size(204, 22);
             this.btPrinterTickets.Text = "Definir Impresora Tickets";
@@ -398,9 +406,18 @@
             // 
             // btDefinirImpresora
             // 
+            this.btDefinirImpresora.Image = global::SACDumont.Properties.Resources.reimpresion;
             this.btDefinirImpresora.Name = "btDefinirImpresora";
             this.btDefinirImpresora.Size = new System.Drawing.Size(204, 22);
             this.btDefinirImpresora.Text = "Definir Impresora";
+            // 
+            // trasnferirAlumnosToolStripMenuItem
+            // 
+            this.trasnferirAlumnosToolStripMenuItem.Image = global::SACDumont.Properties.Resources.transferir_datos;
+            this.trasnferirAlumnosToolStripMenuItem.Name = "trasnferirAlumnosToolStripMenuItem";
+            this.trasnferirAlumnosToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.trasnferirAlumnosToolStripMenuItem.Text = "Trasnferir Alumnos";
+            this.trasnferirAlumnosToolStripMenuItem.Click += new System.EventHandler(this.trasnferirAlumnosToolStripMenuItem_Click);
             // 
             // btCerarSesion
             // 
@@ -447,13 +464,6 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // trasnferirAlumnosToolStripMenuItem
-            // 
-            this.trasnferirAlumnosToolStripMenuItem.Name = "trasnferirAlumnosToolStripMenuItem";
-            this.trasnferirAlumnosToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.trasnferirAlumnosToolStripMenuItem.Text = "Trasnferir Alumnos";
-            this.trasnferirAlumnosToolStripMenuItem.Click += new System.EventHandler(this.trasnferirAlumnosToolStripMenuItem_Click);
             // 
             // frmMain
             // 

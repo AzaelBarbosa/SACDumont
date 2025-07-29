@@ -121,6 +121,9 @@
   <data name="silueta-de-multiples-usuarios" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\silueta-de-multiples-usuarios.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="promociones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\promociones.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="contrato" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\contrato.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -133,8 +136,11 @@
   <data name="flecha-hacia-arriba" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\flecha-hacia-arriba.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="factura" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\factura.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="evento" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\evento.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sombrero-de-graduacion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sombrero-de-graduacion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="guardar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\guardar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -153,6 +159,9 @@
   </data>
   <data name="inscripcion-abierta" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\inscripcion-abierta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="camisa1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\camisa1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bloquear" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bloquear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,8 +187,8 @@
   <data name="salario (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\salario (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="configuracion-del-documento" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\configuracion-del-documento.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="spinner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\spinner.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bajausuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bajausuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,11 +223,14 @@
   <data name="camisa" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\camisa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="apagar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\apagar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="administrativo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\administrativo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="factura" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\factura.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="apagar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\apagar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logoNuevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logoNuevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -226,13 +238,25 @@
   <data name="salario-del-usuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\salario-del-usuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="configuracion-del-documento" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\configuracion-del-documento.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cambio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cambio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="reimpresion" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reimpresion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="nuevousuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\nuevousuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="spinner" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\spinner.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cicloescolar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cicloescolar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="detalle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\detalle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="transferir-datos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\transferir-datos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

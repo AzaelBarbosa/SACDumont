@@ -124,7 +124,8 @@ namespace SACDumont.modulos
                     cantidad = (int)(row["cantidad"]),
                     monto = (decimal)(row["monto"]),
                     monto_recargo = (decimal)(row["monto_recargo"]),
-                    descriptionProducto = row["Producto"].ToString()
+                    descriptionProducto = row["Producto"].ToString(),
+                    talla = row["Talla"].ToString()
                 };
 
                 listaProductos.Add(p);

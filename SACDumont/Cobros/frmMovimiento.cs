@@ -407,6 +407,8 @@ namespace SACDumont.Cobros
                 dgvProductos.Columns["cantidad"].HeaderText = "Qty";
                 dgvProductos.Columns["cantidad"].DefaultCellStyle.Format = "N0";
                 dgvProductos.Columns["monto"].HeaderText = "Monto";
+                dgvProductos.Columns["Talla"].HeaderText = "Talla";
+                if (strConcepto != Conceptos.UNIFORMES.ToString()) dgvProductos.Columns["Talla"].Visible = false;
                 dgvProductos.Columns["monto"].DefaultCellStyle.Format = "C2";
                 dgvProductos.Columns["monto_recargo"].HeaderText = "Recargo";
                 dgvProductos.Columns["monto_recargo"].DefaultCellStyle.Format = "C2";
