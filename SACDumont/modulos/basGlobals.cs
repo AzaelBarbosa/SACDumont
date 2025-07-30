@@ -46,7 +46,8 @@ namespace SACDumont.modulos
         Producto = 1,
         Uniformes = 4,
         Eventos = 5,
-        Graduacion = 6
+        Graduacion = 6,
+        Gasto = 7
     }
 
     public enum EstatusMovimiento
@@ -67,7 +68,8 @@ namespace SACDumont.modulos
         ARTICULO,
         UNIFORMES,
         EVENTOS,
-        GRADUACION
+        GRADUACION,
+        GASTO
     }
 
     public enum Grados

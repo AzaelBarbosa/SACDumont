@@ -76,6 +76,7 @@
             this.tlUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btCorteDiario = new System.Windows.Forms.ToolStripMenuItem();
+            this.btGastos = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -85,6 +86,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btInscripcion,
             this.btCobros,
+            this.btGastos,
             this.btCatalogos,
             this.btReportes,
             this.btCorteDiario,
@@ -139,7 +141,7 @@
             // 
             this.btCobroColegiatura.Image = global::SACDumont.Properties.Resources.salario_del_usuario;
             this.btCobroColegiatura.Name = "btCobroColegiatura";
-            this.btCobroColegiatura.Size = new System.Drawing.Size(135, 22);
+            this.btCobroColegiatura.Size = new System.Drawing.Size(180, 22);
             this.btCobroColegiatura.Text = "Colegiatura";
             this.btCobroColegiatura.Click += new System.EventHandler(this.btCobroColegiatura_Click);
             // 
@@ -147,7 +149,7 @@
             // 
             this.btCobroInscripcion.Image = global::SACDumont.Properties.Resources.salario__1_;
             this.btCobroInscripcion.Name = "btCobroInscripcion";
-            this.btCobroInscripcion.Size = new System.Drawing.Size(135, 22);
+            this.btCobroInscripcion.Size = new System.Drawing.Size(180, 22);
             this.btCobroInscripcion.Text = "Inscripcion";
             this.btCobroInscripcion.Click += new System.EventHandler(this.btCobroInscripcion_Click);
             // 
@@ -155,7 +157,7 @@
             // 
             this.btCobroProducts.Image = global::SACDumont.Properties.Resources.salario;
             this.btCobroProducts.Name = "btCobroProducts";
-            this.btCobroProducts.Size = new System.Drawing.Size(135, 22);
+            this.btCobroProducts.Size = new System.Drawing.Size(180, 22);
             this.btCobroProducts.Text = "Articulos";
             this.btCobroProducts.Click += new System.EventHandler(this.btCobroProducts_Click);
             // 
@@ -163,7 +165,7 @@
             // 
             this.uniformesToolStripMenuItem.Image = global::SACDumont.Properties.Resources.camisa1;
             this.uniformesToolStripMenuItem.Name = "uniformesToolStripMenuItem";
-            this.uniformesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.uniformesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.uniformesToolStripMenuItem.Text = "Uniformes";
             this.uniformesToolStripMenuItem.Click += new System.EventHandler(this.uniformesToolStripMenuItem_Click);
             // 
@@ -171,7 +173,7 @@
             // 
             this.eventosToolStripMenuItem.Image = global::SACDumont.Properties.Resources.evento;
             this.eventosToolStripMenuItem.Name = "eventosToolStripMenuItem";
-            this.eventosToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.eventosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.eventosToolStripMenuItem.Text = "Eventos";
             this.eventosToolStripMenuItem.Click += new System.EventHandler(this.eventosToolStripMenuItem_Click);
             // 
@@ -179,7 +181,7 @@
             // 
             this.graduacionToolStripMenuItem.Image = global::SACDumont.Properties.Resources.sombrero_de_graduacion;
             this.graduacionToolStripMenuItem.Name = "graduacionToolStripMenuItem";
-            this.graduacionToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.graduacionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.graduacionToolStripMenuItem.Text = "Graduacion";
             this.graduacionToolStripMenuItem.Click += new System.EventHandler(this.graduacionToolStripMenuItem_Click);
             // 
@@ -470,10 +472,19 @@
             // 
             // btCorteDiario
             // 
+            this.btCorteDiario.Image = global::SACDumont.Properties.Resources.salario_del_usuario;
             this.btCorteDiario.Name = "btCorteDiario";
-            this.btCorteDiario.Size = new System.Drawing.Size(82, 20);
+            this.btCorteDiario.Size = new System.Drawing.Size(98, 20);
             this.btCorteDiario.Text = "Corte Diario";
             this.btCorteDiario.Click += new System.EventHandler(this.btCorteDiario_Click);
+            // 
+            // btGastos
+            // 
+            this.btGastos.Image = global::SACDumont.Properties.Resources.salario;
+            this.btGastos.Name = "btGastos";
+            this.btGastos.Size = new System.Drawing.Size(70, 20);
+            this.btGastos.Text = "Gastos";
+            this.btGastos.Click += new System.EventHandler(this.btGastos_Click);
             // 
             // frmMain
             // 
@@ -549,6 +560,7 @@
         private System.Windows.Forms.ToolStripMenuItem btDefinirImpresora;
         private System.Windows.Forms.ToolStripMenuItem trasnferirAlumnosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem btCorteDiario;
+        private System.Windows.Forms.ToolStripMenuItem btGastos;
     }
 }
 

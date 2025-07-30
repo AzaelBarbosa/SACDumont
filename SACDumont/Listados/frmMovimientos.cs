@@ -9,6 +9,7 @@ using SACDumont.Dtos;
 using SACDumont.Models;
 using SACDumont.modulos;
 using SACDumont.Modulos;
+using SACDumont.Otros;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,12 +48,23 @@ namespace SACDumont.Listados
                 return;
             }
 
-            basGlobals.Movimiento = new Movimientos();
-            basGlobals.listaProductos = new List<movimiento_productos>();
-            basGlobals.listaCobros = new List<cobros>();
-            frmMovimiento frmMovimiento = new frmMovimiento(0);
-            frmMovimiento.ShowDialog();
-            CargarMovimientos();
+            if (tipoMovimiento == (int)TipoMovimiento.Gasto)
+            {
+                basGlobals.Movimiento = new Movimientos();
+                basGlobals.listaProductos = new List<movimiento_productos>();
+                basGlobals.listaCobros = new List<cobros>();
+                frmGasto frmGasto = new frmGasto();
+                frmGasto.ShowDialog();
+            }
+            else
+            {
+                basGlobals.Movimiento = new Movimientos();
+                basGlobals.listaProductos = new List<movimiento_productos>();
+                basGlobals.listaCobros = new List<cobros>();
+                frmMovimiento frmMovimiento = new frmMovimiento(0);
+                frmMovimiento.ShowDialog();
+                CargarMovimientos();
+            }
         }
         protected override void Guardar()
         {
@@ -183,7 +195,7 @@ namespace SACDumont.Listados
                                                         LEFT JOIN catalogos cat ON cat.valor = i.id_grado AND cat.tipo_catalogo = 'Grado' 
                                                         LEFT JOIN catalogos catG ON catG.valor = i.id_grupo AND catG.tipo_catalogo = 'Grupo'
                                                         LEFT JOIN catalogos catE ON catE.valor = m.id_estatusmovimiento AND catE.tipo_catalogo = 'EstatusMovimiento'
-                                                        WHERE m.id_ciclo = {basGlobals.iCiclo} AND p.concepto = '{basGlobals.sConcepto}'", "Movimientos");
+                                                        WHERE m.id_ciclo = {basGlobals.iCiclo} AND p.concepto = '{basGlobals.sConcepto}' AND CAST(m.fechahora AS DATE) = CAST(GETDATE() AS DATE)", "Movimientos");
             bs.DataSource = dtMovimientos;
             dgvMovimientos.DataSource = bs;
             FormatGrid();
@@ -403,7 +415,7 @@ namespace SACDumont.Listados
             string rutaPDF = Path.Combine(Application.StartupPath, "Ticket.pdf");
             report.Export(new PDFSimpleExport(), rutaPDF);
 
-            string rutaSumatra = Path.Combine(Application.StartupPath, "SumatraPDF.exe");
+            string rutaSumatra = Path.Combine(Application.StartupPath, "PDF", "SumatraPDF.exe");
 
             if (!File.Exists(rutaSumatra))
             {
@@ -414,16 +426,23 @@ namespace SACDumont.Listados
             var nombreImpresora = basConfiguracion.PrinterTiockets;
             var psi = new ProcessStartInfo
             {
-                FileName = rutaPDF,
+                FileName = rutaSumatra, // ← usar el ejecutable de SumatraPDF
                 Arguments = nombreImpresora == ""
-                    ? $"-print-to-default \"{rutaPDF}\""
-                    : $"-print-to \"{nombreImpresora}\" \"{rutaPDF}\"",
+                    ? $"-print-settings 2 -print-to-default \"{rutaPDF}\""
+                    : $"-print-settings 2 -print-to \"{nombreImpresora}\" \"{rutaPDF}\"",
                 CreateNoWindow = true,
                 UseShellExecute = false,
                 WindowStyle = ProcessWindowStyle.Hidden
             };
 
-            Process.Start(psi);
+            try
+            {
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al ejecutar SumatraPDF: " + ex.Message);
+            }
         }
 
         private void dgvMovimientos_CellClick(object sender, DataGridViewCellEventArgs e)

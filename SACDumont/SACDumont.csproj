@@ -26,10 +26,11 @@
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
+    <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>\\192.168.1.99\Updates\</UpdateUrl>
-    <ApplicationRevision>3</ApplicationRevision>
+    <InstallUrl>\\192.168.1.99\Publish\</InstallUrl>
+    <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -412,6 +413,12 @@
     <Compile Include="Otros\frmCrearCiclos.Designer.cs">
       <DependentUpon>frmCrearCiclos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Otros\frmGasto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Otros\frmGasto.Designer.cs">
+      <DependentUpon>frmGasto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Otros\frmPinRecargos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -531,6 +538,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmCrearCiclos.resx">
       <DependentUpon>frmCrearCiclos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Otros\frmGasto.resx">
+      <DependentUpon>frmGasto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmPinRecargos.resx">
       <DependentUpon>frmPinRecargos.cs</DependentUpon>

@@ -344,7 +344,7 @@ namespace SACDumont.Cobros
             string rutaPDF = Path.Combine(Application.StartupPath, "Ticket.pdf");
             report.Export(new PDFSimpleExport(), rutaPDF);
 
-            string rutaSumatra = Path.Combine(Application.StartupPath, "SumatraPDF.exe");
+            string rutaSumatra = Path.Combine("C:\\", "PDF\\", "SumatraPDF.exe");
 
             if (!File.Exists(rutaSumatra))
             {
