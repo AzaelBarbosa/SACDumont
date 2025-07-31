@@ -18,6 +18,7 @@ namespace SACDumont.Models
         public decimal monto { get; set; }
         public decimal monto_recargo { get; set; }
         public string talla { get; set; }
+        public string descripcion { get; set; }
 
         [NotMapped]
         public string descriptionProducto { get; set; }

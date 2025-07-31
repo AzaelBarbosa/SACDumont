@@ -69,7 +69,7 @@ namespace SACDumont.modulos
         UNIFORMES,
         EVENTOS,
         GRADUACION,
-        GASTO
+        GASTOS
     }
 
     public enum Grados

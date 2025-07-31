@@ -55,6 +55,7 @@ namespace SACDumont.Listados
                 basGlobals.listaCobros = new List<cobros>();
                 frmGasto frmGasto = new frmGasto();
                 frmGasto.ShowDialog();
+                CargarMovimientos();
             }
             else
             {
@@ -184,7 +185,18 @@ namespace SACDumont.Listados
         #region Eventos
         private void CargarMovimientos()
         {
-            dtMovimientos = sqlServer.ExecSQLReturnDT($@"SELECT m.id_movimiento ,m.fechahora AS Fecha, p.descripcion AS Producto, a.appaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, 
+            if (tipoMovimiento == (int)TipoMovimiento.Gasto)
+            {
+                dtMovimientos = sqlServer.ExecSQLReturnDT($@"SELECT m.id_movimiento ,m.fechahora AS Fecha, p.descripcion AS Producto, mp.descripcion AS MotivoGasto,
+                                                        m.montoTotal AS Total
+                                                        FROM movimientos m
+                                                        INNER JOIN movimiento_productos mp ON m.id_movimiento = mp.id_movimiento
+                                                        LEFT JOIN productos p ON p.id_producto = mp.id_producto
+                                                        WHERE m.id_ciclo = {basGlobals.iCiclo} AND p.concepto = '{basGlobals.sConcepto}' AND CAST(m.fechahora AS DATE) = CAST(GETDATE() AS DATE)", "Movimientos");
+            }
+            else
+            {
+                dtMovimientos = sqlServer.ExecSQLReturnDT($@"SELECT m.id_movimiento ,m.fechahora AS Fecha, p.descripcion AS Producto, a.appaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, 
                                                         m.montoTotal AS Total, m.montoTotal - (SELECT SUM(monto) FROM cobros WHERE id_movimiento = m.id_movimiento) AS MontoPendiente, m.porcentaje_descuento AS Descuento, m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento,
                                                         catE.descripcion AS Estatus, m.confirmado
                                                         FROM movimientos m
@@ -196,6 +208,8 @@ namespace SACDumont.Listados
                                                         LEFT JOIN catalogos catG ON catG.valor = i.id_grupo AND catG.tipo_catalogo = 'Grupo'
                                                         LEFT JOIN catalogos catE ON catE.valor = m.id_estatusmovimiento AND catE.tipo_catalogo = 'EstatusMovimiento'
                                                         WHERE m.id_ciclo = {basGlobals.iCiclo} AND p.concepto = '{basGlobals.sConcepto}' AND CAST(m.fechahora AS DATE) = CAST(GETDATE() AS DATE)", "Movimientos");
+            }
+
             bs.DataSource = dtMovimientos;
             dgvMovimientos.DataSource = bs;
             FormatGrid();
@@ -204,33 +218,50 @@ namespace SACDumont.Listados
 
         private void FormatGrid()
         {
-            dgvMovimientos.Columns["id_movimiento"].Visible = false;
-            dgvMovimientos.Columns["Fecha"].HeaderText = "Fecha";
-            dgvMovimientos.Columns["Alumno"].HeaderText = "Alumno";
-            dgvMovimientos.Columns["Grado"].HeaderText = "Grado";
-            dgvMovimientos.Columns["Grupo"].HeaderText = "Grupo";
-            dgvMovimientos.Columns["MontoPendiente"].HeaderText = "Monto Pendiente";
-            dgvMovimientos.Columns["MontoPendiente"].DefaultCellStyle.Format = "C2";
-            dgvMovimientos.Columns["Total"].HeaderText = "Total";
-            dgvMovimientos.Columns["Total"].DefaultCellStyle.Format = "C2";
-            dgvMovimientos.Columns["Estatus"].HeaderText = "Estatus";
-            dgvMovimientos.Columns["confirmado"].HeaderText = "Confirmado";
-            dgvMovimientos.Columns["Producto"].HeaderText = "Producto";
-            dgvMovimientos.Columns["Descuento"].HeaderText = "Descuento";
-            dgvMovimientos.Columns["Descuento"].DefaultCellStyle.Format = "P0";
-            dgvMovimientos.Columns["MontoDescuento"].HeaderText = "Monto Descuento";
-            dgvMovimientos.Columns["MontoDescuento"].DefaultCellStyle.Format = "C2";
-            dgvMovimientos.Columns["BecaDescuento"].HeaderText = "Beca Descuento";
-            dgvMovimientos.Columns["BecaDescuento"].DefaultCellStyle.Format = "C2";
+            if (tipoMovimiento == (int)TipoMovimiento.Gasto)
+            {
+                dgvMovimientos.Columns["id_movimiento"].Visible = false;
+                dgvMovimientos.Columns["Fecha"].HeaderText = "Fecha";
+                dgvMovimientos.Columns["MotivoGasto"].HeaderText = "Motivo Gasto";
+                dgvMovimientos.Columns["Total"].HeaderText = "Total";
+                dgvMovimientos.Columns["Total"].DefaultCellStyle.Format = "C2";
+                dgvMovimientos.Columns["Producto"].HeaderText = "Producto";
 
-            dgvMovimientos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvMovimientos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-            dgvMovimientos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMovimientos.ReadOnly = true;
-            bs.Sort = "Fecha DESC"; // O ASC para ascendente
-            //dgvMovimientos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            //dgvMovimientos.MultiSelect = false;
+                dgvMovimientos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvMovimientos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+                dgvMovimientos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                dgvMovimientos.ReadOnly = true;
+                bs.Sort = "Fecha DESC";
+            }
+            else
+            {
+                dgvMovimientos.Columns["id_movimiento"].Visible = false;
+                dgvMovimientos.Columns["Fecha"].HeaderText = "Fecha";
+                dgvMovimientos.Columns["Alumno"].HeaderText = "Alumno";
+                dgvMovimientos.Columns["Grado"].HeaderText = "Grado";
+                dgvMovimientos.Columns["Grupo"].HeaderText = "Grupo";
+                dgvMovimientos.Columns["MontoPendiente"].HeaderText = "Monto Pendiente";
+                dgvMovimientos.Columns["MontoPendiente"].DefaultCellStyle.Format = "C2";
+                dgvMovimientos.Columns["Total"].HeaderText = "Total";
+                dgvMovimientos.Columns["Total"].DefaultCellStyle.Format = "C2";
+                dgvMovimientos.Columns["Estatus"].HeaderText = "Estatus";
+                dgvMovimientos.Columns["confirmado"].HeaderText = "Confirmado";
+                dgvMovimientos.Columns["Producto"].HeaderText = "Producto";
+                dgvMovimientos.Columns["Descuento"].HeaderText = "Descuento";
+                dgvMovimientos.Columns["Descuento"].DefaultCellStyle.Format = "P0";
+                dgvMovimientos.Columns["MontoDescuento"].HeaderText = "Monto Descuento";
+                dgvMovimientos.Columns["MontoDescuento"].DefaultCellStyle.Format = "C2";
+                dgvMovimientos.Columns["BecaDescuento"].HeaderText = "Beca Descuento";
+                dgvMovimientos.Columns["BecaDescuento"].DefaultCellStyle.Format = "C2";
 
+                dgvMovimientos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvMovimientos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+                dgvMovimientos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                dgvMovimientos.ReadOnly = true;
+                bs.Sort = "Fecha DESC"; // O ASC para ascendente
+                                        //dgvMovimientos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                                        //dgvMovimientos.MultiSelect = false;
+            }
         }
         private void CargarMenu()
         {
@@ -267,6 +298,8 @@ namespace SACDumont.Listados
 
         private void dgvMovimientos_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (tipoMovimiento == (int)TipoMovimiento.Gasto) { return; }
+
             var row = ((DataRowView)dgvMovimientos.SelectedRows[0].DataBoundItem).Row;
 
             if (dgvMovimientos.SelectedRows.Count == 0) return;
@@ -279,6 +312,8 @@ namespace SACDumont.Listados
 
         private void dgvMovimientos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            if (tipoMovimiento == (int)TipoMovimiento.Gasto) { return; }
+
             if (dgvMovimientos.Columns[e.ColumnIndex].Name == "Estatus" && e.Value != null)
             {
                 string estatus = e.Value.ToString();
@@ -459,6 +494,8 @@ namespace SACDumont.Listados
 
         private void dgvMovimientos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (tipoMovimiento == (int)TipoMovimiento.Gasto) { return; }
+
             if (e.RowIndex >= 0)
             {
                 // Obtener la fila

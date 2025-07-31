@@ -277,7 +277,7 @@ namespace SACDumont
         private void btGastos_Click(object sender, EventArgs e)
         {
             basGlobals.tipoMovimiento = (int)TipoMovimiento.Gasto;
-            basGlobals.sConcepto = Conceptos.GASTO.ToString();
+            basGlobals.sConcepto = Conceptos.GASTOS.ToString();
             AbrirUnicoFormularioHijo<frmMovimientos>();
         }
     }
