@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SACDumont.Modulos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,7 +32,7 @@ namespace SACDumont.Base
 
         private void frmBaseCatalogos_Load(object sender, EventArgs e)
         {
-
+            btDelete.Visible = basConfiguracion.permisoUsuario.eliminar;
         }
 
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)

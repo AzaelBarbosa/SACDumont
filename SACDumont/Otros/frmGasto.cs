@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -20,18 +21,63 @@ namespace SACDumont.Otros
 
         #region Variables
         int tipoMovimiento = (int)TipoMovimiento.Gasto;
-        
+        Movimientos movimientos;
+        movimiento_productos movimientosProductos;
+        cobros movientoCobro;
+
         #endregion
 
         #region Eventos Virtuales
         protected override void Nuevo()
         {
-            frmCatProducto frm = new frmCatProducto(0);
-            frm.ShowDialog();
+
         }
         protected override void Guardar()
         {
+            using (var db = new DumontContext())
+            {
+                movimientos = new Movimientos
+                {
+                    id_tipomovimiento = tipoMovimiento,
+                    fechahora = DateTime.Now,
+                    id_estatusmovimiento = (int)EstatusMovimiento.Liquidado,
+                    id_usuario = basConfiguracion.UserID,
+                    id_ciclo = basGlobals.iCiclo,
+                    id_matricula = 0,
+                    digitoscuenta = "0",
+                    montoTotal = Convert.ToDecimal(txImporte.Text),
+                    porcentaje_descuento = 0,
+                    monto_descuento = 0,
+                    beca_descuento = 0,
+                    confirmado = true
+                };
 
+                db.Movimientos.Add(movimientos);
+                db.SaveChanges();
+
+                movimientosProductos = new movimiento_productos
+                {
+                    id_producto = 92,
+                    id_movimiento = movimientos.id_movimiento,
+                    cantidad = 1,
+                    monto = Convert.ToDecimal(txImporte.Text),
+                    monto_recargo = 0,
+                    descripcion = txDescripcion.Text
+                };
+
+                movientoCobro = new cobros
+                {
+                    id_movimiento = movimientos.id_movimiento,
+                    monto = Convert.ToDecimal(txImporte.Text),
+                    tipopago = 1,
+                    fechaAlta = DateTime.Now
+                };
+
+                db.MovimientoProductos.Add(movimientosProductos);
+                db.MovimientoCobros.Add(movientoCobro);
+                db.SaveChanges();
+            }
+            this.Close();
         }
         protected override void Eliminar()
         {

@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Security.Cryptography;
 using System.IO;
 using SACDumont.modulos;
+using SACDumont.Models;
 
 namespace SACDumont.Modulos
 {
@@ -16,6 +17,7 @@ namespace SACDumont.Modulos
         public static int UserID;
         public static int IdPerfil;
         public static string Nombre;
+        public static permisos_perfiles permisoUsuario = new permisos_perfiles();
 
         // Variables para almacenar la configuración de la aplicación
         public static string RutaArchivos;
@@ -42,11 +44,27 @@ namespace SACDumont.Modulos
         private static readonly string clave = "CoDumont12345678"; // 16 caracteres
         private static readonly string iv = "CoDuVector123456";      // 16 caracteres
 
-        public void SetUserSession(int userID, int idPerfil, string nombre)
+        public void SetUserSession(int userID, int idPerfil, string nombre, permisos_perfiles permisosUsuario)
         {
             basConfiguracion.UserID = userID;
             basConfiguracion.IdPerfil = idPerfil;
             basConfiguracion.Nombre = nombre;
+            basConfiguracion.permisoUsuario.inscripcion = permisosUsuario.inscripcion;
+            basConfiguracion.permisoUsuario.cobros = permisosUsuario.cobros;
+            basConfiguracion.permisoUsuario.catalogos = permisosUsuario.catalogos;
+            basConfiguracion.permisoUsuario.reportes = permisosUsuario.reportes;
+            basConfiguracion.permisoUsuario.configuracion = permisosUsuario.configuracion;
+            basConfiguracion.permisoUsuario.gastos = permisosUsuario.gastos;
+            basConfiguracion.permisoUsuario.cat_productos = permisosUsuario.cat_productos;
+            basConfiguracion.permisoUsuario.cat_alumnos = permisosUsuario.cat_alumnos;
+            basConfiguracion.permisoUsuario.cat_tutores = permisosUsuario.cat_tutores;
+            basConfiguracion.permisoUsuario.cat_usuarios = permisosUsuario.cat_usuarios;
+            basConfiguracion.permisoUsuario.cat_promociones = permisosUsuario.cat_promociones;
+            basConfiguracion.permisoUsuario.con_general = permisosUsuario.con_general;
+            basConfiguracion.permisoUsuario.con_ciclos = permisosUsuario.con_ciclos;
+            basConfiguracion.permisoUsuario.con_transferir = permisosUsuario.con_transferir;
+            basConfiguracion.permisoUsuario.cortediario = permisosUsuario.cortediario;
+            basConfiguracion.permisoUsuario.eliminar = permisosUsuario.eliminar;
         }
 
         public void SetConfig(int idCiclo, bool bRecargos, bool bPromociones, int porcentajeRecargo, int diasTolerancia)

@@ -18,6 +18,7 @@ namespace SACDumont.Models
         public decimal monto { get; set; }
         public decimal monto_recargo { get; set; }
         public string talla { get; set; }
+        public string descripcion { get; set; }
 
         [NotMapped]
         public string descriptionProducto { get; set; }
@@ -247,6 +248,17 @@ namespace SACDumont.Models
         public bool catalogos { get; set; }
         public bool reportes { get; set; }
         public bool configuracion { get; set; }
+        public bool gastos { get; set; }
+        public bool cat_productos { get; set; }
+        public bool cat_alumnos { get; set; }
+        public bool cat_tutores { get; set; }
+        public bool cat_usuarios { get; set; }
+        public bool cat_promociones { get; set; }
+        public bool con_general { get; set; }
+        public bool con_ciclos { get; set; }
+        public bool con_transferir { get; set; }
+        public bool cortediario { get; set; }
+        public bool eliminar { get; set; }
     }
 
     public class cierre_diario
