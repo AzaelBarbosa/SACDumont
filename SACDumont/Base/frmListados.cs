@@ -34,7 +34,7 @@ namespace SACDumont.Base
 
         private void frmListados_Load(object sender, EventArgs e)
         {
-
+            eliminarToolStripMenuItem.Visible = basConfiguracion.permisoUsuario.eliminar;
         }
 
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)

@@ -84,28 +84,34 @@ namespace SACDumont
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-            using (var db = new DumontContext())
+            if (basConfiguracion.permisoUsuario != null)
             {
-                permisosPerfiles = db.PermisosPerfiles.Where(pf => pf.id_perfil == idPerfil).FirstOrDefault();
-                if (permisosPerfiles != null)
-                {
-                    btCatalogos.Visible = permisosPerfiles.catalogos;
-                    btInscripcion.Visible = permisosPerfiles.inscripcion;
-                    btCobros.Visible = permisosPerfiles.cobros;
-                    btReportes.Visible = permisosPerfiles.reportes;
-                    btConfiguracion.Visible = permisosPerfiles.configuracion;
-
-                }
-                else
-                {
-                    MessageBox.Show("El usuario no tiene permisos definido", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    Environment.Exit(0);
-                }
+                btCatalogos.Visible = basConfiguracion.permisoUsuario.catalogos;
+                btInscripcion.Visible = basConfiguracion.permisoUsuario.inscripcion;
+                btCobros.Visible = basConfiguracion.permisoUsuario.cobros;
+                btReportes.Visible = basConfiguracion.permisoUsuario.reportes;
+                btConfiguracion.Visible = basConfiguracion.permisoUsuario.configuracion;
+                btGastos.Visible = basConfiguracion.permisoUsuario.gastos;
+                btCorteDiario.Visible = basConfiguracion.permisoUsuario.cortediario;
+                btCatalogosAlumnos.Visible = basConfiguracion.permisoUsuario.cat_alumnos;
+                btCatalogosUsuarios.Visible = basConfiguracion.permisoUsuario.cat_usuarios;
+                btCatalogosProducto.Visible = basConfiguracion.permisoUsuario.cat_productos;
+                btPromociones.Visible = basConfiguracion.permisoUsuario.cat_promociones;
+                btCatalogosTutores.Visible = basConfiguracion.permisoUsuario.cat_tutores;
+                btGeneral.Visible = basConfiguracion.permisoUsuario.con_general;
+                btCiclosEscolares.Visible = basConfiguracion.permisoUsuario.con_ciclos;
+                btTransferir.Visible = basConfiguracion.permisoUsuario.con_transferir;
             }
+            else
+            {
+                MessageBox.Show("El usuario no tiene permisos definido", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Environment.Exit(0);
+            }
+
             basFunctions.AgregaImpresorasTickets(btPrinterTickets);
             basFunctions.AgregaImpresoras(btDefinirImpresora);
             DataTable dtConfig = sqlServer.ExecSQLReturnDT("SELECT * FROM config", "Config");
-            DataTable dtCiclo = sqlServer.ExecSQLReturnDT("SELECT * FROM ciclos_escolares WHERE GETDATE() BETWEEN fecha_inicio AND fecha_fin", "Ciclos");
+            DataTable dtCiclo = sqlServer.ExecSQLReturnDT("SELECT * FROM ciclos_escolares WHERE CAST(GETDATE() AS DATE) BETWEEN fecha_inicio AND fecha_fin", "Ciclos");
 
             if (!basFunctions.DataVacio(dtConfig))
             {

@@ -1,22 +1,24 @@
-﻿using System;
+﻿using SACDumont.Clases;
+using SACDumont.Models;
+using SACDumont.Modulos;
+using SACDumont.Otros;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SACDumont.Clases;
-using SACDumont.Modulos;
-using SACDumont.Otros;
-using System.IO;
 namespace SACDumont
 {
     public partial class frmLogin : Form
     {
         DataSet dtPaso;
         DataRow[] drPaso;
+        permisos_perfiles permisoPerfiles = new permisos_perfiles();
         public frmLogin()
         {
             InitializeComponent();
@@ -61,12 +63,19 @@ namespace SACDumont
 
                 MessageBox.Show("Bienvenido " + drPaso[0]["nombre_usuario"], "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                int idPerfil = Convert.ToInt32(drPaso[0]["id_perfil"]);
+                using (var db = new DumontContext())
+                {
+                    permisoPerfiles = db.PermisosPerfiles.Where(pf => pf.id_perfil == idPerfil).FirstOrDefault();
+                }
 
                 basConfiguracion basConfig = new basConfiguracion();
+
                 basConfig.SetUserSession(
                    Convert.ToInt32(drPaso[0]["id_usuario"]),
                     Convert.ToInt32(drPaso[0]["id_perfil"]),
-                    drPaso[0]["nombre_usuario"].ToString()
+                    drPaso[0]["nombre_usuario"].ToString(),
+                    permisoPerfiles
                 );
 
                 this.Hide();
@@ -128,13 +137,18 @@ namespace SACDumont
                     frmMain frmM = new frmMain(drPaso[0], this);
 
                     MessageBox.Show("Bienvenido " + drPaso[0]["nombre_usuario"], "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    int idPerfil = Convert.ToInt32(drPaso[0]["id_perfil"]);
+                    using (var db = new DumontContext())
+                    {
+                        permisoPerfiles = db.PermisosPerfiles.Where(pf => pf.id_perfil == idPerfil).FirstOrDefault();
+                    }
 
                     basConfiguracion basConfig = new basConfiguracion();
                     basConfig.SetUserSession(
                        Convert.ToInt32(drPaso[0]["id_usuario"]),
                         Convert.ToInt32(drPaso[0]["id_perfil"]),
-                        drPaso[0]["nombre_usuario"].ToString()
+                        drPaso[0]["nombre_usuario"].ToString(),
+                        permisoPerfiles
                     );
 
                     this.Hide();
