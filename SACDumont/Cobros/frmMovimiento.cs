@@ -43,6 +43,8 @@ namespace SACDumont.Cobros
         List<movimiento_productos> listaProductos = new List<movimiento_productos>();
         List<cobros> listaCobros = new List<cobros>();
         bool impresionTicket = false;
+        bool promocionActiva = false;
+        bool becaActiva = false;
         #endregion
 
         #region Constructores
@@ -449,13 +451,43 @@ namespace SACDumont.Cobros
             idMatricula = Convert.ToInt32(obj["matricula"]);
             idGrado = Convert.ToInt32(obj["Grado"]);
             idGrupo = Convert.ToInt32(obj["Grupo"]);
-            beca = Convert.ToDecimal(obj["porcentaje_beca"]);
-            promocion = Convert.ToDecimal(obj["porcentaje_promocion"]);
             lbGradoActual.Text = Convert.ToString(obj["DescripcionGrado"]);
             lbGrupoActual.Text = Convert.ToString(obj["DescripcionGrupo"]);
-            lbBeca.Text = Convert.ToString(obj["porcentaje_beca"]);
-            lbPromocion.Text = Convert.ToString(obj["Promocion"]);
             this.cboAlumnos.Size = new Size(398, 21);
+
+            using (var db = new DumontContext())
+            {
+                var inscripcion = db.Inscripciones.Where(i => i.id_ciclo == basGlobals.iCiclo && i.matricula == idMatricula).FirstOrDefault();
+                becaActiva = inscripcion.beca;
+                promocionActiva = inscripcion.promocion;
+
+                if (promocionActiva)
+                {
+                    var promoAlumno = (from pa in db.PromocionesAlumnos
+                                       join p in db.Promociones on pa.id_promocion equals p.id_promocion
+                                       where pa.matricula == idMatricula
+                                          && pa.id_ciclo == basGlobals.iCiclo
+                                          && p.concepto == strConcepto
+                                       select p).FirstOrDefault();
+                    if (promoAlumno != null)
+                    {
+                        promocion = promoAlumno.porcentaje_promocion;
+                        lbPromocion.Text = Convert.ToString(promoAlumno.porcentaje_promocion);
+                    }
+                    lbBeca.Text = "N/A";
+                }
+
+                if (becaActiva)
+                {
+                    var becaAlumno = db.Becas.Where(b => b.id_matricula == idMatricula && b.id_ciclo == basGlobals.iCiclo).FirstOrDefault();
+                    if (becaAlumno != null)
+                    {
+                        beca = becaAlumno.porcentaje_beca;
+                        lbBeca.Text = Convert.ToString(becaAlumno.porcentaje_beca);
+                    }
+                    lbPromocion.Text = "N/A";
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -534,6 +566,7 @@ namespace SACDumont.Cobros
                 dgvCobros.Columns["id_movimiento"].Visible = false;
                 dgvCobros.Columns["tipopago"].Visible = false;
                 dgvCobros.Columns["descripcionPago"].HeaderText = "Forma de Pago";
+                dgvCobros.Columns["fechaAlta"].HeaderText = "Fecha Pago";
                 dgvCobros.Columns["monto"].HeaderText = "Monto";
                 dgvCobros.Columns["monto"].DefaultCellStyle.Format = "C2";
                 dgvCobros.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
