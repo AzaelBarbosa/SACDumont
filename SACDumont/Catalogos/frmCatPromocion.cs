@@ -42,6 +42,7 @@ namespace SACDumont.Catalogos
                     Promocion.id_ciclo = basGlobals.iCiclo;
                     Promocion.id_promocion = 0;
                     Promocion.activo = true;
+                    Promocion.concepto = cboConcepto.Text;
 
                     db.Promociones.Add(Promocion);
 
@@ -51,6 +52,7 @@ namespace SACDumont.Catalogos
                         idPromocion = Promocion.id_promocion;
                         basFunctions.Registrar(basConfiguracion.UserID, "Promocion", "Alta", idPromocion, $"Se Creo la promociono: {Promocion.descripcion}");
                         MessageBox.Show("Promocion creada correctamente.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
                     }
                 }
             }
@@ -65,6 +67,7 @@ namespace SACDumont.Catalogos
                     Promocion.fecha_fin = dtpFechaFin.Value;
                     Promocion.porcentaje_promocion = nPromo.Value;
                     Promocion.id_ciclo = basGlobals.iCiclo;
+                    Promocion.concepto = cboConcepto.Text;
 
                     db.Promociones.Add(Promocion);
                     db.Entry(Promocion).State = System.Data.Entity.EntityState.Modified;
@@ -74,6 +77,7 @@ namespace SACDumont.Catalogos
                     {
                         basFunctions.Registrar(basConfiguracion.UserID, "Promocion", "Editar", idPromocion, $"Se modifico la promociono: {Promocion.descripcion}");
                         MessageBox.Show("Promocion modificada correctamente.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
                     }
                 }
             }
@@ -163,9 +167,16 @@ namespace SACDumont.Catalogos
                     dtpFechaFin.Value = (DateTime)Promocion.fecha_fin;
                     dtpFechaInicio.Value = (DateTime)Promocion.fecha_inicio;
                     nPromo.Value = (int)Promocion.porcentaje_promocion;
+                    //cboConcepto.Text = Promocion.concepto.ToString();
                 }
             }
         }
+
+        private void CargarCombo()
+        {
+            cboConcepto.DataSource = Enum.GetValues(typeof(Conceptos));
+        }
+
         #endregion
 
         #region Eventos Formulario
@@ -178,6 +189,7 @@ namespace SACDumont.Catalogos
         private void frmCatPromocion_Load(object sender, EventArgs e)
         {
             CargarMenu();
+            CargarCombo();
             CargarPromocion();
         }
 

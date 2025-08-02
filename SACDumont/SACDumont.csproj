@@ -389,6 +389,12 @@
     <Compile Include="Otros\frmAcciones.Designer.cs">
       <DependentUpon>frmAcciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="Otros\frmAsignarPromo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Otros\frmAsignarPromo.Designer.cs">
+      <DependentUpon>frmAsignarPromo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Otros\frmAsignarTutor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -526,6 +532,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmAcciones.resx">
       <DependentUpon>frmAcciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Otros\frmAsignarPromo.resx">
+      <DependentUpon>frmAsignarPromo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmAsignarTutor.resx">
       <DependentUpon>frmAsignarTutor.cs</DependentUpon>

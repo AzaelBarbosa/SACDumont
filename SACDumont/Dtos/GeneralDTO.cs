@@ -70,4 +70,14 @@ namespace SACDumont.Dtos
         public DateTime fechaalta { get; set; }
         public bool activo { get; set; }
     }
+
+    public class PromoAlumnosDTO
+    {
+        public int id_promocion { get; set; }
+        public string concepto { get; set; }
+        public string descripcion { get; set; }
+        public string ciclo { get; set; }
+        public int id { get; set; }
+
+    }
 }

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.txDescripcion = new System.Windows.Forms.TextBox();
-            this.txMontoPromo = new System.Windows.Forms.TextBox();
             this.lblApPaterno = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.nPromo = new System.Windows.Forms.NumericUpDown();
@@ -39,6 +38,7 @@
             this.dtpFechaFin = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.lbIdPromo = new System.Windows.Forms.Label();
+            this.cboConcepto = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nPromo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,20 +49,13 @@
             this.txDescripcion.Size = new System.Drawing.Size(374, 20);
             this.txDescripcion.TabIndex = 70;
             // 
-            // txMontoPromo
-            // 
-            this.txMontoPromo.Location = new System.Drawing.Point(218, 159);
-            this.txMontoPromo.Name = "txMontoPromo";
-            this.txMontoPromo.Size = new System.Drawing.Size(168, 20);
-            this.txMontoPromo.TabIndex = 72;
-            // 
             // lblApPaterno
             // 
             this.lblApPaterno.Location = new System.Drawing.Point(218, 139);
             this.lblApPaterno.Name = "lblApPaterno";
             this.lblApPaterno.Size = new System.Drawing.Size(100, 23);
             this.lblApPaterno.TabIndex = 71;
-            this.lblApPaterno.Text = "Monto Promocion:";
+            this.lblApPaterno.Text = "Concepto:";
             // 
             // lblNombre
             // 
@@ -134,11 +127,20 @@
             this.lbIdPromo.Text = "0";
             this.lbIdPromo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // cboConcepto
+            // 
+            this.cboConcepto.FormattingEnabled = true;
+            this.cboConcepto.Location = new System.Drawing.Point(222, 159);
+            this.cboConcepto.Name = "cboConcepto";
+            this.cboConcepto.Size = new System.Drawing.Size(164, 21);
+            this.cboConcepto.TabIndex = 80;
+            // 
             // frmCatPromocion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 271);
+            this.Controls.Add(this.cboConcepto);
             this.Controls.Add(this.lbIdPromo);
             this.Controls.Add(this.dtpFechaFin);
             this.Controls.Add(this.label1);
@@ -147,7 +149,6 @@
             this.Controls.Add(this.nPromo);
             this.Controls.Add(this.txDescripcion);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txMontoPromo);
             this.Controls.Add(this.lblApPaterno);
             this.Controls.Add(this.lblNombre);
             this.Name = "frmCatPromocion";
@@ -155,7 +156,6 @@
             this.Load += new System.EventHandler(this.frmCatPromocion_Load);
             this.Controls.SetChildIndex(this.lblNombre, 0);
             this.Controls.SetChildIndex(this.lblApPaterno, 0);
-            this.Controls.SetChildIndex(this.txMontoPromo, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.txDescripcion, 0);
             this.Controls.SetChildIndex(this.nPromo, 0);
@@ -164,6 +164,7 @@
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.dtpFechaFin, 0);
             this.Controls.SetChildIndex(this.lbIdPromo, 0);
+            this.Controls.SetChildIndex(this.cboConcepto, 0);
             ((System.ComponentModel.ISupportInitialize)(this.nPromo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -173,7 +174,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox txDescripcion;
-        private System.Windows.Forms.TextBox txMontoPromo;
         private System.Windows.Forms.Label lblApPaterno;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.NumericUpDown nPromo;
@@ -183,5 +183,6 @@
         private System.Windows.Forms.DateTimePicker dtpFechaFin;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbIdPromo;
+        private System.Windows.Forms.ComboBox cboConcepto;
     }
 }
