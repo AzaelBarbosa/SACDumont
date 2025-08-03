@@ -54,6 +54,7 @@ namespace SACDumont.Listados
                 basGlobals.listaProductos = new List<movimiento_productos>();
                 basGlobals.listaCobros = new List<cobros>();
                 frmGasto frmGasto = new frmGasto();
+                frmGasto.Text = "Nuevo Gasto";
                 frmGasto.ShowDialog();
                 CargarMovimientos();
             }
@@ -63,6 +64,7 @@ namespace SACDumont.Listados
                 basGlobals.listaProductos = new List<movimiento_productos>();
                 basGlobals.listaCobros = new List<cobros>();
                 frmMovimiento frmMovimiento = new frmMovimiento(0);
+                frmMovimiento.Text = "Nuevo Movimiento";
                 frmMovimiento.ShowDialog();
                 CargarMovimientos();
             }
