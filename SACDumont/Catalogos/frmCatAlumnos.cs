@@ -32,12 +32,15 @@ namespace SACDumont.Catalogos
         sqlServer sqlServer = new sqlServer();
         Becas becas = new Becas();
         Promociones Promociones = new Promociones();
+        public List<Promociones_Alumnos> promoAlumno = new List<Promociones_Alumnos>();
+        List<PromoAlumnosDTO> promoAlumnosDTOs = new List<PromoAlumnosDTO>();
         List<TutorAlumnoDTO> tutores = new List<TutorAlumnoDTO>();
         List<Tutores_Alumnos> tutores_alumnos = new List<Tutores_Alumnos>();
         Inscripciones inscripciones = new Inscripciones();
         Alumnos alumnos = new Alumnos();
         int intMatricula = 0;
-
+        int idPromo = 0;
+        int rowIndexPromo = 0;
         #endregion
 
         public frmCatAlumnos(int matricula)
@@ -105,7 +108,9 @@ namespace SACDumont.Catalogos
                             id_ciclo = basGlobals.iCiclo,
                             id_grado = (int)cboGrado.IDValor,
                             id_grupo = (int)cboGrupo.IDValor,
-                            tipo_inscripcion = "N"
+                            tipo_inscripcion = "N",
+                            beca = chBecado.Checked,
+                            promocion = chPromocion.Checked
                         };
                         db.Inscripciones.Add(inscripcion);
 
@@ -123,12 +128,12 @@ namespace SACDumont.Catalogos
 
                         if (chPromocion.Checked)
                         {
-                            var promocion = new Promociones_Alumnos
+                            foreach (Promociones_Alumnos item in promoAlumno)
                             {
-                                id_promocion = (int)cboPromocion.SelectedValue,
-                                matricula = intMatricula
-                            };
-                            db.PromocionesAlumnos.Add(promocion);
+                                item.matricula = intMatricula;
+                            }
+
+                            db.PromocionesAlumnos.AddRange(promoAlumno);
                         }
                         db.SaveChanges();
                         if (MessageBox.Show("Alumno registrado correctamente con matrícula " + intMatricula + Environment.NewLine + Environment.NewLine + "¿Desea agregar un tutor?", "Guardado", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -180,35 +185,32 @@ namespace SACDumont.Catalogos
 
                     db.Entry(alumno).State = System.Data.Entity.EntityState.Modified;
 
-                    var promocionExistente = db.PromocionesAlumnos.FirstOrDefault(p => p.matricula == intMatricula);
-                    if (promocionExistente == null)
-                    {
-                        if (chPromocion.Checked && cboPromocion.SelectedValue != null)
-                        {
-                            var promocion = new Promociones_Alumnos
-                            {
-                                id_promocion = (int)cboPromocion.SelectedValue,
-                                matricula = intMatricula
-                            };
-                            db.PromocionesAlumnos.Add(promocion);
-                        }
-                    }
-                    else
-                    {
-                        if (chPromocion.Checked && cboPromocion.SelectedValue != null)
-                        {
-                            promocionExistente.id_promocion = (int)cboPromocion.SelectedValue;
-                            basFunctions.Registrar(basConfiguracion.UserID, "Alumnos", "Editar", intMatricula, "Se modifico la promocion del alumno: " + intMatricula);
-                        }
-                        else
-                        {
-                            db.PromocionesAlumnos.Remove(promocionExistente);
-                            basFunctions.Registrar(basConfiguracion.UserID, "Alumnos", "Editar", intMatricula, "Se elimino la promocion del alumno: " + intMatricula);
-                        }
-                        db.Entry(promocionExistente).State = System.Data.Entity.EntityState.Deleted;
-                        db.SaveChanges();
+                    var inscripcion = db.Inscripciones.Where(i => i.matricula == alumno.matricula && i.id_ciclo == basGlobals.iCiclo).FirstOrDefault();
 
+                    inscripcion.beca = chBecado.Checked;
+                    inscripcion.promocion = chPromocion.Checked;
 
+                    db.Entry(inscripcion).State = System.Data.Entity.EntityState.Modified;
+
+                    if (chPromocion.Checked)
+                    {
+                        var promocionesActuales = db.PromocionesAlumnos
+                                                .Where(p => p.matricula == alumno.matricula && p.id_ciclo == basGlobals.iCiclo)
+                                                .ToList();
+
+                        var promocionesAEliminar = promocionesActuales
+                                                .Where(p => !promoAlumno.Any(lp => lp.id == p.id && p.id_ciclo == basGlobals.iCiclo))
+                                                .ToList();
+
+                        db.PromocionesAlumnos.RemoveRange(promocionesAEliminar);
+
+                        var promocionesNuevas = promoAlumno
+                                                .Where(lp => !promocionesActuales.Any(p => p.id_promocion == lp.id_promocion && p.id_ciclo == basGlobals.iCiclo))
+                                                .ToList();
+
+                        db.PromocionesAlumnos.AddRange(promocionesNuevas);
+
+                        basFunctions.Registrar(basConfiguracion.UserID, "Alumnos", "Editar", intMatricula, "Se modifico la promocion del alumno: " + intMatricula);
                     }
 
                     var becaExistente = db.Becas.FirstOrDefault(b => b.id_matricula == intMatricula && b.id_ciclo == basGlobals.iCiclo);
@@ -330,7 +332,7 @@ namespace SACDumont.Catalogos
                     CargaEstadosNacimiento();
                     cmbEstadoNac.SelectedValue = alumnos.estado_nacimiento ?? 0;
                     dtpFechaNac.Value = alumnos.fecha_nacimiento ?? System.DateTime.Now;
-                    cmbSexo.SelectedItem = alumnos.sexo ?? "M";
+                    cmbSexo.SelectedValue = alumnos.sexo ?? "M";
                     txtTel1.Text = alumnos.telefono1;
                     txtTel2.Text = alumnos.telefono2;
                     txtTel3.Text = alumnos.telefono3;
@@ -342,6 +344,8 @@ namespace SACDumont.Catalogos
                     {
                         cboGrado.IDValor = inscripcion.id_grado;
                         cboGrupo.IDValor = inscripcion.id_grupo;
+                        chBecado.Checked = inscripcion.beca;
+                        chPromocion.Checked = inscripcion.promocion;
                     }
                     else
                     {
@@ -352,30 +356,33 @@ namespace SACDumont.Catalogos
                     // Cargar las becas y promociones
                     var beca = db.Becas.FirstOrDefault(b => b.id_matricula == matricula && b.id_ciclo == basGlobals.iCiclo);
                     if (beca != null)
-                    {
-                        chBecado.Checked = true;
+                    {                        
                         nPorBeca.Value = beca.porcentaje_beca;
-                        gbBecado.Enabled = true;
                     }
                     else
                     {
-                        chBecado.Checked = false;
                         nPorBeca.Value = 0;
-                        gbBecado.Enabled = false;
                     }
 
-                    var promocion = db.PromocionesAlumnos.FirstOrDefault(p => p.matricula == matricula);
-                    if (promocion != null)
+                    promoAlumno = db.PromocionesAlumnos.Where(p => p.matricula == intMatricula && p.id_ciclo == basGlobals.iCiclo).ToList();
+                    promoAlumnosDTOs = db.PromocionesAlumnos.Where(p => p.matricula == intMatricula && p.id_ciclo == basGlobals.iCiclo).Select(t => new PromoAlumnosDTO
                     {
-                        chPromocion.Checked = true;
-                        cboPromocion.SelectedValue = promocion.id_promocion;
-                        gbPromocion.Enabled = true;
+                        id_promocion = t.id_promocion,
+                        descripcion = db.Promociones.Where(p => p.id_promocion == t.id_promocion).Select(p => p.descripcion).FirstOrDefault(),
+                        concepto = db.Promociones.Where(p => p.id_promocion == t.id_promocion).Select(p => p.concepto).FirstOrDefault(),
+                        ciclo = db.CiclosEscolares.Where(ce => ce.id_ciclo == t.id_ciclo).Select(ce => ce.ciclo).FirstOrDefault(),
+                        id = t.id
+                    }).ToList();
+
+                    if (promoAlumno.Count > 0)
+                    {
+                        dgvPromociones.DataSource = promoAlumnosDTOs;
+                        FormatGridPromo();
                     }
                     else
                     {
-                        chPromocion.Checked = false;
-                        cboPromocion.SelectedIndex = -1;
-                        gbPromocion.Enabled = false;
+                        dgvPromociones.DataSource = promoAlumnosDTOs;
+                        FormatGridPromo();
                     }
 
                     // Validar si el alumno tiene tutores
@@ -404,6 +411,13 @@ namespace SACDumont.Catalogos
             }
         }
 
+        private void FormatGridPromo()
+        {
+            dgvPromociones.Columns["id_promocion"].Visible = false;
+            dgvPromociones.Columns["descripcion"].HeaderText = "Promocion";
+            dgvPromociones.Columns["concepto"].HeaderText = "Concepto";
+            dgvPromociones.Columns["ciclo"].HeaderText = "Ciclo";
+        }
         private void CargarComboSexo()
         {
             var items = new List<KeyValuePair<string, string>>
@@ -446,18 +460,6 @@ namespace SACDumont.Catalogos
             }
         }
 
-        private void CargarPromociones()
-        {
-            List<Promociones> listPromos = new List<Promociones>();
-            using (var db = new DumontContext())
-            {
-                listPromos = db.Promociones.Where(t => t.id_ciclo == basGlobals.iCiclo).ToList();
-                cboPromocion.DataSource = listPromos;
-                cboPromocion.DisplayMember = "descripcion";
-                cboPromocion.ValueMember = "id_promocion";
-            }
-        }
-
         private void CargarMenu()
         {
 
@@ -488,7 +490,6 @@ namespace SACDumont.Catalogos
         #region Eventos del Formulario
         private void frmCatAlumnos_Load(object sender, EventArgs e)
         {
-            CargarPromociones();
             basFunctions.CargarCatalogo(cmbEstado, "estados", "Id", "Nombre", "WHERE PaisId = 1");
             basFunctions.CargarCatalogo(cmbPais, "paises", "Id", "Nombre");
             CargarComboSexo();
@@ -524,6 +525,7 @@ namespace SACDumont.Catalogos
             if (chBecado.Checked)
             {
                 gbBecado.Enabled = true;
+                chPromocion.Checked = false;
                 nPorBeca.Focus();
             }
             else
@@ -537,16 +539,76 @@ namespace SACDumont.Catalogos
         {
             if (chPromocion.Checked)
             {
-                gbPromocion.Enabled = true;
-                cboPromocion.Focus();
+                chBecado.Checked = false;
+                gbPromociones.Enabled = true;
+                btAddPromo.Enabled = true;
+                btDeletePromo.Enabled = true;
             }
             else
             {
-                gbPromocion.Enabled = false;
-                cboPromocion.SelectedIndex = -1;
+                gbPromociones.Enabled = false;
+                btAddPromo.Enabled = false;
+                btDeletePromo.Enabled = false;
             }
         }
 
         #endregion
+
+        private void btAddPromo_Click(object sender, EventArgs e)
+        {
+            frmAsignarPromo frmPromo = new frmAsignarPromo(this, intMatricula);
+            frmPromo.ShowDialog();
+            using (var db = new DumontContext())
+            {
+                promoAlumnosDTOs = promoAlumno.Select(t => new PromoAlumnosDTO
+                {
+                    id_promocion = t.id_promocion,
+                    descripcion = db.Promociones.Where(p => p.id_promocion == t.id_promocion).Select(p => p.descripcion).FirstOrDefault(),
+                    concepto = db.Promociones.Where(p => p.id_promocion == t.id_promocion).Select(p => p.concepto).FirstOrDefault(),
+                    ciclo = db.CiclosEscolares.Where(ce => ce.id_ciclo == t.id_ciclo).Select(ce => ce.ciclo).FirstOrDefault(),
+                    id = t.id
+                }).ToList();
+
+                dgvPromociones.DataSource = promoAlumnosDTOs;
+                FormatGridPromo();
+            }
+        }
+
+        private void dgvPromociones_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                rowIndexPromo = e.RowIndex;
+                // Obtener la fila
+                DataGridViewRow fila = dgvPromociones.Rows[e.RowIndex];
+
+                // Obtener el valor de la columna "ID" (puedes usar el índice también)
+                idPromo = (int)fila.Cells["id"].Value;
+            }
+        }
+
+        private void btDeletePromo_Click(object sender, EventArgs e)
+        {
+            if (promoAlumno.Count > 0)
+            {
+                promoAlumno.RemoveAt(rowIndexPromo);
+            }
+
+            using (var db = new DumontContext())
+            {
+
+                promoAlumnosDTOs = promoAlumno.Select(t => new PromoAlumnosDTO
+                {
+                    id_promocion = t.id_promocion,
+                    descripcion = db.Promociones.Where(p => p.id_promocion == t.id_promocion).Select(p => p.descripcion).FirstOrDefault(),
+                    concepto = db.Promociones.Where(p => p.id_promocion == t.id_promocion).Select(p => p.concepto).FirstOrDefault(),
+                    ciclo = db.CiclosEscolares.Where(ce => ce.id_ciclo == t.id_ciclo).Select(ce => ce.ciclo).FirstOrDefault(),
+                    id = t.id
+                }).ToList();
+
+                dgvPromociones.DataSource = promoAlumnosDTOs;
+                FormatGridPromo();
+            }
+        }
     }
 }

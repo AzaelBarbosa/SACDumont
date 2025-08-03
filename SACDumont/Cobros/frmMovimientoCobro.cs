@@ -53,7 +53,9 @@ namespace SACDumont.Cobros
                 id_movimiento = 0,
                 monto = total,
                 tipopago = Convert.ToInt32(cboCatalogos.IDValor),
-                descripcionPago = Convert.ToString(cboCatalogos.Descripcion)
+                descripcionPago = Convert.ToString(cboCatalogos.Descripcion),
+                fechaAlta = DateTime.Now
+
             };
 
             basGlobals.listaCobros.Add(movimientoCobros);

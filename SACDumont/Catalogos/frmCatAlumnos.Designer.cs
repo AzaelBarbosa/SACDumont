@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCatAlumnos));
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApPaterno = new System.Windows.Forms.TextBox();
             this.txtApMaterno = new System.Windows.Forms.TextBox();
@@ -70,13 +72,15 @@
             this.label10 = new System.Windows.Forms.Label();
             this.gbFinanciero = new System.Windows.Forms.GroupBox();
             this.chBecado = new System.Windows.Forms.CheckBox();
+            this.chPromocion = new System.Windows.Forms.CheckBox();
             this.gbBecado = new System.Windows.Forms.GroupBox();
             this.nPorBeca = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.chPromocion = new System.Windows.Forms.CheckBox();
-            this.gbPromocion = new System.Windows.Forms.GroupBox();
-            this.cboPromocion = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.btDeletePromo = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.btAddPromo = new System.Windows.Forms.Button();
+            this.gbPromociones = new System.Windows.Forms.GroupBox();
+            this.dgvPromociones = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvTutors = new System.Windows.Forms.DataGridView();
             this.gbAlumno.SuspendLayout();
@@ -85,7 +89,8 @@
             this.gbFinanciero.SuspendLayout();
             this.gbBecado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nPorBeca)).BeginInit();
-            this.gbPromocion.SuspendLayout();
+            this.gbPromociones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPromociones)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTutors)).BeginInit();
             this.SuspendLayout();
@@ -350,7 +355,7 @@
             this.lbMatricula.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbMatricula.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbMatricula.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lbMatricula.Location = new System.Drawing.Point(496, 845);
+            this.lbMatricula.Location = new System.Drawing.Point(519, 845);
             this.lbMatricula.Name = "lbMatricula";
             this.lbMatricula.Size = new System.Drawing.Size(100, 23);
             this.lbMatricula.TabIndex = 33;
@@ -377,7 +382,7 @@
             this.gbAlumno.Controls.Add(this.lblNombre);
             this.gbAlumno.Location = new System.Drawing.Point(12, 70);
             this.gbAlumno.Name = "gbAlumno";
-            this.gbAlumno.Size = new System.Drawing.Size(582, 185);
+            this.gbAlumno.Size = new System.Drawing.Size(605, 185);
             this.gbAlumno.TabIndex = 34;
             this.gbAlumno.TabStop = false;
             this.gbAlumno.Text = "Alumno";
@@ -402,7 +407,7 @@
             this.gbDomicilio.Controls.Add(this.lblCalle);
             this.gbDomicilio.Location = new System.Drawing.Point(12, 261);
             this.gbDomicilio.Name = "gbDomicilio";
-            this.gbDomicilio.Size = new System.Drawing.Size(582, 235);
+            this.gbDomicilio.Size = new System.Drawing.Size(605, 235);
             this.gbDomicilio.TabIndex = 35;
             this.gbDomicilio.TabStop = false;
             this.gbDomicilio.Text = "Domicilio";
@@ -463,39 +468,51 @@
             // gbFinanciero
             // 
             this.gbFinanciero.Controls.Add(this.chBecado);
-            this.gbFinanciero.Controls.Add(this.gbBecado);
             this.gbFinanciero.Controls.Add(this.chPromocion);
-            this.gbFinanciero.Controls.Add(this.gbPromocion);
+            this.gbFinanciero.Controls.Add(this.gbBecado);
+            this.gbFinanciero.Controls.Add(this.btDeletePromo);
+            this.gbFinanciero.Controls.Add(this.btAddPromo);
+            this.gbFinanciero.Controls.Add(this.gbPromociones);
             this.gbFinanciero.Location = new System.Drawing.Point(191, 502);
             this.gbFinanciero.Name = "gbFinanciero";
-            this.gbFinanciero.Size = new System.Drawing.Size(403, 165);
+            this.gbFinanciero.Size = new System.Drawing.Size(426, 165);
             this.gbFinanciero.TabIndex = 37;
             this.gbFinanciero.TabStop = false;
             this.gbFinanciero.Text = "Inscripción";
             // 
             // chBecado
             // 
-            this.chBecado.Location = new System.Drawing.Point(212, 16);
+            this.chBecado.Location = new System.Drawing.Point(8, 15);
             this.chBecado.Name = "chBecado";
             this.chBecado.Size = new System.Drawing.Size(88, 24);
             this.chBecado.TabIndex = 33;
-            this.chBecado.Text = "Becado";
+            this.chBecado.Text = "Becado SEP";
             this.chBecado.CheckedChanged += new System.EventHandler(this.chBecado_CheckedChanged);
+            // 
+            // chPromocion
+            // 
+            this.chPromocion.Location = new System.Drawing.Point(145, 14);
+            this.chPromocion.Name = "chPromocion";
+            this.chPromocion.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.chPromocion.Size = new System.Drawing.Size(88, 24);
+            this.chPromocion.TabIndex = 66;
+            this.chPromocion.Text = "Promocion (Beca Interna)";
+            this.chPromocion.CheckedChanged += new System.EventHandler(this.chPromocion_CheckedChanged);
             // 
             // gbBecado
             // 
             this.gbBecado.Controls.Add(this.nPorBeca);
             this.gbBecado.Controls.Add(this.label2);
             this.gbBecado.Enabled = false;
-            this.gbBecado.Location = new System.Drawing.Point(212, 19);
+            this.gbBecado.Location = new System.Drawing.Point(6, 19);
             this.gbBecado.Name = "gbBecado";
-            this.gbBecado.Size = new System.Drawing.Size(185, 140);
+            this.gbBecado.Size = new System.Drawing.Size(129, 140);
             this.gbBecado.TabIndex = 68;
             this.gbBecado.TabStop = false;
             // 
             // nPorBeca
             // 
-            this.nPorBeca.Location = new System.Drawing.Point(109, 40);
+            this.nPorBeca.Location = new System.Drawing.Point(10, 61);
             this.nPorBeca.Name = "nPorBeca";
             this.nPorBeca.Size = new System.Drawing.Size(61, 20);
             this.nPorBeca.TabIndex = 34;
@@ -504,57 +521,91 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(5, 42);
+            this.label2.Location = new System.Drawing.Point(7, 42);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(117, 27);
             this.label2.TabIndex = 64;
             this.label2.Text = "Porcentaje de beca:";
             // 
-            // chPromocion
+            // btDeletePromo
             // 
-            this.chPromocion.Location = new System.Drawing.Point(6, 16);
-            this.chPromocion.Name = "chPromocion";
-            this.chPromocion.Size = new System.Drawing.Size(88, 24);
-            this.chPromocion.TabIndex = 66;
-            this.chPromocion.Text = "Promocion";
-            this.chPromocion.CheckedChanged += new System.EventHandler(this.chPromocion_CheckedChanged);
+            this.btDeletePromo.Enabled = false;
+            this.btDeletePromo.ImageKey = "4.png";
+            this.btDeletePromo.ImageList = this.imageList1;
+            this.btDeletePromo.Location = new System.Drawing.Point(394, 61);
+            this.btDeletePromo.Name = "btDeletePromo";
+            this.btDeletePromo.Size = new System.Drawing.Size(25, 25);
+            this.btDeletePromo.TabIndex = 67;
+            this.btDeletePromo.UseVisualStyleBackColor = true;
+            this.btDeletePromo.Click += new System.EventHandler(this.btDeletePromo_Click);
             // 
-            // gbPromocion
+            // imageList1
             // 
-            this.gbPromocion.Controls.Add(this.cboPromocion);
-            this.gbPromocion.Controls.Add(this.label3);
-            this.gbPromocion.Enabled = false;
-            this.gbPromocion.Location = new System.Drawing.Point(6, 19);
-            this.gbPromocion.Name = "gbPromocion";
-            this.gbPromocion.Size = new System.Drawing.Size(200, 140);
-            this.gbPromocion.TabIndex = 67;
-            this.gbPromocion.TabStop = false;
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "1.png");
+            this.imageList1.Images.SetKeyName(1, "2.png");
+            this.imageList1.Images.SetKeyName(2, "3.png");
+            this.imageList1.Images.SetKeyName(3, "4.png");
+            this.imageList1.Images.SetKeyName(4, "5.png");
+            this.imageList1.Images.SetKeyName(5, "6.png");
+            this.imageList1.Images.SetKeyName(6, "7.png");
+            this.imageList1.Images.SetKeyName(7, "8.png");
+            this.imageList1.Images.SetKeyName(8, "9.png");
+            this.imageList1.Images.SetKeyName(9, "10.png");
+            this.imageList1.Images.SetKeyName(10, "11.png");
+            this.imageList1.Images.SetKeyName(11, "12.png");
+            this.imageList1.Images.SetKeyName(12, "13.png");
+            this.imageList1.Images.SetKeyName(13, "14.png");
+            this.imageList1.Images.SetKeyName(14, "15.png");
+            this.imageList1.Images.SetKeyName(15, "16.png");
+            this.imageList1.Images.SetKeyName(16, "17.png");
             // 
-            // cboPromocion
+            // btAddPromo
             // 
-            this.cboPromocion.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cboPromocion.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cboPromocion.Location = new System.Drawing.Point(6, 61);
-            this.cboPromocion.Name = "cboPromocion";
-            this.cboPromocion.Size = new System.Drawing.Size(188, 21);
-            this.cboPromocion.TabIndex = 32;
+            this.btAddPromo.Enabled = false;
+            this.btAddPromo.ImageKey = "3.png";
+            this.btAddPromo.ImageList = this.imageList1;
+            this.btAddPromo.Location = new System.Drawing.Point(394, 31);
+            this.btAddPromo.Name = "btAddPromo";
+            this.btAddPromo.Size = new System.Drawing.Size(25, 25);
+            this.btAddPromo.TabIndex = 66;
+            this.btAddPromo.UseVisualStyleBackColor = true;
+            this.btAddPromo.Click += new System.EventHandler(this.btAddPromo_Click);
             // 
-            // label3
+            // gbPromociones
             // 
-            this.label3.Location = new System.Drawing.Point(7, 42);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(117, 27);
-            this.label3.TabIndex = 65;
-            this.label3.Text = "Promoción:";
+            this.gbPromociones.Controls.Add(this.dgvPromociones);
+            this.gbPromociones.Enabled = false;
+            this.gbPromociones.Location = new System.Drawing.Point(141, 15);
+            this.gbPromociones.Name = "gbPromociones";
+            this.gbPromociones.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.gbPromociones.Size = new System.Drawing.Size(247, 144);
+            this.gbPromociones.TabIndex = 70;
+            this.gbPromociones.TabStop = false;
+            this.gbPromociones.Text = "Promociones Asignadas";
+            // 
+            // dgvPromociones
+            // 
+            this.dgvPromociones.AllowUserToAddRows = false;
+            this.dgvPromociones.AllowUserToDeleteRows = false;
+            this.dgvPromociones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPromociones.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPromociones.Location = new System.Drawing.Point(3, 16);
+            this.dgvPromociones.Name = "dgvPromociones";
+            this.dgvPromociones.ReadOnly = true;
+            this.dgvPromociones.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgvPromociones.Size = new System.Drawing.Size(241, 125);
+            this.dgvPromociones.TabIndex = 0;
+            this.dgvPromociones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPromociones_CellClick);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgvTutors);
             this.groupBox1.Location = new System.Drawing.Point(12, 673);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(582, 165);
+            this.groupBox1.Size = new System.Drawing.Size(605, 165);
             this.groupBox1.TabIndex = 69;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tutores";
@@ -568,13 +619,13 @@
             this.dgvTutors.Location = new System.Drawing.Point(3, 16);
             this.dgvTutors.Name = "dgvTutors";
             this.dgvTutors.ReadOnly = true;
-            this.dgvTutors.Size = new System.Drawing.Size(576, 146);
+            this.dgvTutors.Size = new System.Drawing.Size(599, 146);
             this.dgvTutors.TabIndex = 0;
             // 
             // frmCatAlumnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(608, 872);
+            this.ClientSize = new System.Drawing.Size(631, 872);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbFinanciero);
             this.Controls.Add(this.gbAcademicos);
@@ -598,7 +649,8 @@
             this.gbFinanciero.ResumeLayout(false);
             this.gbBecado.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nPorBeca)).EndInit();
-            this.gbPromocion.ResumeLayout(false);
+            this.gbPromociones.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPromociones)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTutors)).EndInit();
             this.ResumeLayout(false);
@@ -624,15 +676,17 @@
         private Controles.ComboCatalogos cboGrado;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox gbFinanciero;
-        private System.Windows.Forms.ComboBox cboPromocion;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown nPorBeca;
         private System.Windows.Forms.CheckBox chBecado;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chPromocion;
         private System.Windows.Forms.GroupBox gbBecado;
-        private System.Windows.Forms.GroupBox gbPromocion;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgvTutors;
+        private System.Windows.Forms.GroupBox gbPromociones;
+        private System.Windows.Forms.DataGridView dgvPromociones;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Button btDeletePromo;
+        private System.Windows.Forms.Button btAddPromo;
     }
 }

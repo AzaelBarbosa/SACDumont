@@ -17,5 +17,6 @@ namespace SACDumont.Dtos
         public int Id_Grupo { get; set; }
         public string Grupo { get; set; }
         public DateTime FechaVencimiento { get; set; }
+        public int Id { get; set; }
     }
 }

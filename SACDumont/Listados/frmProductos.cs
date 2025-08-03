@@ -28,6 +28,7 @@ namespace SACDumont.Listados
         DataTable dtProductos = new DataTable("Productos");
         int idCiclo = 0;
         int idProducto = 0;
+        int idProdCiclo = 0;
         BindingSource bs = new BindingSource();
         protected override void Nuevo()
         {
@@ -47,13 +48,11 @@ namespace SACDumont.Listados
             using (var db = new DumontContext())
             {
                 producto = db.Productos.Find(idProducto);
-                productoCiclo = db.ProductoCiclo.FirstOrDefault(t => t.id_producto == idProducto && t.id_ciclo == idCiclo);
+                productoCiclo = db.ProductoCiclo.Find(idProdCiclo);
 
                 if (MessageBox.Show($"Esta por eliminar el producto:" + Environment.NewLine + Environment.NewLine + $"{producto.descripcion}" + Environment.NewLine + "¿Desea Continuar?", "Productos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    db.Productos.Remove(producto);
                     db.ProductoCiclo.Remove(productoCiclo);
-                    db.Entry(producto).State = System.Data.Entity.EntityState.Deleted;
                     db.Entry(productoCiclo).State = System.Data.Entity.EntityState.Deleted;
                     var result = db.SaveChanges();
                     if (result == 1)
@@ -180,7 +179,8 @@ namespace SACDumont.Listados
                       Id_Producto = prc.Producto.id_producto,
                       Costo = prc.precio,
                       Id_Grupo = prc.id_grupo,
-                      FechaVencimiento = prc.fecha_vencimiento
+                      FechaVencimiento = prc.fecha_vencimiento,
+                      Id = prc.id
                   })
                   .ToList();
 
@@ -211,6 +211,7 @@ namespace SACDumont.Listados
         private void FormatGrid()
         {
             dgvProductos.Columns["Id_Producto"].Visible = false; // Ocultar columna Id si no es necesaria
+            dgvProductos.Columns["Id"].Visible = false; // Ocultar columna Id si no es necesaria
             dgvProductos.Columns["Concepto"].HeaderText = "Concepto";
             dgvProductos.Columns["Id_Grupo"].Visible = false;
             dgvProductos.Columns["Grupo"].HeaderText = "Grupo";
@@ -274,6 +275,7 @@ namespace SACDumont.Listados
             {
                 DataGridViewRow fila = dgvProductos.Rows[e.RowIndex];
                 idProducto = int.Parse(fila.Cells["Id_Producto"].Value?.ToString());
+                idProdCiclo = int.Parse(fila.Cells["Id"].Value?.ToString());
             }
         }
 

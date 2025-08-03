@@ -81,6 +81,7 @@ namespace SACDumont.Models
         public DateTime? fecha_inicio { get; set; }
         public DateTime? fecha_fin { get; set; }
         public bool activo { get; set; }
+        public string concepto { get; set; }
     }
 
     public class Promociones_Alumnos
@@ -89,6 +90,7 @@ namespace SACDumont.Models
         public int id { get; set; }
         public int id_promocion { get; set; }
         public int matricula { get; set; }
+        public int id_ciclo { get; set; }
     }
 
     public class Alumnos
@@ -202,6 +204,8 @@ namespace SACDumont.Models
         public int id_grado { get; set; }
         public int id_grupo { get; set; }
         public string tipo_inscripcion { get; set; }
+        public bool beca { get; set; }
+        public bool promocion { get; set; }
 
         [ForeignKey("matricula")]
         public virtual Alumnos Alumnos { get; set; }
