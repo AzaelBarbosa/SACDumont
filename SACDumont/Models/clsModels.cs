@@ -273,6 +273,17 @@ namespace SACDumont.Models
         public DateTime fechaAlta { get; set; }
         public decimal total { get; set; }
         public int idUsuario { get; set; }
+        public int B1000 { get; set; }
+        public int B500 { get; set; }
+        public int B200 { get; set; }
+        public int B100 { get; set; }
+        public int B50 { get; set; }
+        public int B20 { get; set; }
+        public int M10 { get; set; }
+        public int M5 { get; set; }
+        public int M2 { get; set; }
+        public int M1 { get; set; }
+        public int M050 { get; set; }
 
     }
     internal class clsModels

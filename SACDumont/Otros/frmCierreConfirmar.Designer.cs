@@ -1,0 +1,459 @@
+﻿namespace SACDumont.Otros
+{
+    partial class frmCierreConfirmar
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txTotalesConfirmar = new System.Windows.Forms.TextBox();
+            this.txTotales = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txGastoConfirmar = new System.Windows.Forms.TextBox();
+            this.txGasto = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txTrasnferConfirma = new System.Windows.Forms.TextBox();
+            this.txTrasnfer = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txEfectivoConfirmar = new System.Windows.Forms.TextBox();
+            this.txEfectivo = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txM050 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txM1 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txM2 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txM5 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txM10 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txB20 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txB50 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txB100 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txB200 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txB500 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txB1000 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txTotalesConfirmar);
+            this.groupBox1.Controls.Add(this.txTotales);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.txGastoConfirmar);
+            this.groupBox1.Controls.Add(this.txGasto);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.txTrasnferConfirma);
+            this.groupBox1.Controls.Add(this.txTrasnfer);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.txEfectivoConfirmar);
+            this.groupBox1.Controls.Add(this.txEfectivo);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 56);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(314, 159);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Totales";
+            // 
+            // txTotalesConfirmar
+            // 
+            this.txTotalesConfirmar.Location = new System.Drawing.Point(199, 117);
+            this.txTotalesConfirmar.Name = "txTotalesConfirmar";
+            this.txTotalesConfirmar.Size = new System.Drawing.Size(100, 20);
+            this.txTotalesConfirmar.TabIndex = 3;
+            this.txTotalesConfirmar.Validated += new System.EventHandler(this.txTotalesConfirmar_Validated);
+            // 
+            // txTotales
+            // 
+            this.txTotales.Location = new System.Drawing.Point(84, 117);
+            this.txTotales.Name = "txTotales";
+            this.txTotales.ReadOnly = true;
+            this.txTotales.Size = new System.Drawing.Size(100, 20);
+            this.txTotales.TabIndex = 12;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(7, 120);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(45, 13);
+            this.label15.TabIndex = 11;
+            this.label15.Text = "Totales:";
+            // 
+            // txGastoConfirmar
+            // 
+            this.txGastoConfirmar.Location = new System.Drawing.Point(199, 91);
+            this.txGastoConfirmar.Name = "txGastoConfirmar";
+            this.txGastoConfirmar.Size = new System.Drawing.Size(100, 20);
+            this.txGastoConfirmar.TabIndex = 2;
+            this.txGastoConfirmar.Validated += new System.EventHandler(this.txGastoConfirmar_Validated);
+            // 
+            // txGasto
+            // 
+            this.txGasto.Location = new System.Drawing.Point(84, 91);
+            this.txGasto.Name = "txGasto";
+            this.txGasto.ReadOnly = true;
+            this.txGasto.Size = new System.Drawing.Size(100, 20);
+            this.txGasto.TabIndex = 9;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(7, 94);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(43, 13);
+            this.label14.TabIndex = 8;
+            this.label14.Text = "Gastos:";
+            // 
+            // txTrasnferConfirma
+            // 
+            this.txTrasnferConfirma.Location = new System.Drawing.Point(199, 64);
+            this.txTrasnferConfirma.Name = "txTrasnferConfirma";
+            this.txTrasnferConfirma.Size = new System.Drawing.Size(100, 20);
+            this.txTrasnferConfirma.TabIndex = 1;
+            this.txTrasnferConfirma.Validated += new System.EventHandler(this.txTrasnferConfirma_Validated);
+            // 
+            // txTrasnfer
+            // 
+            this.txTrasnfer.Location = new System.Drawing.Point(84, 64);
+            this.txTrasnfer.Name = "txTrasnfer";
+            this.txTrasnfer.ReadOnly = true;
+            this.txTrasnfer.Size = new System.Drawing.Size(100, 20);
+            this.txTrasnfer.TabIndex = 6;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(7, 67);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(80, 13);
+            this.label13.TabIndex = 5;
+            this.label13.Text = "Transferencias:";
+            // 
+            // txEfectivoConfirmar
+            // 
+            this.txEfectivoConfirmar.Location = new System.Drawing.Point(199, 38);
+            this.txEfectivoConfirmar.Name = "txEfectivoConfirmar";
+            this.txEfectivoConfirmar.Size = new System.Drawing.Size(100, 20);
+            this.txEfectivoConfirmar.TabIndex = 0;
+            this.txEfectivoConfirmar.Validated += new System.EventHandler(this.txEfectivoConfirmar_Validated);
+            // 
+            // txEfectivo
+            // 
+            this.txEfectivo.Location = new System.Drawing.Point(84, 38);
+            this.txEfectivo.Name = "txEfectivo";
+            this.txEfectivo.ReadOnly = true;
+            this.txEfectivo.Size = new System.Drawing.Size(100, 20);
+            this.txEfectivo.TabIndex = 3;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(7, 41);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(49, 13);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "Efectivo:";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txM050);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.txM1);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.txM2);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.txM5);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.txM10);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.txB20);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.txB50);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.txB100);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.txB200);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.txB500);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.txB1000);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Location = new System.Drawing.Point(332, 56);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(358, 200);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Billetes y Monedas";
+            // 
+            // txM050
+            // 
+            this.txM050.Location = new System.Drawing.Point(235, 139);
+            this.txM050.Name = "txM050";
+            this.txM050.Size = new System.Drawing.Size(100, 20);
+            this.txM050.TabIndex = 10;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(188, 142);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(34, 13);
+            this.label11.TabIndex = 20;
+            this.label11.Text = "M .50";
+            // 
+            // txM1
+            // 
+            this.txM1.Location = new System.Drawing.Point(235, 113);
+            this.txM1.Name = "txM1";
+            this.txM1.Size = new System.Drawing.Size(100, 20);
+            this.txM1.TabIndex = 9;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(188, 116);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(25, 13);
+            this.label10.TabIndex = 18;
+            this.label10.Text = "M1:";
+            // 
+            // txM2
+            // 
+            this.txM2.Location = new System.Drawing.Point(235, 87);
+            this.txM2.Name = "txM2";
+            this.txM2.Size = new System.Drawing.Size(100, 20);
+            this.txM2.TabIndex = 8;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(188, 90);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(25, 13);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "M2:";
+            // 
+            // txM5
+            // 
+            this.txM5.Location = new System.Drawing.Point(235, 61);
+            this.txM5.Name = "txM5";
+            this.txM5.Size = new System.Drawing.Size(100, 20);
+            this.txM5.TabIndex = 7;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(188, 64);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(25, 13);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "M5:";
+            // 
+            // txM10
+            // 
+            this.txM10.Location = new System.Drawing.Point(235, 35);
+            this.txM10.Name = "txM10";
+            this.txM10.Size = new System.Drawing.Size(100, 20);
+            this.txM10.TabIndex = 6;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(188, 38);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(31, 13);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "M10:";
+            // 
+            // txB20
+            // 
+            this.txB20.Location = new System.Drawing.Point(65, 165);
+            this.txB20.Name = "txB20";
+            this.txB20.Size = new System.Drawing.Size(100, 20);
+            this.txB20.TabIndex = 5;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 168);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(29, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "B20:";
+            // 
+            // txB50
+            // 
+            this.txB50.Location = new System.Drawing.Point(65, 139);
+            this.txB50.Name = "txB50";
+            this.txB50.Size = new System.Drawing.Size(100, 20);
+            this.txB50.TabIndex = 4;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(18, 142);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "B50:";
+            // 
+            // txB100
+            // 
+            this.txB100.Location = new System.Drawing.Point(65, 113);
+            this.txB100.Name = "txB100";
+            this.txB100.Size = new System.Drawing.Size(100, 20);
+            this.txB100.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(18, 116);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "B100:";
+            // 
+            // txB200
+            // 
+            this.txB200.Location = new System.Drawing.Point(65, 87);
+            this.txB200.Name = "txB200";
+            this.txB200.Size = new System.Drawing.Size(100, 20);
+            this.txB200.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 90);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "B200:";
+            // 
+            // txB500
+            // 
+            this.txB500.Location = new System.Drawing.Point(65, 61);
+            this.txB500.Name = "txB500";
+            this.txB500.Size = new System.Drawing.Size(100, 20);
+            this.txB500.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 64);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "B500:";
+            // 
+            // txB1000
+            // 
+            this.txB1000.Location = new System.Drawing.Point(65, 35);
+            this.txB1000.Name = "txB1000";
+            this.txB1000.Size = new System.Drawing.Size(100, 20);
+            this.txB1000.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "B1000:";
+            // 
+            // frmCierreConfirmar
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(704, 263);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.Name = "frmCierreConfirmar";
+            this.Text = "frmCierreConfirmar";
+            this.Load += new System.EventHandler(this.frmCierreConfirmar_Load);
+            this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.Controls.SetChildIndex(this.groupBox2, 0);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txM050;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txM1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txM2;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txM5;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txM10;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txB20;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txB50;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txB100;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txB200;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txB500;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txB1000;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txGastoConfirmar;
+        private System.Windows.Forms.TextBox txGasto;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txTrasnferConfirma;
+        private System.Windows.Forms.TextBox txTrasnfer;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txEfectivoConfirmar;
+        private System.Windows.Forms.TextBox txEfectivo;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txTotalesConfirmar;
+        private System.Windows.Forms.TextBox txTotales;
+        private System.Windows.Forms.Label label15;
+    }
+}

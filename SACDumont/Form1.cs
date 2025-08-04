@@ -253,30 +253,10 @@ namespace SACDumont
 
         private void btCorteDiario_Click(object sender, EventArgs e)
         {
-            decimal total = 0;
-            cierre_diario cierre_Diario;
             if (MessageBox.Show("¿Desea realizar el cierre diario?", "Cierre Diario", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                using (var db = new DumontContext())
-                {
-                    total = db.MovimientoCobros.Where(c => c.fechaAlta == DateTime.Today)
-                        .Sum(c => (decimal?)c.monto) ?? 0;
-
-                    cierre_Diario = new cierre_diario
-                    {
-                        fechacorte = DateTime.Today,
-                        total = total,
-                        fechaAlta = DateTime.Now,
-                        idUsuario = basConfiguracion.UserID
-                    };
-
-                    db.CierreDiario.Add(cierre_Diario);
-                    var result = db.SaveChanges();
-                    if (result != 0)
-                    {
-                        MessageBox.Show("Cierre realizado con Exito", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
+                frmCierreConfirmar frmCierre = new frmCierreConfirmar();
+                frmCierre.ShowDialog();
             }
         }
 
