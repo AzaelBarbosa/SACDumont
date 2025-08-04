@@ -344,6 +344,12 @@ namespace SACDumont
 
         private void btCorteDiario_Click(object sender, EventArgs e)
         {
+            if (basFunctions.ValidaCierre())
+            {
+                MessageBox.Show("Ya se ah realizado el cierre del dia de hoy.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (MessageBox.Show("¿Desea realizar el cierre diario?", "Cierre Diario", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 frmCierreConfirmar frmCierre = new frmCierreConfirmar();
