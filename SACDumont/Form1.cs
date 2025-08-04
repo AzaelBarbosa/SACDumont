@@ -1,19 +1,21 @@
-﻿using System;
+﻿using SACDumont.Catalogos;
+using SACDumont.Clases;
+using SACDumont.Listados;
+using SACDumont.Models;
+using SACDumont.modulos;
+using SACDumont.Modulos;
+using SACDumont.Otros;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SACDumont.Listados;
-using SACDumont.Otros;
-using SACDumont.Clases;
-using SACDumont.Modulos;
-using SACDumont.modulos;
-using SACDumont.Catalogos;
-using SACDumont.Models;
 
 namespace SACDumont
 {
@@ -65,6 +67,95 @@ namespace SACDumont
             }
         }
 
+        private void PreparaReporteCierre()
+        {
+            try
+            {
+
+
+                DataTable dtResumen = new DataTable("Resumen");
+                DataTable dtBilletes = new DataTable("Billetes"); ;
+                DataTable dtDetalle = new DataTable("Detalle"); ;
+
+                using (var db = new DumontContext())
+                {
+                    var resumen = (from m in db.Movimientos
+                                   join mp in db.MovimientoProductos on m.id_movimiento equals mp.id_movimiento
+                                   join c in db.MovimientoCobros on m.id_movimiento equals c.id_movimiento into cobrosGroup
+                                   from c in cobrosGroup.DefaultIfEmpty()
+                                   join cat in db.Catalogos on new { valor = (int?)c.tipopago, tipo_catalogo = "TipoPago" }
+                                                              equals new { valor = (int?)cat.valor, cat.tipo_catalogo } into catalogosGroup
+                                   from cat in catalogosGroup.DefaultIfEmpty()
+                                   where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now)
+                                   group c by cat.descripcion into g
+                                   select new
+                                   {
+                                       Tipo = g.Key,
+                                       Monto = g.Sum(x => x != null ? x.monto : 0)
+                                   }).ToList();
+
+                    var billetes = db.CierreDiario
+                                     .Where(cd => DbFunctions.TruncateTime(cd.fechacorte) == DbFunctions.TruncateTime(DateTime.Now))
+                                     .Select(cd => new
+                                     {
+                                         cd.B1000,
+                                         cd.B500,
+                                         cd.B200,
+                                         cd.B100,
+                                         cd.B50,
+                                         cd.B20,
+                                         cd.M10,
+                                         cd.M5,
+                                         cd.M2,
+                                         cd.M1,
+                                         cd.M050
+                                     })
+                                     .ToList();
+
+                    var detalles = (from m in db.Movimientos
+                                    join mp in db.MovimientoProductos on m.id_movimiento equals mp.id_movimiento into mpGroup
+                                    from mp in mpGroup.DefaultIfEmpty()
+
+                                    join p in db.Productos on mp.id_producto equals p.id_producto into pGroup
+                                    from p in pGroup.DefaultIfEmpty()
+
+                                    join c in db.MovimientoCobros on m.id_movimiento equals c.id_movimiento into cGroup
+                                    from c in cGroup.DefaultIfEmpty()
+
+                                    join a in db.Alumnos on m.id_matricula equals a.matricula into aGroup
+                                    from a in aGroup.DefaultIfEmpty()
+
+                                    where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now)
+
+                                    group new { c, mp, p, a } by new
+                                    {
+                                        Alumno = (a.appaterno ?? "") + " " + (a.apmaterno ?? "") + " " + (a.nombre ?? ""),
+                                        Concepto = p.concepto,
+                                        MotivoGasto = mp.descripcion,
+                                        Monto = c.monto
+                                    } into g
+
+                                    select new
+                                    {
+                                        Alumno = (g.Key.Alumno == null || g.Key.Alumno.Trim() == "") ? "GASTO" : g.Key.Alumno,
+                                        Concepto = g.Key.Concepto,
+                                        MotivoGasto = g.Key.MotivoGasto ?? "",
+                                        Monto = g.Key.Monto
+                                    }).ToList();
+
+                    dtResumen = basFunctions.ConvertToDataTable(resumen);
+                    dtDetalle = basFunctions.ConvertToDataTable(detalles);
+                    dtBilletes = basFunctions.ConvertToDataTable(billetes);
+
+                    basFunctions.ExportarYMostrarPDF3DT("CierreDiario.frx", dtResumen, dtDetalle, dtBilletes, "Resumen", "Detalle", "Billetes");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         public void AbrirUnicoFormularioHijo<T>() where T : Form, new()
         {
             // Cierra todos los formularios MDI hijos abiertos
@@ -265,6 +356,14 @@ namespace SACDumont
             basGlobals.tipoMovimiento = (int)TipoMovimiento.Gasto;
             basGlobals.sConcepto = Conceptos.GASTOS.ToString();
             AbrirUnicoFormularioHijo<frmMovimientos>();
+        }
+
+        private void btRptAdministrativoCorteDirio_Click(object sender, EventArgs e)
+        {
+            if (basFunctions.ValidaCierre())
+            {
+                PreparaReporteCierre();
+            }
         }
     }
 }

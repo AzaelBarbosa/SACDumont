@@ -60,6 +60,7 @@ namespace SACDumont.Otros
                     if (result > 0)
                     {
                         MessageBox.Show("Se ah efectuado el Cierre, ya no podra realizar movimientos.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        PreparaReporte();
                     }
                 }
             }
@@ -109,6 +110,73 @@ namespace SACDumont.Otros
             }
         }
 
+        private void PreparaReporte()
+        {
+            using (var db = new DumontContext())
+            {
+                var resumen = (from m in db.Movimientos
+                               join mp in db.MovimientoProductos on m.id_movimiento equals mp.id_movimiento
+                               join c in db.MovimientoCobros on m.id_movimiento equals c.id_movimiento into cobrosGroup
+                               from c in cobrosGroup.DefaultIfEmpty()
+                               join cat in db.Catalogos on new { valor = (int?)c.tipopago, tipo_catalogo = "TipoPago" }
+                                                          equals new { valor = (int?)cat.valor, cat.tipo_catalogo } into catalogosGroup
+                               from cat in catalogosGroup.DefaultIfEmpty()
+                               where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now)
+                               group c by cat.descripcion into g
+                               select new
+                               {
+                                   Tipo = g.Key,
+                                   Monto = g.Sum(x => x != null ? x.monto : 0)
+                               }).ToList();
+
+                var billetes = db.CierreDiario
+                                 .Where(cd => DbFunctions.TruncateTime(cd.fechacorte) == DbFunctions.TruncateTime(DateTime.Now))
+                                 .Select(cd => new
+                                 {
+                                     cd.B1000,
+                                     cd.B500,
+                                     cd.B200,
+                                     cd.B100,
+                                     cd.B50,
+                                     cd.B20,
+                                     cd.M10,
+                                     cd.M5,
+                                     cd.M2,
+                                     cd.M1,
+                                     cd.M050
+                                 })
+                                 .ToList();
+
+                var detalles = (from m in db.Movimientos
+                                join mp in db.MovimientoProductos on m.id_movimiento equals mp.id_movimiento into mpGroup
+                                from mp in mpGroup.DefaultIfEmpty()
+                                where mp == null || mp.descripcion != null
+
+                                join c in db.MovimientoCobros on m.id_movimiento equals c.id_movimiento into cGroup
+                                from c in cGroup.DefaultIfEmpty()
+
+                                join a in db.Alumnos on m.id_matricula equals a.matricula into aGroup
+                                from a in aGroup.DefaultIfEmpty()
+
+                                where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now)
+
+                                group new { c, mp, a } by new
+                                {
+                                    NombreCompleto = (a.appaterno ?? "") + " " + (a.apmaterno ?? "") + " " + (a.nombre ?? ""),
+                                    Motivo = mp.descripcion
+                                } into g
+
+                                select new
+                                {
+                                    Alumno = string.IsNullOrWhiteSpace(g.Key.NombreCompleto.Trim()) ? "GASTO" : g.Key.NombreCompleto,
+                                    MotivoGasto = g.Key.Motivo ?? "",
+                                    Monto = g.Sum(x => x.c != null ? x.c.monto : 0)
+                                }).ToList();
+
+                basFunctions.ExportarYMostrarPDF3DT("CierreDiario.frx", basFunctions.ConvertToDataTable(resumen), basFunctions.ConvertToDataTable(detalles), basFunctions.ConvertToDataTable(billetes), "Resumen", "Detalle", "Billetes");
+
+            }
+        }
         #endregion
         public frmCierreConfirmar()
         {

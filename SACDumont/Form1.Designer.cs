@@ -112,14 +112,14 @@
             // btNuevoIngreso
             // 
             this.btNuevoIngreso.Name = "btNuevoIngreso";
-            this.btNuevoIngreso.Size = new System.Drawing.Size(180, 22);
+            this.btNuevoIngreso.Size = new System.Drawing.Size(151, 22);
             this.btNuevoIngreso.Text = "Nuevo Ingreso";
             this.btNuevoIngreso.Click += new System.EventHandler(this.btNuevoIngreso_Click);
             // 
             // btReinscripcion
             // 
             this.btReinscripcion.Name = "btReinscripcion";
-            this.btReinscripcion.Size = new System.Drawing.Size(180, 22);
+            this.btReinscripcion.Size = new System.Drawing.Size(151, 22);
             this.btReinscripcion.Text = "Reinscripcion";
             this.btReinscripcion.Click += new System.EventHandler(this.btReinscripcion_Click);
             // 
@@ -141,7 +141,7 @@
             // 
             this.btCobroColegiatura.Image = global::SACDumont.Properties.Resources.salario_del_usuario;
             this.btCobroColegiatura.Name = "btCobroColegiatura";
-            this.btCobroColegiatura.Size = new System.Drawing.Size(180, 22);
+            this.btCobroColegiatura.Size = new System.Drawing.Size(135, 22);
             this.btCobroColegiatura.Text = "Colegiatura";
             this.btCobroColegiatura.Click += new System.EventHandler(this.btCobroColegiatura_Click);
             // 
@@ -149,7 +149,7 @@
             // 
             this.btCobroInscripcion.Image = global::SACDumont.Properties.Resources.salario__1_;
             this.btCobroInscripcion.Name = "btCobroInscripcion";
-            this.btCobroInscripcion.Size = new System.Drawing.Size(180, 22);
+            this.btCobroInscripcion.Size = new System.Drawing.Size(135, 22);
             this.btCobroInscripcion.Text = "Inscripcion";
             this.btCobroInscripcion.Click += new System.EventHandler(this.btCobroInscripcion_Click);
             // 
@@ -157,7 +157,7 @@
             // 
             this.btCobroProducts.Image = global::SACDumont.Properties.Resources.salario;
             this.btCobroProducts.Name = "btCobroProducts";
-            this.btCobroProducts.Size = new System.Drawing.Size(180, 22);
+            this.btCobroProducts.Size = new System.Drawing.Size(135, 22);
             this.btCobroProducts.Text = "Articulos";
             this.btCobroProducts.Click += new System.EventHandler(this.btCobroProducts_Click);
             // 
@@ -165,7 +165,7 @@
             // 
             this.uniformesToolStripMenuItem.Image = global::SACDumont.Properties.Resources.camisa1;
             this.uniformesToolStripMenuItem.Name = "uniformesToolStripMenuItem";
-            this.uniformesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.uniformesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.uniformesToolStripMenuItem.Text = "Uniformes";
             this.uniformesToolStripMenuItem.Click += new System.EventHandler(this.uniformesToolStripMenuItem_Click);
             // 
@@ -173,7 +173,7 @@
             // 
             this.eventosToolStripMenuItem.Image = global::SACDumont.Properties.Resources.evento;
             this.eventosToolStripMenuItem.Name = "eventosToolStripMenuItem";
-            this.eventosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eventosToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.eventosToolStripMenuItem.Text = "Eventos";
             this.eventosToolStripMenuItem.Click += new System.EventHandler(this.eventosToolStripMenuItem_Click);
             // 
@@ -181,7 +181,7 @@
             // 
             this.graduacionToolStripMenuItem.Image = global::SACDumont.Properties.Resources.sombrero_de_graduacion;
             this.graduacionToolStripMenuItem.Name = "graduacionToolStripMenuItem";
-            this.graduacionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.graduacionToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.graduacionToolStripMenuItem.Text = "Graduacion";
             this.graduacionToolStripMenuItem.Click += new System.EventHandler(this.graduacionToolStripMenuItem_Click);
             // 
@@ -210,7 +210,7 @@
             // 
             this.btCatalogosProducto.Image = global::SACDumont.Properties.Resources.caja_de_entrega;
             this.btCatalogosProducto.Name = "btCatalogosProducto";
-            this.btCatalogosProducto.Size = new System.Drawing.Size(180, 22);
+            this.btCatalogosProducto.Size = new System.Drawing.Size(144, 22);
             this.btCatalogosProducto.Text = "Productos";
             this.btCatalogosProducto.Click += new System.EventHandler(this.btCatalogosProducto_Click);
             // 
@@ -218,7 +218,7 @@
             // 
             this.btCatalogosAlumnos.Image = global::SACDumont.Properties.Resources.estudiante_universitario;
             this.btCatalogosAlumnos.Name = "btCatalogosAlumnos";
-            this.btCatalogosAlumnos.Size = new System.Drawing.Size(180, 22);
+            this.btCatalogosAlumnos.Size = new System.Drawing.Size(144, 22);
             this.btCatalogosAlumnos.Text = "Alumnos";
             this.btCatalogosAlumnos.Click += new System.EventHandler(this.btCatalogosAlumnos_Click);
             // 
@@ -226,7 +226,7 @@
             // 
             this.btCatalogosTutores.Image = global::SACDumont.Properties.Resources.tutor;
             this.btCatalogosTutores.Name = "btCatalogosTutores";
-            this.btCatalogosTutores.Size = new System.Drawing.Size(180, 22);
+            this.btCatalogosTutores.Size = new System.Drawing.Size(144, 22);
             this.btCatalogosTutores.Text = "Tutores";
             this.btCatalogosTutores.Click += new System.EventHandler(this.btCatalogosTutores_Click);
             // 
@@ -234,7 +234,7 @@
             // 
             this.btCatalogosUsuarios.Image = global::SACDumont.Properties.Resources.silueta_de_multiples_usuarios;
             this.btCatalogosUsuarios.Name = "btCatalogosUsuarios";
-            this.btCatalogosUsuarios.Size = new System.Drawing.Size(180, 22);
+            this.btCatalogosUsuarios.Size = new System.Drawing.Size(144, 22);
             this.btCatalogosUsuarios.Text = "Usuarios";
             this.btCatalogosUsuarios.Click += new System.EventHandler(this.btCatalogosUsuarios_Click);
             // 
@@ -242,7 +242,7 @@
             // 
             this.btPromociones.Image = global::SACDumont.Properties.Resources.promociones;
             this.btPromociones.Name = "btPromociones";
-            this.btPromociones.Size = new System.Drawing.Size(180, 22);
+            this.btPromociones.Size = new System.Drawing.Size(144, 22);
             this.btPromociones.Text = "Promociones";
             this.btPromociones.Click += new System.EventHandler(this.promocionesToolStripMenuItem_Click);
             // 
@@ -316,26 +316,27 @@
             this.btRptAdministrativoCorteDirio,
             this.btRptAdministrativoCorteFecha});
             this.btRptAdministrativoCorte.Name = "btRptAdministrativoCorte";
-            this.btRptAdministrativoCorte.Size = new System.Drawing.Size(167, 22);
+            this.btRptAdministrativoCorte.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoCorte.Text = "Corte";
             // 
             // btRptAdministrativoCorteDirio
             // 
             this.btRptAdministrativoCorteDirio.Name = "btRptAdministrativoCorteDirio";
-            this.btRptAdministrativoCorteDirio.Size = new System.Drawing.Size(126, 22);
+            this.btRptAdministrativoCorteDirio.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoCorteDirio.Text = "Diario";
+            this.btRptAdministrativoCorteDirio.Click += new System.EventHandler(this.btRptAdministrativoCorteDirio_Click);
             // 
             // btRptAdministrativoCorteFecha
             // 
             this.btRptAdministrativoCorteFecha.Name = "btRptAdministrativoCorteFecha";
-            this.btRptAdministrativoCorteFecha.Size = new System.Drawing.Size(126, 22);
+            this.btRptAdministrativoCorteFecha.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoCorteFecha.Text = "Por Fecha";
             // 
             // btRptAdministrativoBecas
             // 
             this.btRptAdministrativoBecas.Image = global::SACDumont.Properties.Resources.beca_educativa;
             this.btRptAdministrativoBecas.Name = "btRptAdministrativoBecas";
-            this.btRptAdministrativoBecas.Size = new System.Drawing.Size(167, 22);
+            this.btRptAdministrativoBecas.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoBecas.Text = "Becas";
             this.btRptAdministrativoBecas.Visible = false;
             // 
@@ -343,7 +344,7 @@
             // 
             this.btRptAdministrativoFacturas.Image = global::SACDumont.Properties.Resources.facturacion;
             this.btRptAdministrativoFacturas.Name = "btRptAdministrativoFacturas";
-            this.btRptAdministrativoFacturas.Size = new System.Drawing.Size(167, 22);
+            this.btRptAdministrativoFacturas.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoFacturas.Text = "Facturas";
             this.btRptAdministrativoFacturas.Visible = false;
             // 
@@ -351,7 +352,7 @@
             // 
             this.btRptAdministrativoUniformes.Image = global::SACDumont.Properties.Resources.camisa;
             this.btRptAdministrativoUniformes.Name = "btRptAdministrativoUniformes";
-            this.btRptAdministrativoUniformes.Size = new System.Drawing.Size(167, 22);
+            this.btRptAdministrativoUniformes.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoUniformes.Text = "Uniformes";
             this.btRptAdministrativoUniformes.Visible = false;
             // 
@@ -359,7 +360,7 @@
             // 
             this.btRptAdministrativoActividad.Image = global::SACDumont.Properties.Resources.lista_de_asistentes;
             this.btRptAdministrativoActividad.Name = "btRptAdministrativoActividad";
-            this.btRptAdministrativoActividad.Size = new System.Drawing.Size(167, 22);
+            this.btRptAdministrativoActividad.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoActividad.Text = "Actividad Usuario";
             this.btRptAdministrativoActividad.Visible = false;
             // 
