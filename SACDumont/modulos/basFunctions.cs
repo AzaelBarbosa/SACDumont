@@ -361,6 +361,82 @@ namespace SACDumont.Modulos
             });
         }
 
+        public void ExportarYMostrarPDF2DT(string reporteName, DataTable datos, DataTable datos2, string nombreDatos, string nombreDatos2)
+        {
+
+            // 2. Cargar el reporte
+            string rutaFrx = Path.Combine(Application.StartupPath, "Reportes", reporteName);
+            Report report = new Report();
+            report.Load(rutaFrx);
+
+            report.RegisterData(datos, nombreDatos);
+            report.RegisterData(datos2, nombreDatos2);
+            report.GetDataSource(nombreDatos).Enabled = true;
+            report.GetDataSource(nombreDatos2).Enabled = true;
+
+
+            // 3. Forzar carga de Microsoft.CSharp
+            System.Runtime.CompilerServices.RuntimeHelpers
+                .RunClassConstructor(typeof(Microsoft.CSharp.RuntimeBinder.Binder).TypeHandle);
+
+            // 4. Preparar y exportar
+            report.Prepare();
+            string rutaPDF = Path.Combine(Application.StartupPath, "Reporte.pdf");
+            report.Export(new PDFSimpleExport(), rutaPDF);
+
+            string rutaSumatra = Path.Combine(Application.StartupPath, "PDF", "SumatraPDF.exe");
+
+            if (!File.Exists(rutaSumatra))
+            {
+                MessageBox.Show("No se encontró SumatraPDF.exe. Asegúrate de colocarlo junto a la aplicación.");
+                return;
+            }
+
+            // 5. Abrir visor PDF predeterminado
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = rutaPDF,
+                UseShellExecute = true
+            });
+        }
+
+        public static void ExportarYMostrarPDF3DT(string reporteName, DataTable datos, DataTable datos2, DataTable datos3, string nombreDatos, string nombreDatos2, string nombreDatos3)
+        {
+
+            // 2. Cargar el reporte
+            string rutaFrx = Path.Combine(Application.StartupPath, "Reportes", reporteName);
+            Report report = new Report();
+            report.Load(rutaFrx);
+
+            report.RegisterData(datos, nombreDatos);
+            report.RegisterData(datos2, nombreDatos2);
+            report.RegisterData(datos3, nombreDatos3);
+
+
+            // 3. Forzar carga de Microsoft.CSharp
+            System.Runtime.CompilerServices.RuntimeHelpers
+                .RunClassConstructor(typeof(Microsoft.CSharp.RuntimeBinder.Binder).TypeHandle);
+
+            // 4. Preparar y exportar
+            report.Prepare();
+            string rutaPDF = Path.Combine(Application.StartupPath, "Reporte.pdf");
+            report.Export(new PDFSimpleExport(), rutaPDF);
+
+            string rutaSumatra = Path.Combine(Application.StartupPath, "PDF", "SumatraPDF.exe");
+
+            if (!File.Exists(rutaSumatra))
+            {
+                MessageBox.Show("No se encontró SumatraPDF.exe. Asegúrate de colocarlo junto a la aplicación.");
+                return;
+            }
+
+            // 5. Abrir visor PDF predeterminado
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = rutaPDF,
+                UseShellExecute = true
+            });
+        }
         public void ExportareImprimirSinAbrir(int idMov)
         {
             if (idMov == 0) return;
