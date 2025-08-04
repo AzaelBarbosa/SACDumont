@@ -279,21 +279,21 @@
             // 
             this.btRptAcdemicosAsistencia.Image = global::SACDumont.Properties.Resources.contrato;
             this.btRptAcdemicosAsistencia.Name = "btRptAcdemicosAsistencia";
-            this.btRptAcdemicosAsistencia.Size = new System.Drawing.Size(168, 22);
+            this.btRptAcdemicosAsistencia.Size = new System.Drawing.Size(180, 22);
             this.btRptAcdemicosAsistencia.Text = "Lista Asistencia";
             // 
             // btRptAcdemicosCumple
             // 
             this.btRptAcdemicosCumple.Image = global::SACDumont.Properties.Resources.cumpleanos;
             this.btRptAcdemicosCumple.Name = "btRptAcdemicosCumple";
-            this.btRptAcdemicosCumple.Size = new System.Drawing.Size(168, 22);
+            this.btRptAcdemicosCumple.Size = new System.Drawing.Size(180, 22);
             this.btRptAcdemicosCumple.Text = "Lista Cumpleaños";
             // 
             // btRptAcdemicosAlumnos
             // 
             this.btRptAcdemicosAlumnos.Image = global::SACDumont.Properties.Resources.contrato;
             this.btRptAcdemicosAlumnos.Name = "btRptAcdemicosAlumnos";
-            this.btRptAcdemicosAlumnos.Size = new System.Drawing.Size(168, 22);
+            this.btRptAcdemicosAlumnos.Size = new System.Drawing.Size(180, 22);
             this.btRptAcdemicosAlumnos.Text = "Lista Alumnos";
             this.btRptAcdemicosAlumnos.Click += new System.EventHandler(this.btRptAcdemicosAlumnos_Click);
             // 
@@ -354,7 +354,6 @@
             this.btRptAdministrativoUniformes.Name = "btRptAdministrativoUniformes";
             this.btRptAdministrativoUniformes.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoUniformes.Text = "Uniformes";
-            this.btRptAdministrativoUniformes.Visible = false;
             // 
             // btRptAdministrativoActividad
             // 
