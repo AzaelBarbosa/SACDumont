@@ -279,7 +279,7 @@
             // 
             this.btRptAcdemicosAsistencia.Image = global::SACDumont.Properties.Resources.contrato;
             this.btRptAcdemicosAsistencia.Name = "btRptAcdemicosAsistencia";
-            this.btRptAcdemicosAsistencia.Size = new System.Drawing.Size(180, 22);
+            this.btRptAcdemicosAsistencia.Size = new System.Drawing.Size(168, 22);
             this.btRptAcdemicosAsistencia.Text = "Lista Asistencia";
             this.btRptAcdemicosAsistencia.Click += new System.EventHandler(this.btRptAcdemicosAsistencia_Click);
             // 
@@ -287,14 +287,14 @@
             // 
             this.btRptAcdemicosCumple.Image = global::SACDumont.Properties.Resources.cumpleanos;
             this.btRptAcdemicosCumple.Name = "btRptAcdemicosCumple";
-            this.btRptAcdemicosCumple.Size = new System.Drawing.Size(180, 22);
+            this.btRptAcdemicosCumple.Size = new System.Drawing.Size(168, 22);
             this.btRptAcdemicosCumple.Text = "Lista Cumpleaños";
             // 
             // btRptAcdemicosAlumnos
             // 
             this.btRptAcdemicosAlumnos.Image = global::SACDumont.Properties.Resources.contrato;
             this.btRptAcdemicosAlumnos.Name = "btRptAcdemicosAlumnos";
-            this.btRptAcdemicosAlumnos.Size = new System.Drawing.Size(180, 22);
+            this.btRptAcdemicosAlumnos.Size = new System.Drawing.Size(168, 22);
             this.btRptAcdemicosAlumnos.Text = "Lista Alumnos";
             this.btRptAcdemicosAlumnos.Click += new System.EventHandler(this.btRptAcdemicosAlumnos_Click);
             // 
@@ -332,6 +332,7 @@
             this.btRptAdministrativoCorteFecha.Name = "btRptAdministrativoCorteFecha";
             this.btRptAdministrativoCorteFecha.Size = new System.Drawing.Size(126, 22);
             this.btRptAdministrativoCorteFecha.Text = "Por Fecha";
+            this.btRptAdministrativoCorteFecha.Click += new System.EventHandler(this.btRptAdministrativoCorteFecha_Click);
             // 
             // btRptAdministrativoBecas
             // 
