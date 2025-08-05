@@ -132,8 +132,6 @@ namespace SACDumont.Catalogos
                 producto_Ciclo = db.ProductoCiclo.FirstOrDefault(t => t.id_producto == idProducto && t.id_ciclo == basGlobals.iCiclo);
                 if (MessageBox.Show($"Esta por eliminar el producto:" + Environment.NewLine + Environment.NewLine + $"{productos.descripcion}" + Environment.NewLine + "¿Desea Continuar?", "Productos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    db.Productos.Remove(productos);
-                    db.Entry(productos).State = System.Data.Entity.EntityState.Deleted;
                     db.ProductoCiclo.Remove(producto_Ciclo);
                     db.Entry(producto_Ciclo).State = System.Data.Entity.EntityState.Deleted;
                     var result = db.SaveChanges();

@@ -622,6 +622,9 @@
     <Content Include="Reportes\ListaAlumnos.frx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Reportes\TicketMovimientoImpresora.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\transferir-datos.png" />
     <None Include="Resources\detalle.png" />
     <None Include="Resources\cicloescolar.png" />

@@ -99,7 +99,7 @@ namespace SACDumont.Listados
                 MessageBox.Show("Debe configurar una impresora en la configuración del sistema.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            ExportareImprimirSinAbrir();
+            ExportarYMostrarPDF();
         }
         protected override void Cerrar()
         {
@@ -357,22 +357,65 @@ namespace SACDumont.Listados
 
         private void ExportarYMostrarPDF()
         {
-            // 1. Crear DataTable
-            DataTable dt = new DataTable("TicketData");
-            dt.Columns.Add("Producto", typeof(string));
-            dt.Columns.Add("Cantidad", typeof(int));
-            dt.Columns.Add("PrecioUnitario", typeof(decimal));
-            dt.Columns.Add("Total", typeof(decimal));
-            dt.Columns.Add("Recargo", typeof(decimal));
-            dt.Rows.Add("Inscripción", 1, 500, 600, 100);
-            dt.Rows.Add("Cuota Septiembre", 1, 800, 800, 0);
-            dt.Rows.Add("Uniforme", 2, 300, 600, 0);
+            if (idMov == 0) return;
 
+            DataTable dataTable = new DataTable();
+            Movimientos mov = new Movimientos();
+            Inscripciones ins = new Inscripciones();
+            List<ReportesDTO> reportesDTO = new List<ReportesDTO>();
+            using (var db = new DumontContext())
+            {
+                mov = db.Movimientos.Find(idMov);
+                ins = db.Inscripciones.Where(i => i.matricula == mov.id_matricula && i.id_ciclo == basGlobals.iCiclo).FirstOrDefault();
+
+                var lista = db.Movimientos
+                  .Where(m => m.id_movimiento == idMov)
+                  .Include(m => m.MovimientosProductos)
+                  .Include(m => m.MovimientosCobros)
+                  .SelectMany(m => m.MovimientosProductos, (m, mp) => new ReportesDTO
+                  {
+                      Producto = db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
+                      Cantidad = mp.cantidad,
+                      PrecioUnitario = mp.cantidad * mp.monto,
+                      Total = mp.monto + mp.monto_recargo,
+                      Recargo = mp.monto_recargo,
+                      Folio = m.id_movimiento,
+                      Fecha = m.fechahora,
+                      Grupo = db.Catalogos.Where(c => c.valor == ins.id_grupo && c.tipo_catalogo == "Grupo").Select(c => c.descripcion).FirstOrDefault(),
+                      Matricula = m.id_matricula,
+                      Alumno = db.Alumnos
+                                  .Where(a => a.matricula == m.id_matricula)
+                                  .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
+                                  .FirstOrDefault(),
+                      MontoPendiente = m.montoTotal - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                      MontoPagado = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                  })
+                  .ToList();
+
+                reportesDTO = lista;
+            }
+
+            dataTable = basFunctions.ConvertToDataTable(reportesDTO);
             // 2. Cargar el reporte
             string rutaFrx = Path.Combine(Application.StartupPath, "Reportes", "TicketMovimient.frx");
             Report report = new Report();
             report.Load(rutaFrx);
-            report.RegisterData(dt, "TicketData");
+
+            report.SetParameterValue("pFolio", reportesDTO[0].Folio);
+            report.SetParameterValue("pFecha", reportesDTO[0].Fecha);
+            report.SetParameterValue("pGrupo", reportesDTO[0].Grupo);
+            report.SetParameterValue("pMatricula", reportesDTO[0].Matricula);
+            report.SetParameterValue("pAlumno", reportesDTO[0].Alumno);
+            if (mov.confirmado)
+            {
+                report.SetParameterValue("pPendienteConfirmar", "Pendiente de Confirmar");
+            }
+            else
+            {
+                report.SetParameterValue("pPendienteConfirmar", "");
+            }
+
+            report.RegisterData(dataTable, "TicketData");
             report.GetDataSource("TicketData").Enabled = true;
 
             // 3. Forzar carga de Microsoft.CSharp
@@ -383,6 +426,7 @@ namespace SACDumont.Listados
             report.Prepare();
             string rutaPDF = Path.Combine(Application.StartupPath, "Ticket.pdf");
             report.Export(new PDFSimpleExport(), rutaPDF);
+
 
             // 5. Abrir visor PDF predeterminado
             Process.Start(new ProcessStartInfo
@@ -443,7 +487,7 @@ namespace SACDumont.Listados
             report.SetParameterValue("pGrupo", reportesDTO[0].Grupo);
             report.SetParameterValue("pMatricula", reportesDTO[0].Matricula);
             report.SetParameterValue("pAlumno", reportesDTO[0].Alumno);
-            if (basConfiguracion.Transferencias)
+            if (mov.confirmado)
             {
                 report.SetParameterValue("pPendienteConfirmar", "Pendiente de Confirmar");
             }

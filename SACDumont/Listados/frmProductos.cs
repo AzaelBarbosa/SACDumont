@@ -50,6 +50,13 @@ namespace SACDumont.Listados
                 producto = db.Productos.Find(idProducto);
                 productoCiclo = db.ProductoCiclo.Find(idProdCiclo);
 
+                List<movimiento_productos> listaMov = db.MovimientoProductos.Where(t => t.id_producto == idProducto).ToList();
+                if (listaMov.Count > 0)
+                {
+                    MessageBox.Show($"El producto {producto.descripcion} ya se encuentra asignado a uno o mas movimientos." + Environment.NewLine + "No es posible eliminar el Producto", "ATENCION", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 if (MessageBox.Show($"Esta por eliminar el producto:" + Environment.NewLine + Environment.NewLine + $"{producto.descripcion}" + Environment.NewLine + "¿Desea Continuar?", "Productos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     db.ProductoCiclo.Remove(productoCiclo);
