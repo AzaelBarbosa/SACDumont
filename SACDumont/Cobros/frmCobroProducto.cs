@@ -192,6 +192,11 @@ namespace SACDumont.Cobros
                 var producto = db.Productos.Find(comboProductos1.IdProductoSeleccionado);
                 int productoAnterior = producto.id_producto_obligatorio ?? 0;
 
+                if (productoAnterior == 0)
+                {
+                    return true;
+                }
+
                 bool productoYaRegistrado = db.Movimientos
                 .Where(m => m.id_matricula == idAlumno && m.id_ciclo == basGlobals.iCiclo)
                 .SelectMany(m => m.MovimientosProductos)
