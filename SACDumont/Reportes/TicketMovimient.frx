@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="06/29/2025 09:41:38" ReportInfo.Modified="07/29/2025 21:17:21" ReportInfo.CreatorVersion="2025.2.0.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/29/2025 09:41:38" ReportInfo.Modified="08/04/2025 20:21:20" ReportInfo.CreatorVersion="2025.2.0.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +18,7 @@ namespace FastReport
 {
   public class ReportScript
   {
+
   }
 }
 </ScriptText>
@@ -38,11 +39,12 @@ namespace FastReport
     <Parameter Name="pMatricula" DataType="System.Int32" AsString=""/>
     <Parameter Name="pAlumno" DataType="System.String" AsString=""/>
     <Parameter Name="pGrado" DataType="System.String" AsString=""/>
+    <Parameter Name="pPendienteConfirmar" DataType="System.String" AsString=""/>
     <Total Name="Total" Expression="[TicketData.Total]" Evaluator="Data1"/>
   </Dictionary>
   <ReportPage Name="Page1" PaperWidth="80" PaperHeight="250" LeftMargin="5" TopMargin="5" RightMargin="5" BottomMargin="0" MirrorMargins="true" Guides="264.6,264.6,264.6,0" Watermark.Font="Arial, 60pt" LastPageSource="15" FirstPageSource="15">
     <ReportTitleBand Name="ReportTitle1" Width="264.6"/>
-    <PageHeaderBand Name="PageHeader1" Top="1.45" Width="264.6" Height="189" CanShrink="true" Guides="18.9">
+    <PageHeaderBand Name="PageHeader1" Top="3.2" Width="264.6" Height="189" CanShrink="true" Guides="18.9">
       <TextObject Name="Text2" Left="47.25" Top="170.1" Width="151.2" Height="18.9" Text="Concepto" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 9pt"/>
       <TextObject Name="Text4" Top="170.1" Width="47.25" Height="18.9" Text="Cant." HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 9pt"/>
       <TextObject Name="Text10" Left="207.9" Top="170.1" Width="56.7" Height="18.9" Text="Total" HorzAlign="Center" VertAlign="Center" Font="Microsoft Sans Serif, 9pt"/>
@@ -61,13 +63,13 @@ namespace FastReport
       <TextObject Name="Text46" Left="85.05" Top="113.4" Width="56.7" Height="18.9" Text="Grado:" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 6.75pt"/>
       <TextObject Name="Text47" Left="132.3" Top="113.4" Width="56.7" Height="18.9" Text="[pGrado]" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 6pt, style=Bold"/>
     </PageHeaderBand>
-    <DataBand Name="Data1" Top="191.91" Width="264.6" Height="28.35" CanShrink="true" Guides="0,0,0,0" DataSource="TicketData">
+    <DataBand Name="Data1" Top="195.4" Width="264.6" Height="28.35" CanShrink="true" Guides="0,0,0,0" DataSource="TicketData">
       <LineObject Name="Line2" Width="264.6"/>
       <TextObject Name="Text3" Top="9.45" Width="47.25" Height="18.9" Text="[TicketData.Cantidad]" HorzAlign="Center" Font="Century Gothic, 6.75pt"/>
       <TextObject Name="Text38" Left="198.45" Top="9.45" Width="66.15" Height="18.9" Text="[TicketData.PrecioUnitario]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 6.75pt" Trimming="EllipsisCharacter"/>
       <TextObject Name="Text1" Left="47.25" Top="9.45" Width="151.2" Height="18.9" Text="[TicketData.Producto]" HorzAlign="Center" Font="Century Gothic, 6pt"/>
     </DataBand>
-    <ReportSummaryBand Name="ReportSummary1" Top="221.71" Width="264.6" Height="415.8" CanShrink="true">
+    <ReportSummaryBand Name="ReportSummary1" Top="226.95" Width="264.6" Height="444.15" CanShrink="true">
       <TextObject Name="Text35" Top="28.35" Width="75.6" Height="18.9" Text="Recargos:" HorzAlign="Right" VertAlign="Center" Font="Century Gothic, 8pt"/>
       <TextObject Name="Text36" Left="75.6" Top="28.35" Width="66.15" Height="18.9" Text="[TicketData.Recargo]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 6.75pt" Trimming="EllipsisCharacter"/>
       <TextObject Name="Text34" Top="66.15" Width="47.25" Height="18.9" Text="Resta:" HorzAlign="Right" VertAlign="Center" Font="Century Gothic, 9pt"/>
@@ -78,11 +80,12 @@ namespace FastReport
       <TextObject Name="Text45" Left="198.45" Top="66.15" Width="66.15" Height="18.9" Text="[TicketData.MontoPagado]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 6.78pt" Trimming="EllipsisCharacter"/>
       <LineObject Name="Line3" Top="85.05" Width="264.6"/>
       <TextObject Name="Text39" Top="85.05" Width="264.6" Height="28.35" Text="Documento valido con nombre y firma de cajera. " HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 9pt"/>
-      <TextObject Name="Text40" Top="151.2" Width="264.6" Height="18.9" Text="__________________________________________" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 9pt"/>
-      <TextObject Name="Text41" Top="170.1" Width="264.6" Height="18.9" Text="Cajera" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 9pt"/>
-      <TextObject Name="Text42" Top="189" Width="264.6" Height="132.3" Text="Las condiciones de pago de los conceptos realizados al Colegio se encuentran descritos en el Acuerdo de Convivencia Escolar. &#13;&#10;Documento únicamente valido para el ciclo escolar que se indica. Verificar la información aquí descrita. &#13;&#10;Recordatorio: Los conceptos causan un 10% de recargo si se pagan después de su fecha de venci&#13;&#10;miento estipulada en el Reporte de Inversión Escolar." HorzAlign="Justify" VertAlign="Center" Font="Century Gothic, 6.75pt"/>
-      <TextObject Name="Text43" Top="321.3" Width="264.6" Height="85.05" Text="Dudas o comentarios: &#13;&#10;&#13;&#10;Tels.: 899-929-5242 y 899-929-2767 &#13;&#10;WhatsApp: 899-164-7166 &#13;&#10;Correo Electrónico: &#13;&#10;dumontcolegio@gmail.com " HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 9pt"/>
+      <TextObject Name="Text40" Top="198.45" Width="264.6" Height="18.9" Text="__________________________________________" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 9pt"/>
+      <TextObject Name="Text41" Top="217.35" Width="264.6" Height="18.9" Text="Cajera" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 9pt"/>
+      <TextObject Name="Text42" Top="226.8" Width="264.6" Height="132.3" Text="Las condiciones de pago de los conceptos realizados al Colegio se encuentran descritos en el Acuerdo de Convivencia Escolar. &#13;&#10;Documento únicamente valido para el ciclo escolar que se indica. Verificar la información aquí descrita. &#13;&#10;Recordatorio: Los conceptos causan un 10% de recargo si se pagan después de su fecha de venci&#13;&#10;miento estipulada en el Reporte de Inversión Escolar." HorzAlign="Justify" VertAlign="Center" Font="Century Gothic, 6.75pt"/>
+      <TextObject Name="Text43" Top="359.1" Width="264.6" Height="85.05" Text="Dudas o comentarios: &#13;&#10;&#13;&#10;Tels.: 899-929-5242 y 899-929-2767 &#13;&#10;WhatsApp: 899-164-7166 &#13;&#10;Correo Electrónico: &#13;&#10;dumontcolegio@gmail.com " HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 9pt"/>
       <LineObject Name="Line4" Top="56.7" Width="264.6"/>
+      <TextObject Name="Text48" Top="122.85" Width="264.6" Height="18.9" Text="[pPendienteConfirmar]" HorzAlign="Center" Font="Century Gothic, 7pt"/>
     </ReportSummaryBand>
   </ReportPage>
 </Report>

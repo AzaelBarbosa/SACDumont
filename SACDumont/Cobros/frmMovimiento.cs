@@ -333,6 +333,15 @@ namespace SACDumont.Cobros
             report.SetParameterValue("pGrupo", reportesDTO[0].Grupo);
             report.SetParameterValue("pMatricula", reportesDTO[0].Matricula);
             report.SetParameterValue("pAlumno", reportesDTO[0].Alumno);
+            if (basConfiguracion.Transferencias)
+            {
+                report.SetParameterValue("pPendienteConfirmar", "Pendiente de Confirmar");
+            }
+            else
+            {
+                report.SetParameterValue("pPendienteConfirmar", "");
+            }
+
 
             report.RegisterData(dataTable, "TicketData");
             report.GetDataSource("TicketData").Enabled = true;
