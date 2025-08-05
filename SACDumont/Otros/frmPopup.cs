@@ -27,7 +27,7 @@ namespace SACDumont.Otros
             {
                 if (tipoReporte == "ListaAsistencia")
                 {
-                    if (cboGrupo.IDValor != 0 && cboGrado.IDValor != 0)
+                    if (cboGrupo.IDValor != 4 && cboGrado.IDValor != 0)
                     {
                         basFunctions.AlumnosExportarYMostrarPDF((int)cboGrupo.IDValor, (int)cboGrado.IDValor);
                     }

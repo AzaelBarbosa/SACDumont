@@ -526,6 +526,7 @@ namespace SACDumont.Modulos
         public static void AlumnosExportarYMostrarPDF(int idGrupo, int idGrado)
         {
             // 1. Crear DataTable
+            string nombreReporte = "Reporte";
             DataTable dataTable = new DataTable();
             List<AlumnosDTO> alumnosDTO = new List<AlumnosDTO>();
             using (var db = new DumontContext())
@@ -545,6 +546,11 @@ namespace SACDumont.Modulos
                   })
                   .ToList();
 
+                if (lista.Count > 0)
+                {
+                    nombreReporte = lista[0].Grado;
+                }
+
                 alumnosDTO = lista;
             }
 
@@ -562,7 +568,7 @@ namespace SACDumont.Modulos
 
             // 4. Preparar y exportar
             report.Prepare();
-            string rutaPDF = Path.Combine(Application.StartupPath, "Ticket.pdf");
+            string rutaPDF = Path.Combine(Application.StartupPath, $"{nombreReporte}.pdf");
             report.Export(new PDFSimpleExport(), rutaPDF);
 
             // 5. Abrir visor PDF predeterminado
