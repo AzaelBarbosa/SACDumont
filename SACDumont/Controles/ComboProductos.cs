@@ -50,6 +50,7 @@ namespace SACDumont.Controles
             _datos.Clear();
             _datos = sqlServer.ExecSQLReturnDT(SqlQuery, "Productos");
             bs.DataSource = _datos;
+            bs.Sort = "fecha_vencimiento ASC";
         }
 
         private void FormatoCeldas(DataGridView dgv)

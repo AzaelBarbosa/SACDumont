@@ -35,6 +35,10 @@ namespace SACDumont.Listados
         int estatusMovimiento = basGlobals.estatusMovimiento;
         basSql sql = new basSql();
         int idMov = 0;
+        Movimientos movimientos = new Movimientos();
+        List<movimiento_productos> movimientosProductos = new List<movimiento_productos>();
+        List<cobros> movimientosCobros = new List<cobros>();
+
         BindingSource bs = new BindingSource();
         #endregion
 
@@ -75,7 +79,31 @@ namespace SACDumont.Listados
         }
         protected override void Eliminar()
         {
-            // Implementar la lógica para eliminar el movimiento
+            // Implementar la lógica para eliminar el producto
+            if (idMov == 0) return;
+
+            using (var db = new DumontContext())
+            {
+                movimientos = db.Movimientos.Find(idMov);
+                movimientosProductos = db.MovimientoProductos.Where(mp => mp.id_movimiento == idMov).ToList();
+                movimientosCobros = db.MovimientoCobros.Where(mc => mc.id_movimiento == idMov).ToList();
+
+                if (MessageBox.Show($"Esta por eliminar el movimiento:" + Environment.NewLine + Environment.NewLine + $"{movimientos.id_movimiento}" + Environment.NewLine + "¿Desea Continuar?", "Movimientos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    db.Movimientos.Remove(movimientos);
+                    db.Entry(movimientos).State = System.Data.Entity.EntityState.Deleted;
+                    db.MovimientoProductos.RemoveRange(movimientosProductos);
+                    db.Entry(movimientosProductos).State = System.Data.Entity.EntityState.Deleted;
+                    db.MovimientoCobros.RemoveRange(movimientosCobros);
+                    db.Entry(movimientosCobros).State = System.Data.Entity.EntityState.Deleted;
+                    var result = db.SaveChanges();
+                    if (result == 1)
+                    {
+                        MessageBox.Show("Movimiento eliminado correctamente", "Movimientos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        CargarMovimientos();
+                    }
+                }
+            }
         }
         protected override void Imprimir()
         {
@@ -203,7 +231,7 @@ namespace SACDumont.Listados
             else
             {
                 dtMovimientos = sqlServer.ExecSQLReturnDT($@"SELECT m.id_movimiento ,m.fechahora AS Fecha, p.descripcion AS Producto, a.appaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, 
-                                                        m.montoTotal AS Total, m.montoTotal - (SELECT SUM(monto) FROM cobros WHERE id_movimiento = m.id_movimiento) AS MontoPendiente, m.porcentaje_descuento AS Descuento, m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento,
+                                                        m.montoTotal AS Total, (m.montoTotal - m.monto_descuento)  - (SELECT SUM(monto) FROM cobros WHERE id_movimiento = m.id_movimiento) AS MontoPendiente, m.porcentaje_descuento AS Descuento, m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento,
                                                         catE.descripcion AS Estatus, m.confirmado
                                                         FROM movimientos m
                                                         INNER JOIN movimiento_productos mp ON m.id_movimiento = mp.id_movimiento

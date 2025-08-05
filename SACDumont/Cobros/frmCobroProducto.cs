@@ -35,6 +35,14 @@ namespace SACDumont.Cobros
         }
         protected override void Guardar()
         {
+            if (strConcepto == Conceptos.COLEGIATURA.ToString() | strConcepto == Conceptos.INSCRIPCION.ToString())
+            {
+                if (ValidarYaCobrado())
+                {
+                    MessageBox.Show("El producto seleccionado ya fue cobrado", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
             // Implementar la lógica para guardar el movimiento  
             if (comboProductos1.IdProductoSeleccionado != null)
             {
@@ -132,9 +140,7 @@ namespace SACDumont.Cobros
             }
 
             comboProductos1.SqlQuery = $@"SELECT p.id_producto, p.descripcion, p.concepto, pc.fecha_vencimiento, pc.precio FROM productos p   
-                                           INNER JOIN producto_ciclo pc ON pc.id_producto = p.id_producto  
-                                           LEFT JOIN movimiento_productos mp ON mp.id_producto = p.id_producto  
-                                           LEFT JOIN movimientos m ON m.id_movimiento = mp.id_movimiento   
+                                           INNER JOIN producto_ciclo pc ON pc.id_producto = p.id_producto   
                                            WHERE pc.id_ciclo = {basGlobals.iCiclo} AND pc.id_grupo in (4,{idGrupo}) AND p.concepto = '{strConcepto}'";
             comboProductos1.Inicializar();
         }
@@ -175,15 +181,6 @@ namespace SACDumont.Cobros
 
         private void comboProductos1_OnCobroSeleccionado(DataRow obj)
         {
-
-            if (strConcepto == Conceptos.COLEGIATURA.ToString() | strConcepto == Conceptos.INSCRIPCION.ToString())
-            {
-                if (ValidarYaCobrado())
-                {
-                    MessageBox.Show("El producto seleccionado ya fue cobrado", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
 
             nCantidad.Enabled = true;
             DateTime fechaVencimiento = Convert.ToDateTime(obj["fecha_vencimiento"]);

@@ -81,7 +81,7 @@ namespace SACDumont.Cobros
                     MessageBox.Show("El monto total de los productos debe ser mayor a cero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if ((basGlobals.listaProductos.Sum(p => p.monto) + basGlobals.listaProductos.Sum(p => p.monto_recargo)) - basGlobals.listaCobros.Sum(p => p.monto) > 0)
+                if ((basGlobals.listaProductos.Sum(p => p.monto) + basGlobals.listaProductos.Sum(p => p.monto_recargo) - basGlobals.Movimiento.beca_descuento - basGlobals.Movimiento.monto_descuento) - basGlobals.listaCobros.Sum(p => p.monto) > 0)
                 {
                     id_estatusmovimiento = (int)modulos.EstatusMovimiento.Abono; // Si hay saldo pendiente, el estatus es Pendiente
                 }
@@ -396,7 +396,7 @@ namespace SACDumont.Cobros
                 cboAlumnos.Enabled = false;
                 txImporte.Text = (basGlobals.listaProductos.Sum(p => p.monto)).ToString("C2");
                 txRecargo.Text = (basGlobals.listaProductos.Sum(p => p.monto_recargo)).ToString("C2");
-                txImportePte.Text = (basGlobals.Movimiento.montoTotal - basGlobals.listaCobros.Sum(p => p.monto)).ToString("C2");
+                txImportePte.Text = (basGlobals.Movimiento.montoTotal - basGlobals.Movimiento.monto_descuento - basGlobals.Movimiento.beca_descuento - basGlobals.listaCobros.Sum(p => p.monto)).ToString("C2");
                 txTotal.Text = (basGlobals.Movimiento.montoTotal).ToString("C");
                 txDescuento.Text = (basGlobals.Movimiento.monto_descuento).ToString("C");
                 txBeca.Text = (basGlobals.Movimiento.beca_descuento).ToString("C");
@@ -645,6 +645,7 @@ namespace SACDumont.Cobros
                 txImporte.Text = Convert.ToDecimal(txImporte.Text).ToString("C2");
                 txRecargo.Text = basGlobals.listaProductos.Sum(p => p.monto_recargo).ToString();
                 txRecargo.Text = Convert.ToDecimal(txRecargo.Text).ToString("C2");
+                txDescuento.Text = ((promocion / 100m) * basGlobals.listaProductos.Sum(p => p.monto)).ToString("C2");
                 txTotal.Text = (Convert.ToDecimal(txImporte.Text.Replace("$", "").Replace(",", "").Trim()) + Convert.ToDecimal(txRecargo.Text.Replace("$", "").Replace(",", "").Trim())).ToString("C2");
                 txImportePte.Text = txTotal.Text;
             }
