@@ -29,6 +29,7 @@ namespace SACDumont.Dtos
         public string Grado { get; set; }
         public string Grupo { get; set; }
         public string Ciclo { get; set; }
+        public string Matricula { get; set; }
     }
 
     public class CorteDiarioDTO

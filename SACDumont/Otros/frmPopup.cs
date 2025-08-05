@@ -27,9 +27,42 @@ namespace SACDumont.Otros
             {
                 if (tipoReporte == "ListaAsistencia")
                 {
-                    if (cboGrupo.IDValor != 0)
+                    if (cboGrupo.IDValor != 0 && cboGrado.IDValor != 0)
                     {
                         basFunctions.AlumnosExportarYMostrarPDF((int)cboGrupo.IDValor, (int)cboGrado.IDValor);
+                    }
+                    else
+                    {
+                        switch (cboGrupo.IDValor)
+                        {
+                            case 1:
+
+                                for (int i = 1; i <= 3; i++)
+                                {
+                                    basFunctions.AlumnosExportarYMostrarPDF((int)cboGrupo.IDValor, i);
+                                }
+                                break;
+
+                            case 2:
+
+                                for (int i = 4; i <= 9; i++)
+                                {
+                                    basFunctions.AlumnosExportarYMostrarPDF((int)cboGrupo.IDValor, i);
+                                }
+                                break;
+
+                            case 3:
+
+                                for (int i = 10; i <= 12; i++)
+                                {
+                                    basFunctions.AlumnosExportarYMostrarPDF((int)cboGrupo.IDValor, i);
+                                }
+                                break;
+
+                            default:
+                                // Código si no coincide ningún caso
+                                break;
+                        }
                     }
                 }
                 else if (tipoReporte == "ListaAlumno")
@@ -47,7 +80,8 @@ namespace SACDumont.Otros
                               Alumno = db.Alumnos
                                           .Where(a => a.matricula == m.matricula)
                                           .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
-                                          .FirstOrDefault()
+                                          .FirstOrDefault(),
+                              Matricula = m.matricula.ToString()
                           })
                           .ToList();
 

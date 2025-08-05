@@ -540,7 +540,8 @@ namespace SACDumont.Modulos
                       Alumno = db.Alumnos
                                   .Where(a => a.matricula == m.matricula)
                                   .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
-                                  .FirstOrDefault()
+                                  .FirstOrDefault(),
+                      Matricula = m.matricula.ToString()
                   })
                   .ToList();
 
