@@ -28,14 +28,10 @@ namespace SACDumont.modulos
 
     public enum Perfiles
     {
-        Director = 1,
+        Contabilidad = 1,
         Cajero = 2,
-        Coordinador = 3,
-        Administrador = 99,
-        Academico = 4,
+        Sistemas = 99,
         Capturista = 5,
-        Usuario = 6,
-        Docente = 7,
         Almacen = 8
     }
 

@@ -62,7 +62,7 @@ namespace SACDumont.Catalogos
             if (txtNombre.Text == "") { MessageBox.Show("El campo Nombre es obligatorio."); txtNombre.Focus(); return; }
             if (txtApPaterno.Text == "") { MessageBox.Show("El campo Apellido Paterno es obligatorio."); txtApPaterno.Focus(); return; }
             if (txtApMaterno.Text == "") { MessageBox.Show("El campo Apellido Materno es obligatorio."); txtApMaterno.Focus(); return; }
-            if (txtCurp.Text == "") { MessageBox.Show("El campo CURP es obligatorio."); txtCurp.Focus(); return; }
+            //if (txtCurp.Text == "") { MessageBox.Show("El campo CURP es obligatorio."); txtCurp.Focus(); return; }
             if (cmbEstadoNac.SelectedIndex == -1) { MessageBox.Show("El campo Estado Nacimiento es obligatorio."); cmbEstadoNac.Focus(); return; }
             if (cmbPais.SelectedIndex == -1) { MessageBox.Show("El campo País es obligatorio."); cmbPais.Focus(); return; }
 
@@ -356,7 +356,7 @@ namespace SACDumont.Catalogos
                     // Cargar las becas y promociones
                     var beca = db.Becas.FirstOrDefault(b => b.id_matricula == matricula && b.id_ciclo == basGlobals.iCiclo);
                     if (beca != null)
-                    {                        
+                    {
                         nPorBeca.Value = beca.porcentaje_beca;
                     }
                     else

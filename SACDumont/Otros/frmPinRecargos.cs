@@ -33,7 +33,7 @@ namespace SACDumont.Otros
         {
             using (var db = new DumontContext())
             {
-                usuarios = db.Usuarios.Where(u => u.id_perfil == (int)Perfiles.Administrador).ToList();
+                usuarios = db.Usuarios.Where(u => u.id_perfil == (int)Perfiles.Contabilidad).ToList();
 
                 cboUsuario.DataSource = usuarios;
                 cboUsuario.DisplayMember = "usuario";
