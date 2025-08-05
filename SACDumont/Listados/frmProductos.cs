@@ -62,7 +62,7 @@ namespace SACDumont.Listados
                     db.ProductoCiclo.Remove(productoCiclo);
                     db.Entry(productoCiclo).State = System.Data.Entity.EntityState.Deleted;
                     var result = db.SaveChanges();
-                    if (result == 1)
+                    if (result > 0)
                     {
                         MessageBox.Show("Producto eliminado correctamente", "Productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         CargarProductos();

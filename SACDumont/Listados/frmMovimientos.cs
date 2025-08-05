@@ -93,11 +93,9 @@ namespace SACDumont.Listados
                     db.Movimientos.Remove(movimientos);
                     db.Entry(movimientos).State = System.Data.Entity.EntityState.Deleted;
                     db.MovimientoProductos.RemoveRange(movimientosProductos);
-                    db.Entry(movimientosProductos).State = System.Data.Entity.EntityState.Deleted;
                     db.MovimientoCobros.RemoveRange(movimientosCobros);
-                    db.Entry(movimientosCobros).State = System.Data.Entity.EntityState.Deleted;
                     var result = db.SaveChanges();
-                    if (result == 1)
+                    if (result > 0)
                     {
                         MessageBox.Show("Movimiento eliminado correctamente", "Movimientos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         CargarMovimientos();
@@ -404,18 +402,18 @@ namespace SACDumont.Listados
                   {
                       Producto = db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
                       Cantidad = mp.cantidad,
-                      PrecioUnitario = mp.cantidad * mp.monto,
-                      Total = mp.monto + mp.monto_recargo,
+                      PrecioUnitario = mp.cantidad * mp.monto - m.beca_descuento - m.monto_descuento,
+                      Total = mp.monto + mp.monto_recargo - m.beca_descuento - m.monto_descuento,
                       Recargo = mp.monto_recargo,
                       Folio = m.id_movimiento,
                       Fecha = m.fechahora,
-                      Grupo = db.Catalogos.Where(c => c.valor == ins.id_grupo && c.tipo_catalogo == "Grupo").Select(c => c.descripcion).FirstOrDefault(),
+                      Grado = db.Catalogos.Where(c => c.valor == ins.id_grado && c.tipo_catalogo == "Grado").Select(c => c.descripcion).FirstOrDefault(),
                       Matricula = m.id_matricula,
                       Alumno = db.Alumnos
                                   .Where(a => a.matricula == m.id_matricula)
                                   .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
                                   .FirstOrDefault(),
-                      MontoPendiente = m.montoTotal - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                      MontoPendiente = m.montoTotal - m.beca_descuento - m.monto_descuento - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
                       MontoPagado = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
                   })
                   .ToList();
@@ -425,16 +423,17 @@ namespace SACDumont.Listados
 
             dataTable = basFunctions.ConvertToDataTable(reportesDTO);
             // 2. Cargar el reporte
-            string rutaFrx = Path.Combine(Application.StartupPath, "Reportes", "TicketMovimient.frx");
+            string rutaFrx = Path.Combine(Application.StartupPath, "Reportes", "TicketMovimientoImpresora.frx");
             Report report = new Report();
             report.Load(rutaFrx);
 
             report.SetParameterValue("pFolio", reportesDTO[0].Folio);
             report.SetParameterValue("pFecha", reportesDTO[0].Fecha);
             report.SetParameterValue("pGrupo", reportesDTO[0].Grupo);
+            report.SetParameterValue("pGrado", reportesDTO[0].Grado);
             report.SetParameterValue("pMatricula", reportesDTO[0].Matricula);
             report.SetParameterValue("pAlumno", reportesDTO[0].Alumno);
-            if (mov.confirmado)
+            if (!mov.confirmado)
             {
                 report.SetParameterValue("pPendienteConfirmar", "Pendiente de Confirmar");
             }
@@ -485,18 +484,18 @@ namespace SACDumont.Listados
                   {
                       Producto = db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
                       Cantidad = mp.cantidad,
-                      PrecioUnitario = mp.cantidad * mp.monto,
-                      Total = mp.monto + mp.monto_recargo,
+                      PrecioUnitario = mp.cantidad * mp.monto - m.beca_descuento - m.monto_descuento,
+                      Total = mp.monto + mp.monto_recargo - m.beca_descuento - m.monto_descuento,
                       Recargo = mp.monto_recargo,
                       Folio = m.id_movimiento,
                       Fecha = m.fechahora,
-                      Grupo = db.Catalogos.Where(c => c.valor == ins.id_grupo && c.tipo_catalogo == "Grupo").Select(c => c.descripcion).FirstOrDefault(),
+                      Grado = db.Catalogos.Where(c => c.valor == ins.id_grado && c.tipo_catalogo == "Grado").Select(c => c.descripcion).FirstOrDefault(),
                       Matricula = m.id_matricula,
                       Alumno = db.Alumnos
                                   .Where(a => a.matricula == m.id_matricula)
                                   .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
                                   .FirstOrDefault(),
-                      MontoPendiente = m.montoTotal - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                      MontoPendiente = m.montoTotal - m.beca_descuento - m.monto_descuento - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
                       MontoPagado = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
                   })
                   .ToList();
@@ -513,9 +512,10 @@ namespace SACDumont.Listados
             report.SetParameterValue("pFolio", reportesDTO[0].Folio);
             report.SetParameterValue("pFecha", reportesDTO[0].Fecha);
             report.SetParameterValue("pGrupo", reportesDTO[0].Grupo);
+            report.SetParameterValue("pGrado", reportesDTO[0].Grado);
             report.SetParameterValue("pMatricula", reportesDTO[0].Matricula);
             report.SetParameterValue("pAlumno", reportesDTO[0].Alumno);
-            if (mov.confirmado)
+            if (!mov.confirmado)
             {
                 report.SetParameterValue("pPendienteConfirmar", "Pendiente de Confirmar");
             }

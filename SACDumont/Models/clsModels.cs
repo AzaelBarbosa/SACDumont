@@ -159,6 +159,7 @@ namespace SACDumont.Models
         public string concepto { get; set; }
         public bool estado { get; set; }
         public string abreviatura { get; set; }
+        public int? id_producto_obligatorio { get; set; }
     }
     public class Producto_Ciclo
     {

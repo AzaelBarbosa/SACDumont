@@ -81,7 +81,7 @@ namespace SACDumont.Cobros
                     MessageBox.Show("El monto total de los productos debe ser mayor a cero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if ((basGlobals.listaProductos.Sum(p => p.monto) + basGlobals.listaProductos.Sum(p => p.monto_recargo) - basGlobals.Movimiento.beca_descuento - basGlobals.Movimiento.monto_descuento) - basGlobals.listaCobros.Sum(p => p.monto) > 0)
+                if ((basGlobals.listaProductos.Sum(p => p.monto) + basGlobals.listaProductos.Sum(p => p.monto_recargo) - Convert.ToDecimal(txBeca.Text.Replace("$", "").Replace(",", "").Trim()) - Convert.ToDecimal(txDescuento.Text.Replace("$", "").Replace(",", "").Trim())) - basGlobals.listaCobros.Sum(p => p.monto) > 0)
                 {
                     id_estatusmovimiento = (int)modulos.EstatusMovimiento.Abono; // Si hay saldo pendiente, el estatus es Pendiente
                 }
@@ -199,7 +199,10 @@ namespace SACDumont.Cobros
                                 MessageBox.Show("Debe configurar una impresora para tickets en la configuración del sistema.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
                             }
-                            ExportareImprimirSinAbrir(nuevo.id_movimiento);
+                            for (int i = 0; i < 2; i++)
+                            {
+                                ExportareImprimirSinAbrir(nuevo.id_movimiento);
+                            }
                         }
                     }
                 }
@@ -303,18 +306,18 @@ namespace SACDumont.Cobros
                   {
                       Producto = db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
                       Cantidad = mp.cantidad,
-                      PrecioUnitario = mp.cantidad * mp.monto,
-                      Total = mp.monto + mp.monto_recargo,
+                      PrecioUnitario = mp.cantidad * mp.monto - m.beca_descuento - m.monto_descuento,
+                      Total = mp.monto + mp.monto_recargo - m.beca_descuento - m.monto_descuento,
                       Recargo = mp.monto_recargo,
                       Folio = m.id_movimiento,
                       Fecha = m.fechahora,
-                      Grupo = db.Catalogos.Where(c => c.valor == ins.id_grupo && c.tipo_catalogo == "Grupo").Select(c => c.descripcion).FirstOrDefault(),
+                      Grado = db.Catalogos.Where(c => c.valor == ins.id_grado && c.tipo_catalogo == "Grado").Select(c => c.descripcion).FirstOrDefault(),
                       Matricula = m.id_matricula,
                       Alumno = db.Alumnos
                                   .Where(a => a.matricula == m.id_matricula)
                                   .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
                                   .FirstOrDefault(),
-                      MontoPendiente = m.montoTotal - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                      MontoPendiente = m.montoTotal - m.beca_descuento - m.monto_descuento - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
                       MontoPagado = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
                   })
                   .ToList();
@@ -331,6 +334,7 @@ namespace SACDumont.Cobros
             report.SetParameterValue("pFolio", reportesDTO[0].Folio);
             report.SetParameterValue("pFecha", reportesDTO[0].Fecha);
             report.SetParameterValue("pGrupo", reportesDTO[0].Grupo);
+            report.SetParameterValue("pGrado", reportesDTO[0].Grado);
             report.SetParameterValue("pMatricula", reportesDTO[0].Matricula);
             report.SetParameterValue("pAlumno", reportesDTO[0].Alumno);
             if (basConfiguracion.Transferencias)
@@ -397,7 +401,7 @@ namespace SACDumont.Cobros
                 txImporte.Text = (basGlobals.listaProductos.Sum(p => p.monto)).ToString("C2");
                 txRecargo.Text = (basGlobals.listaProductos.Sum(p => p.monto_recargo)).ToString("C2");
                 txImportePte.Text = (basGlobals.Movimiento.montoTotal - basGlobals.Movimiento.monto_descuento - basGlobals.Movimiento.beca_descuento - basGlobals.listaCobros.Sum(p => p.monto)).ToString("C2");
-                txTotal.Text = (basGlobals.Movimiento.montoTotal).ToString("C");
+                txTotal.Text = (basGlobals.Movimiento.montoTotal - basGlobals.Movimiento.monto_descuento - basGlobals.Movimiento.beca_descuento).ToString("C");
                 txDescuento.Text = (basGlobals.Movimiento.monto_descuento).ToString("C");
                 txBeca.Text = (basGlobals.Movimiento.beca_descuento).ToString("C");
                 chConfirmar.Checked = basGlobals.Movimiento.confirmado;

@@ -42,6 +42,12 @@ namespace SACDumont.Cobros
                     MessageBox.Show("El producto seleccionado ya fue cobrado", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
+                if (!ValidarColegiaturaAnt())
+                {
+                    MessageBox.Show("No puede cobrar la Colegiatura seleccionada, ya que aun tiene en adeudo la colegiatura anterior", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
             // Implementar la lógica para guardar el movimiento  
             if (comboProductos1.IdProductoSeleccionado != null)
@@ -174,6 +180,22 @@ namespace SACDumont.Cobros
                 .Where(m => m.id_matricula == idAlumno && m.id_ciclo == basGlobals.iCiclo)
                 .SelectMany(m => m.MovimientosProductos)
                 .Any(mp => mp.id_producto == comboProductos1.IdProductoSeleccionado);
+
+                return productoYaRegistrado;
+            }
+        }
+
+        private bool ValidarColegiaturaAnt()
+        {
+            using (var db = new DumontContext())
+            {
+                var producto = db.Productos.Find(comboProductos1.IdProductoSeleccionado);
+                int productoAnterior = producto.id_producto_obligatorio ?? 0;
+
+                bool productoYaRegistrado = db.Movimientos
+                .Where(m => m.id_matricula == idAlumno && m.id_ciclo == basGlobals.iCiclo)
+                .SelectMany(m => m.MovimientosProductos)
+                .Any(mp => mp.id_producto == productoAnterior);
 
                 return productoYaRegistrado;
             }

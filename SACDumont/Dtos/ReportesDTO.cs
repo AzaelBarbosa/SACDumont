@@ -16,6 +16,7 @@ namespace SACDumont.Dtos
         public int Folio { get; set; }
         public DateTime Fecha { get; set; }
         public string Grupo { get; set; }
+        public string Grado { get; set; }
         public int Matricula { get; set; }
         public string Alumno { get; set; }
         public string Ciclo { get; set; }
