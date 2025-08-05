@@ -281,6 +281,7 @@
             this.btRptAcdemicosAsistencia.Name = "btRptAcdemicosAsistencia";
             this.btRptAcdemicosAsistencia.Size = new System.Drawing.Size(180, 22);
             this.btRptAcdemicosAsistencia.Text = "Lista Asistencia";
+            this.btRptAcdemicosAsistencia.Click += new System.EventHandler(this.btRptAcdemicosAsistencia_Click);
             // 
             // btRptAcdemicosCumple
             // 
@@ -316,27 +317,27 @@
             this.btRptAdministrativoCorteDirio,
             this.btRptAdministrativoCorteFecha});
             this.btRptAdministrativoCorte.Name = "btRptAdministrativoCorte";
-            this.btRptAdministrativoCorte.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoCorte.Size = new System.Drawing.Size(167, 22);
             this.btRptAdministrativoCorte.Text = "Corte";
             // 
             // btRptAdministrativoCorteDirio
             // 
             this.btRptAdministrativoCorteDirio.Name = "btRptAdministrativoCorteDirio";
-            this.btRptAdministrativoCorteDirio.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoCorteDirio.Size = new System.Drawing.Size(126, 22);
             this.btRptAdministrativoCorteDirio.Text = "Diario";
             this.btRptAdministrativoCorteDirio.Click += new System.EventHandler(this.btRptAdministrativoCorteDirio_Click);
             // 
             // btRptAdministrativoCorteFecha
             // 
             this.btRptAdministrativoCorteFecha.Name = "btRptAdministrativoCorteFecha";
-            this.btRptAdministrativoCorteFecha.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoCorteFecha.Size = new System.Drawing.Size(126, 22);
             this.btRptAdministrativoCorteFecha.Text = "Por Fecha";
             // 
             // btRptAdministrativoBecas
             // 
             this.btRptAdministrativoBecas.Image = global::SACDumont.Properties.Resources.beca_educativa;
             this.btRptAdministrativoBecas.Name = "btRptAdministrativoBecas";
-            this.btRptAdministrativoBecas.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoBecas.Size = new System.Drawing.Size(167, 22);
             this.btRptAdministrativoBecas.Text = "Becas";
             this.btRptAdministrativoBecas.Visible = false;
             // 
@@ -344,7 +345,7 @@
             // 
             this.btRptAdministrativoFacturas.Image = global::SACDumont.Properties.Resources.facturacion;
             this.btRptAdministrativoFacturas.Name = "btRptAdministrativoFacturas";
-            this.btRptAdministrativoFacturas.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoFacturas.Size = new System.Drawing.Size(167, 22);
             this.btRptAdministrativoFacturas.Text = "Facturas";
             this.btRptAdministrativoFacturas.Visible = false;
             // 
@@ -352,14 +353,14 @@
             // 
             this.btRptAdministrativoUniformes.Image = global::SACDumont.Properties.Resources.camisa;
             this.btRptAdministrativoUniformes.Name = "btRptAdministrativoUniformes";
-            this.btRptAdministrativoUniformes.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoUniformes.Size = new System.Drawing.Size(167, 22);
             this.btRptAdministrativoUniformes.Text = "Uniformes";
             // 
             // btRptAdministrativoActividad
             // 
             this.btRptAdministrativoActividad.Image = global::SACDumont.Properties.Resources.lista_de_asistentes;
             this.btRptAdministrativoActividad.Name = "btRptAdministrativoActividad";
-            this.btRptAdministrativoActividad.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoActividad.Size = new System.Drawing.Size(167, 22);
             this.btRptAdministrativoActividad.Text = "Actividad Usuario";
             this.btRptAdministrativoActividad.Visible = false;
             // 

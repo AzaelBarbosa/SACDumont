@@ -83,6 +83,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cboGrado);
             this.Controls.Add(this.label10);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "frmPopup";
             this.Text = "frmPopup";
             this.Load += new System.EventHandler(this.frmPopup_Load);

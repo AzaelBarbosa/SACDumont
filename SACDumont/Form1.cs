@@ -297,7 +297,7 @@ namespace SACDumont
 
         private void btRptAcdemicosAlumnos_Click(object sender, EventArgs e)
         {
-            frmPopup frmPopup = new frmPopup();
+            frmPopup frmPopup = new frmPopup("ListaAlumno");
             frmPopup.Text = "Reporte Listado de Alumnos";
             frmPopup.ShowDialog();
         }
@@ -370,6 +370,13 @@ namespace SACDumont
             {
                 PreparaReporteCierre();
             }
+        }
+
+        private void btRptAcdemicosAsistencia_Click(object sender, EventArgs e)
+        {
+            frmPopup frmPopup = new frmPopup("ListaAsistencia");
+            frmPopup.Text = "Reporte Asistencia de Alumnos";
+            frmPopup.ShowDialog();
         }
     }
 }

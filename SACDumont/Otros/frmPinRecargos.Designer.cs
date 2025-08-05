@@ -39,7 +39,7 @@
             // 
             this.btSubmit.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btSubmit.Location = new System.Drawing.Point(0, 160);
-            this.btSubmit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btSubmit.Margin = new System.Windows.Forms.Padding(4);
             this.btSubmit.Name = "btSubmit";
             this.btSubmit.Size = new System.Drawing.Size(323, 28);
             this.btSubmit.TabIndex = 0;
@@ -50,7 +50,7 @@
             // txtPin
             // 
             this.txtPin.Location = new System.Drawing.Point(12, 113);
-            this.txtPin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPin.Margin = new System.Windows.Forms.Padding(4);
             this.txtPin.Name = "txtPin";
             this.txtPin.Size = new System.Drawing.Size(306, 22);
             this.txtPin.TabIndex = 1;
@@ -59,7 +59,7 @@
             // 
             this.cboUsuario.FormattingEnabled = true;
             this.cboUsuario.Location = new System.Drawing.Point(12, 39);
-            this.cboUsuario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.cboUsuario.Name = "cboUsuario";
             this.cboUsuario.Size = new System.Drawing.Size(306, 24);
             this.cboUsuario.TabIndex = 2;
@@ -93,7 +93,8 @@
             this.Controls.Add(this.txtPin);
             this.Controls.Add(this.btSubmit);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmPinRecargos";

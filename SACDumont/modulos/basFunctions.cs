@@ -325,7 +325,7 @@ namespace SACDumont.Modulos
             return dataTable;
         }
 
-        public void ExportarYMostrarPDF(string reporteName, DataTable datos, string nombreDatos)
+        public static void ExportarYMostrarPDF(string reporteName, DataTable datos, string nombreDatos)
         {
 
             // 2. Cargar el reporte
@@ -334,7 +334,6 @@ namespace SACDumont.Modulos
             report.Load(rutaFrx);
 
             report.RegisterData(datos, nombreDatos);
-            report.GetDataSource(nombreDatos).Enabled = true;
 
             // 3. Forzar carga de Microsoft.CSharp
             System.Runtime.CompilerServices.RuntimeHelpers
@@ -361,7 +360,7 @@ namespace SACDumont.Modulos
             });
         }
 
-        public void ExportarYMostrarPDF2DT(string reporteName, DataTable datos, DataTable datos2, string nombreDatos, string nombreDatos2)
+        public static void ExportarYMostrarPDF2DT(string reporteName, DataTable datos, DataTable datos2, string nombreDatos, string nombreDatos2)
         {
 
             // 2. Cargar el reporte
