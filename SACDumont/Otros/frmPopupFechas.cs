@@ -18,7 +18,14 @@ namespace SACDumont.Otros
         {
             try
             {
-                
+                if (basFunctions.ValidaCierrePorFecha(dtFecha.Value))
+                {
+                    basFunctions.PreparaReporteCierreFecha(dtFecha.Value);
+                }
+                else
+                {
+                    MessageBox.Show($"No ah realizado el Corte del dia: {dtFecha.Value.ToShortDateString()}, no es posible realizar el reporte.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             catch (Exception ex)
             {

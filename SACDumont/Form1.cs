@@ -27,6 +27,7 @@ namespace SACDumont
         int idPerfil = 0;
         private frmLogin loginForm;
         DateTime fechaCierre = DateTime.Now;
+        public DateTime fechaCorte = DateTime.Now;
         public frmMain(DataRow drUsuario, frmLogin frm)
         {
             // Esta llamada es requerida por el diseñador
@@ -67,7 +68,7 @@ namespace SACDumont
             }
         }
 
-        private void PreparaReporteCierre()
+        private void PreparaReporteCierre(DateTime fecha)
         {
             try
             {
@@ -86,7 +87,7 @@ namespace SACDumont
                                    join cat in db.Catalogos on new { valor = (int?)c.tipopago, tipo_catalogo = "TipoPago" }
                                                               equals new { valor = (int?)cat.valor, cat.tipo_catalogo } into catalogosGroup
                                    from cat in catalogosGroup.DefaultIfEmpty()
-                                   where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now)
+                                   where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(fecha)
                                    group c by cat.descripcion into g
                                    select new
                                    {
@@ -95,7 +96,7 @@ namespace SACDumont
                                    }).ToList();
 
                     var billetes = db.CierreDiario
-                                     .Where(cd => DbFunctions.TruncateTime(cd.fechacorte) == DbFunctions.TruncateTime(DateTime.Now))
+                                     .Where(cd => DbFunctions.TruncateTime(cd.fechacorte) == DbFunctions.TruncateTime(fecha))
                                      .Select(cd => new
                                      {
                                          cd.B1000,
@@ -125,7 +126,7 @@ namespace SACDumont
                                     join a in db.Alumnos on m.id_matricula equals a.matricula into aGroup
                                     from a in aGroup.DefaultIfEmpty()
 
-                                    where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now)
+                                    where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(fecha)
 
                                     group new { c, mp, p, a } by new
                                     {
@@ -368,21 +369,26 @@ namespace SACDumont
         {
             if (basFunctions.ValidaCierre())
             {
-                PreparaReporteCierre();
+                PreparaReporteCierre(DateTime.Now);
+            }
+            else
+            {
+                MessageBox.Show($"No ah realizado el Corte del dia: {DateTime.Now.ToShortDateString()}, no es posible realizar el reporte.", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-<<<<<<< Updated upstream
         private void btRptAcdemicosAsistencia_Click(object sender, EventArgs e)
         {
             frmPopup frmPopup = new frmPopup("ListaAsistencia");
             frmPopup.Text = "Reporte Asistencia de Alumnos";
             frmPopup.ShowDialog();
-=======
+        }
+
         private void btRptAdministrativoCorteFecha_Click(object sender, EventArgs e)
         {
-
->>>>>>> Stashed changes
+            frmPopupFechas frmFehas = new frmPopupFechas();
+            frmFehas.Text = "Corte Diario por Fecha";
+            frmFehas.ShowDialog();
         }
     }
 }
