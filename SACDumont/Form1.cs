@@ -372,11 +372,17 @@ namespace SACDumont
             }
         }
 
+<<<<<<< Updated upstream
         private void btRptAcdemicosAsistencia_Click(object sender, EventArgs e)
         {
             frmPopup frmPopup = new frmPopup("ListaAsistencia");
             frmPopup.Text = "Reporte Asistencia de Alumnos";
             frmPopup.ShowDialog();
+=======
+        private void btRptAdministrativoCorteFecha_Click(object sender, EventArgs e)
+        {
+
+>>>>>>> Stashed changes
         }
     }
 }
