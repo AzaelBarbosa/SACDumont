@@ -167,7 +167,7 @@ namespace SACDumont.Catalogos
                     dtpFechaFin.Value = (DateTime)Promocion.fecha_fin;
                     dtpFechaInicio.Value = (DateTime)Promocion.fecha_inicio;
                     nPromo.Value = (int)Promocion.porcentaje_promocion;
-                    //cboConcepto.Text = Promocion.concepto.ToString();
+                    cboConcepto.Text = Promocion.concepto.ToString();
                 }
             }
         }

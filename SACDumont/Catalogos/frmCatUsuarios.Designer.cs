@@ -44,7 +44,7 @@
             this.txNombreUsuario.Location = new System.Drawing.Point(12, 102);
             this.txNombreUsuario.Name = "txNombreUsuario";
             this.txNombreUsuario.Size = new System.Drawing.Size(443, 20);
-            this.txNombreUsuario.TabIndex = 72;
+            this.txNombreUsuario.TabIndex = 0;
             // 
             // lblNombre
             // 
@@ -59,7 +59,7 @@
             this.txUsuario.Location = new System.Drawing.Point(12, 158);
             this.txUsuario.Name = "txUsuario";
             this.txUsuario.Size = new System.Drawing.Size(244, 20);
-            this.txUsuario.TabIndex = 74;
+            this.txUsuario.TabIndex = 1;
             // 
             // label1
             // 
@@ -74,7 +74,7 @@
             this.txCorreo.Location = new System.Drawing.Point(12, 213);
             this.txCorreo.Name = "txCorreo";
             this.txCorreo.Size = new System.Drawing.Size(443, 20);
-            this.txCorreo.TabIndex = 76;
+            this.txCorreo.TabIndex = 3;
             // 
             // label2
             // 
@@ -98,7 +98,7 @@
             this.cboPerfiles.Location = new System.Drawing.Point(262, 158);
             this.cboPerfiles.Name = "cboPerfiles";
             this.cboPerfiles.Size = new System.Drawing.Size(193, 21);
-            this.cboPerfiles.TabIndex = 78;
+            this.cboPerfiles.TabIndex = 2;
             // 
             // lbIdPromo
             // 

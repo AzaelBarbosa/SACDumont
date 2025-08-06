@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="08/04/2025 01:04:06" ReportInfo.Modified="08/04/2025 17:02:04" ReportInfo.CreatorVersion="2025.2.0.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/04/2025 01:04:06" ReportInfo.Modified="08/05/2025 21:40:39" ReportInfo.CreatorVersion="2025.2.0.0">
   <Dictionary>
     <TableDataSource Name="Resumen" ReferenceName="Resumen" DataType="System.Int32" Enabled="true">
       <Column Name="Tipo" DataType="System.String" PropName="Efectivo"/>
@@ -12,6 +12,7 @@
       <Column Name="Monto" DataType="System.Decimal"/>
       <Column Name="MotivoGasto" DataType="System.String"/>
       <Column Name="Concepto" DataType="System.String" PropName="Column"/>
+      <Column Name="Folio" DataType="System.String" PropName="Column"/>
     </TableDataSource>
     <TableDataSource Name="Billetes" ReferenceName="Billetes" DataType="System.Int32" Enabled="true">
       <Column Name="B1000" DataType="System.Decimal"/>
@@ -37,7 +38,7 @@
       <TextObject Name="Text31" Top="189" Width="151.2" Height="18.9" Text="RESUMEN" Font="Century Gothic, 12pt, style=Bold"/>
       <TextObject Name="Text41" Left="481.95" Top="189" Width="151.2" Height="18.9" Text="RECUENTO" Font="Century Gothic, 12pt, style=Bold"/>
     </ReportTitleBand>
-    <DataBand Name="Data1" Top="220.55" Width="718.2" Height="179.52" CanGrow="true">
+    <DataBand Name="Data1" Top="220.02" Width="718.2" Height="179.52" CanGrow="true">
       <TableObject Name="Table1" Left="444.15" Top="18.9" Width="230.58" Height="141.72">
         <TableColumn Name="Column1" Width="62.37"/>
         <TableColumn Name="Column2" Width="52.92"/>
@@ -106,17 +107,19 @@
         </TableRow>
       </MatrixObject>
     </DataBand>
-    <DataBand Name="DataDetalle" Top="482.07" Width="718.2" Height="18.9" DataSource="Detalle">
-      <TextObject Name="Text36" Left="141.75" Width="236.25" Height="18.9" Border.Lines="Bottom" Text="[Detalle.Alumno]" Font="Century Gothic, 9pt"/>
-      <TextObject Name="Text37" Left="378" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[Detalle.Monto]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" Font="Century Gothic, 9pt"/>
-      <TextObject Name="Text38" Left="510.3" Width="207.9" Height="18.9" Border.Lines="Bottom" Text="[Detalle.MotivoGasto]" Font="Century Gothic, 9pt"/>
-      <TextObject Name="Text42" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[Detalle.Concepto]" Font="Century Gothic, 9pt"/>
-      <DataHeaderBand Name="DataHeader1" Top="403.27" Width="718.2" Height="75.6">
-        <TextObject Name="Text2" Left="141.75" Top="56.7" Width="236.25" Height="18.9" Border.Lines="All" Text="Alumno" HorzAlign="Center" Font="Century Gothic, 10pt, style=Bold"/>
-        <TextObject Name="Text3" Left="378" Top="56.7" Width="132.3" Height="18.9" Border.Lines="All" Text="Monto" HorzAlign="Center" Font="Century Gothic, 10pt, style=Bold"/>
-        <TextObject Name="Text4" Left="510.3" Top="56.7" Width="207.9" Height="18.9" Border.Lines="All" Text="MotivoGasto" HorzAlign="Center" Font="Century Gothic, 10pt, style=Bold"/>
+    <DataBand Name="DataDetalle" Top="480.47" Width="718.2" Height="18.9" DataSource="Detalle">
+      <TextObject Name="Text36" Left="217.35" Width="236.25" Height="18.9" Border.Lines="Left, Right, Bottom" Text="[Detalle.Alumno]" VertAlign="Center" Font="Century Gothic, 8pt"/>
+      <TextObject Name="Text37" Left="453.6" Width="113.4" Height="18.9" Border.Lines="Left, Right, Bottom" Text="[Detalle.Monto]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" Font="Century Gothic, 9pt"/>
+      <TextObject Name="Text38" Left="567" Width="151.2" Height="18.9" Border.Lines="Right, Bottom" Text="[Detalle.MotivoGasto]" VertAlign="Center" Font="Century Gothic, 9pt"/>
+      <TextObject Name="Text42" Left="85.05" Width="132.3" Height="18.9" Border.Lines="Left, Right, Bottom" Text="[Detalle.Concepto]" VertAlign="Center" Font="Century Gothic, 9pt"/>
+      <TextObject Name="Text44" Width="85.05" Height="18.9" Border.Lines="Left, Right, Bottom" Text="[Detalle.Folio]" VertAlign="Center" Font="Century Gothic, 8pt"/>
+      <DataHeaderBand Name="DataHeader1" Top="402.2" Width="718.2" Height="75.6">
+        <TextObject Name="Text2" Left="217.35" Top="56.7" Width="236.25" Height="18.9" Border.Lines="All" Text="Alumno" HorzAlign="Center" Font="Century Gothic, 10pt, style=Bold"/>
+        <TextObject Name="Text3" Left="453.6" Top="56.7" Width="113.4" Height="18.9" Border.Lines="All" Text="Monto" HorzAlign="Center" Font="Century Gothic, 10pt, style=Bold"/>
+        <TextObject Name="Text4" Left="567" Top="56.7" Width="151.2" Height="18.9" Border.Lines="All" Text="MotivoGasto" HorzAlign="Center" Font="Century Gothic, 10pt, style=Bold"/>
         <TextObject Name="Text33" Top="28.35" Width="151.2" Height="18.9" Text="DETALLE" Font="Century Gothic, 12pt, style=Bold"/>
-        <TextObject Name="Text1" Top="56.7" Width="141.75" Height="18.9" Border.Lines="All" Text="Concepto" HorzAlign="Center" Font="Century Gothic, 9pt, style=Bold"/>
+        <TextObject Name="Text1" Left="85.05" Top="56.7" Width="132.3" Height="18.9" Border.Lines="All" Text="Concepto" HorzAlign="Center" Font="Century Gothic, 9pt, style=Bold"/>
+        <TextObject Name="Text43" Top="56.7" Width="85.05" Height="18.9" Border.Lines="All" Text="Folio" HorzAlign="Center" Font="Century Gothic, 9pt, style=Bold"/>
       </DataHeaderBand>
     </DataBand>
   </ReportPage>

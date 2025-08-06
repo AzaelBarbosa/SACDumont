@@ -262,7 +262,7 @@
             this.cboAlumnos.Name = "cboAlumnos";
             this.cboAlumnos.Size = new System.Drawing.Size(417, 18);
             this.cboAlumnos.SqlQuery = null;
-            this.cboAlumnos.TabIndex = 1;
+            this.cboAlumnos.TabIndex = 0;
             this.cboAlumnos.OnAlumnoSeleccionado += new System.Action<System.Data.DataRow>(this.cboAlumnos_OnAlumnoSeleccionado);
             this.cboAlumnos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cboAlumnos_KeyPress);
             // 
@@ -308,7 +308,7 @@
             this.btNewProducto.Location = new System.Drawing.Point(504, 215);
             this.btNewProducto.Name = "btNewProducto";
             this.btNewProducto.Size = new System.Drawing.Size(25, 25);
-            this.btNewProducto.TabIndex = 47;
+            this.btNewProducto.TabIndex = 1;
             this.btNewProducto.UseVisualStyleBackColor = true;
             this.btNewProducto.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -341,7 +341,7 @@
             this.btDeleteProducto.Location = new System.Drawing.Point(504, 246);
             this.btDeleteProducto.Name = "btDeleteProducto";
             this.btDeleteProducto.Size = new System.Drawing.Size(25, 25);
-            this.btDeleteProducto.TabIndex = 48;
+            this.btDeleteProducto.TabIndex = 2;
             this.btDeleteProducto.UseVisualStyleBackColor = true;
             this.btDeleteProducto.Click += new System.EventHandler(this.btDeleteProducto_Click);
             // 
@@ -352,7 +352,7 @@
             this.btDeletePago.Location = new System.Drawing.Point(507, 517);
             this.btDeletePago.Name = "btDeletePago";
             this.btDeletePago.Size = new System.Drawing.Size(25, 25);
-            this.btDeletePago.TabIndex = 50;
+            this.btDeletePago.TabIndex = 4;
             this.btDeletePago.UseVisualStyleBackColor = true;
             this.btDeletePago.Click += new System.EventHandler(this.btDeletePago_Click);
             // 
@@ -363,7 +363,7 @@
             this.btNewPago.Location = new System.Drawing.Point(507, 486);
             this.btNewPago.Name = "btNewPago";
             this.btNewPago.Size = new System.Drawing.Size(25, 25);
-            this.btNewPago.TabIndex = 49;
+            this.btNewPago.TabIndex = 3;
             this.btNewPago.UseVisualStyleBackColor = true;
             this.btNewPago.Click += new System.EventHandler(this.btNewPago_Click);
             // 

@@ -47,7 +47,7 @@
             this.txDescripcion.Location = new System.Drawing.Point(12, 100);
             this.txDescripcion.Name = "txDescripcion";
             this.txDescripcion.Size = new System.Drawing.Size(374, 20);
-            this.txDescripcion.TabIndex = 70;
+            this.txDescripcion.TabIndex = 0;
             // 
             // lblApPaterno
             // 
@@ -70,7 +70,7 @@
             this.nPromo.Location = new System.Drawing.Point(222, 211);
             this.nPromo.Name = "nPromo";
             this.nPromo.Size = new System.Drawing.Size(76, 20);
-            this.nPromo.TabIndex = 34;
+            this.nPromo.TabIndex = 4;
             this.nPromo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nPromo.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             // 
@@ -89,7 +89,7 @@
             this.dtpFechaInicio.Location = new System.Drawing.Point(12, 159);
             this.dtpFechaInicio.Name = "dtpFechaInicio";
             this.dtpFechaInicio.Size = new System.Drawing.Size(200, 20);
-            this.dtpFechaInicio.TabIndex = 76;
+            this.dtpFechaInicio.TabIndex = 1;
             // 
             // lblFechaNac
             // 
@@ -105,7 +105,7 @@
             this.dtpFechaFin.Location = new System.Drawing.Point(12, 211);
             this.dtpFechaFin.Name = "dtpFechaFin";
             this.dtpFechaFin.Size = new System.Drawing.Size(200, 20);
-            this.dtpFechaFin.TabIndex = 78;
+            this.dtpFechaFin.TabIndex = 2;
             // 
             // label1
             // 
@@ -133,7 +133,7 @@
             this.cboConcepto.Location = new System.Drawing.Point(222, 159);
             this.cboConcepto.Name = "cboConcepto";
             this.cboConcepto.Size = new System.Drawing.Size(164, 21);
-            this.cboConcepto.TabIndex = 80;
+            this.cboConcepto.TabIndex = 3;
             // 
             // frmCatPromocion
             // 

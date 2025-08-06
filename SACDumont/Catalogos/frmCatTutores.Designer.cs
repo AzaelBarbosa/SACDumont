@@ -81,21 +81,21 @@
             this.txtNombre.Location = new System.Drawing.Point(12, 92);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(257, 20);
-            this.txtNombre.TabIndex = 35;
+            this.txtNombre.TabIndex = 0;
             // 
             // txtApPaterno
             // 
             this.txtApPaterno.Location = new System.Drawing.Point(12, 142);
             this.txtApPaterno.Name = "txtApPaterno";
             this.txtApPaterno.Size = new System.Drawing.Size(257, 20);
-            this.txtApPaterno.TabIndex = 37;
+            this.txtApPaterno.TabIndex = 1;
             // 
             // txtApMaterno
             // 
             this.txtApMaterno.Location = new System.Drawing.Point(12, 192);
             this.txtApMaterno.Name = "txtApMaterno";
             this.txtApMaterno.Size = new System.Drawing.Size(257, 20);
-            this.txtApMaterno.TabIndex = 39;
+            this.txtApMaterno.TabIndex = 2;
             // 
             // dtpFechaNac
             // 
@@ -103,7 +103,7 @@
             this.dtpFechaNac.Location = new System.Drawing.Point(12, 242);
             this.dtpFechaNac.Name = "dtpFechaNac";
             this.dtpFechaNac.Size = new System.Drawing.Size(200, 20);
-            this.dtpFechaNac.TabIndex = 41;
+            this.dtpFechaNac.TabIndex = 6;
             // 
             // cmbSexo
             // 
@@ -111,28 +111,28 @@
             this.cmbSexo.Location = new System.Drawing.Point(12, 292);
             this.cmbSexo.Name = "cmbSexo";
             this.cmbSexo.Size = new System.Drawing.Size(200, 21);
-            this.cmbSexo.TabIndex = 43;
+            this.cmbSexo.TabIndex = 8;
             // 
             // txtCalle
             // 
             this.txtCalle.Location = new System.Drawing.Point(306, 92);
             this.txtCalle.Name = "txtCalle";
             this.txtCalle.Size = new System.Drawing.Size(312, 20);
-            this.txtCalle.TabIndex = 51;
+            this.txtCalle.TabIndex = 3;
             // 
             // txtColonia
             // 
             this.txtColonia.Location = new System.Drawing.Point(306, 142);
             this.txtColonia.Name = "txtColonia";
             this.txtColonia.Size = new System.Drawing.Size(312, 20);
-            this.txtColonia.TabIndex = 53;
+            this.txtColonia.TabIndex = 4;
             // 
             // txtCiudad
             // 
             this.txtCiudad.Location = new System.Drawing.Point(306, 192);
             this.txtCiudad.Name = "txtCiudad";
             this.txtCiudad.Size = new System.Drawing.Size(312, 20);
-            this.txtCiudad.TabIndex = 55;
+            this.txtCiudad.TabIndex = 5;
             // 
             // cmbEstado
             // 
@@ -141,7 +141,7 @@
             this.cmbEstado.Location = new System.Drawing.Point(306, 242);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(200, 21);
-            this.cmbEstado.TabIndex = 57;
+            this.cmbEstado.TabIndex = 7;
             // 
             // txtTel1
             // 
@@ -149,7 +149,7 @@
             this.txtTel1.MaxLength = 10;
             this.txtTel1.Name = "txtTel1";
             this.txtTel1.Size = new System.Drawing.Size(200, 20);
-            this.txtTel1.TabIndex = 59;
+            this.txtTel1.TabIndex = 9;
             // 
             // txtTel2
             // 
@@ -157,7 +157,7 @@
             this.txtTel2.MaxLength = 10;
             this.txtTel2.Name = "txtTel2";
             this.txtTel2.Size = new System.Drawing.Size(200, 20);
-            this.txtTel2.TabIndex = 61;
+            this.txtTel2.TabIndex = 11;
             // 
             // txtTel3
             // 
@@ -165,7 +165,7 @@
             this.txtTel3.MaxLength = 10;
             this.txtTel3.Name = "txtTel3";
             this.txtTel3.Size = new System.Drawing.Size(200, 20);
-            this.txtTel3.TabIndex = 63;
+            this.txtTel3.TabIndex = 13;
             // 
             // lblNombre
             // 
@@ -269,7 +269,7 @@
             this.txRFC.MaxLength = 10;
             this.txRFC.Name = "txRFC";
             this.txRFC.Size = new System.Drawing.Size(200, 20);
-            this.txRFC.TabIndex = 69;
+            this.txRFC.TabIndex = 10;
             // 
             // label1
             // 
@@ -284,7 +284,7 @@
             this.chFactura.Location = new System.Drawing.Point(12, 505);
             this.chFactura.Name = "chFactura";
             this.chFactura.Size = new System.Drawing.Size(100, 24);
-            this.chFactura.TabIndex = 70;
+            this.chFactura.TabIndex = 16;
             this.chFactura.Text = "Pide factura";
             // 
             // cboAlumnos
@@ -294,7 +294,7 @@
             this.cboAlumnos.Location = new System.Drawing.Point(9, 449);
             this.cboAlumnos.Name = "cboAlumnos";
             this.cboAlumnos.Size = new System.Drawing.Size(263, 21);
-            this.cboAlumnos.TabIndex = 72;
+            this.cboAlumnos.TabIndex = 14;
             this.cboAlumnos.Tag = "Seleccione al Alumno de quien esta acargo el Tutor";
             // 
             // lbNombreAlumno
@@ -311,7 +311,7 @@
             this.txDenominacionSocial.MaxLength = 10;
             this.txDenominacionSocial.Name = "txDenominacionSocial";
             this.txDenominacionSocial.Size = new System.Drawing.Size(260, 20);
-            this.txDenominacionSocial.TabIndex = 74;
+            this.txDenominacionSocial.TabIndex = 12;
             // 
             // label2
             // 
@@ -328,7 +328,7 @@
             this.cboParentesco.Location = new System.Drawing.Point(300, 449);
             this.cboParentesco.Name = "cboParentesco";
             this.cboParentesco.Size = new System.Drawing.Size(203, 21);
-            this.cboParentesco.TabIndex = 76;
+            this.cboParentesco.TabIndex = 15;
             this.cboParentesco.Tag = "Seleccione al Alumno de quien esta acargo el Tutor";
             // 
             // label3

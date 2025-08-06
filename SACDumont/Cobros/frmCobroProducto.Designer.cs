@@ -60,7 +60,7 @@
             this.comboProductos1.Precio = null;
             this.comboProductos1.Size = new System.Drawing.Size(371, 21);
             this.comboProductos1.SqlQuery = null;
-            this.comboProductos1.TabIndex = 38;
+            this.comboProductos1.TabIndex = 0;
             this.comboProductos1.OnCobroSeleccionado += new System.Action<System.Data.DataRow>(this.comboProductos1_OnCobroSeleccionado);
             // 
             // lbSeleccion
@@ -155,7 +155,7 @@
             this.nCantidad.Location = new System.Drawing.Point(18, 39);
             this.nCantidad.Name = "nCantidad";
             this.nCantidad.Size = new System.Drawing.Size(61, 20);
-            this.nCantidad.TabIndex = 48;
+            this.nCantidad.TabIndex = 0;
             this.nCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nCantidad.Value = new decimal(new int[] {
             1,
@@ -220,7 +220,7 @@
             this.txTalla.MaxLength = 3;
             this.txTalla.Name = "txTalla";
             this.txTalla.Size = new System.Drawing.Size(156, 20);
-            this.txTalla.TabIndex = 53;
+            this.txTalla.TabIndex = 1;
             // 
             // frmCobroProducto
             // 

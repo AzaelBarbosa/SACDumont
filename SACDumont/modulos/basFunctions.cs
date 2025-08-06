@@ -325,7 +325,7 @@ namespace SACDumont.Modulos
             return dataTable;
         }
 
-        public static void ExportarYMostrarPDF(string reporteName, DataTable datos, string nombreDatos)
+        public static void ExportarYMostrarPDF(string reporteName, DataTable datos, string nombreDatos, string PDFname)
         {
 
             // 2. Cargar el reporte
@@ -334,14 +334,14 @@ namespace SACDumont.Modulos
             report.Load(rutaFrx);
 
             report.RegisterData(datos, nombreDatos);
-
+            report.GetDataSource(nombreDatos).Enabled = true;
             // 3. Forzar carga de Microsoft.CSharp
             System.Runtime.CompilerServices.RuntimeHelpers
                 .RunClassConstructor(typeof(Microsoft.CSharp.RuntimeBinder.Binder).TypeHandle);
 
             // 4. Preparar y exportar
             report.Prepare();
-            string rutaPDF = Path.Combine(Application.StartupPath, "Reporte.pdf");
+            string rutaPDF = Path.Combine(Application.StartupPath, $"{PDFname}.pdf");
             report.Export(new PDFSimpleExport(), rutaPDF);
 
             string rutaSumatra = Path.Combine(Application.StartupPath, "PDF", "SumatraPDF.exe");

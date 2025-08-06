@@ -76,6 +76,7 @@ namespace SACDumont.Otros
         {
             try
             {
+                decimal cero = 0;
                 using (var db = new DumontContext())
                 {
                     var resultado = (from m in db.Movimientos
@@ -93,7 +94,23 @@ namespace SACDumont.Otros
                                          Monto = g.Sum(x => x != null ? x.monto : 0)
                                      }).ToList();
 
-                    if (resultado.Count() > 0)
+                    if (resultado.Count() == 1)
+                    {
+                        txEfectivo.Text = (resultado[0].Monto).ToString("C2");
+                        txGasto.Text = cero.ToString("C2");
+                        txTrasnfer.Text = cero.ToString("C2");
+                        txTotales.Text = ((resultado[0].Monto + cero) - cero).ToString("C2");
+                        total = (resultado[0].Monto + cero) - cero;
+                    }
+                    else if (resultado.Count() == 2)
+                    {
+                        txEfectivo.Text = (resultado[0].Monto).ToString("C2");
+                        txGasto.Text = resultado[1].Monto.ToString("C2");
+                        txTrasnfer.Text = cero.ToString("C2");
+                        txTotales.Text = ((resultado[0].Monto + cero) - resultado[1].Monto).ToString("C2");
+                        total = (resultado[0].Monto + cero) - resultado[1].Monto;
+                    }
+                    else if (resultado.Count() == 3)
                     {
                         txEfectivo.Text = (resultado[0].Monto - resultado[1].Monto).ToString("C2");
                         txGasto.Text = resultado[1].Monto.ToString("C2");
@@ -115,7 +132,6 @@ namespace SACDumont.Otros
             using (var db = new DumontContext())
             {
                 var resumen = (from m in db.Movimientos
-                               join mp in db.MovimientoProductos on m.id_movimiento equals mp.id_movimiento
                                join c in db.MovimientoCobros on m.id_movimiento equals c.id_movimiento into cobrosGroup
                                from c in cobrosGroup.DefaultIfEmpty()
                                join cat in db.Catalogos on new { valor = (int?)c.tipopago, tipo_catalogo = "TipoPago" }
@@ -150,7 +166,9 @@ namespace SACDumont.Otros
                 var detalles = (from m in db.Movimientos
                                 join mp in db.MovimientoProductos on m.id_movimiento equals mp.id_movimiento into mpGroup
                                 from mp in mpGroup.DefaultIfEmpty()
-                                where mp == null || mp.descripcion != null
+
+                                join p in db.Productos on mp.id_producto equals p.id_producto into pGroup
+                                from p in pGroup.DefaultIfEmpty()
 
                                 join c in db.MovimientoCobros on m.id_movimiento equals c.id_movimiento into cGroup
                                 from c in cGroup.DefaultIfEmpty()
@@ -160,17 +178,22 @@ namespace SACDumont.Otros
 
                                 where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now)
 
-                                group new { c, mp, a } by new
+                                group new { c, mp, p, a } by new
                                 {
-                                    NombreCompleto = (a.appaterno ?? "") + " " + (a.apmaterno ?? "") + " " + (a.nombre ?? ""),
-                                    Motivo = mp.descripcion
+                                    Alumno = (a.appaterno ?? "") + " " + (a.apmaterno ?? "") + " " + (a.nombre ?? ""),
+                                    Concepto = p.concepto,
+                                    MotivoGasto = mp.descripcion,
+                                    Monto = c.monto,
+                                    Folio = m.id_movimiento
                                 } into g
 
                                 select new
                                 {
-                                    Alumno = string.IsNullOrWhiteSpace(g.Key.NombreCompleto.Trim()) ? "GASTO" : g.Key.NombreCompleto,
-                                    MotivoGasto = g.Key.Motivo ?? "",
-                                    Monto = g.Sum(x => x.c != null ? x.c.monto : 0)
+                                    Alumno = (g.Key.Alumno == null || g.Key.Alumno.Trim() == "") ? "GASTO" : g.Key.Alumno,
+                                    Concepto = g.Key.Concepto,
+                                    MotivoGasto = g.Key.MotivoGasto ?? "",
+                                    Monto = g.Key.Monto,
+                                    Folio = g.Key.Folio
                                 }).ToList();
 
                 basFunctions.ExportarYMostrarPDF3DT("CierreDiario.frx", basFunctions.ConvertToDataTable(resumen), basFunctions.ConvertToDataTable(detalles), basFunctions.ConvertToDataTable(billetes), "Resumen", "Detalle", "Billetes");
