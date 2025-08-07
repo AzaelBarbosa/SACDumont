@@ -30,7 +30,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.99\Publish\</InstallUrl>
     <MinimumRequiredVersion>1.0.0.23</MinimumRequiredVersion>
-    <ApplicationRevision>23</ApplicationRevision>
+    <ApplicationRevision>24</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

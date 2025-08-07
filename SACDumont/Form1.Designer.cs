@@ -290,6 +290,7 @@
             this.btRptAcdemicosCumple.Name = "btRptAcdemicosCumple";
             this.btRptAcdemicosCumple.Size = new System.Drawing.Size(180, 22);
             this.btRptAcdemicosCumple.Text = "Lista Cumpleaños";
+            this.btRptAcdemicosCumple.Visible = false;
             // 
             // btRptAcdemicosAlumnos
             // 
@@ -310,7 +311,7 @@
             this.btRptAdministrativo.Image = global::SACDumont.Properties.Resources.administrativo;
             this.btRptAdministrativo.Name = "btRptAdministrativo";
             this.btRptAdministrativo.Size = new System.Drawing.Size(180, 22);
-            this.btRptAdministrativo.Text = "Administrtivo";
+            this.btRptAdministrativo.Text = "Administrativo";
             // 
             // btRptAdministrativoCorte
             // 
@@ -357,6 +358,7 @@
             this.btRptAdministrativoUniformes.Name = "btRptAdministrativoUniformes";
             this.btRptAdministrativoUniformes.Size = new System.Drawing.Size(180, 22);
             this.btRptAdministrativoUniformes.Text = "Uniformes";
+            this.btRptAdministrativoUniformes.Visible = false;
             // 
             // btRptAdministrativoActividad
             // 
