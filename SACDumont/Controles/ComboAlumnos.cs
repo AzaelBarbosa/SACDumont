@@ -34,6 +34,7 @@ namespace SACDumont.Controles
                     if (row != null)
                     {
                         txProducto.Text = row["Alumno"].ToString();
+                        OnAlumnoSeleccionado?.Invoke(row);
                     }
                 }
                 else

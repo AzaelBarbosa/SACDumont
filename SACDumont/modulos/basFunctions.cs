@@ -233,6 +233,35 @@ namespace SACDumont.Modulos
             }
         }
 
+        public static void ValidarYAgregarNuevoP(string valor, string valor2, string valor3, string tabla)
+        {
+            bool existe = false;
+            using (var db = new DumontContext())
+            {
+                var productos = db.Productos.Where(p => p.descripcion == valor).FirstOrDefault();
+                if (productos != null)
+                {
+                    existe = true;
+                }
+            }
+
+            if (!existe)
+            {
+                DialogResult r = MessageBox.Show(
+                    $"“{valor}” no está en el catálogo de {tabla}. ¿Deseas agregarlo?",
+                    "Agregar Producto",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (r == DialogResult.Yes)
+                {
+
+                    sqlServer.ExecSQL($"INSERT INTO {tabla} (descripcion, concepto, abreviatura) VALUES ('{valor}','{valor2}','{valor3}')");
+
+                    MessageBox.Show("Elemento agregado correctamente.", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
         public static void LimpiarCombo(ComboBox combo)
         {
             combo.DataSource = null;

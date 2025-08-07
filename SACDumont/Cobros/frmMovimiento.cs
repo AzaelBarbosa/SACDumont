@@ -443,6 +443,7 @@ namespace SACDumont.Cobros
                     btDeletePago.Enabled = true;
                     btNewPago.Enabled = true;
                 }
+                VerificaPromociones();
             }
 
         }
@@ -503,6 +504,42 @@ namespace SACDumont.Cobros
             }
         }
 
+        private void VerificaPromociones()
+        {
+            using (var db = new DumontContext())
+            {
+                var inscripcion = db.Inscripciones.Where(i => i.id_ciclo == basGlobals.iCiclo && i.matricula == (int)basGlobals.Movimiento.id_matricula).FirstOrDefault();
+                becaActiva = inscripcion.beca;
+                promocionActiva = inscripcion.promocion;
+
+                if (promocionActiva)
+                {
+                    var promoAlumno = (from pa in db.PromocionesAlumnos
+                                       join p in db.Promociones on pa.id_promocion equals p.id_promocion
+                                       where pa.matricula == (int)basGlobals.Movimiento.id_matricula
+                                          && pa.id_ciclo == basGlobals.iCiclo
+                                          && p.concepto == strConcepto
+                                       select p).FirstOrDefault();
+                    if (promoAlumno != null)
+                    {
+                        promocion = promoAlumno.porcentaje_promocion;
+                        lbPromocion.Text = Convert.ToString(promoAlumno.porcentaje_promocion);
+                    }
+                    lbBeca.Text = "N/A";
+                }
+
+                if (becaActiva)
+                {
+                    var becaAlumno = db.Becas.Where(b => b.id_matricula == (int)basGlobals.Movimiento.id_matricula && b.id_ciclo == basGlobals.iCiclo).FirstOrDefault();
+                    if (becaAlumno != null)
+                    {
+                        beca = becaAlumno.porcentaje_beca;
+                        lbBeca.Text = Convert.ToString(becaAlumno.porcentaje_beca);
+                    }
+                    lbPromocion.Text = "N/A";
+                }
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             if (cboAlumnos.matricula == 0)

@@ -17,7 +17,30 @@ namespace SACDumont.Controles
     {
         private Form popup;
         public event Action<DataRow> OnCobroSeleccionado;
-        public int? IdProductoSeleccionado { get; set; }
+        public int? IdProductoSeleccionado
+        {
+            get
+            {
+                return Convert.ToInt32(txProducto.Tag);
+            }
+            set
+            {
+                txProducto.Tag = value;
+                if (value != null)
+                {
+                    DataRow row = _datos.AsEnumerable().FirstOrDefault(r => r.Field<int>("id_producto") == value);
+                    if (row != null)
+                    {
+                        txProducto.Text = row["descripcion"].ToString();
+                        OnCobroSeleccionado?.Invoke(row);
+                    }
+                }
+                else
+                {
+                    txProducto.Text = string.Empty;
+                }
+            }
+        }
         public decimal? Precio { get; set; }
         public DateTime? FechaVencimiento { get; set; }
         public string Descripcion { get; set; }
@@ -56,9 +79,7 @@ namespace SACDumont.Controles
         private void FormatoCeldas(DataGridView dgv)
         {
             dgv.Columns["descripcion"].HeaderText = "Descripción";
-
             dgv.Columns["concepto"].HeaderText = "Concepto";
-
             dgv.Columns["fecha_vencimiento"].HeaderText = "Fecha Vencimiento";
             dgv.Columns["precio"].HeaderText = "Precio";
             dgv.Columns["id_producto"].Visible = false;
