@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="06/29/2025 09:41:38" ReportInfo.Modified="08/07/2025 14:59:57" ReportInfo.CreatorVersion="2025.2.0.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/29/2025 09:41:38" ReportInfo.Modified="08/07/2025 15:16:28" ReportInfo.CreatorVersion="2025.2.0.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -56,7 +56,7 @@ namespace FastReport
       <TextObject Name="Text26" Top="132.3" Width="302.4" Height="18.9" Text="Alumno:" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 10pt"/>
       <TextObject Name="Text27" Left="160.65" Top="113.4" Width="56.7" Height="18.9" Text="Mat:" HorzAlign="Justify" VertAlign="Center" Font="Century Gothic, 10pt"/>
       <TextObject Name="Text30" Left="47.25" Top="85.05" Width="66.15" Height="18.9" Text="[pFolio]" VertAlign="Center" Font="Century Gothic, 10pt, style=Bold"/>
-      <TextObject Name="Text31" Left="132.3" Top="85.05" Width="170.1" Height="18.9" Text="[pFecha]" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 10pt"/>
+      <TextObject Name="Text31" Left="113.4" Top="85.05" Width="189" Height="18.9" Text="[pFecha]" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 10pt"/>
       <TextObject Name="Text32" Left="217.35" Top="113.4" Width="85.05" Height="18.9" Text="[pMatricula]" VertAlign="Center" Font="Century Gothic, 10pt, style=Bold"/>
       <TextObject Name="Text29" Top="151.2" Width="302.4" Height="18.9" Text="[pAlumno]" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 10pt, style=Bold"/>
       <TextObject Name="Text47" Left="47.25" Top="113.4" Width="103.95" Height="18.9" Text="[pGrado]" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 10pt, style=Bold"/>
