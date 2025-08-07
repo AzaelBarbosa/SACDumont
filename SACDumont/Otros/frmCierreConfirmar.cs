@@ -80,7 +80,6 @@ namespace SACDumont.Otros
                 using (var db = new DumontContext())
                 {
                     var resultado = (from m in db.Movimientos
-                                     join mp in db.MovimientoProductos on m.id_movimiento equals mp.id_movimiento
                                      join c in db.MovimientoCobros on m.id_movimiento equals c.id_movimiento into cobrosGroup
                                      from c in cobrosGroup.DefaultIfEmpty()
                                      join cat in db.Catalogos on new { valor = (int?)c.tipopago, tipo_catalogo = "TipoPago" }
