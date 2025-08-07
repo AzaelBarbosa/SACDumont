@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="06/29/2025 09:41:38" ReportInfo.Modified="08/07/2025 14:46:42" ReportInfo.CreatorVersion="2025.2.0.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/29/2025 09:41:38" ReportInfo.Modified="08/07/2025 14:59:57" ReportInfo.CreatorVersion="2025.2.0.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -71,11 +71,11 @@ namespace FastReport
       <TextObject Name="Text35" Top="28.35" Width="75.6" Height="18.9" Text="Recargos:" HorzAlign="Right" VertAlign="Center" Font="Century Gothic, 9pt"/>
       <TextObject Name="Text36" Left="75.6" Top="28.35" Width="75.6" Height="18.9" Text="[TicketData.Recargo]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 9pt" Trimming="EllipsisCharacter"/>
       <TextObject Name="Text34" Top="66.15" Width="47.25" Height="18.9" Text="Resta:" HorzAlign="Right" VertAlign="Center" Font="Century Gothic, 10pt"/>
-      <TextObject Name="Text11" Left="226.8" Width="75.6" Height="18.9" Text="[Total]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
-      <TextObject Name="Text33" Left="179.55" Width="47.25" Height="18.9" Text="Total:" HorzAlign="Right" VertAlign="Center" Font="Century Gothic, 9pt"/>
-      <TextObject Name="Text37" Left="47.25" Top="66.15" Width="56.7" Height="18.9" Text="[TicketData.MontoPendiente]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Century Gothic, 10pt" Trimming="EllipsisCharacter"/>
-      <TextObject Name="Text44" Left="113.4" Top="66.15" Width="66.15" Height="18.9" Text="Monto P." HorzAlign="Right" VertAlign="Center" Font="Century Gothic, 10pt"/>
-      <TextObject Name="Text45" Left="207.9" Top="66.15" Width="94.5" Height="18.9" Text="[TicketData.MontoPagado]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 10pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text11" Left="226.8" Top="37.8" Width="75.6" Height="18.9" Text="[Total]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text33" Left="151.2" Top="37.8" Width="75.6" Height="18.9" Text="Total:" HorzAlign="Right" VertAlign="Center" Font="Century Gothic, 9pt"/>
+      <TextObject Name="Text37" Left="47.25" Top="66.15" Width="85.05" Height="18.9" Text="[TicketData.MontoPendiente]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Century Gothic, 10pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text44" Left="132.3" Top="66.15" Width="75.6" Height="18.9" Text="Monto P." HorzAlign="Right" VertAlign="Center" Font="Century Gothic, 10pt"/>
+      <TextObject Name="Text45" Left="207.9" Top="66.15" Width="94.5" Height="18.9" Text="[TicketData.MontoPagado]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 10pt, style=Bold" Trimming="EllipsisCharacter"/>
       <LineObject Name="Line3" Top="85.05" Width="302.4"/>
       <TextObject Name="Text39" Top="85.05" Width="302.4" Height="28.35" Text="Documento valido con nombre y firma de cajera. " HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 9pt"/>
       <TextObject Name="Text40" Top="198.45" Width="302.4" Height="18.9" Text="__________________________________________" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 9pt"/>
