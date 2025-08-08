@@ -21,12 +21,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SACDumont.Modulos.basConfiguracion;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace SACDumont.Modulos
 {
     public class basFunctions
     {
-
+        private DumontContext db = new DumontContext();
         public static DataTable dtExportar;
         private const string claveSecreta = "Dumont";
         public void ConectaBD()
@@ -140,7 +142,8 @@ namespace SACDumont.Modulos
             }
         }
 
-        public void UpdateConfig(string spName, bool recargos, bool promo, int porcentajeRecargos, int diasTolerancia)
+        public void UpdateConfig(string spName, bool recargos, bool promo, int porcentajeRecargos, int diasTolerancia, string primSep, string primClave,
+            string matSep, string matClave, string preSep, string preClave, string secSep, string secClave)
         {
             try
             {
@@ -149,7 +152,15 @@ namespace SACDumont.Modulos
                     new SqlParameter("@Recargos", SqlDbType.Bit) { Value = recargos },
                     new SqlParameter("@Promo", SqlDbType.Bit) { Value =promo },
                     new SqlParameter("@PorcentajeRecargo", SqlDbType.Int, 100) { Value = porcentajeRecargos },
-                    new SqlParameter("@DiasTolerancia", SqlDbType.Int, 100) { Value = diasTolerancia }
+                    new SqlParameter("@DiasTolerancia", SqlDbType.Int, 100) { Value = diasTolerancia },
+                    new SqlParameter("@PrimariaSEP", SqlDbType.NVarChar, 100) { Value = primSep },
+                    new SqlParameter("@SecundariaSEP", SqlDbType.NVarChar, 100) { Value = secSep },
+                    new SqlParameter("@MaternalSEP", SqlDbType.NVarChar, 100) { Value = matSep },
+                    new SqlParameter("@PreEscolarSEP", SqlDbType.NVarChar, 100) { Value = preSep },
+                    new SqlParameter("@PrimariaClave", SqlDbType.NVarChar, 100) { Value = primClave },
+                    new SqlParameter("@SecundariaClave", SqlDbType.NVarChar, 100) { Value = secClave },
+                    new SqlParameter("@MaternalClave", SqlDbType.NVarChar, 100) { Value = matClave },
+                    new SqlParameter("@PreEscolarClave", SqlDbType.NVarChar, 100) { Value = preClave }
                 };
 
 
@@ -634,7 +645,26 @@ namespace SACDumont.Modulos
 
                     // Marca la seleccionada
                     item.Checked = true;
-
+                    var db = new DumontContext();
+                    using (db)
+                    {
+                        var equipo = db.ConfigEquipos.Where(ce => ce.equipo == basConfiguracion.Config.Equipo).FirstOrDefault();
+                        if (equipo != null)
+                        {
+                            equipo.impresora_tickets = item.Name;
+                            db.Entry(equipo).State = EntityState.Modified;
+                        }
+                        else
+                        {
+                            equipo = new config_equipos
+                            {
+                                impresora_tickets = item.Name,
+                                equipo = basConfiguracion.Config.Equipo
+                            };
+                            db.ConfigEquipos.Add(equipo);
+                        }
+                        db.SaveChanges();
+                    }
                     // Guarda el nombre seleccionado
                     basConfiguracion.PrinterTiockets = item.Name;
 
@@ -683,6 +713,27 @@ namespace SACDumont.Modulos
 
                     // Marca la seleccionada
                     item.Checked = true;
+
+                    var db = new DumontContext();
+                    using (db)
+                    {
+                        var equipo = db.ConfigEquipos.Where(ce => ce.equipo == basConfiguracion.Config.Equipo).FirstOrDefault();
+                        if (equipo != null)
+                        {
+                            equipo.impresora_general = item.Name;
+                            db.Entry(equipo).State = EntityState.Modified;
+                        }
+                        else
+                        {
+                            equipo = new config_equipos
+                            {
+                                impresora_general = item.Name,
+                                equipo = basConfiguracion.Config.Equipo
+                            };
+                            db.ConfigEquipos.Add(equipo);
+                        }
+                        db.SaveChanges();
+                    }
 
                     // Guarda el nombre seleccionado
                     basConfiguracion.Printer = item.Name;
@@ -831,5 +882,32 @@ namespace SACDumont.Modulos
             return ultimoCierre != null;
         }
 
+        public static byte[] ImageToBytes(Image img)
+        {
+            if (img == null) return null;
+            var ms = new MemoryStream();
+            img.Save(ms, ImageFormat.Jpeg); // o Png
+            return ms.ToArray();
+        }
+
+        public static Image BytesToImage(byte[] bytes)
+        {
+            if (bytes == null || bytes.Length == 0) return null;
+            var ms = new MemoryStream(bytes);
+            return Image.FromStream(ms);
+        }
+
+        public static Image Resize(Image img, int maxWidth)
+        {
+            if (img.Width <= maxWidth) return img;
+            var ratio = (double)maxWidth / img.Width;
+            int newW = maxWidth;
+            int newH = (int)(img.Height * ratio);
+            var bmp = new Bitmap(newW, newH);
+            var g = Graphics.FromImage(bmp);
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.DrawImage(img, 0, 0, newW, newH);
+            return bmp;
+        }
     }
 }

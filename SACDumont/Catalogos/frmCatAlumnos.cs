@@ -90,8 +90,8 @@ namespace SACDumont.Catalogos
                         telefono1 = txtTel1.Text,
                         telefono2 = txtTel2.Text,
                         telefono3 = txtTel3.Text,
-                        email = txtEmail.Text
-
+                        email = txtEmail.Text,
+                        foto_alumno = basFunctions.ImageToBytes(pictureBox1.Image)
                     };
 
                     db.Alumnos.Add(alumno);
@@ -181,63 +181,68 @@ namespace SACDumont.Catalogos
                     alumno.telefono3 = txtTel3.Text;
                     alumno.email = txtEmail.Text;
                     alumno.activo = true;
+                    alumno.foto_alumno = basFunctions.ImageToBytes(pictureBox1.Image);
+
                     // Guardar los cambios
 
                     db.Entry(alumno).State = System.Data.Entity.EntityState.Modified;
 
                     var inscripcion = db.Inscripciones.Where(i => i.matricula == alumno.matricula && i.id_ciclo == basGlobals.iCiclo).FirstOrDefault();
 
-                    inscripcion.beca = chBecado.Checked;
-                    inscripcion.promocion = chPromocion.Checked;
-
-                    db.Entry(inscripcion).State = System.Data.Entity.EntityState.Modified;
-
-                    if (chPromocion.Checked)
+                    if (inscripcion != null)
                     {
-                        var promocionesActuales = db.PromocionesAlumnos
-                                                .Where(p => p.matricula == alumno.matricula && p.id_ciclo == basGlobals.iCiclo)
-                                                .ToList();
+                        inscripcion.beca = chBecado.Checked;
+                        inscripcion.promocion = chPromocion.Checked;
 
-                        var promocionesAEliminar = promocionesActuales
-                                                .Where(p => !promoAlumno.Any(lp => lp.id == p.id && p.id_ciclo == basGlobals.iCiclo))
-                                                .ToList();
+                        db.Entry(inscripcion).State = System.Data.Entity.EntityState.Modified;
 
-                        db.PromocionesAlumnos.RemoveRange(promocionesAEliminar);
-
-                        var promocionesNuevas = promoAlumno
-                                                .Where(lp => !promocionesActuales.Any(p => p.id_promocion == lp.id_promocion && p.id_ciclo == basGlobals.iCiclo))
-                                                .ToList();
-
-                        db.PromocionesAlumnos.AddRange(promocionesNuevas);
-
-                        basFunctions.Registrar(basConfiguracion.UserID, "Alumnos", "Editar", intMatricula, "Se modifico la promocion del alumno: " + intMatricula);
-                    }
-
-                    var becaExistente = db.Becas.FirstOrDefault(b => b.id_matricula == intMatricula && b.id_ciclo == basGlobals.iCiclo);
-                    if (becaExistente == null)
-                    {
-                        if (chBecado.Checked)
+                        if (chPromocion.Checked)
                         {
-                            var beca = new Becas
-                            {
-                                id_matricula = intMatricula,
-                                id_ciclo = basGlobals.iCiclo,
-                                porcentaje_beca = Convert.ToDecimal(nPorBeca.Value)
-                            };
-                            db.Becas.Add(beca);
+                            var promocionesActuales = db.PromocionesAlumnos
+                                                    .Where(p => p.matricula == alumno.matricula && p.id_ciclo == basGlobals.iCiclo)
+                                                    .ToList();
+
+                            var promocionesAEliminar = promocionesActuales
+                                                    .Where(p => !promoAlumno.Any(lp => lp.id == p.id && p.id_ciclo == basGlobals.iCiclo))
+                                                    .ToList();
+
+                            db.PromocionesAlumnos.RemoveRange(promocionesAEliminar);
+
+                            var promocionesNuevas = promoAlumno
+                                                    .Where(lp => !promocionesActuales.Any(p => p.id_promocion == lp.id_promocion && p.id_ciclo == basGlobals.iCiclo))
+                                                    .ToList();
+
+                            db.PromocionesAlumnos.AddRange(promocionesNuevas);
+
+                            basFunctions.Registrar(basConfiguracion.UserID, "Alumnos", "Editar", intMatricula, "Se modifico la promocion del alumno: " + intMatricula);
                         }
-                    }
-                    else
-                    {
-                        if (chBecado.Checked)
+
+                        var becaExistente = db.Becas.FirstOrDefault(b => b.id_matricula == intMatricula && b.id_ciclo == basGlobals.iCiclo);
+                        if (becaExistente == null)
                         {
-                            becaExistente.porcentaje_beca = Convert.ToDecimal(nPorBeca.Value);
-                            db.Entry(becaExistente).State = System.Data.Entity.EntityState.Modified;
+                            if (chBecado.Checked)
+                            {
+                                var beca = new Becas
+                                {
+                                    id_matricula = intMatricula,
+                                    id_ciclo = basGlobals.iCiclo,
+                                    porcentaje_beca = Convert.ToDecimal(nPorBeca.Value)
+                                };
+                                db.Becas.Add(beca);
+                            }
                         }
                         else
                         {
-                            db.Becas.Remove(becaExistente);
-                            basFunctions.Registrar(basConfiguracion.UserID, "Alumnos", "Editar", intMatricula, "Se elimino la beca del alumno: " + intMatricula);
+                            if (chBecado.Checked)
+                            {
+                                becaExistente.porcentaje_beca = Convert.ToDecimal(nPorBeca.Value);
+                                db.Entry(becaExistente).State = System.Data.Entity.EntityState.Modified;
+                            }
+                            else
+                            {
+                                db.Becas.Remove(becaExistente);
+                                basFunctions.Registrar(basConfiguracion.UserID, "Alumnos", "Editar", intMatricula, "Se elimino la beca del alumno: " + intMatricula);
+                            }
                         }
                     }
                     basFunctions.Registrar(basConfiguracion.UserID, "Alumnos", "Editar", intMatricula, "Se actualizó el alumno con matrícula: " + intMatricula);
@@ -337,6 +342,10 @@ namespace SACDumont.Catalogos
                     txtTel2.Text = alumnos.telefono2;
                     txtTel3.Text = alumnos.telefono3;
                     txtEmail.Text = alumnos.email;
+                    if (alumnos.foto_alumno != null)
+                    {
+                        pictureBox1.Image = basFunctions.BytesToImage(alumnos.foto_alumno);
+                    }
 
                     // Cargar los grados y grupos
                     var inscripcion = db.Inscripciones.FirstOrDefault(i => i.matricula == matricula && i.id_ciclo == basGlobals.iCiclo);
@@ -485,6 +494,56 @@ namespace SACDumont.Catalogos
                 }
             }
         }
+
+        private void ConfigurarMenuFoto()
+        {
+            var menu = new ContextMenuStrip();
+            var subir = new ToolStripMenuItem("Subir foto");
+            var eliminar = new ToolStripMenuItem("Eliminar foto");
+
+            subir.Click += (s, e) =>
+            {
+                var ofd = new OpenFileDialog
+                {
+                    Filter = "Imágenes|*.jpg;*.jpeg;*.png;*.bmp",
+                    Title = "Selecciona una foto"
+                };
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    // Cargar en PictureBox
+                    pictureBox1.Image = Image.FromFile(ofd.FileName);
+
+                    // Si usas EF (varbinary):
+                    // alumno.Foto = ImageToBytes(pictureBox1.Image);
+                    // db.SaveChanges(); // o guarda más tarde
+                }
+            };
+
+            eliminar.Click += (s, e) =>
+            {
+                if (pictureBox1.Image == null) return;
+                if (MessageBox.Show("¿Eliminar la foto?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    pictureBox1.Image = null;
+
+                    // Si usas EF (varbinary):
+                    // alumno.Foto = null;
+                    // db.SaveChanges(); // o guarda más tarde
+                }
+            };
+
+            menu.Items.Add(subir);
+            menu.Items.Add(eliminar);
+            pictureBox1.ContextMenuStrip = menu;
+
+            // (Opcional) Mostrar menú también con clic izquierdo:
+            pictureBox1.MouseUp += (s, e) =>
+            {
+                if (e.Button == MouseButtons.Left)
+                    pictureBox1.ContextMenuStrip?.Show(pictureBox1, e.Location);
+            };
+        }
+
         #endregion
 
         #region Eventos del Formulario
@@ -502,6 +561,7 @@ namespace SACDumont.Catalogos
             {
                 ValidaTutores();
             }
+            ConfigurarMenuFoto();
         }
 
         private void cmbEstadoNac_Validating(object sender, CancelEventArgs e)
@@ -608,6 +668,21 @@ namespace SACDumont.Catalogos
 
                 dgvPromociones.DataSource = promoAlumnosDTOs;
                 FormatGridPromo();
+            }
+        }
+
+        private void btAddFoto_Click(object sender, EventArgs e)
+        {
+            using (var ofd = new OpenFileDialog()
+            {
+                Filter = "Imágenes|*.jpg;*.jpeg;*.png;*.bmp",
+                Title = "Selecciona una foto del alumno"
+            })
+            {
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBox1.Image = Image.FromFile(ofd.FileName);
+                }
             }
         }
     }

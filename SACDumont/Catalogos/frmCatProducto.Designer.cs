@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.lbProductoID = new System.Windows.Forms.Label();
-            this.txDescripcion = new System.Windows.Forms.TextBox();
             this.txtCosto = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblApPaterno = new System.Windows.Forms.Label();
@@ -41,6 +40,7 @@
             this.cboConcepto = new System.Windows.Forms.ComboBox();
             this.txAbreviatura = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.txDescripcion = new SACDumont.Controles.ComboProductos();
             this.SuspendLayout();
             // 
             // lbProductoID
@@ -54,13 +54,6 @@
             this.lbProductoID.TabIndex = 34;
             this.lbProductoID.Text = "lbProductoID";
             this.lbProductoID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txDescripcion
-            // 
-            this.txDescripcion.Location = new System.Drawing.Point(12, 144);
-            this.txDescripcion.Name = "txDescripcion";
-            this.txDescripcion.Size = new System.Drawing.Size(438, 20);
-            this.txDescripcion.TabIndex = 2;
             // 
             // txtCosto
             // 
@@ -153,11 +146,27 @@
             this.label2.TabIndex = 74;
             this.label2.Text = "Abreviatura:";
             // 
+            // txDescripcion
+            // 
+            this.txDescripcion.Descripcion = null;
+            this.txDescripcion.FechaVencimiento = null;
+            this.txDescripcion.idGrado = null;
+            this.txDescripcion.IdProductoSeleccionado = 0;
+            this.txDescripcion.Location = new System.Drawing.Point(12, 141);
+            this.txDescripcion.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txDescripcion.Name = "txDescripcion";
+            this.txDescripcion.Precio = null;
+            this.txDescripcion.Size = new System.Drawing.Size(437, 21);
+            this.txDescripcion.SqlQuery = null;
+            this.txDescripcion.TabIndex = 75;
+            this.txDescripcion.OnCobroSeleccionado += new System.Action<System.Data.DataRow>(this.txDescripcion_OnCobroSeleccionado);
+            // 
             // frmCatProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 257);
+            this.Controls.Add(this.txDescripcion);
             this.Controls.Add(this.txAbreviatura);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cboConcepto);
@@ -165,7 +174,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtFechaVenci);
             this.Controls.Add(this.lblFechaNac);
-            this.Controls.Add(this.txDescripcion);
             this.Controls.Add(this.txtCosto);
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblApPaterno);
@@ -179,7 +187,6 @@
             this.Controls.SetChildIndex(this.lblApPaterno, 0);
             this.Controls.SetChildIndex(this.lblNombre, 0);
             this.Controls.SetChildIndex(this.txtCosto, 0);
-            this.Controls.SetChildIndex(this.txDescripcion, 0);
             this.Controls.SetChildIndex(this.lblFechaNac, 0);
             this.Controls.SetChildIndex(this.dtFechaVenci, 0);
             this.Controls.SetChildIndex(this.label1, 0);
@@ -187,6 +194,7 @@
             this.Controls.SetChildIndex(this.cboConcepto, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.txAbreviatura, 0);
+            this.Controls.SetChildIndex(this.txDescripcion, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,7 +203,6 @@
         #endregion
 
         private System.Windows.Forms.Label lbProductoID;
-        private System.Windows.Forms.TextBox txDescripcion;
         private System.Windows.Forms.TextBox txtCosto;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblApPaterno;
@@ -207,5 +214,6 @@
         private System.Windows.Forms.ComboBox cboConcepto;
         private System.Windows.Forms.TextBox txAbreviatura;
         private System.Windows.Forms.Label label2;
+        private Controles.ComboProductos txDescripcion;
     }
 }

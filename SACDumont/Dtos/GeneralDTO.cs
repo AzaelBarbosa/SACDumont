@@ -80,4 +80,19 @@ namespace SACDumont.Dtos
         public int id { get; set; }
 
     }
+
+    public class ConfigDTO
+    {
+        public string PrimariaSEP { get; set; }
+        public string PrimariaClave { get; set; }
+        public string SecundariaSEP { get; set; }
+        public string SecundariaClave { get; set; }
+        public string PreEscolarSEP { get; set; }
+        public string PreEscolarClave { get; set; }
+        public string MaternalSEP { get; set; }
+        public string MaternalClave { get; set; }
+        public string Equipo { get; set; }
+
+    }
+
 }

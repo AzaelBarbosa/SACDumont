@@ -64,6 +64,8 @@
             this.lblEmail = new System.Windows.Forms.Label();
             this.lbMatricula = new System.Windows.Forms.Label();
             this.gbAlumno = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.gbDomicilio = new System.Windows.Forms.GroupBox();
             this.gbAcademicos = new System.Windows.Forms.GroupBox();
             this.cboGrupo = new SACDumont.Controles.ComboCatalogos();
@@ -84,6 +86,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvTutors = new System.Windows.Forms.DataGridView();
             this.gbAlumno.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbDomicilio.SuspendLayout();
             this.gbAcademicos.SuspendLayout();
             this.gbFinanciero.SuspendLayout();
@@ -97,48 +100,48 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(19, 48);
+            this.txtNombre.Location = new System.Drawing.Point(19, 43);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(200, 20);
+            this.txtNombre.Size = new System.Drawing.Size(212, 20);
             this.txtNombre.TabIndex = 1;
             // 
             // txtApPaterno
             // 
-            this.txtApPaterno.Location = new System.Drawing.Point(225, 48);
+            this.txtApPaterno.Location = new System.Drawing.Point(18, 87);
             this.txtApPaterno.Name = "txtApPaterno";
-            this.txtApPaterno.Size = new System.Drawing.Size(168, 20);
+            this.txtApPaterno.Size = new System.Drawing.Size(213, 20);
             this.txtApPaterno.TabIndex = 3;
             // 
             // txtApMaterno
             // 
-            this.txtApMaterno.Location = new System.Drawing.Point(399, 48);
+            this.txtApMaterno.Location = new System.Drawing.Point(18, 130);
             this.txtApMaterno.Name = "txtApMaterno";
-            this.txtApMaterno.Size = new System.Drawing.Size(177, 20);
+            this.txtApMaterno.Size = new System.Drawing.Size(213, 20);
             this.txtApMaterno.TabIndex = 5;
             // 
             // dtpFechaNac
             // 
             this.dtpFechaNac.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaNac.Location = new System.Drawing.Point(19, 101);
+            this.dtpFechaNac.Location = new System.Drawing.Point(237, 43);
             this.dtpFechaNac.Name = "dtpFechaNac";
-            this.dtpFechaNac.Size = new System.Drawing.Size(200, 20);
+            this.dtpFechaNac.Size = new System.Drawing.Size(187, 20);
             this.dtpFechaNac.TabIndex = 7;
             // 
             // cmbSexo
             // 
             this.cmbSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSexo.Location = new System.Drawing.Point(225, 101);
+            this.cmbSexo.Location = new System.Drawing.Point(237, 87);
             this.cmbSexo.Name = "cmbSexo";
-            this.cmbSexo.Size = new System.Drawing.Size(168, 21);
+            this.cmbSexo.Size = new System.Drawing.Size(185, 21);
             this.cmbSexo.TabIndex = 9;
             // 
             // cmbPais
             // 
             this.cmbPais.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbPais.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbPais.Location = new System.Drawing.Point(399, 101);
+            this.cmbPais.Location = new System.Drawing.Point(237, 131);
             this.cmbPais.Name = "cmbPais";
-            this.cmbPais.Size = new System.Drawing.Size(177, 21);
+            this.cmbPais.Size = new System.Drawing.Size(187, 21);
             this.cmbPais.TabIndex = 11;
             this.cmbPais.Validating += new System.ComponentModel.CancelEventHandler(this.cmbPais_Validating);
             // 
@@ -146,18 +149,18 @@
             // 
             this.cmbEstadoNac.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbEstadoNac.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbEstadoNac.Location = new System.Drawing.Point(19, 155);
+            this.cmbEstadoNac.Location = new System.Drawing.Point(237, 172);
             this.cmbEstadoNac.Name = "cmbEstadoNac";
-            this.cmbEstadoNac.Size = new System.Drawing.Size(200, 21);
+            this.cmbEstadoNac.Size = new System.Drawing.Size(187, 21);
             this.cmbEstadoNac.TabIndex = 13;
             this.cmbEstadoNac.Validating += new System.ComponentModel.CancelEventHandler(this.cmbEstadoNac_Validating);
             // 
             // txtCurp
             // 
-            this.txtCurp.Location = new System.Drawing.Point(225, 155);
+            this.txtCurp.Location = new System.Drawing.Point(18, 173);
             this.txtCurp.MaxLength = 20;
             this.txtCurp.Name = "txtCurp";
-            this.txtCurp.Size = new System.Drawing.Size(257, 20);
+            this.txtCurp.Size = new System.Drawing.Size(213, 20);
             this.txtCurp.TabIndex = 15;
             // 
             // txtCalle
@@ -224,7 +227,7 @@
             // 
             // lblNombre
             // 
-            this.lblNombre.Location = new System.Drawing.Point(19, 28);
+            this.lblNombre.Location = new System.Drawing.Point(19, 23);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(100, 23);
             this.lblNombre.TabIndex = 0;
@@ -232,7 +235,7 @@
             // 
             // lblApPaterno
             // 
-            this.lblApPaterno.Location = new System.Drawing.Point(225, 28);
+            this.lblApPaterno.Location = new System.Drawing.Point(18, 67);
             this.lblApPaterno.Name = "lblApPaterno";
             this.lblApPaterno.Size = new System.Drawing.Size(100, 23);
             this.lblApPaterno.TabIndex = 2;
@@ -240,7 +243,7 @@
             // 
             // lblApMaterno
             // 
-            this.lblApMaterno.Location = new System.Drawing.Point(399, 28);
+            this.lblApMaterno.Location = new System.Drawing.Point(18, 110);
             this.lblApMaterno.Name = "lblApMaterno";
             this.lblApMaterno.Size = new System.Drawing.Size(100, 23);
             this.lblApMaterno.TabIndex = 4;
@@ -248,15 +251,15 @@
             // 
             // lblFechaNac
             // 
-            this.lblFechaNac.Location = new System.Drawing.Point(19, 81);
+            this.lblFechaNac.Location = new System.Drawing.Point(239, 23);
             this.lblFechaNac.Name = "lblFechaNac";
-            this.lblFechaNac.Size = new System.Drawing.Size(168, 23);
+            this.lblFechaNac.Size = new System.Drawing.Size(185, 23);
             this.lblFechaNac.TabIndex = 6;
             this.lblFechaNac.Text = "Fecha de nacimiento:";
             // 
             // lblSexo
             // 
-            this.lblSexo.Location = new System.Drawing.Point(225, 81);
+            this.lblSexo.Location = new System.Drawing.Point(237, 67);
             this.lblSexo.Name = "lblSexo";
             this.lblSexo.Size = new System.Drawing.Size(100, 23);
             this.lblSexo.TabIndex = 8;
@@ -264,7 +267,7 @@
             // 
             // lblPais
             // 
-            this.lblPais.Location = new System.Drawing.Point(399, 81);
+            this.lblPais.Location = new System.Drawing.Point(237, 111);
             this.lblPais.Name = "lblPais";
             this.lblPais.Size = new System.Drawing.Size(144, 23);
             this.lblPais.TabIndex = 10;
@@ -272,7 +275,7 @@
             // 
             // lblEstadoNac
             // 
-            this.lblEstadoNac.Location = new System.Drawing.Point(19, 135);
+            this.lblEstadoNac.Location = new System.Drawing.Point(234, 155);
             this.lblEstadoNac.Name = "lblEstadoNac";
             this.lblEstadoNac.Size = new System.Drawing.Size(144, 23);
             this.lblEstadoNac.TabIndex = 12;
@@ -280,7 +283,7 @@
             // 
             // lblCurp
             // 
-            this.lblCurp.Location = new System.Drawing.Point(225, 135);
+            this.lblCurp.Location = new System.Drawing.Point(19, 155);
             this.lblCurp.Name = "lblCurp";
             this.lblCurp.Size = new System.Drawing.Size(100, 23);
             this.lblCurp.TabIndex = 14;
@@ -355,7 +358,7 @@
             this.lbMatricula.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbMatricula.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbMatricula.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lbMatricula.Location = new System.Drawing.Point(519, 845);
+            this.lbMatricula.Location = new System.Drawing.Point(519, 901);
             this.lbMatricula.Name = "lbMatricula";
             this.lbMatricula.Size = new System.Drawing.Size(100, 23);
             this.lbMatricula.TabIndex = 33;
@@ -364,6 +367,8 @@
             // 
             // gbAlumno
             // 
+            this.gbAlumno.Controls.Add(this.pictureBox1);
+            this.gbAlumno.Controls.Add(this.label3);
             this.gbAlumno.Controls.Add(this.txtNombre);
             this.gbAlumno.Controls.Add(this.txtApPaterno);
             this.gbAlumno.Controls.Add(this.txtApMaterno);
@@ -382,10 +387,28 @@
             this.gbAlumno.Controls.Add(this.lblNombre);
             this.gbAlumno.Location = new System.Drawing.Point(12, 70);
             this.gbAlumno.Name = "gbAlumno";
-            this.gbAlumno.Size = new System.Drawing.Size(605, 185);
+            this.gbAlumno.Size = new System.Drawing.Size(605, 239);
             this.gbAlumno.TabIndex = 34;
             this.gbAlumno.TabStop = false;
             this.gbAlumno.Text = "Alumno";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::SACDumont.Properties.Resources.nopicture;
+            this.pictureBox1.Location = new System.Drawing.Point(433, 43);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(153, 180);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 17;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(430, 23);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(168, 23);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Foto:";
             // 
             // gbDomicilio
             // 
@@ -405,7 +428,7 @@
             this.gbDomicilio.Controls.Add(this.lblEstado);
             this.gbDomicilio.Controls.Add(this.lblCiudad);
             this.gbDomicilio.Controls.Add(this.lblCalle);
-            this.gbDomicilio.Location = new System.Drawing.Point(12, 261);
+            this.gbDomicilio.Location = new System.Drawing.Point(12, 315);
             this.gbDomicilio.Name = "gbDomicilio";
             this.gbDomicilio.Size = new System.Drawing.Size(605, 235);
             this.gbDomicilio.TabIndex = 35;
@@ -418,7 +441,7 @@
             this.gbAcademicos.Controls.Add(this.label1);
             this.gbAcademicos.Controls.Add(this.cboGrado);
             this.gbAcademicos.Controls.Add(this.label10);
-            this.gbAcademicos.Location = new System.Drawing.Point(12, 502);
+            this.gbAcademicos.Location = new System.Drawing.Point(12, 574);
             this.gbAcademicos.Name = "gbAcademicos";
             this.gbAcademicos.Size = new System.Drawing.Size(173, 165);
             this.gbAcademicos.TabIndex = 36;
@@ -473,7 +496,7 @@
             this.gbFinanciero.Controls.Add(this.btDeletePromo);
             this.gbFinanciero.Controls.Add(this.btAddPromo);
             this.gbFinanciero.Controls.Add(this.gbPromociones);
-            this.gbFinanciero.Location = new System.Drawing.Point(191, 502);
+            this.gbFinanciero.Location = new System.Drawing.Point(191, 556);
             this.gbFinanciero.Name = "gbFinanciero";
             this.gbFinanciero.Size = new System.Drawing.Size(426, 165);
             this.gbFinanciero.TabIndex = 37;
@@ -491,12 +514,14 @@
             // 
             // chPromocion
             // 
+            this.chPromocion.BackColor = System.Drawing.Color.Transparent;
             this.chPromocion.Location = new System.Drawing.Point(145, 14);
             this.chPromocion.Name = "chPromocion";
             this.chPromocion.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.chPromocion.Size = new System.Drawing.Size(88, 24);
             this.chPromocion.TabIndex = 66;
             this.chPromocion.Text = "Promocion (Beca Interna)";
+            this.chPromocion.UseVisualStyleBackColor = false;
             this.chPromocion.CheckedChanged += new System.EventHandler(this.chPromocion_CheckedChanged);
             // 
             // gbBecado
@@ -603,7 +628,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgvTutors);
-            this.groupBox1.Location = new System.Drawing.Point(12, 673);
+            this.groupBox1.Location = new System.Drawing.Point(14, 727);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(605, 165);
             this.groupBox1.TabIndex = 69;
@@ -625,7 +650,7 @@
             // frmCatAlumnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(631, 872);
+            this.ClientSize = new System.Drawing.Size(631, 928);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbFinanciero);
             this.Controls.Add(this.gbAcademicos);
@@ -643,6 +668,7 @@
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.gbAlumno.ResumeLayout(false);
             this.gbAlumno.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gbDomicilio.ResumeLayout(false);
             this.gbDomicilio.PerformLayout();
             this.gbAcademicos.ResumeLayout(false);
@@ -688,5 +714,7 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button btDeletePromo;
         private System.Windows.Forms.Button btAddPromo;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label3;
     }
 }

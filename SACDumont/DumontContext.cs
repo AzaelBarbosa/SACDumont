@@ -1,11 +1,11 @@
-﻿using System;
+﻿using SACDumont.Models;
+using SACDumont.modulos; // Assuming you have a Models namespace for your entity models
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
-using SACDumont.Models;
-using SACDumont.modulos; // Assuming you have a Models namespace for your entity models
 
 namespace SACDumont
 {
@@ -33,9 +33,12 @@ namespace SACDumont
         public DbSet<perfiles> Perfiles { get; set; }
         public DbSet<permisos_perfiles> PermisosPerfiles { get; set; }
         public DbSet<cierre_diario> CierreDiario { get; set; }
+        public DbSet<config> Config { get; set; }
+        public DbSet<config_equipos> ConfigEquipos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<config>().ToTable("Config");
             // Configure entity properties and relationships here if needed
             base.OnModelCreating(modelBuilder);
         }

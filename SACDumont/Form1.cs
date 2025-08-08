@@ -1,4 +1,5 @@
-﻿using SACDumont.Catalogos;
+﻿using FastReport.Utils;
+using SACDumont.Catalogos;
 using SACDumont.Clases;
 using SACDumont.Listados;
 using SACDumont.Models;
@@ -16,6 +17,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SACDumont.Modulos.basConfiguracion;
 
 namespace SACDumont
 {
@@ -203,6 +205,54 @@ namespace SACDumont
 
             basFunctions.AgregaImpresorasTickets(btPrinterTickets);
             basFunctions.AgregaImpresoras(btDefinirImpresora);
+
+            ConfigInfo config = basConfiguracion.LeerConfig(@"C:\SAC\configSecure.dll");
+
+            using (var db = new DumontContext())
+            {
+                var systemConfig = db.Config.Where(c => c.id == 1).FirstOrDefault();
+                basConfiguracion.Config = new Dtos.ConfigDTO
+                {
+                    PreEscolarClave = systemConfig.preescolar_clave,
+                    PreEscolarSEP = systemConfig.preescolar_sep,
+                    PrimariaClave = systemConfig.primaria_clave,
+                    PrimariaSEP = systemConfig.primaria_sep,
+                    SecundariaClave = systemConfig.secundaria_clave,
+                    SecundariaSEP = systemConfig.secundaria_sep,
+                    MaternalClave = systemConfig.maternal_clave,
+                    MaternalSEP = systemConfig.maternal_sep,
+                    Equipo = config.Equipo
+                };
+
+                var printers = db.ConfigEquipos.Where(ce => ce.equipo == basConfiguracion.Config.Equipo).FirstOrDefault();
+                basConfiguracion.PrinterTiockets = printers.impresora_tickets;
+                basConfiguracion.Printer = printers.impresora_general;
+
+                foreach (ToolStripMenuItem item in btPrinterTickets.DropDownItems)
+                {
+                    // Quitar check de todos
+                    item.Checked = false;
+
+                    // Marcar solo el que coincide con el nombre guardado
+                    if (item.Text.Equals(printers.impresora_tickets, StringComparison.OrdinalIgnoreCase))
+                    {
+                        item.Checked = true;
+                    }
+                }
+
+                foreach (ToolStripMenuItem item in btDefinirImpresora.DropDownItems)
+                {
+                    // Quitar check de todos
+                    item.Checked = false;
+
+                    // Marcar solo el que coincide con el nombre guardado
+                    if (item.Text.Equals(printers.impresora_general, StringComparison.OrdinalIgnoreCase))
+                    {
+                        item.Checked = true;
+                    }
+                }
+            }
+
             DataTable dtConfig = sqlServer.ExecSQLReturnDT("SELECT * FROM config", "Config");
             DataTable dtCiclo = sqlServer.ExecSQLReturnDT("SELECT * FROM ciclos_escolares WHERE CAST(GETDATE() AS DATE) BETWEEN fecha_inicio AND fecha_fin", "Ciclos");
 

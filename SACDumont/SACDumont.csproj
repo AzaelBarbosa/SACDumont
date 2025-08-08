@@ -628,6 +628,8 @@
     <Content Include="Reportes\ListAlumnos.frx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\nopicture.jpg" />
+    <None Include="Resources\atencion.png" />
     <None Include="Resources\transferir-datos.png" />
     <None Include="Resources\detalle.png" />
     <None Include="Resources\cicloescolar.png" />

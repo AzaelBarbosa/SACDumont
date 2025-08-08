@@ -113,6 +113,16 @@ namespace SACDumont.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap atencion {
+            get {
+                object obj = ResourceManager.GetObject("atencion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bajausuario {
             get {
                 object obj = ResourceManager.GetObject("bajausuario", resourceCulture);
@@ -386,6 +396,16 @@ namespace SACDumont.Properties {
         internal static System.Drawing.Bitmap Logosinfondo {
             get {
                 object obj = ResourceManager.GetObject("Logosinfondo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap nopicture {
+            get {
+                object obj = ResourceManager.GetObject("nopicture", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

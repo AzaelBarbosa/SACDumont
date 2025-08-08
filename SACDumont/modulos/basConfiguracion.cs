@@ -8,9 +8,27 @@ using System.Security.Cryptography;
 using System.IO;
 using SACDumont.modulos;
 using SACDumont.Models;
+using SACDumont.Dtos;
 
 namespace SACDumont.Modulos
 {
+    public class ConfigColegio
+    {
+        public string PrimariaSEP { get; set; }
+        public string MaternalSEP { get; set; }
+        public string PreEscolarSEP { get; set; }
+        public string SecundariaSEP { get; set; }
+        public string PrimariaZona { get; set; }
+        public string MaternalZona { get; set; }
+        public string PreEscolarZona { get; set; }
+        public string SecundariaZona { get; set; }
+    }
+
+    public class ConfigEquipo
+    {
+        public string Equipo { get; set; }
+    }
+
     public class basConfiguracion
     {
         // Variables para almacenar la información del usuario
@@ -40,6 +58,8 @@ namespace SACDumont.Modulos
         public static string PrinterTiockets;
         public static string Printer;
         public static bool Transferencias;
+
+        public static ConfigDTO Config;
 
         private static readonly string clave = "CoDumont12345678"; // 16 caracteres
         private static readonly string iv = "CoDuVector123456";      // 16 caracteres
@@ -92,6 +112,7 @@ namespace SACDumont.Modulos
             public string BaseDatos { get; set; }
             public string Usuario { get; set; }
             public string Contrasena { get; set; }
+            public string Equipo { get; set; }
         }
 
         public static void GuardarConfig(ConfigInfo config, string rutaArchivo)

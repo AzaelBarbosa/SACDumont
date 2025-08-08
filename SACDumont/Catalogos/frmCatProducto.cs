@@ -1,4 +1,11 @@
-﻿using System;
+﻿using SACDumont.Base;
+using SACDumont.Clases;
+using SACDumont.Controles;
+using SACDumont.Models;
+using SACDumont.modulos;
+using SACDumont.Modulos;
+using SACDumont.Otros;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,12 +14,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SACDumont.Base;
-using SACDumont.Clases;
-using SACDumont.Models;
-using SACDumont.modulos;
-using SACDumont.Modulos;
-using SACDumont.Otros;
 
 namespace SACDumont.Catalogos
 {
@@ -204,7 +205,7 @@ namespace SACDumont.Catalogos
                     if (productos != null)
                     {
                         txAbreviatura.Text = productos.abreviatura ?? " ";
-                        txDescripcion.Text = productos.descripcion.ToString().ToUpper();
+                        txDescripcion.IdProductoSeleccionado = idProducto;
                         cboConcepto.Text = productos.concepto.ToString();
                         txtCosto.Text = producto_Ciclo.precio.ToString("C2");
                         dtFechaVenci.Value = producto_Ciclo.fecha_vencimiento;
@@ -233,6 +234,12 @@ namespace SACDumont.Catalogos
         private void CargarCombo()
         {
             cboConcepto.DataSource = Enum.GetValues(typeof(Conceptos));
+
+            txDescripcion.SqlQuery = $@"SELECT p.id_producto, p.descripcion, p.concepto, pc.fecha_vencimiento, 0 AS precio FROM productos p  
+                                        INNER JOIN producto_ciclo pc ON pc.id_producto = p.id_producto
+                                        WHERE p.estado = 1 AND pc.id_ciclo = {basGlobals.iCiclo}
+                                        GROUP BY p.id_producto, p.descripcion, p.concepto, pc.fecha_vencimiento";
+            txDescripcion.Inicializar();
         }
         #endregion
 
@@ -248,6 +255,11 @@ namespace SACDumont.Catalogos
             CargarCombo();
             CargarProducto();
             CargarMenu();
+        }
+
+        private void txDescripcion_OnCobroSeleccionado(DataRow obj)
+        {
+            idProducto = Convert.ToInt32(obj["id_producto"]);
         }
     }
 }

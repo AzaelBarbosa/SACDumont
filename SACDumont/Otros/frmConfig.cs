@@ -34,13 +34,15 @@ namespace SACDumont.Otros
                     Servidor = txServidor.Text,
                     BaseDatos = txBasseDatos.Text,
                     Usuario = txUsuario.Text,
-                    Contrasena = txContra.Text
+                    Contrasena = txContra.Text,
+                    Equipo = txEquipo.Text
+
                 };
 
                 basConfiguracion.GuardarConfig(config, rutaArchivo);
                 basFunctions basFunctions = new basFunctions();
                 basFunctions.ConectaBD();
-                basFunctions.UpdateConfig("sp_Config_Update", chRecargos.Checked, chPromociones.Checked, int.Parse(txPorcentajeRecargo.Text), int.Parse(nDiasTolerancia.Value.ToString()));
+                basFunctions.UpdateConfig("sp_Config_Update", chRecargos.Checked, chPromociones.Checked, int.Parse(txPorcentajeRecargo.Text), int.Parse(nDiasTolerancia.Value.ToString()), txSEPPrimaria.Text, txZonaPrim.Text, txSEPMat.Text, txZonaMat.Text, txSEPPre.Text, txZonaPre.Text, txSEPSecundaria.Text, txZonaPre.Text);
                 MessageBox.Show($"Configuración guardada de forma segura. {Environment.NewLine} Por favor reinicie el sistema para que los cambios surtan efecto.", "Copeland", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
@@ -66,6 +68,7 @@ namespace SACDumont.Otros
                 txBasseDatos.Text = config.BaseDatos;
                 txUsuario.Text = config.Usuario;
                 txContra.Text = config.Contrasena;
+                txEquipo.Text = config.Equipo;
 
                 // Cargar configuraciones adicionales
                 DataTable dt = sqlServer.ExecSQLReturnDT("SELECT * FROM config", "Config");
@@ -75,6 +78,14 @@ namespace SACDumont.Otros
                     chPromociones.Checked = Convert.ToBoolean(dt.Rows[0]["aplicar_promociones"]);
                     txPorcentajeRecargo.Text = dt.Rows[0]["porcentaje_recargo"].ToString();
                     nDiasTolerancia.Value = Convert.ToInt32(dt.Rows[0]["dias_tolerancia"]);
+                    txSEPMat.Text = dt.Rows[0]["maternal_sep"].ToString();
+                    txSEPPre.Text = dt.Rows[0]["preescolar_sep"].ToString();
+                    txSEPPrimaria.Text = dt.Rows[0]["primaria_sep"].ToString();
+                    txSEPSecundaria.Text = dt.Rows[0]["secundaria_sep"].ToString();
+                    txZonaMat.Text = dt.Rows[0]["maternal_clave"].ToString();
+                    txZonaPre.Text = dt.Rows[0]["preescolar_clave"].ToString();
+                    txZonaPrim.Text = dt.Rows[0]["primaria_clave"].ToString();
+                    txZonaSec.Text = dt.Rows[0]["secundaria_clave"].ToString();
                 }
 
             }

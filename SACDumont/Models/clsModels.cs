@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,7 @@ namespace SACDumont.Models
         public decimal monto { get; set; }
         public int tipopago { get; set; }
         public DateTime? fechaAlta { get; set; }
+        public string pago_por { get; set; }
 
         [NotMapped]
         public string descripcionPago { get; set; }
@@ -115,6 +117,7 @@ namespace SACDumont.Models
         public string email { get; set; }
         public bool activo { get; set; }
         public DateTime? fecha_alta { get; set; }
+        public byte[] foto_alumno { get; set; }
         public virtual ICollection<Inscripciones> Inscripciones { get; set; }
 
     }
@@ -286,6 +289,32 @@ namespace SACDumont.Models
         public int M1 { get; set; }
         public int M050 { get; set; }
 
+    }
+    public class config
+    {
+        [Key]
+        public int id { get; set; }
+        public int porcentaje_recargo { get; set; }
+        public int dias_tolerancia { get; set; }
+        public bool aplicar_recargos { get; set; }
+        public bool aplicar_promociones { get; set; }
+        public string primaria_sep { get; set; }
+        public string primaria_clave { get; set; }
+        public string secundaria_sep { get; set; }
+        public string secundaria_clave { get; set; }
+        public string preescolar_sep { get; set; }
+        public string preescolar_clave { get; set; }
+        public string maternal_sep { get; set; }
+        public string maternal_clave { get; set; }
+    }
+
+    public class config_equipos
+    {
+        [Key]
+        public int id { get; set; }
+        public string equipo { get; set; }
+        public string impresora_tickets { get; set; }
+        public string impresora_general { get; set; }
     }
     internal class clsModels
     {
