@@ -88,16 +88,15 @@ namespace SACDumont.Listados
                 movimientosProductos = db.MovimientoProductos.Where(mp => mp.id_movimiento == idMov).ToList();
                 movimientosCobros = db.MovimientoCobros.Where(mc => mc.id_movimiento == idMov).ToList();
 
-                if (MessageBox.Show($"Esta por eliminar el movimiento:" + Environment.NewLine + Environment.NewLine + $"{movimientos.id_movimiento}" + Environment.NewLine + "¿Desea Continuar?", "Movimientos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show($"Esta por cancelar el movimiento:" + Environment.NewLine + Environment.NewLine + $"{movimientos.id_movimiento}" + Environment.NewLine + "¿Desea Continuar?", "Movimientos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    db.Movimientos.Remove(movimientos);
-                    db.Entry(movimientos).State = System.Data.Entity.EntityState.Deleted;
-                    db.MovimientoProductos.RemoveRange(movimientosProductos);
-                    db.MovimientoCobros.RemoveRange(movimientosCobros);
+                    movimientos.id_estatusmovimiento = (int)EstatusMovimiento.Cancelado;
+                    db.Entry(movimientos).State = System.Data.Entity.EntityState.Modified;
                     var result = db.SaveChanges();
                     if (result > 0)
                     {
-                        MessageBox.Show("Movimiento eliminado correctamente", "Movimientos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Movimiento cancelado correctamente", "Movimientos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        basFunctions.Registrar(basConfiguracion.UserID, "Movimiento", "Cancelar", idMov, $"Se cancelo el Movimiento con ID: {idMov}");
                         CargarMovimientos();
                     }
                 }

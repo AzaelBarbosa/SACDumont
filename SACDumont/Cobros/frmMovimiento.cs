@@ -216,6 +216,28 @@ namespace SACDumont.Cobros
         }
         protected override void Eliminar()
         {
+            if (idMovimiento == 0)
+            {
+                MessageBox.Show("Esta dando de Alta un nuevo movomiento, no es posible Cancelar", "SAC-Dumont", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            using (var db = new DumontContext())
+            {
+                var movimientos = db.Movimientos.Find(idMovimiento);
+
+                if (MessageBox.Show($"Esta por cancelar el movimiento:" + Environment.NewLine + Environment.NewLine + $"{movimientos.id_movimiento}" + Environment.NewLine + "¿Desea Continuar?", "Movimientos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    movimientos.id_estatusmovimiento = (int)EstatusMovimiento.Cancelado;
+                    db.Entry(movimientos).State = System.Data.Entity.EntityState.Modified;
+                    var result = db.SaveChanges();
+                    if (result > 0)
+                    {
+                        MessageBox.Show("Movimiento cancelado correctamente", "Movimientos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        basFunctions.Registrar(basConfiguracion.UserID, "Movimiento", "Cancelar", idMovimiento, $"Se cancelo el Movimiento con ID: {idMovimiento}");
+                    }
+                }
+            }
             // Implementar la lógica para eliminar el movimiento
         }
         protected override void Cerrar()

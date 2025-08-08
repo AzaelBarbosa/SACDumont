@@ -34,6 +34,8 @@
             this.lblNombre = new System.Windows.Forms.Label();
             this.cboCatalogos = new SACDumont.Controles.ComboCatalogos();
             this.label10 = new System.Windows.Forms.Label();
+            this.txRealizado = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtTotal
@@ -81,7 +83,7 @@
             // cboCatalogos
             // 
             this.cboCatalogos.Descripcion = null;
-            this.cboCatalogos.IDValor = null;
+            this.cboCatalogos.IDValor = 0;
             this.cboCatalogos.Location = new System.Drawing.Point(189, 151);
             this.cboCatalogos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cboCatalogos.Name = "cboCatalogos";
@@ -98,11 +100,31 @@
             this.label10.TabIndex = 57;
             this.label10.Text = "Tipo Pago:";
             // 
+            // txRealizado
+            // 
+            this.txRealizado.Location = new System.Drawing.Point(10, 200);
+            this.txRealizado.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txRealizado.Name = "txRealizado";
+            this.txRealizado.Size = new System.Drawing.Size(323, 20);
+            this.txRealizado.TabIndex = 58;
+            this.txRealizado.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(10, 182);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 27);
+            this.label2.TabIndex = 59;
+            this.label2.Text = "Relizado Por:";
+            // 
             // frmMovimientoCobro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(346, 208);
+            this.ClientSize = new System.Drawing.Size(346, 232);
+            this.Controls.Add(this.txRealizado);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.cboCatalogos);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtTotal);
@@ -118,6 +140,8 @@
             this.Controls.SetChildIndex(this.txtTotal, 0);
             this.Controls.SetChildIndex(this.label10, 0);
             this.Controls.SetChildIndex(this.cboCatalogos, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.txRealizado, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,5 +155,7 @@
         private System.Windows.Forms.Label lblNombre;
         private Controles.ComboCatalogos cboCatalogos;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txRealizado;
+        private System.Windows.Forms.Label label2;
     }
 }

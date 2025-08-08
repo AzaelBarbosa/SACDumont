@@ -794,7 +794,6 @@ namespace SACDumont.Modulos
                 using (var db = new DumontContext())
                 {
                     var resumen = (from m in db.Movimientos
-                                   join mp in db.MovimientoProductos on m.id_movimiento equals mp.id_movimiento
                                    join c in db.MovimientoCobros on m.id_movimiento equals c.id_movimiento into cobrosGroup
                                    from c in cobrosGroup.DefaultIfEmpty()
                                    join cat in db.Catalogos on new { valor = (int?)c.tipopago, tipo_catalogo = "TipoPago" }
@@ -822,7 +821,8 @@ namespace SACDumont.Modulos
                                          cd.M5,
                                          cd.M2,
                                          cd.M1,
-                                         cd.M050
+                                         cd.M050,
+                                         cd.fechacorte
                                      })
                                      .ToList();
 
@@ -846,7 +846,8 @@ namespace SACDumont.Modulos
                                         Alumno = (a.appaterno ?? "") + " " + (a.apmaterno ?? "") + " " + (a.nombre ?? ""),
                                         Concepto = p.concepto,
                                         MotivoGasto = mp.descripcion,
-                                        Monto = c.monto
+                                        Monto = c.monto,
+                                        Folio = m.id_movimiento
                                     } into g
 
                                     select new
@@ -854,7 +855,8 @@ namespace SACDumont.Modulos
                                         Alumno = (g.Key.Alumno == null || g.Key.Alumno.Trim() == "") ? "GASTO" : g.Key.Alumno,
                                         Concepto = g.Key.Concepto,
                                         MotivoGasto = g.Key.MotivoGasto ?? "",
-                                        Monto = g.Key.Monto
+                                        Monto = g.Key.Monto,
+                                        Folio = g.Key.Folio
                                     }).ToList();
 
                     dtResumen = basFunctions.ConvertToDataTable(resumen);

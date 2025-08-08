@@ -54,7 +54,8 @@ namespace SACDumont.Cobros
                 monto = total,
                 tipopago = Convert.ToInt32(cboCatalogos.IDValor),
                 descripcionPago = Convert.ToString(cboCatalogos.Descripcion),
-                fechaAlta = DateTime.Now
+                fechaAlta = DateTime.Now,
+                pago_por = txRealizado.Text
 
             };
 

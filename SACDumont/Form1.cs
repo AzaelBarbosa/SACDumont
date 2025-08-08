@@ -110,7 +110,8 @@ namespace SACDumont
                                          cd.M5,
                                          cd.M2,
                                          cd.M1,
-                                         cd.M050
+                                         cd.M050,
+                                         cd.fechacorte
                                      })
                                      .ToList();
 

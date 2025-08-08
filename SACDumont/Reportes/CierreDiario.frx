@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="08/04/2025 01:04:06" ReportInfo.Modified="08/05/2025 21:40:39" ReportInfo.CreatorVersion="2025.2.0.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/04/2025 01:04:06" ReportInfo.Modified="08/08/2025 12:19:29" ReportInfo.CreatorVersion="2025.2.0.0">
   <Dictionary>
     <TableDataSource Name="Resumen" ReferenceName="Resumen" DataType="System.Int32" Enabled="true">
       <Column Name="Tipo" DataType="System.String" PropName="Efectivo"/>
@@ -26,7 +26,9 @@
       <Column Name="M2" DataType="System.Decimal"/>
       <Column Name="M1" DataType="System.Decimal"/>
       <Column Name="M050" DataType="System.Decimal"/>
+      <Column Name="fechacorte" DataType="System.DateTime" PropName="Column"/>
     </TableDataSource>
+    <Parameter Name="pFecha" DataType="System.DateTime" AsString=""/>
   </Dictionary>
   <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
     <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="217.35">
@@ -37,6 +39,7 @@
       <TextObject Name="Text22" Top="141.75" Width="718.2" Height="28.35" Text="Corte Diario" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 16pt, style=Bold"/>
       <TextObject Name="Text31" Top="189" Width="151.2" Height="18.9" Text="RESUMEN" Font="Century Gothic, 12pt, style=Bold"/>
       <TextObject Name="Text41" Left="481.95" Top="189" Width="151.2" Height="18.9" Text="RECUENTO" Font="Century Gothic, 12pt, style=Bold"/>
+      <TextObject Name="Text45" Left="481.95" Top="141.75" Width="236.25" Height="28.35" Text="[Billetes.fechacorte]" Format="Date" Format.Format="d" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 9pt"/>
     </ReportTitleBand>
     <DataBand Name="Data1" Top="220.02" Width="718.2" Height="179.52" CanGrow="true">
       <TableObject Name="Table1" Left="444.15" Top="18.9" Width="230.58" Height="141.72">
