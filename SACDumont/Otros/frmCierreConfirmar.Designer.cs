@@ -226,6 +226,7 @@
             this.txM050.Name = "txM050";
             this.txM050.Size = new System.Drawing.Size(100, 20);
             this.txM050.TabIndex = 10;
+            this.txM050.Text = "0";
             // 
             // label11
             // 
@@ -242,6 +243,7 @@
             this.txM1.Name = "txM1";
             this.txM1.Size = new System.Drawing.Size(100, 20);
             this.txM1.TabIndex = 9;
+            this.txM1.Text = "0";
             // 
             // label10
             // 
@@ -258,6 +260,7 @@
             this.txM2.Name = "txM2";
             this.txM2.Size = new System.Drawing.Size(100, 20);
             this.txM2.TabIndex = 8;
+            this.txM2.Text = "0";
             // 
             // label9
             // 
@@ -274,6 +277,7 @@
             this.txM5.Name = "txM5";
             this.txM5.Size = new System.Drawing.Size(100, 20);
             this.txM5.TabIndex = 7;
+            this.txM5.Text = "0";
             // 
             // label8
             // 
@@ -290,6 +294,7 @@
             this.txM10.Name = "txM10";
             this.txM10.Size = new System.Drawing.Size(100, 20);
             this.txM10.TabIndex = 6;
+            this.txM10.Text = "0";
             // 
             // label7
             // 
@@ -306,6 +311,7 @@
             this.txB20.Name = "txB20";
             this.txB20.Size = new System.Drawing.Size(100, 20);
             this.txB20.TabIndex = 5;
+            this.txB20.Text = "0";
             // 
             // label6
             // 
@@ -322,6 +328,7 @@
             this.txB50.Name = "txB50";
             this.txB50.Size = new System.Drawing.Size(100, 20);
             this.txB50.TabIndex = 4;
+            this.txB50.Text = "0";
             // 
             // label5
             // 
@@ -338,6 +345,7 @@
             this.txB100.Name = "txB100";
             this.txB100.Size = new System.Drawing.Size(100, 20);
             this.txB100.TabIndex = 3;
+            this.txB100.Text = "0";
             // 
             // label4
             // 
@@ -354,6 +362,7 @@
             this.txB200.Name = "txB200";
             this.txB200.Size = new System.Drawing.Size(100, 20);
             this.txB200.TabIndex = 2;
+            this.txB200.Text = "0";
             // 
             // label3
             // 
@@ -370,6 +379,7 @@
             this.txB500.Name = "txB500";
             this.txB500.Size = new System.Drawing.Size(100, 20);
             this.txB500.TabIndex = 1;
+            this.txB500.Text = "0";
             // 
             // label2
             // 
@@ -386,6 +396,7 @@
             this.txB1000.Name = "txB1000";
             this.txB1000.Size = new System.Drawing.Size(100, 20);
             this.txB1000.TabIndex = 0;
+            this.txB1000.Text = "0";
             // 
             // label1
             // 

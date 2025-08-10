@@ -29,7 +29,7 @@ namespace SACDumont.Cobros
 
         DataTable dtMovimiento = new DataTable("Movimiento");
         int idCiclo = basGlobals.iCiclo;
-        int id_estatusmovimiento = (int)modulos.EstatusMovimiento.Liquidado;
+        int id_estatusmovimiento = (int)EstatusMovimiento.Liquidado;
         int idMovimiento = 0;
         int idMatricula = 0;
         int idGrado = 0;
@@ -431,7 +431,9 @@ namespace SACDumont.Cobros
                 dgvCobros.Columns["id_cobro"].Visible = false;
                 dgvCobros.Columns["id_movimiento"].Visible = false;
                 dgvCobros.Columns["tipopago"].Visible = false;
+                dgvCobros.Columns["fechaAlta"].HeaderText = "Fecha Pago";
                 dgvCobros.Columns["monto"].HeaderText = "Monto";
+                dgvCobros.Columns["pago_por"].HeaderText = "Pago Por";
                 dgvCobros.Columns["monto"].DefaultCellStyle.Format = "C2";
                 dgvCobros.Columns["descripcionPago"].HeaderText = "Forma de Pago";
                 dgvCobros.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -444,26 +446,47 @@ namespace SACDumont.Cobros
                 dgvProductos.Columns["cantidad"].HeaderText = "Qty";
                 dgvProductos.Columns["cantidad"].DefaultCellStyle.Format = "N0";
                 dgvProductos.Columns["monto"].HeaderText = "Monto";
-                dgvProductos.Columns["Talla"].HeaderText = "Talla";
-                if (strConcepto != Conceptos.UNIFORMES.ToString()) dgvProductos.Columns["Talla"].Visible = false;
+                if (strConcepto == Conceptos.GASTOS.ToString())
+                {
+                    dgvProductos.Columns["descripcion"].HeaderText = "Descripcion";
+                }
+                else
+                {
+                    dgvProductos.Columns["descripcion"].Visible = false;
+                }
+                if (strConcepto == Conceptos.UNIFORMES.ToString())
+                {
+                    dgvProductos.Columns["talla"].HeaderText = "Talla";
+                }
+                else
+                {
+                    dgvProductos.Columns["talla"].Visible = false;
+                }
                 dgvProductos.Columns["monto"].DefaultCellStyle.Format = "C2";
                 dgvProductos.Columns["monto_recargo"].HeaderText = "Recargo";
                 dgvProductos.Columns["monto_recargo"].DefaultCellStyle.Format = "C2";
                 dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvProductos.RowHeadersVisible = false;
-                if (basGlobals.Movimiento.id_estatusmovimiento == (int)modulos.EstatusMovimiento.Liquidado)
+                if (basGlobals.Movimiento.id_estatusmovimiento == (int)EstatusMovimiento.Liquidado)
                 {
                     btDeleteProducto.Enabled = false;
                     btNewProducto.Enabled = false;
                     btDeletePago.Enabled = false;
                     btNewPago.Enabled = false;
                 }
-                else if (basGlobals.Movimiento.id_estatusmovimiento == (int)modulos.EstatusMovimiento.Abono)
+                else if (basGlobals.Movimiento.id_estatusmovimiento == (int)EstatusMovimiento.Abono)
                 {
                     btDeleteProducto.Enabled = false;
                     btNewProducto.Enabled = false;
                     btDeletePago.Enabled = true;
                     btNewPago.Enabled = true;
+                }
+                else if (basGlobals.Movimiento.id_estatusmovimiento == (int)EstatusMovimiento.Cancelado)
+                {
+                    btDeleteProducto.Enabled = false;
+                    btNewProducto.Enabled = false;
+                    btDeletePago.Enabled = false;
+                    btNewPago.Enabled = false;
                 }
                 VerificaPromociones();
             }
@@ -586,7 +609,22 @@ namespace SACDumont.Cobros
                 dgvProductos.Columns["monto"].DefaultCellStyle.Format = "C2";
                 dgvProductos.Columns["monto_recargo"].HeaderText = "Recargo";
                 dgvProductos.Columns["monto_recargo"].DefaultCellStyle.Format = "C2";
-
+                if (strConcepto == Conceptos.GASTOS.ToString())
+                {
+                    dgvProductos.Columns["descripcion"].HeaderText = "Descripcion";
+                }
+                else
+                {
+                    dgvProductos.Columns["descripcion"].Visible = false;
+                }
+                if (strConcepto == Conceptos.UNIFORMES.ToString())
+                {
+                    dgvProductos.Columns["talla"].HeaderText = "Talla";
+                }
+                else
+                {
+                    dgvProductos.Columns["talla"].Visible = false;
+                }
                 dgvProductos.Columns["descriptionProducto"].Width = 220;
                 dgvProductos.Columns["cantidad"].Width = 30;
                 dgvProductos.Columns["monto"].Width = 110;
@@ -640,6 +678,7 @@ namespace SACDumont.Cobros
                 dgvCobros.Columns["descripcionPago"].HeaderText = "Forma de Pago";
                 dgvCobros.Columns["fechaAlta"].HeaderText = "Fecha Pago";
                 dgvCobros.Columns["monto"].HeaderText = "Monto";
+                dgvCobros.Columns["pago_por"].HeaderText = "Pago Por";
                 dgvCobros.Columns["monto"].DefaultCellStyle.Format = "C2";
                 dgvCobros.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvCobros.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -702,6 +741,22 @@ namespace SACDumont.Cobros
                 dgvProductos.Columns["cantidad"].Width = 30;
                 dgvProductos.Columns["monto"].Width = 110;
                 dgvProductos.Columns["monto_recargo"].Width = 110;
+                if (strConcepto == Conceptos.GASTOS.ToString())
+                {
+                    dgvProductos.Columns["descripcion"].HeaderText = "Descripcion";
+                }
+                else
+                {
+                    dgvProductos.Columns["descripcion"].Visible = false;
+                }
+                if (strConcepto == Conceptos.UNIFORMES.ToString())
+                {
+                    dgvProductos.Columns["talla"].HeaderText = "Talla";
+                }
+                else
+                {
+                    dgvProductos.Columns["talla"].Visible = false;
+                }
                 dgvProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgvProductos.MultiSelect = false;
                 txImporte.Text = basGlobals.listaProductos.Sum(p => p.monto).ToString();
@@ -730,7 +785,9 @@ namespace SACDumont.Cobros
                 dgvCobros.Columns["id_movimiento"].Visible = false;
                 dgvCobros.Columns["tipopago"].Visible = false;
                 dgvCobros.Columns["descripcionPago"].HeaderText = "Forma de Pago";
+                dgvCobros.Columns["fechaAlta"].HeaderText = "Fecha Pago";
                 dgvCobros.Columns["monto"].HeaderText = "Monto";
+                dgvCobros.Columns["pago_por"].HeaderText = "Pago Por";
                 dgvCobros.Columns["monto"].DefaultCellStyle.Format = "C2";
                 dgvCobros.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvCobros.RowHeadersVisible = false;

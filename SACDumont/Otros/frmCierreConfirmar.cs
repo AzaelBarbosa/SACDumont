@@ -86,6 +86,7 @@ namespace SACDumont.Otros
                                                                 equals new { valor = (int?)cat.valor, cat.tipo_catalogo } into catalogosGroup
                                      from cat in catalogosGroup.DefaultIfEmpty()
                                      where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now)
+                                     && m.id_estatusmovimiento != 4
                                      group c by cat.descripcion into g
                                      select new
                                      {
@@ -93,6 +94,14 @@ namespace SACDumont.Otros
                                          Monto = g.Sum(x => x != null ? x.monto : 0)
                                      }).ToList();
 
+                    if (resultado.Count() == 0)
+                    {
+                        txEfectivo.Text = cero.ToString("C2");
+                        txGasto.Text = cero.ToString("C2");
+                        txTrasnfer.Text = cero.ToString("C2");
+                        txTotales.Text = cero.ToString("C2");
+                        total = cero;
+                    }
                     if (resultado.Count() == 1)
                     {
                         txEfectivo.Text = (resultado[0].Monto).ToString("C2");
@@ -177,6 +186,7 @@ namespace SACDumont.Otros
                                 from a in aGroup.DefaultIfEmpty()
 
                                 where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now)
+                                && m.id_estatusmovimiento != 4
 
                                 group new { c, mp, p, a } by new
                                 {
@@ -209,6 +219,7 @@ namespace SACDumont.Otros
         private void frmCierreConfirmar_Load(object sender, EventArgs e)
         {
             CargarDatos();
+            basFunctions.SelectAll(this);
         }
 
         private void txEfectivoConfirmar_Validated(object sender, EventArgs e)

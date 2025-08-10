@@ -66,7 +66,7 @@
             this.txCosto.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txCosto.Name = "txCosto";
             this.txCosto.Size = new System.Drawing.Size(165, 20);
-            this.txCosto.TabIndex = 48;
+            this.txCosto.TabIndex = 0;
             this.txCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txCosto.TextChanged += new System.EventHandler(this.txCosto_TextChanged);
             this.txCosto.Leave += new System.EventHandler(this.txCosto_Leave);
@@ -88,7 +88,7 @@
             this.cboCatalogos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cboCatalogos.Name = "cboCatalogos";
             this.cboCatalogos.Size = new System.Drawing.Size(144, 21);
-            this.cboCatalogos.TabIndex = 56;
+            this.cboCatalogos.TabIndex = 1;
             this.cboCatalogos.TipoCatalogo = "TipoPago";
             // 
             // label10
@@ -106,8 +106,8 @@
             this.txRealizado.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txRealizado.Name = "txRealizado";
             this.txRealizado.Size = new System.Drawing.Size(323, 20);
-            this.txRealizado.TabIndex = 58;
-            this.txRealizado.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txRealizado.TabIndex = 2;
+            this.txRealizado.Leave += new System.EventHandler(this.txRealizado_Leave);
             // 
             // label2
             // 

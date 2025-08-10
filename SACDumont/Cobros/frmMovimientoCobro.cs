@@ -55,8 +55,7 @@ namespace SACDumont.Cobros
                 tipopago = Convert.ToInt32(cboCatalogos.IDValor),
                 descripcionPago = Convert.ToString(cboCatalogos.Descripcion),
                 fechaAlta = DateTime.Now,
-                pago_por = txRealizado.Text
-
+                pago_por = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(txRealizado.Text.ToLower())
             };
 
             basGlobals.listaCobros.Add(movimientoCobros);
@@ -91,6 +90,7 @@ namespace SACDumont.Cobros
             GenerarMenu();
             txtTotal.Text = importePendiente.ToString("C2");
             cboCatalogos.Inicializar();
+            basFunctions.SelectAll(this);
         }
 
         private void txCosto_TextChanged(object sender, EventArgs e)
@@ -109,6 +109,12 @@ namespace SACDumont.Cobros
         private void txCosto_Leave(object sender, EventArgs e)
         {
             txCosto.Text = importeFrente.ToString("C2");
+        }
+
+        private void txRealizado_Leave(object sender, EventArgs e)
+        {
+            txRealizado.Text = System.Globalization.CultureInfo.CurrentCulture.TextInfo
+    .ToTitleCase(txRealizado.Text.ToLower());
         }
     }
 }

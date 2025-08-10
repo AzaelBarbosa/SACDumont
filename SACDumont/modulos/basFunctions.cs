@@ -911,5 +911,24 @@ namespace SACDumont.Modulos
             g.DrawImage(img, 0, 0, newW, newH);
             return bmp;
         }
+
+        public static void SelectAll(Form frm)
+        {
+            foreach (Control c in frm.Controls)
+            {
+                if (c is TextBox tb)
+                {
+                    tb.Enter += (s, ev) => tb.SelectAll();
+                }
+            }
+
+            foreach (Control c in frm.Controls)
+            {
+                if (c is TextBox tb)
+                {
+                    tb.MouseUp += (s, ev) => tb.SelectAll();
+                }
+            }
+        }
     }
 }

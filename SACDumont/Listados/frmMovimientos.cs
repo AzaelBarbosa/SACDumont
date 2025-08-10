@@ -238,7 +238,7 @@ namespace SACDumont.Listados
                                                         LEFT JOIN catalogos cat ON cat.valor = i.id_grado AND cat.tipo_catalogo = 'Grado' 
                                                         LEFT JOIN catalogos catG ON catG.valor = i.id_grupo AND catG.tipo_catalogo = 'Grupo'
                                                         LEFT JOIN catalogos catE ON catE.valor = m.id_estatusmovimiento AND catE.tipo_catalogo = 'EstatusMovimiento'
-                                                        WHERE m.id_ciclo = {basGlobals.iCiclo} AND p.concepto = '{basGlobals.sConcepto}' AND CAST(m.fechahora AS DATE) = CAST(GETDATE() AS DATE)", "Movimientos");
+                                                        WHERE m.id_ciclo = {basGlobals.iCiclo} AND p.concepto = '{basGlobals.sConcepto}' AND (CAST(m.fechahora AS DATE) = CAST(GETDATE() AS DATE) OR m.id_estatusmovimiento = 1);", "Movimientos");
             }
 
             bs.DataSource = dtMovimientos;
