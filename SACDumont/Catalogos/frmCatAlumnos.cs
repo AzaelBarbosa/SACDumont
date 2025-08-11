@@ -71,6 +71,8 @@ namespace SACDumont.Catalogos
 
             if (esNuevo)
             {
+                Image foto = null;
+                foto = basFunctions.Resize(pictureBox1.Image, 800);
                 using (var db = new DumontContext())
                 {
                     var alumno = new Alumnos
@@ -91,7 +93,7 @@ namespace SACDumont.Catalogos
                         telefono2 = txtTel2.Text,
                         telefono3 = txtTel3.Text,
                         email = txtEmail.Text,
-                        foto_alumno = basFunctions.ImageToBytes(pictureBox1.Image)
+                        foto_alumno = basFunctions.ImageToBytes(foto)
                     };
 
                     db.Alumnos.Add(alumno);
@@ -165,7 +167,7 @@ namespace SACDumont.Catalogos
                         return;
                     }
 
-                    if (foto != null) { foto = basFunctions.Resize(pictureBox1.Image, 800); }
+                    foto = basFunctions.Resize(pictureBox1.Image, 800);
 
                     // Asignar los valores del formulario al objeto alumno
                     alumno.nombre = txtNombre.Text;
