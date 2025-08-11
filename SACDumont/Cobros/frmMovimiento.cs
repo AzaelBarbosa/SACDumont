@@ -19,6 +19,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -182,7 +183,8 @@ namespace SACDumont.Cobros
                             id_movimiento = (int)nuevo.id_movimiento,
                             monto = c.monto,
                             tipopago = c.tipopago,
-                            descripcionPago = c.descripcionPago
+                            descripcionPago = c.descripcionPago,
+                            pago_por = c.pago_por
                         }));
                         var result2 = db.SaveChanges(); // 🔥 EF genera los INSERT automáticamente para productos y cobros
                         if (result2 != 0)
@@ -203,6 +205,7 @@ namespace SACDumont.Cobros
                             for (int i = 0; i < 2; i++)
                             {
                                 ExportareImprimirSinAbrir(nuevo.id_movimiento);
+                                Thread.Sleep(2000);
                             }
                         }
                     }
@@ -342,6 +345,7 @@ namespace SACDumont.Cobros
                                   .FirstOrDefault(),
                       MontoPendiente = m.montoTotal - m.beca_descuento - m.monto_descuento - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
                       MontoPagado = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                      PagadoPor = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Select(mc => mc.pago_por).FirstOrDefault()
                   })
                   .ToList();
 
@@ -379,7 +383,7 @@ namespace SACDumont.Cobros
 
             // 4. Preparar y exportar
             report.Prepare();
-            string rutaPDF = Path.Combine(Application.StartupPath, "Ticket.pdf");
+            string rutaPDF = Path.Combine(Application.StartupPath, $"{reportesDTO[0].Folio}.pdf");
             report.Export(new PDFSimpleExport(), rutaPDF);
 
             string rutaSumatra = Path.Combine("C:\\", "PDF\\", "SumatraPDF.exe");
@@ -725,7 +729,7 @@ namespace SACDumont.Cobros
             if (dgvProductos.SelectedRows.Count > 0)
             {
                 int idProducto = Convert.ToInt32(dgvProductos.SelectedRows[0].Cells["id_producto"].Value);
-             
+
                 basGlobals.listaProductos.RemoveAll(p => p.id_producto == idProducto);
                 dgvProductos.DataSource = null;
                 dgvProductos.DataSource = basGlobals.listaProductos;

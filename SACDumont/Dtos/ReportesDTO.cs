@@ -22,6 +22,8 @@ namespace SACDumont.Dtos
         public string Ciclo { get; set; }
         public decimal MontoPendiente { get; set; }
         public decimal MontoPagado { get; set; }
+        public string PagadoPor { get; set; }
+
     }
 
     public class AlumnosDTO

@@ -34,8 +34,13 @@
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.dgvMovimientos = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSpinner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovimientos)).BeginInit();
             this.SuspendLayout();
+            // 
+            // pbSpinner
+            // 
+            this.pbSpinner.Location = new System.Drawing.Point(335, 167);
             // 
             // BottomToolStripPanel
             // 
@@ -101,7 +106,9 @@
             this.Name = "frmMovimientos";
             this.Text = "frmMovimientos";
             this.Load += new System.EventHandler(this.frmMovimientos_Load);
+            this.Controls.SetChildIndex(this.pbSpinner, 0);
             this.Controls.SetChildIndex(this.dgvMovimientos, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.pbSpinner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovimientos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

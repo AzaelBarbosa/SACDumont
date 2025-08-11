@@ -20,6 +20,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -114,6 +115,7 @@ namespace SACDumont.Listados
             for (int i = 0; i < 2; i++)
             {
                 ExportareImprimirSinAbrir();
+                Thread.Sleep(2000);
             }
         }
         protected override void ImprimirTicket()
@@ -496,6 +498,7 @@ namespace SACDumont.Listados
                                   .FirstOrDefault(),
                       MontoPendiente = m.montoTotal - m.beca_descuento - m.monto_descuento - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
                       MontoPagado = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                      PagadoPor = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Select(mc => mc.pago_por).FirstOrDefault()
                   })
                   .ToList();
 
@@ -532,7 +535,7 @@ namespace SACDumont.Listados
 
             // 4. Preparar y exportar
             report.Prepare();
-            string rutaPDF = Path.Combine(Application.StartupPath, "Ticket.pdf");
+            string rutaPDF = Path.Combine(Application.StartupPath, $"{reportesDTO[0].Folio}.pdf");
             report.Export(new PDFSimpleExport(), rutaPDF);
 
             string rutaSumatra = Path.Combine(Application.StartupPath, "PDF", "SumatraPDF.exe");
