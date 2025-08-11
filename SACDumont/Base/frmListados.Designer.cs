@@ -166,12 +166,14 @@
             this.txBusqueda.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txBusqueda.Name = "txBusqueda";
             this.txBusqueda.Size = new System.Drawing.Size(400, 25);
+            this.txBusqueda.Visible = false;
             this.txBusqueda.TextChanged += new System.EventHandler(this.txBusqueda_TextChanged);
             // 
             // cboBusqueda
             // 
             this.cboBusqueda.Name = "cboBusqueda";
             this.cboBusqueda.Size = new System.Drawing.Size(121, 25);
+            this.cboBusqueda.Visible = false;
             this.cboBusqueda.SelectedIndexChanged += new System.EventHandler(this.cboBusqueda_SelectedIndexChanged);
             // 
             // pbSpinner

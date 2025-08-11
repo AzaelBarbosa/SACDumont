@@ -239,6 +239,7 @@ namespace SACDumont.Listados
         {
             guardarToolStripMenuItem.Visible = false;
             reporteToolStripMenuItem.Visible = false;
+            btTicketImpresora.Visible = false;
         }
 
         private void dgvAlumnos_CellClick(object sender, DataGridViewCellEventArgs e)

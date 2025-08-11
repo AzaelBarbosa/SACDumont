@@ -35,7 +35,7 @@ namespace SACDumont.Catalogos
             {
                 using (var db = new DumontContext())
                 {
-                    Usuarios.nombre_usuario = txNombreUsuario.Text;
+                    Usuarios.nombre_usuario = basFunctions.StringToLittleCase(txNombreUsuario.Text);
                     Usuarios.usuario = txUsuario.Text.ToString();
                     Usuarios.correo = txCorreo.Text;
                     Usuarios.reset_contrasena = true;

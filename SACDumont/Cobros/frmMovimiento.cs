@@ -1,6 +1,10 @@
-﻿using log4net.Util;
+﻿using FastReport;
+using FastReport.Export.PdfSimple;
+using log4net.Util;
 using SACDumont.Base;
 using SACDumont.Clases;
+using SACDumont.Controles;
+using SACDumont.Dtos;
 using SACDumont.Models;
 using SACDumont.modulos;
 using SACDumont.Modulos;
@@ -9,17 +13,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FastReport;
-using FastReport.Export.PdfSimple;
-using System.IO;
-using SACDumont.Dtos;
-using System.Data.Entity;
 
 namespace SACDumont.Cobros
 {
@@ -724,6 +725,7 @@ namespace SACDumont.Cobros
             if (dgvProductos.SelectedRows.Count > 0)
             {
                 int idProducto = Convert.ToInt32(dgvProductos.SelectedRows[0].Cells["id_producto"].Value);
+             
                 basGlobals.listaProductos.RemoveAll(p => p.id_producto == idProducto);
                 dgvProductos.DataSource = null;
                 dgvProductos.DataSource = basGlobals.listaProductos;

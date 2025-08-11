@@ -112,6 +112,7 @@ namespace SACDumont.Listados
         {
             guardarToolStripMenuItem.Visible = false;
             nuevoToolStripMenuItem.Visible = false;
+            btTicketImpresora.Visible = false;
         }
 
         private void CargarElementosBusqueda()

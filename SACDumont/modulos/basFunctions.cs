@@ -930,5 +930,20 @@ namespace SACDumont.Modulos
                 }
             }
         }
+
+        public static void FormatToLittleCase(TextBox txt)
+        {
+            System.Globalization.CultureInfo.CurrentCulture.TextInfo
+        .ToTitleCase(txt.Text.ToLower());
+        }
+
+        public static string StringToLittleCase(string value)
+        {
+            string valureReturn = "";
+            valureReturn = System.Globalization.CultureInfo.CurrentCulture.TextInfo
+        .ToTitleCase(value.ToLower());
+
+            return valureReturn;
+        }
     }
 }

@@ -89,7 +89,7 @@ namespace SACDumont.Catalogos
                     productos = db.Productos.Find(idProducto);
                     if (productos != null)
                     {
-                        productos.descripcion = txDescripcion.Text.ToUpper();
+                        productos.descripcion = txDescripcion.Descripcion.ToLowerInvariant();
                         productos.concepto = cboConcepto.Text;
                         productos.abreviatura = txAbreviatura.Text.ToUpper();
 

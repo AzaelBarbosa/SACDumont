@@ -105,6 +105,7 @@ namespace SACDumont.Listados
         {
             reporteToolStripMenuItem.Visible = false;
             guardarToolStripMenuItem.Visible = false;
+            btTicketImpresora.Visible = false;
         }
 
         private async void CargarCiclos()

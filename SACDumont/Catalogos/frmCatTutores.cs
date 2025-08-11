@@ -199,9 +199,9 @@ namespace SACDumont.Catalogos
                     }
                     lbTutorID.Text = tutores.id_tutor.ToString();
                     this.Text = "Modificar Tutor: " + tutores.nombre + " " + tutores.appaterno + " " + tutores.apmaterno;
-                    txtNombre.Text = tutores.nombre;
-                    txtApPaterno.Text = tutores.appaterno;
-                    txtApMaterno.Text = tutores.apmaterno;
+                    txtNombre.Text = basFunctions.StringToLittleCase(tutores.nombre);
+                    txtApPaterno.Text = basFunctions.StringToLittleCase(tutores.appaterno);
+                    txtApMaterno.Text = basFunctions.StringToLittleCase(tutores.apmaterno);
                     txRFC.Text = tutores.rfc;
                     txtCalle.Text = tutores.calle;
                     txtColonia.Text = tutores.colonia;

@@ -177,9 +177,11 @@ namespace SACDumont.Cobros
             using (var db = new DumontContext())
             {
                 bool productoYaRegistrado = db.Movimientos
-                .Where(m => m.id_matricula == idAlumno && m.id_ciclo == basGlobals.iCiclo)
+                .Where(m => m.id_matricula == idAlumno && m.id_ciclo == basGlobals.iCiclo && m.id_estatusmovimiento != 4)
                 .SelectMany(m => m.MovimientosProductos)
                 .Any(mp => mp.id_producto == comboProductos1.IdProductoSeleccionado);
+
+                productoYaRegistrado = basGlobals.listaProductos.Any(mp => mp.id_producto == comboProductos1.IdProductoSeleccionado);
 
                 return productoYaRegistrado;
             }
@@ -198,9 +200,11 @@ namespace SACDumont.Cobros
                 }
 
                 bool productoYaRegistrado = db.Movimientos
-                .Where(m => m.id_matricula == idAlumno && m.id_ciclo == basGlobals.iCiclo)
+                .Where(m => m.id_matricula == idAlumno && m.id_ciclo == basGlobals.iCiclo && m.id_estatusmovimiento != 4)
                 .SelectMany(m => m.MovimientosProductos)
                 .Any(mp => mp.id_producto == productoAnterior);
+
+                productoYaRegistrado = basGlobals.listaProductos.Any(mp => mp.id_producto == productoAnterior);
 
                 return productoYaRegistrado;
             }

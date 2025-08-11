@@ -77,6 +77,7 @@ namespace SACDumont.Listados
             reporteToolStripMenuItem.Visible = false;
             guardarToolStripMenuItem.Visible = false;
             tsSearch.Visible = false;
+            btTicketImpresora.Visible = false;
         }
 
         private async void CargarPromociones()

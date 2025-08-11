@@ -163,7 +163,7 @@ namespace SACDumont.Catalogos
                 if (Promocion != null)
                 {
                     lbIdPromo.Text = Promocion.id_promocion.ToString();
-                    txDescripcion.Text = Promocion.descripcion;
+                    txDescripcion.Text = basFunctions.StringToLittleCase(Promocion.descripcion);
                     dtpFechaFin.Value = (DateTime)Promocion.fecha_fin;
                     dtpFechaInicio.Value = (DateTime)Promocion.fecha_inicio;
                     nPromo.Value = (int)Promocion.porcentaje_promocion;

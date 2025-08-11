@@ -75,9 +75,9 @@ namespace SACDumont.Catalogos
                 {
                     var alumno = new Alumnos
                     {
-                        nombre = txtNombre.Text,
-                        appaterno = txtApPaterno.Text,
-                        apmaterno = txtApMaterno.Text,
+                        nombre = basFunctions.StringToLittleCase(txtNombre.Text),
+                        appaterno = basFunctions.StringToLittleCase(txtApPaterno.Text),
+                        apmaterno = basFunctions.StringToLittleCase(txtApMaterno.Text),
                         fecha_nacimiento = dtpFechaNac.Value,
                         pais_nacimiento = Convert.ToInt32(cmbPais.SelectedValue),
                         estado_nacimiento = Convert.ToInt32(cmbEstadoNac.SelectedValue),
@@ -157,12 +157,16 @@ namespace SACDumont.Catalogos
             {
                 using (var db = new DumontContext())
                 {
+                    Image foto = null;
                     var alumno = db.Alumnos.Find(intMatricula);
                     if (alumno == null)
                     {
                         MessageBox.Show("No se encontró el alumno para actualizar.");
                         return;
                     }
+
+                    if (foto != null) { foto = basFunctions.Resize(pictureBox1.Image, 800); }
+
                     // Asignar los valores del formulario al objeto alumno
                     alumno.nombre = txtNombre.Text;
                     alumno.appaterno = txtApPaterno.Text;
@@ -181,7 +185,7 @@ namespace SACDumont.Catalogos
                     alumno.telefono3 = txtTel3.Text;
                     alumno.email = txtEmail.Text;
                     alumno.activo = true;
-                    alumno.foto_alumno = basFunctions.ImageToBytes(pictureBox1.Image);
+                    alumno.foto_alumno = basFunctions.ImageToBytes(foto);
 
                     // Guardar los cambios
 

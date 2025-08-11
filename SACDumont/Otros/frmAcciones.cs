@@ -58,6 +58,7 @@ namespace SACDumont.Otros
             eliminarToolStripMenuItem.Visible = false;
             reporteToolStripMenuItem.Visible = false;
             tsSearch.Visible = false;
+            btTicketImpresora.Visible = false;
         }
 
         private void FormatGrid()
