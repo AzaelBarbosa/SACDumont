@@ -85,7 +85,7 @@ namespace SACDumont.Otros
                                      join cat in db.Catalogos on new { valor = (int?)c.tipopago, tipo_catalogo = "TipoPago" }
                                                                 equals new { valor = (int?)cat.valor, cat.tipo_catalogo } into catalogosGroup
                                      from cat in catalogosGroup.DefaultIfEmpty()
-                                     where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now)
+                                     where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now) && m.id_estatusmovimiento != 4
                                      && m.id_estatusmovimiento != 4
                                      group c by cat.descripcion into g
                                      select new
@@ -145,7 +145,7 @@ namespace SACDumont.Otros
                                join cat in db.Catalogos on new { valor = (int?)c.tipopago, tipo_catalogo = "TipoPago" }
                                                           equals new { valor = (int?)cat.valor, cat.tipo_catalogo } into catalogosGroup
                                from cat in catalogosGroup.DefaultIfEmpty()
-                               where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now)
+                               where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now) && m.id_estatusmovimiento != 4
                                group c by cat.descripcion into g
                                select new
                                {

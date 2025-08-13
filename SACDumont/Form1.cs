@@ -88,7 +88,7 @@ namespace SACDumont
                                    join cat in db.Catalogos on new { valor = (int?)c.tipopago, tipo_catalogo = "TipoPago" }
                                                               equals new { valor = (int?)cat.valor, cat.tipo_catalogo } into catalogosGroup
                                    from cat in catalogosGroup.DefaultIfEmpty()
-                                   where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(fecha)
+                                   where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(fecha) && m.id_estatusmovimiento != 4
                                    group c by cat.descripcion into g
                                    select new
                                    {
@@ -128,7 +128,7 @@ namespace SACDumont
                                     join a in db.Alumnos on m.id_matricula equals a.matricula into aGroup
                                     from a in aGroup.DefaultIfEmpty()
 
-                                    where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(fecha)
+                                    where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(fecha) && m.id_estatusmovimiento != 4
 
                                     group new { c, mp, p, a } by new
                                     {

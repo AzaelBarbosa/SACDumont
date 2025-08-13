@@ -184,6 +184,7 @@ namespace SACDumont.Cobros
                             monto = c.monto,
                             tipopago = c.tipopago,
                             descripcionPago = c.descripcionPago,
+                            fechaAlta = c.fechaAlta,
                             pago_por = c.pago_por
                         }));
                         var result2 = db.SaveChanges(); // 🔥 EF genera los INSERT automáticamente para productos y cobros
