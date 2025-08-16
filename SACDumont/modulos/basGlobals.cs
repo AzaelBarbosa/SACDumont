@@ -75,4 +75,13 @@ namespace SACDumont.modulos
         Primaria = 2,
         Secundaria = 3
     }
+
+    public enum TipoPago
+    {
+        SinPago = 0,
+        Efectivo = 1,
+        Transferencia = 3,
+        SaldoFavor = 4,
+        Gasto = 5
+    }
 }

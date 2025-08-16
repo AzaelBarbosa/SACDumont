@@ -35,10 +35,13 @@ namespace SACDumont
         public DbSet<cierre_diario> CierreDiario { get; set; }
         public DbSet<config> Config { get; set; }
         public DbSet<config_equipos> ConfigEquipos { get; set; }
+        public DbSet<saldo_favor> SaldoFavor { get; set; }
+        public DbSet<saldo_mov> SaldoMovimiento { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<config>().ToTable("Config");
+
             // Configure entity properties and relationships here if needed
             base.OnModelCreating(modelBuilder);
         }

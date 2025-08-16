@@ -94,5 +94,10 @@ namespace SACDumont.Dtos
         public string Equipo { get; set; }
 
     }
+    public class CierreDTO
+    {
+        public decimal Monto { get; set; }
+        public string Tipo { get; set; }
 
+    }
 }

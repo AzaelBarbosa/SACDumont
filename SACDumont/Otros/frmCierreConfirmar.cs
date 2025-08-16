@@ -1,6 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Wordprocessing;
 using SACDumont.Base;
 using SACDumont.Catalogos;
+using SACDumont.Dtos;
 using SACDumont.Models;
 using SACDumont.modulos;
 using SACDumont.Modulos;
@@ -79,13 +80,23 @@ namespace SACDumont.Otros
                 decimal cero = 0;
                 using (var db = new DumontContext())
                 {
+                    //var resultado = db.Movimientos.Include(m => m.MovimientosCobros).Where(m => DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now))
+                    //                            .SelectMany(m => m.MovimientosCobros)
+                    //                            .Select(c => new CierreDTO
+                    //                            {
+                    //                                Tipo = db.Catalogos.Where(ca => ca.tipo_catalogo == "TipoPago" && ca.valor == c.tipopago).Select(ca => ca.descripcion).FirstOrDefault(),   // 👈 descripción desde catálogo
+                    //                                Monto = c.monto
+                    //                            })
+                    //                            .ToList();
+
+
                     var resultado = (from m in db.Movimientos
                                      join c in db.MovimientoCobros on m.id_movimiento equals c.id_movimiento into cobrosGroup
                                      from c in cobrosGroup.DefaultIfEmpty()
                                      join cat in db.Catalogos on new { valor = (int?)c.tipopago, tipo_catalogo = "TipoPago" }
                                                                 equals new { valor = (int?)cat.valor, cat.tipo_catalogo } into catalogosGroup
                                      from cat in catalogosGroup.DefaultIfEmpty()
-                                     where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now) && m.id_estatusmovimiento != 4
+                                     where DbFunctions.TruncateTime(m.fechahora) == DbFunctions.TruncateTime(DateTime.Now)
                                      && m.id_estatusmovimiento != 4
                                      group c by cat.descripcion into g
                                      select new

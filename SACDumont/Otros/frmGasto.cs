@@ -69,7 +69,7 @@ namespace SACDumont.Otros
                 {
                     id_movimiento = movimientos.id_movimiento,
                     monto = Convert.ToDecimal(txImporte.Text),
-                    tipopago = 1,
+                    tipopago = (int)TipoPago.Gasto,
                     fechaAlta = DateTime.Now
                 };
 

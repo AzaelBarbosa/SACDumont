@@ -36,6 +36,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txRealizado = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.txSaldoFavor = new System.Windows.Forms.TextBox();
+            this.lbSaldoFavor = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtTotal
@@ -118,11 +120,36 @@
             this.label2.TabIndex = 59;
             this.label2.Text = "Relizado Por:";
             // 
+            // txSaldoFavor
+            // 
+            this.txSaldoFavor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txSaldoFavor.Enabled = false;
+            this.txSaldoFavor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txSaldoFavor.ForeColor = System.Drawing.Color.Green;
+            this.txSaldoFavor.Location = new System.Drawing.Point(189, 95);
+            this.txSaldoFavor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txSaldoFavor.Name = "txSaldoFavor";
+            this.txSaldoFavor.Size = new System.Drawing.Size(148, 22);
+            this.txSaldoFavor.TabIndex = 60;
+            this.txSaldoFavor.Text = "0";
+            this.txSaldoFavor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbSaldoFavor
+            // 
+            this.lbSaldoFavor.Location = new System.Drawing.Point(186, 72);
+            this.lbSaldoFavor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbSaldoFavor.Name = "lbSaldoFavor";
+            this.lbSaldoFavor.Size = new System.Drawing.Size(98, 27);
+            this.lbSaldoFavor.TabIndex = 61;
+            this.lbSaldoFavor.Text = "Saldo a favor:";
+            // 
             // frmMovimientoCobro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(346, 232);
+            this.Controls.Add(this.txSaldoFavor);
+            this.Controls.Add(this.lbSaldoFavor);
             this.Controls.Add(this.txRealizado);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cboCatalogos);
@@ -142,6 +169,8 @@
             this.Controls.SetChildIndex(this.cboCatalogos, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.txRealizado, 0);
+            this.Controls.SetChildIndex(this.lbSaldoFavor, 0);
+            this.Controls.SetChildIndex(this.txSaldoFavor, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -157,5 +186,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txRealizado;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txSaldoFavor;
+        private System.Windows.Forms.Label lbSaldoFavor;
     }
 }

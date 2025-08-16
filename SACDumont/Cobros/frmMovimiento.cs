@@ -114,6 +114,26 @@ namespace SACDumont.Cobros
                                     item.id_movimiento = idMovimiento;
                                     db.MovimientoCobros.Add(item);
                                     impresionTicket = true;
+
+                                    if (item.tipopago == (int)TipoPago.SaldoFavor)
+                                    {
+                                        var saldo = db.SaldoFavor.Where(sf => sf.Matricula == idMatricula && sf.IdCiclo == basGlobals.iCiclo).FirstOrDefault();
+                                        if (saldo != null)
+                                        {
+                                            saldo.Saldo = saldo.Saldo - item.monto;
+                                        }
+
+                                        saldo_mov saldoMov = new saldo_mov
+                                        {
+                                            IdMov = idMovimiento,
+                                            IdSaldo = saldo.IdSaldo,
+                                            Monto = item.monto,
+                                            Origen = strConcepto
+                                        };
+                                        db.Entry(saldo).State = EntityState.Modified;
+                                        db.SaldoMovimiento.Add(saldoMov);
+                                    }
+
                                 }
                             }
 
@@ -187,6 +207,31 @@ namespace SACDumont.Cobros
                             fechaAlta = c.fechaAlta,
                             pago_por = c.pago_por
                         }));
+
+                        foreach (cobros lc in basGlobals.listaCobros)
+                        {
+                            if (lc.tipopago == (int)TipoPago.SaldoFavor)
+                            {
+                                var saldo = db.SaldoFavor.Where(sf => sf.Matricula == idMatricula && sf.IdCiclo == basGlobals.iCiclo).FirstOrDefault();
+                                if (saldo != null)
+                                {
+                                    saldo.Saldo = saldo.Saldo - lc.monto;
+                                }
+
+                                saldo_mov saldoMov = new saldo_mov
+                                {
+                                    IdMov = idMovimiento,
+                                    IdSaldo = saldo.IdSaldo,
+                                    Monto = lc.monto,
+                                    Origen = strConcepto,
+                                    FechaUtc = DateTime.Now
+                                };
+                                db.Entry(saldo).State = EntityState.Modified;
+                                db.SaldoMovimiento.Add(saldoMov);
+                            }
+                        }
+
+
                         var result2 = db.SaveChanges(); // 🔥 EF genera los INSERT automáticamente para productos y cobros
                         if (result2 != 0)
                         {
@@ -671,7 +716,7 @@ namespace SACDumont.Cobros
                 txImportePte.Text = decImportePte.ToString("C2");
             }
 
-            frmMovimientoCobro frmMovimientoCobro = new frmMovimientoCobro(decImportePte);
+            frmMovimientoCobro frmMovimientoCobro = new frmMovimientoCobro(decImportePte, idMatricula);
             frmMovimientoCobro.Text = "Agregar Cobro";
             frmMovimientoCobro.ShowDialog();
             if (basGlobals.listaCobros.Count > 0)

@@ -93,7 +93,8 @@ namespace SACDumont.Catalogos
                         telefono2 = txtTel2.Text,
                         telefono3 = txtTel3.Text,
                         email = txtEmail.Text,
-                        foto_alumno = basFunctions.ImageToBytes(foto)
+                        foto_alumno = basFunctions.ImageToBytes(foto),
+                        fecha_alta = System.DateTime.Now
                     };
 
                     db.Alumnos.Add(alumno);
@@ -228,13 +229,45 @@ namespace SACDumont.Catalogos
                         {
                             if (chBecado.Checked)
                             {
+                                decimal saldoFavor = 0;
+                                decimal monto = 0;
+                                decimal porBeca = 0;
+
+                                porBeca = Convert.ToDecimal(nPorBeca.Value);
+                                var movimientosInscripcion = db.Movimientos.Where(m => m.id_matricula == intMatricula && m.id_ciclo == basGlobals.iCiclo
+                                && m.id_tipomovimiento == (int)TipoMovimiento.Inscripcion && m.id_estatusmovimiento == 2).ToList();
+
+                                var movimientosColegiatura = db.Movimientos.Where(m => m.id_matricula == intMatricula && m.id_ciclo == basGlobals.iCiclo
+                                && m.id_tipomovimiento == (int)TipoMovimiento.Colegiatura && m.id_estatusmovimiento == 2).ToList();
+
+                                foreach (var mi in movimientosInscripcion)
+                                {
+                                    monto = db.MovimientoCobros.Where(mp => mp.id_movimiento == mi.id_movimiento).Sum(mp => mp.monto);
+                                    saldoFavor = saldoFavor + (monto * (porBeca / 100));
+                                }
+
+                                foreach (var mc in movimientosColegiatura)
+                                {
+                                    monto = db.MovimientoCobros.Where(mp => mp.id_movimiento == mc.id_movimiento).Sum(mp => mp.monto);
+                                    saldoFavor = saldoFavor + (monto * (porBeca / 100));
+                                }
+
                                 var beca = new Becas
                                 {
                                     id_matricula = intMatricula,
                                     id_ciclo = basGlobals.iCiclo,
-                                    porcentaje_beca = Convert.ToDecimal(nPorBeca.Value)
+                                    porcentaje_beca = porBeca
                                 };
                                 db.Becas.Add(beca);
+
+                                var salFavor = new saldo_favor
+                                {
+                                    IdCiclo = basGlobals.iCiclo,
+                                    Matricula = intMatricula,
+                                    Saldo = saldoFavor,
+                                    LastUpdateUtc = System.DateTime.Now
+                                };
+                                db.SaldoFavor.Add(salFavor);
                             }
                         }
                         else

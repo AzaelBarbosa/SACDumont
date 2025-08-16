@@ -18,14 +18,19 @@ namespace SACDumont.Cobros
     public partial class frmMovimientoCobro : frmBaseCatalogos
     {
         decimal importePendiente = 0;
+        int matricula = 0;
         decimal importeFrente = 0;
+        decimal saldoFavor = 0;
         cobros movimientoCobros;
         protected override void Guardar()
         {
             // Implementar la lógica para guardar el movimiento  
             decimal total = 0;
+            decimal saldo = 0;
             string rawText = txCosto.Text.Replace("$", "").Replace(",", "").Trim();
             decimal.TryParse(rawText, out total);
+            string rawSaldo = txSaldoFavor.Text.Replace("$", "").Replace(",", "").Trim();
+            decimal.TryParse(rawSaldo, out saldo);
 
             if (total <= 0)
             {
@@ -42,6 +47,15 @@ namespace SACDumont.Cobros
                 MessageBox.Show("Por favor seleccione el tipo de pago.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (cboCatalogos.IDValor == (int)TipoPago.SaldoFavor)
+            {
+                if (total > saldo)
+                {
+                    MessageBox.Show("No cuenta con el suficiente saldo a favor para el monto ingresado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
 
             if (cboCatalogos.IDValor == 3)
             {
@@ -67,10 +81,11 @@ namespace SACDumont.Cobros
             this.Close();
         }
 
-        public frmMovimientoCobro(decimal importePendiente)
+        public frmMovimientoCobro(decimal importePendiente, int matricula)
         {
             InitializeComponent();
             this.importePendiente = importePendiente;
+            this.matricula = matricula;
         }
 
         private void GenerarMenu()
@@ -85,12 +100,32 @@ namespace SACDumont.Cobros
             this.btResetPass.Visible = false;
         }
 
+        private void VerificaSaldoFavor()
+        {
+            using (var db = new DumontContext())
+            {
+                var saldoUsado = basGlobals.listaCobros.Where(lc => lc.tipopago == (int)TipoPago.SaldoFavor).Sum(lc => lc.monto);
+                var saldo = db.SaldoFavor.Where(sf => sf.Matricula == matricula && sf.IdCiclo == basGlobals.iCiclo).FirstOrDefault();
+                if (saldo != null)
+                {
+                    txSaldoFavor.Text = (saldo.Saldo - saldoUsado).ToString("C2");
+                    saldoFavor = saldo.Saldo - saldoUsado;
+                }
+                else
+                {
+                    txSaldoFavor.Text = "0";
+                    saldoFavor = 0;
+                }
+            }
+        }
+
         private void frmMovimientoCobro_Load(object sender, EventArgs e)
         {
             GenerarMenu();
             txtTotal.Text = importePendiente.ToString("C2");
             cboCatalogos.Inicializar();
             basFunctions.SelectAll(this);
+            VerificaSaldoFavor();
         }
 
         private void txCosto_TextChanged(object sender, EventArgs e)

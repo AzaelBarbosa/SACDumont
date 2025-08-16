@@ -316,6 +316,28 @@ namespace SACDumont.Models
         public string impresora_tickets { get; set; }
         public string impresora_general { get; set; }
     }
+
+    public class saldo_favor
+    {
+        [Key]
+        public int IdSaldo { get; set; }
+        public int Matricula { get; set; }
+        public int IdCiclo { get; set; }
+        public decimal Saldo { get; set; }
+        public DateTime LastUpdateUtc { get; set; }
+    }
+
+    public class saldo_mov
+    {
+        [Key]
+        public int Id { get; set; }
+        public int IdSaldo { get; set; }
+        public DateTime FechaUtc { get; set; }
+        public decimal Monto { get; set; }
+        public string Origen { get; set; }
+        public int IdMov { get; set; }
+        public string Nota { get; set; }
+    }
     internal class clsModels
     {
 
