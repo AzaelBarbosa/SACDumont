@@ -353,6 +353,12 @@
     <Compile Include="Listados\frmMovimientos.Designer.cs">
       <DependentUpon>frmMovimientos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados\frmPagosAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\frmPagosAlumno.Designer.cs">
+      <DependentUpon>frmPagosAlumno.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listados\frmProductos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -529,6 +535,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\frmMovimientos.resx">
       <DependentUpon>frmMovimientos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\frmPagosAlumno.resx">
+      <DependentUpon>frmPagosAlumno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\frmProductos.resx">
       <DependentUpon>frmProductos.cs</DependentUpon>
