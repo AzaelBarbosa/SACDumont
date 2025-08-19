@@ -62,7 +62,7 @@ namespace SACDumont.Controles
                                     LEFT JOIN catalogos cat ON cat.valor = ins.id_grado AND cat.tipo_catalogo = 'Grado' 
                                     LEFT JOIN catalogos catG ON catG.valor = ins.id_grupo AND catG.tipo_catalogo = 'Grupo' 
                                     LEFT JOIN ciclos_escolares ce ON ins.id_ciclo = ce.id_ciclo
-                                    WHERE ins.id_ciclo = {basGlobals.iCiclo}";
+                                    WHERE ins.id_ciclo = {basGlobals.iCiclo} AND al.activo = 1";
             }
             //if (txProducto.Text.Length > 0)
             //{

@@ -136,7 +136,7 @@ namespace SACDumont.Otros
             using (var db = new DumontContext())
             {
                 var lista = db.Inscripciones
-                  .Where(m => m.id_ciclo == basGlobals.iCiclo && m.id_grupo == idGrupo && m.id_grado == idGrado && m.matricula > 0).Include(m => m.Alumnos)
+                  .Where(m => m.id_ciclo == basGlobals.iCiclo && m.id_grupo == idGrupo && m.id_grado == idGrado && m.matricula > 0 && m.Alumnos.activo == true).Include(m => m.Alumnos)
                   .Select(m => new AlumnosDTO
                   {
                       Grupo = db.Catalogos.Where(c => c.valor == idGrupo && c.tipo_catalogo == "Grupo").Select(c => c.descripcion).FirstOrDefault(),

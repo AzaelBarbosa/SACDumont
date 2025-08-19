@@ -75,6 +75,7 @@ namespace SACDumont.Catalogos
                 foto = basFunctions.Resize(pictureBox1.Image, 800);
                 using (var db = new DumontContext())
                 {
+                    int nuevaMatricula = db.Alumnos.Max(a => a.matricula) + 1;
                     var alumno = new Alumnos
                     {
                         nombre = basFunctions.StringToLittleCase(txtNombre.Text),
@@ -94,7 +95,8 @@ namespace SACDumont.Catalogos
                         telefono3 = txtTel3.Text,
                         email = txtEmail.Text,
                         foto_alumno = basFunctions.ImageToBytes(foto),
-                        fecha_alta = System.DateTime.Now
+                        fecha_alta = System.DateTime.Now,
+                        matricula = nuevaMatricula
                     };
 
                     db.Alumnos.Add(alumno);
