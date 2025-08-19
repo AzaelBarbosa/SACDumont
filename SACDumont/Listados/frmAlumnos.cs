@@ -106,10 +106,15 @@ namespace SACDumont.Listados
         {
             string texto = txBusqueda.Text.ToLower();
             if (cboFiltros.SelectedItem == null) return;
-            if (cboFiltros.SelectedItem == "Matricula") return;
             string campoSeleccionado = cboFiltros.SelectedItem.ToString();
-
-            bs.Filter = $"{campoSeleccionado} LIKE '%{texto}%'";
+            if (campoSeleccionado == "Matricula")
+            {
+                bs.Filter = $"CONVERT({campoSeleccionado}, 'System.String') LIKE '%{texto}%'";
+            }
+            else
+            {
+                bs.Filter = $"{campoSeleccionado} LIKE '%{texto}%'";
+            }
         }
 
         protected override void BusquedaCombo()
