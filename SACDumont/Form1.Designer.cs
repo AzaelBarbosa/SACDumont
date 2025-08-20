@@ -54,6 +54,7 @@
             this.btRptAcdemicosAsistencia = new System.Windows.Forms.ToolStripMenuItem();
             this.btRptAcdemicosCumple = new System.Windows.Forms.ToolStripMenuItem();
             this.btRptAcdemicosAlumnos = new System.Windows.Forms.ToolStripMenuItem();
+            this.btReporteConstancias = new System.Windows.Forms.ToolStripMenuItem();
             this.btRptAdministrativo = new System.Windows.Forms.ToolStripMenuItem();
             this.btRptAdministrativoCorte = new System.Windows.Forms.ToolStripMenuItem();
             this.btRptAdministrativoCorteDirio = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +78,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tlUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btReporteConstancias = new System.Windows.Forms.ToolStripMenuItem();
+            this.pagosAlumnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -302,6 +303,13 @@
             this.btRptAcdemicosAlumnos.Text = "Lista Alumnos";
             this.btRptAcdemicosAlumnos.Click += new System.EventHandler(this.btRptAcdemicosAlumnos_Click);
             // 
+            // btReporteConstancias
+            // 
+            this.btReporteConstancias.Image = global::SACDumont.Properties.Resources.academic;
+            this.btReporteConstancias.Name = "btReporteConstancias";
+            this.btReporteConstancias.Size = new System.Drawing.Size(180, 22);
+            this.btReporteConstancias.Text = "Constancias";
+            // 
             // btRptAdministrativo
             // 
             this.btRptAdministrativo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -309,7 +317,8 @@
             this.btRptAdministrativoBecas,
             this.btRptAdministrativoFacturas,
             this.btRptAdministrativoUniformes,
-            this.btRptAdministrativoActividad});
+            this.btRptAdministrativoActividad,
+            this.pagosAlumnoToolStripMenuItem});
             this.btRptAdministrativo.Image = global::SACDumont.Properties.Resources.administrativo;
             this.btRptAdministrativo.Name = "btRptAdministrativo";
             this.btRptAdministrativo.Size = new System.Drawing.Size(180, 22);
@@ -328,14 +337,14 @@
             // btRptAdministrativoCorteDirio
             // 
             this.btRptAdministrativoCorteDirio.Name = "btRptAdministrativoCorteDirio";
-            this.btRptAdministrativoCorteDirio.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoCorteDirio.Size = new System.Drawing.Size(126, 22);
             this.btRptAdministrativoCorteDirio.Text = "Diario";
             this.btRptAdministrativoCorteDirio.Click += new System.EventHandler(this.btRptAdministrativoCorteDirio_Click);
             // 
             // btRptAdministrativoCorteFecha
             // 
             this.btRptAdministrativoCorteFecha.Name = "btRptAdministrativoCorteFecha";
-            this.btRptAdministrativoCorteFecha.Size = new System.Drawing.Size(180, 22);
+            this.btRptAdministrativoCorteFecha.Size = new System.Drawing.Size(126, 22);
             this.btRptAdministrativoCorteFecha.Text = "Por Fecha";
             this.btRptAdministrativoCorteFecha.Click += new System.EventHandler(this.btRptAdministrativoCorteFecha_Click);
             // 
@@ -494,12 +503,12 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btReporteConstancias
+            // pagosAlumnoToolStripMenuItem
             // 
-            this.btReporteConstancias.Image = global::SACDumont.Properties.Resources.academic;
-            this.btReporteConstancias.Name = "btReporteConstancias";
-            this.btReporteConstancias.Size = new System.Drawing.Size(180, 22);
-            this.btReporteConstancias.Text = "Constancias";
+            this.pagosAlumnoToolStripMenuItem.Name = "pagosAlumnoToolStripMenuItem";
+            this.pagosAlumnoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pagosAlumnoToolStripMenuItem.Text = "Pagos Alumno";
+            this.pagosAlumnoToolStripMenuItem.Click += new System.EventHandler(this.pagosAlumnoToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -577,6 +586,7 @@
         private System.Windows.Forms.ToolStripMenuItem btCorteDiario;
         private System.Windows.Forms.ToolStripMenuItem btGastos;
         private System.Windows.Forms.ToolStripMenuItem btReporteConstancias;
+        private System.Windows.Forms.ToolStripMenuItem pagosAlumnoToolStripMenuItem;
     }
 }
 
