@@ -442,5 +442,10 @@ namespace SACDumont
             frmFehas.Text = "Corte Diario por Fecha";
             frmFehas.ShowDialog();
         }
+
+        private void pagosAlumnoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AbrirUnicoFormularioHijo<frmPagosAlumno>();
+        }
     }
 }

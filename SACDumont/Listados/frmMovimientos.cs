@@ -300,6 +300,7 @@ namespace SACDumont.Listados
         {
             //reporteToolStripMenuItem.Visible = false;
             guardarToolStripMenuItem.Visible = false;
+            eliminarToolStripMenuItem.Text = "Cancelar";
         }
 
         private void CargarElementosBusqueda()

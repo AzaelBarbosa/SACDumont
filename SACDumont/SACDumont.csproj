@@ -220,6 +220,12 @@
     <Compile Include="Base\frmBaseCatalogos.Designer.cs">
       <DependentUpon>frmBaseCatalogos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\frmBaseConsulta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\frmBaseConsulta.Designer.cs">
+      <DependentUpon>frmBaseConsulta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\frmBaseGeneral.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -449,6 +455,12 @@
     <Compile Include="Otros\frmPopup.Designer.cs">
       <DependentUpon>frmPopup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Otros\frmPopupAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Otros\frmPopupAlumno.Designer.cs">
+      <DependentUpon>frmPopupAlumno.cs</DependentUpon>
+    </Compile>
     <Compile Include="Otros\frmPopupFechas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -472,6 +484,9 @@
     <Compile Include="SACContext.cs" />
     <EmbeddedResource Include="Base\frmBaseCatalogos.resx">
       <DependentUpon>frmBaseCatalogos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\frmBaseConsulta.resx">
+      <DependentUpon>frmBaseConsulta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\frmBaseGeneral.resx">
       <DependentUpon>frmBaseGeneral.cs</DependentUpon>
@@ -580,6 +595,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmPopup.resx">
       <DependentUpon>frmPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Otros\frmPopupAlumno.resx">
+      <DependentUpon>frmPopupAlumno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmPopupFechas.resx">
       <DependentUpon>frmPopupFechas.cs</DependentUpon>
