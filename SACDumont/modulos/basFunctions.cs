@@ -572,7 +572,7 @@ namespace SACDumont.Modulos
             using (var db = new DumontContext())
             {
                 var lista = db.Inscripciones
-                  .Where(m => m.id_ciclo == basGlobals.iCiclo && m.id_grupo == idGrupo && m.id_grado == idGrado)
+                  .Where(m => m.id_ciclo == basGlobals.iCiclo && m.id_grupo == idGrupo && m.id_grado == idGrado && m.matricula > 0 && m.Alumnos.activo == true)
                   .Include(m => m.Alumnos)
                   .Select(m => new AlumnosDTO
                   {
@@ -583,7 +583,7 @@ namespace SACDumont.Modulos
                                   .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
                                   .FirstOrDefault(),
                       Matricula = m.matricula.ToString()
-                  })
+                  }).OrderBy(m => m.Alumno)
                   .ToList();
 
                 if (lista.Count > 0)
