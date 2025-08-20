@@ -11,9 +11,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Deployment.Application;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -180,6 +183,8 @@ namespace SACDumont
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
+            var version = ApplicationDeployment.CurrentDeployment.CurrentVersion;
+
             if (basConfiguracion.permisoUsuario != null)
             {
                 btCatalogos.Visible = basConfiguracion.permisoUsuario.catalogos;
@@ -260,7 +265,7 @@ namespace SACDumont
             if (!basFunctions.DataVacio(dtConfig))
             {
                 basConfig.SetConfig(int.Parse(dtCiclo.Rows[0]["id_ciclo"].ToString()), bool.Parse(dtConfig.Rows[0]["aplicar_recargos"].ToString()), bool.Parse(dtConfig.Rows[0]["aplicar_promociones"].ToString()), int.Parse(dtConfig.Rows[0]["porcentaje_recargo"].ToString()), int.Parse(dtConfig.Rows[0]["dias_tolerancia"].ToString()));
-                basConfiguracion.InformacionHeader = basConfiguracion.InformacionHeader + " || Ciclo Escolar: " + dtCiclo.Rows[0]["ciclo"].ToString();
+                basConfiguracion.InformacionHeader = basConfiguracion.InformacionHeader + $" || Ciclo Escolar: {dtCiclo.Rows[0]["ciclo"].ToString()} || Versión Sistema: {version}";
             }
         }
 
