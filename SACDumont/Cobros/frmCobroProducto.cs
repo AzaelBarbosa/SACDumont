@@ -180,6 +180,8 @@ namespace SACDumont.Cobros
                 .Where(m => m.id_matricula == idAlumno && m.id_ciclo == basGlobals.iCiclo && m.id_estatusmovimiento != 4)
                 .SelectMany(m => m.MovimientosProductos)
                 .Any(mp => mp.id_producto == comboProductos1.IdProductoSeleccionado);
+                
+                if (productoYaRegistrado) return productoYaRegistrado;
 
                 productoYaRegistrado = basGlobals.listaProductos.Any(mp => mp.id_producto == comboProductos1.IdProductoSeleccionado);
 
@@ -204,6 +206,8 @@ namespace SACDumont.Cobros
                 .SelectMany(m => m.MovimientosProductos)
                 .Any(mp => mp.id_producto == productoAnterior);
 
+                if (productoYaRegistrado) return productoYaRegistrado;
+
                 productoYaRegistrado = basGlobals.listaProductos.Any(mp => mp.id_producto == productoAnterior);
 
                 return productoYaRegistrado;
@@ -220,9 +224,10 @@ namespace SACDumont.Cobros
             strConcepto = obj["concepto"].ToString();
             strProducto = obj["descripcion"].ToString();
             decPrecio = Convert.ToDecimal(obj["precio"]);
+            DateTime fechaNuevaVencimiento = fechaVencimiento.AddDays(basConfiguracion.DiasTolerancia);
             if (basConfiguracion.Recargos)
             {
-                if (fechaVencimiento < DateTime.Now.AddDays(basConfiguracion.DiasTolerancia))
+                if (DateTime.Now.Date > fechaNuevaVencimiento.Date)
                 {
                     lbAtencion.Visible = true;
                     decRecargo = basConfiguracion.PorcentajeRecargo;
