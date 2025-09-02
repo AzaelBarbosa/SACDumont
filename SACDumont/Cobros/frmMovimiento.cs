@@ -378,7 +378,7 @@ namespace SACDumont.Cobros
                   {
                       Producto = db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
                       Cantidad = mp.cantidad,
-                      PrecioUnitario = mp.cantidad * mp.monto - m.beca_descuento - m.monto_descuento,
+                      PrecioUnitario = mp.monto - m.beca_descuento - m.monto_descuento,
                       Total = mp.monto + mp.monto_recargo - m.beca_descuento - m.monto_descuento,
                       Recargo = mp.monto_recargo,
                       Folio = m.id_movimiento,
