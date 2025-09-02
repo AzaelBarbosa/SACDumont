@@ -42,6 +42,9 @@
             this.txProducto.Click += new System.EventHandler(this.txProducto_Click);
             this.txProducto.TextChanged += new System.EventHandler(this.txProducto_TextChanged);
             this.txProducto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txProducto_KeyPress);
+            this.txProducto.Leave += new System.EventHandler(this.txProducto_Leave);
+            this.txProducto.Validating += new System.ComponentModel.CancelEventHandler(this.txProducto_Validating);
+            this.txProducto.Validated += new System.EventHandler(this.txProducto_Validated);
             // 
             // ComboProductos
             // 

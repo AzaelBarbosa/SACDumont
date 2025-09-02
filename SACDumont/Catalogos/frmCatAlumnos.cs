@@ -96,7 +96,7 @@ namespace SACDumont.Catalogos
                         email = txtEmail.Text,
                         foto_alumno = basFunctions.ImageToBytes(foto),
                         fecha_alta = System.DateTime.Now,
-                        matricula = nuevaMatricula
+                        activo = true,
                     };
 
                     db.Alumnos.Add(alumno);

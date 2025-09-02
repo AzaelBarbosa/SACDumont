@@ -49,6 +49,7 @@ namespace SACDumont.Controles
 
         DataTable _datos = new DataTable();
         BindingSource bs = new BindingSource();
+        bool existeProducto = false;
         public void Inicializar()
         {
             //if (txProducto.Text.Length > 0)
@@ -186,6 +187,22 @@ namespace SACDumont.Controles
             string texto = txProducto.Text.ToLower();
 
             bs.Filter = $"descripcion LIKE '%{txProducto.Text}%'";
+
+        }
+
+        private void txProducto_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txProducto_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void txProducto_Validated(object sender, EventArgs e)
+        {
+            Descripcion = txProducto.Text;
         }
     }
 }

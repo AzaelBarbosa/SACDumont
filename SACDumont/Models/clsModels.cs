@@ -98,6 +98,7 @@ namespace SACDumont.Models
     public class Alumnos
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int matricula { get; set; }
         public string nombre { get; set; }
         public string appaterno { get; set; }
