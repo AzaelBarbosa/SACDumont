@@ -266,7 +266,7 @@
             // txRFC
             // 
             this.txRFC.Location = new System.Drawing.Point(9, 342);
-            this.txRFC.MaxLength = 10;
+            this.txRFC.MaxLength = 14;
             this.txRFC.Name = "txRFC";
             this.txRFC.Size = new System.Drawing.Size(200, 20);
             this.txRFC.TabIndex = 10;

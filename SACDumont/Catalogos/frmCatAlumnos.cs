@@ -442,7 +442,9 @@ namespace SACDumont.Catalogos
                       NombreTutor = db.Tutores.Where(tu => tu.id_tutor == m.id_tutor).Select(tu => tu.appaterno + " " + tu.apmaterno + " " + tu.nombre).FirstOrDefault(),
                       IdTutor = m.id_tutor,
                       IdAlumno = m.matricula,
-                      Parentesco = db.Catalogos.Where(c => c.valor == m.parentesco && c.tipo_catalogo == "Parentesco").Select(c => c.descripcion).FirstOrDefault()
+                      Parentesco = db.Catalogos.Where(c => c.valor == m.parentesco && c.tipo_catalogo == "Parentesco").Select(c => c.descripcion).FirstOrDefault(),
+                      Telefono1 = db.Tutores.Where(tu => tu.id_tutor == m.id_tutor).Select(tu => tu.telefono1).FirstOrDefault(),
+                      Telefono2 = db.Tutores.Where(tu => tu.id_tutor == m.id_tutor).Select(tu => tu.telefono2).FirstOrDefault(),
                   }).ToList();
 
                     if (tutores.Count > 0)
@@ -454,8 +456,10 @@ namespace SACDumont.Catalogos
                         dgvTutors.Columns["IdAlumno"].Visible = false;
                         dgvTutors.Columns["NombreTutor"].HeaderText = "Nombre del Tutor";
                         dgvTutors.Columns["Parentesco"].HeaderText = "Parentesco";
-                        dgvTutors.Columns["Parentesco"].Width = 150;
-                        dgvTutors.Columns["NombreTutor"].Width = 250;
+                        dgvTutors.Columns["Telefono1"].HeaderText = "Telefono 1";
+                        dgvTutors.Columns["Telefono2"].HeaderText = "Telefono 2";
+                        dgvTutors.Columns["Parentesco"].Width = 100;
+                        dgvTutors.Columns["NombreTutor"].Width = 200;
                     }
                 }
             }

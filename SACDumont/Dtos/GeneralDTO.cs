@@ -33,6 +33,9 @@ namespace SACDumont.Dtos
         public int IdAlumno { get; set; }
         public string NombreTutor { get; set; }
         public string Parentesco { get; set; }
+        public string Telefono1 { get; set; }
+        public string Telefono2 { get; set; }
+
     }
 
     public class AlumnoDTO
