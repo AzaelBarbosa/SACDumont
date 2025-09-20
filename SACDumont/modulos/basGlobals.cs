@@ -1,10 +1,6 @@
-﻿using System;
+﻿using SACDumont.Models;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SACDumont.Models;
 
 namespace SACDumont.modulos
 {

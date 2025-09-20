@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SACDumont.Models
 {
@@ -20,6 +16,8 @@ namespace SACDumont.Models
         public decimal monto_recargo { get; set; }
         public string talla { get; set; }
         public string descripcion { get; set; }
+        public decimal monto_beca { get; set; }
+        public decimal monto_promocion { get; set; }
 
         [NotMapped]
         public string descriptionProducto { get; set; }

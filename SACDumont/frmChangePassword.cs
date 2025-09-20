@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using SACDumont.Clases;
+﻿using SACDumont.Clases;
 using SACDumont.Modulos;
+using System;
+using System.Windows.Forms;
 
 namespace SACDumont
 {
@@ -31,10 +24,10 @@ namespace SACDumont
             }
             else
             {
-                    string strPassword = basFunctions.HashPassword(txContrasena.Text);
-                    string sSQL = "UPDATE usuarios SET contrasena = '" + strPassword + "', reset_contrasena = 0 WHERE id_usuario = " + id_usuario;
-                    sqlServer.ExecSQL(sSQL);
-               
+                string strPassword = basFunctions.HashPassword(txContrasena.Text);
+                string sSQL = "UPDATE usuarios SET contrasena = '" + strPassword + "', reset_contrasena = 0 WHERE id_usuario = " + id_usuario;
+                sqlServer.ExecSQL(sSQL);
+
                 MessageBox.Show("Contraseña cambiada correctamente", "SAC Dumont", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }

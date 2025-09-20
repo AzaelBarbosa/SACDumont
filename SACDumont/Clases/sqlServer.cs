@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SACDumont.Clases
 {
@@ -247,86 +244,86 @@ namespace SACDumont.Clases
         #endregion
 
         #region "ExecSPReturnDT"
-            public static DataTable ExecSPReturnDT(string spName, SqlParameter[] paramValues = null, string tableName = "Table")
+        public static DataTable ExecSPReturnDT(string spName, SqlParameter[] paramValues = null, string tableName = "Table")
+        {
+            SqlCommand objCommand;
+            SqlDataAdapter objDA;
+            DataTable objDT = new DataTable();
+
+            try
             {
-                SqlCommand objCommand;
-                SqlDataAdapter objDA;
-                DataTable objDT = new DataTable();
+                if (mblnDisposed)
+                    throw new ObjectDisposedException(mstrModuleName, "This object has already been disposed.");
 
-                try
+                if (mobjConnection.State != ConnectionState.Open)
+                    mobjConnection.Open();
+
+                objCommand = new SqlCommand(spName, mobjConnection)
                 {
-                    if (mblnDisposed)
-                        throw new ObjectDisposedException(mstrModuleName, "This object has already been disposed.");
+                    CommandTimeout = mintTimeOut,
+                    CommandType = CommandType.StoredProcedure
+                };
 
-                    if (mobjConnection.State != ConnectionState.Open)
-                        mobjConnection.Open();
+                if (paramValues != null)
+                    AttachParameters(objCommand, paramValues);
 
-                    objCommand = new SqlCommand(spName, mobjConnection)
-                    {
-                        CommandTimeout = mintTimeOut,
-                        CommandType = CommandType.StoredProcedure
-                    };
+                if (mobjTransaction != null)
+                    objCommand.Transaction = mobjTransaction;
 
-                    if (paramValues != null)
-                        AttachParameters(objCommand, paramValues);
+                objDA = new SqlDataAdapter(objCommand);
+                objDA.Fill(objDT);
+                objDT.TableName = tableName;
 
-                    if (mobjTransaction != null)
-                        objCommand.Transaction = mobjTransaction;
-
-                    objDA = new SqlDataAdapter(objCommand);
-                    objDA.Fill(objDT);
-                    objDT.TableName = tableName;
-
-                    return objDT;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                return objDT;
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         #endregion
 
         #region "ExecSPReturnDS"
-            public static DataSet ExecSPReturnDS(string spName, SqlParameter[] paramValues = null, string strTableName = "Table")
+        public static DataSet ExecSPReturnDS(string spName, SqlParameter[] paramValues = null, string strTableName = "Table")
+        {
+            SqlCommand objCommand;
+            SqlDataAdapter objDA;
+            DataSet objDS = new DataSet();
+
+            try
             {
-                SqlCommand objCommand;
-                SqlDataAdapter objDA;
-                DataSet objDS = new DataSet();
+                if (mblnDisposed)
+                    throw new ObjectDisposedException(mstrModuleName, "This object has already been disposed.");
 
-                try
+                if (mobjConnection == null)
+                    Init(); // Asume que Init() configura la conexión correctamente
+
+                if (mobjConnection.State != ConnectionState.Open)
+                    mobjConnection.Open();
+
+                objCommand = new SqlCommand(spName, mobjConnection)
                 {
-                    if (mblnDisposed)
-                        throw new ObjectDisposedException(mstrModuleName, "This object has already been disposed.");
+                    CommandTimeout = mintTimeOut,
+                    CommandType = CommandType.StoredProcedure
+                };
 
-                    if (mobjConnection == null)
-                        Init(); // Asume que Init() configura la conexión correctamente
+                if (paramValues != null)
+                    AttachParameters(objCommand, paramValues);
 
-                    if (mobjConnection.State != ConnectionState.Open)
-                        mobjConnection.Open();
+                if (mobjTransaction != null)
+                    objCommand.Transaction = mobjTransaction;
 
-                    objCommand = new SqlCommand(spName, mobjConnection)
-                    {
-                        CommandTimeout = mintTimeOut,
-                        CommandType = CommandType.StoredProcedure
-                    };
+                objDA = new SqlDataAdapter(objCommand);
+                objDA.Fill(objDS, strTableName);
 
-                    if (paramValues != null)
-                        AttachParameters(objCommand, paramValues);
-
-                    if (mobjTransaction != null)
-                        objCommand.Transaction = mobjTransaction;
-
-                    objDA = new SqlDataAdapter(objCommand);
-                    objDA.Fill(objDS, strTableName);
-
-                    return objDS;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                return objDS;
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region AssignParameterValues
@@ -459,7 +456,7 @@ namespace SACDumont.Clases
                 objDT.TableName = tableName;
 
                 return objDT;
-            }   
+            }
             catch (Exception ex)
             {
                 throw ex;

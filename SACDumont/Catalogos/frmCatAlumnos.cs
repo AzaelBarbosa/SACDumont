@@ -1,8 +1,6 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-using SACDumont.Base;
+﻿using SACDumont.Base;
 using SACDumont.Clases;
 using SACDumont.Dtos;
-using SACDumont.Listados;
 using SACDumont.Models;
 using SACDumont.modulos;
 using SACDumont.Modulos;
@@ -11,14 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Entity;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ClosedXML.Excel.XLPredefinedFormat;
 
 namespace SACDumont.Catalogos
 {

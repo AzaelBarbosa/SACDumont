@@ -1,8 +1,6 @@
 ﻿using FastReport;
 using FastReport.Export.PdfSimple;
-using Microsoft.CSharp;
 using SACDumont.Base;
-using SACDumont.Catalogos;
 using SACDumont.Clases;
 using SACDumont.Cobros;
 using SACDumont.Dtos;
@@ -12,16 +10,13 @@ using SACDumont.Modulos;
 using SACDumont.Otros;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SACDumont.Listados

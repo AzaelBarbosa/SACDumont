@@ -1,9 +1,6 @@
 ﻿using FastReport;
 using FastReport.Export.PdfSimple;
-using log4net.Util;
 using SACDumont.Base;
-using SACDumont.Clases;
-using SACDumont.Controles;
 using SACDumont.Dtos;
 using SACDumont.Models;
 using SACDumont.modulos;
@@ -11,16 +8,13 @@ using SACDumont.Modulos;
 using SACDumont.Otros;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SACDumont.Cobros
@@ -645,6 +639,8 @@ namespace SACDumont.Cobros
             }
             frmCobroProducto frmCobro = new frmCobroProducto(idGrupo, strConcepto, (int)cboAlumnos.matricula);
             frmCobro.Text = "Agregar Producto";
+            frmCobro.beca = beca;
+            frmCobro.promocion = promocion;
             frmCobro.ShowDialog();
             if (basGlobals.listaProductos.Count > 0)
             {
@@ -682,13 +678,11 @@ namespace SACDumont.Cobros
                 dgvProductos.Columns["monto_recargo"].Width = 110;
                 dgvProductos.RowHeadersVisible = false;
 
-                txImporte.Text = basGlobals.listaProductos.Sum(p => p.monto).ToString();
-                txImporte.Text = Convert.ToDecimal(txImporte.Text).ToString("C2");
-                txRecargo.Text = basGlobals.listaProductos.Sum(p => p.monto_recargo).ToString();
-                txRecargo.Text = Convert.ToDecimal(txRecargo.Text).ToString("C2");
-                txBeca.Text = ((beca / 100m) * basGlobals.listaProductos.Sum(p => p.monto)).ToString("C2");
-                txDescuento.Text = ((promocion / 100m) * basGlobals.listaProductos.Sum(p => p.monto)).ToString("C2");
-                txTotal.Text = (Convert.ToDecimal(txImporte.Text.Replace("$", "").Replace(",", "").Trim()) + Convert.ToDecimal(txRecargo.Text.Replace("$", "").Replace(",", "").Trim()) - Convert.ToDecimal(txBeca.Text.Replace("$", "").Replace(",", "").Trim()) - Convert.ToDecimal(txDescuento.Text.Replace("$", "").Replace(",", "").Trim())).ToString("C2");
+                txImporte.Text = basGlobals.listaProductos.Sum(p => p.monto).ToString("C2");
+                txRecargo.Text = basGlobals.listaProductos.Sum(p => p.monto_recargo).ToString("C2");
+                txBeca.Text = basGlobals.listaProductos.Sum(p => p.monto_beca).ToString("C2");
+                txDescuento.Text = basGlobals.listaProductos.Sum(p => p.monto_promocion).ToString("C2");
+                txTotal.Text = (Convert.ToDecimal(txImporte.Text.Replace("$", "").Replace(",", "").Trim()) + Convert.ToDecimal(txRecargo.Text.Replace("$", "").Replace(",", "").Trim())).ToString("C2");
                 txImportePte.Text = txTotal.Text;
                 txImportePte.ForeColor = Color.Red;
             }

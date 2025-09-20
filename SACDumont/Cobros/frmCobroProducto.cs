@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Entity;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-using SACDumont.Base;
-using SACDumont.Controles;
+﻿using SACDumont.Base;
 using SACDumont.Models;
 using SACDumont.modulos;
 using SACDumont.Modulos;
 using SACDumont.Otros;
+using System;
+using System.Data;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace SACDumont.Cobros
 {
     public partial class frmCobroProducto : frmBaseCatalogos
     {
+        public decimal promocion = 0;
+        public decimal beca = 0;
+        decimal valuePromocion = 0;
+        decimal valueBeca = 0;
+        decimal precioConBeca = 0;
         decimal decRecargo = basConfiguracion.PorcentajeRecargo;
         int idGrupo = 0;
         string strConcepto = "";
@@ -72,7 +69,9 @@ namespace SACDumont.Cobros
                     cantidad = Convert.ToInt32(nCantidad.Value),
                     monto = total,
                     monto_recargo = Convert.ToDecimal(txRecargo.Text.Replace("$", "").Replace(",", "").Trim()),
-                    talla = txTalla.Text
+                    talla = txTalla.Text,
+                    monto_beca = valueBeca,
+                    monto_promocion = valuePromocion
                 };
 
                 basGlobals.listaProductos.Add(productos);
@@ -180,7 +179,7 @@ namespace SACDumont.Cobros
                 .Where(m => m.id_matricula == idAlumno && m.id_ciclo == basGlobals.iCiclo && m.id_estatusmovimiento != 4)
                 .SelectMany(m => m.MovimientosProductos)
                 .Any(mp => mp.id_producto == comboProductos1.IdProductoSeleccionado);
-                
+
                 if (productoYaRegistrado) return productoYaRegistrado;
 
                 productoYaRegistrado = basGlobals.listaProductos.Any(mp => mp.id_producto == comboProductos1.IdProductoSeleccionado);
@@ -225,14 +224,19 @@ namespace SACDumont.Cobros
             strProducto = obj["descripcion"].ToString();
             decPrecio = Convert.ToDecimal(obj["precio"]);
             DateTime fechaNuevaVencimiento = fechaVencimiento.AddDays(basConfiguracion.DiasTolerancia);
+
             if (basConfiguracion.Recargos)
             {
                 if (DateTime.Now.Date > fechaNuevaVencimiento.Date)
                 {
                     lbAtencion.Visible = true;
                     decRecargo = basConfiguracion.PorcentajeRecargo;
-                    txRecargo.Text = (Convert.ToDecimal(obj["precio"]) * decRecargo / 100).ToString("C");
-                    txtTotal.Text = (Convert.ToDecimal(obj["precio"]) + Convert.ToDecimal(obj["precio"]) * decRecargo / 100).ToString("C");
+                    valuePromocion = (Convert.ToDecimal(obj["precio"]) * promocion / 100);
+                    valueBeca = (Convert.ToDecimal(obj["precio"]) * beca / 100);
+                    precioConBeca = Convert.ToDecimal(obj["precio"]) - valuePromocion - valueBeca;
+                    txCosto.Text = Convert.ToDecimal(precioConBeca).ToString("C");
+                    txRecargo.Text = (precioConBeca * decRecargo / 100).ToString("C");
+                    txtTotal.Text = ((precioConBeca) + precioConBeca * decRecargo / 100).ToString("C");
                 }
                 else
                 {

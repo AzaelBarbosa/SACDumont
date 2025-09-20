@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using SACDumont.Base;
+﻿using SACDumont.Base;
 using SACDumont.Clases;
 using SACDumont.modulos;
 using SACDumont.Modulos;
-using static SACDumont.Modulos.basConfiguracion;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace SACDumont.Otros
 {

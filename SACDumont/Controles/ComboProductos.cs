@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SACDumont.Clases;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using SACDumont.Clases;
-using SACDumont.modulos;
 
 namespace SACDumont.Controles
 {

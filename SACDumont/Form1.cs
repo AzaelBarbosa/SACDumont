@@ -1,5 +1,4 @@
-﻿using FastReport.Utils;
-using SACDumont.Catalogos;
+﻿using SACDumont.Catalogos;
 using SACDumont.Clases;
 using SACDumont.Listados;
 using SACDumont.Models;
@@ -7,18 +6,9 @@ using SACDumont.modulos;
 using SACDumont.Modulos;
 using SACDumont.Otros;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
-using System.Deployment.Application;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SACDumont.Modulos.basConfiguracion;
 

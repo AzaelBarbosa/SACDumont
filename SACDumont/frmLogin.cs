@@ -3,16 +3,10 @@ using SACDumont.Models;
 using SACDumont.Modulos;
 using SACDumont.Otros;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static SACDumont.Modulos.basConfiguracion;
 namespace SACDumont
 {
     public partial class frmLogin : Form

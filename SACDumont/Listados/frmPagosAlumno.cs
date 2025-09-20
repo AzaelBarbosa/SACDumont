@@ -1,5 +1,5 @@
-﻿using FastReport.Export.PdfSimple;
-using Microsoft.Win32;
+﻿using FastReport;
+using FastReport.Export.PdfSimple;
 using SACDumont.Base;
 using SACDumont.Clases;
 using SACDumont.Controles;
@@ -8,20 +8,15 @@ using SACDumont.Models;
 using SACDumont.modulos;
 using SACDumont.Modulos;
 using System;
-using System.IO;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using FastReport;
-using FastReport.Export.PdfSimple;
 
 namespace SACDumont.Listados
 {
@@ -280,35 +275,67 @@ namespace SACDumont.Listados
             Movimientos mov = new Movimientos();
             Inscripciones ins = new Inscripciones();
             List<ReportesDTO> reportesDTO = new List<ReportesDTO>();
+            List<ReportesDTO> lista = new List<ReportesDTO>();
             using (var db = new DumontContext())
             {
                 mov = db.Movimientos.Find(idMov);
                 ins = db.Inscripciones.Where(i => i.matricula == mov.id_matricula && i.id_ciclo == basGlobals.iCiclo).FirstOrDefault();
 
-                var lista = db.Movimientos
-                  .Where(m => m.id_movimiento == idMov)
-                  .Include(m => m.MovimientosProductos)
-                  .Include(m => m.MovimientosCobros)
-                  .SelectMany(m => m.MovimientosProductos, (m, mp) => new ReportesDTO
-                  {
-                      Producto = db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
-                      Cantidad = mp.cantidad,
-                      PrecioUnitario =  mp.monto - m.beca_descuento - m.monto_descuento,
-                      Total = mp.monto + mp.monto_recargo - m.beca_descuento - m.monto_descuento,
-                      Recargo = mp.monto_recargo,
-                      Folio = m.id_movimiento,
-                      Fecha = m.fechahora,
-                      Grado = db.Catalogos.Where(c => c.valor == ins.id_grado && c.tipo_catalogo == "Grado").Select(c => c.descripcion).FirstOrDefault(),
-                      Matricula = m.id_matricula,
-                      Alumno = db.Alumnos
-                                  .Where(a => a.matricula == m.id_matricula)
-                                  .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
-                                  .FirstOrDefault(),
-                      MontoPendiente = m.montoTotal - m.beca_descuento - m.monto_descuento - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
-                      MontoPagado = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
-                      PagadoPor = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Select(mc => mc.pago_por).FirstOrDefault()
-                  })
-                  .ToList();
+                if (mov.id_estatusmovimiento == (int)EstatusMovimiento.Liquidado)
+                {
+                    lista = db.Movimientos
+                                      .Where(m => m.id_movimiento == idMov)
+                                      .Include(m => m.MovimientosProductos)
+                                      .Include(m => m.MovimientosCobros)
+                                      .SelectMany(m => m.MovimientosProductos, (m, mp) => new ReportesDTO
+                                      {
+                                          Producto = db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
+                                          Cantidad = mp.cantidad,
+                                          PrecioUnitario = mp.monto - mp.monto_beca - mp.monto_promocion,
+                                          Total = mp.monto + mp.monto_recargo - mp.monto_beca - mp.monto_promocion,
+                                          Recargo = mp.monto_recargo,
+                                          Folio = m.id_movimiento,
+                                          Fecha = m.fechahora,
+                                          Grado = db.Catalogos.Where(c => c.valor == ins.id_grado && c.tipo_catalogo == "Grado").Select(c => c.descripcion).FirstOrDefault(),
+                                          Matricula = m.id_matricula,
+                                          Alumno = db.Alumnos
+                                                      .Where(a => a.matricula == m.id_matricula)
+                                                      .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
+                                                      .FirstOrDefault(),
+                                          MontoPendiente = m.montoTotal - m.beca_descuento - m.monto_descuento - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                                          MontoPagado = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                                          PagadoPor = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Select(mc => mc.pago_por).FirstOrDefault()
+                                      })
+                                      .ToList();
+                }
+                else
+                {
+                    lista = db.Movimientos
+                                 .Where(m => m.id_movimiento == idMov)
+                                 .Include(m => m.MovimientosProductos)
+                                 .Include(m => m.MovimientosCobros)
+                                 .SelectMany(m => m.MovimientosProductos, (m, mp) => new ReportesDTO
+                                 {
+                                     Producto = db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
+                                     Cantidad = mp.cantidad,
+                                     PrecioUnitario = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento && mc.fechaAlta == mc.fechaAlta).Sum(mc => mc.monto),
+                                     Total = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento && mc.fechaAlta == DbFunctions.TruncateTime(DateTime.Now)).Sum(mc => mc.monto),
+                                     Recargo = mp.monto_recargo,
+                                     Folio = m.id_movimiento,
+                                     Fecha = m.fechahora,
+                                     Grado = db.Catalogos.Where(c => c.valor == ins.id_grado && c.tipo_catalogo == "Grado").Select(c => c.descripcion).FirstOrDefault(),
+                                     Matricula = m.id_matricula,
+                                     Alumno = db.Alumnos
+                                                 .Where(a => a.matricula == m.id_matricula)
+                                                 .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
+                                                 .FirstOrDefault(),
+                                     MontoPendiente = m.montoTotal - m.beca_descuento - m.monto_descuento - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                                     MontoPagado = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                                     PagadoPor = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Select(mc => mc.pago_por).FirstOrDefault()
+                                 })
+                                 .ToList();
+                }
+
 
                 reportesDTO = lista;
             }

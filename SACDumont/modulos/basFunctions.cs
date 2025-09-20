@@ -1,5 +1,4 @@
 ﻿using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Math;
 using FastReport;
 using FastReport.Export.PdfSimple;
 using SACDumont.Clases;
@@ -12,17 +11,15 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Security.RightsManagement;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SACDumont.Modulos.basConfiguracion;
-using System.Drawing;
-using System.Drawing.Imaging;
 
 namespace SACDumont.Modulos
 {

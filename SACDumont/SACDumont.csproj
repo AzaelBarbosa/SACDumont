@@ -443,6 +443,12 @@
     <Compile Include="Otros\frmGasto.Designer.cs">
       <DependentUpon>frmGasto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Otros\frmImrpimirCobros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Otros\frmImrpimirCobros.Designer.cs">
+      <DependentUpon>frmImrpimirCobros.cs</DependentUpon>
+    </Compile>
     <Compile Include="Otros\frmPinRecargos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -589,6 +595,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmGasto.resx">
       <DependentUpon>frmGasto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Otros\frmImrpimirCobros.resx">
+      <DependentUpon>frmImrpimirCobros.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Otros\frmPinRecargos.resx">
       <DependentUpon>frmPinRecargos.cs</DependentUpon>
