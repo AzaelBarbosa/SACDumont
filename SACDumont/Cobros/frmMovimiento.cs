@@ -648,6 +648,8 @@ namespace SACDumont.Cobros
                 dgvProductos.DataSource = basGlobals.listaProductos;
                 dgvProductos.Columns["id_movimiento"].Visible = false;
                 dgvProductos.Columns["id_producto"].Visible = false;
+                dgvProductos.Columns["monto_beca"].Visible = false;
+                dgvProductos.Columns["monto_promocion"].Visible = false;
                 dgvProductos.Columns["id"].Visible = false;
                 dgvProductos.Columns["descriptionProducto"].HeaderText = "Producto";
                 dgvProductos.Columns["cantidad"].HeaderText = "Qty";
