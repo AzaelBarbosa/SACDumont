@@ -241,15 +241,23 @@ namespace SACDumont.Cobros
                 else
                 {
                     lbAtencion.Visible = false;
-                    txtTotal.Text = (Convert.ToDecimal(obj["precio"])).ToString("C");
-                    txRecargo.Text = (Convert.ToDecimal(0)).ToString("C");
+                    valuePromocion = (Convert.ToDecimal(obj["precio"]) * promocion / 100);
+                    valueBeca = (Convert.ToDecimal(obj["precio"]) * beca / 100);
+                    precioConBeca = Convert.ToDecimal(obj["precio"]) - valuePromocion - valueBeca;
+                    txCosto.Text = Convert.ToDecimal(precioConBeca).ToString("C");
+                    txRecargo.Text = (0).ToString("C");
+                    txtTotal.Text = ((precioConBeca)).ToString("C");
                 }
             }
             else
             {
                 lbAtencion.Visible = false;
-                txRecargo.Text = (Convert.ToDecimal(0)).ToString("C");
-                txtTotal.Text = (Convert.ToDecimal(obj["precio"])).ToString("C");
+                valuePromocion = (Convert.ToDecimal(obj["precio"]) * promocion / 100);
+                valueBeca = (Convert.ToDecimal(obj["precio"]) * beca / 100);
+                precioConBeca = Convert.ToDecimal(obj["precio"]) - valuePromocion - valueBeca;
+                txCosto.Text = Convert.ToDecimal(precioConBeca).ToString("C");
+                txRecargo.Text = (0).ToString("C");
+                txtTotal.Text = ((precioConBeca)).ToString("C");
             }
         }
 

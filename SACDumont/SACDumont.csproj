@@ -29,8 +29,8 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.99\Publish\</InstallUrl>
-    <MinimumRequiredVersion>1.0.0.40</MinimumRequiredVersion>
-    <ApplicationRevision>41</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.0.44</MinimumRequiredVersion>
+    <ApplicationRevision>45</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -59,7 +59,7 @@
     <ApplicationIcon>LogoIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2D2564D03C202A219920190ABF5C144AF8D971CB</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>6705E6F4CE51B1887CB2188EBD739690DE455D4A</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>SACDumont_TemporaryKey.pfx</ManifestKeyFile>
