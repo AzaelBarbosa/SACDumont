@@ -511,6 +511,7 @@ namespace SACDumont.Cobros
                 dgvCobros.Columns["fechaAlta"].HeaderText = "Fecha Pago";
                 dgvCobros.Columns["monto"].HeaderText = "Monto";
                 dgvCobros.Columns["pago_por"].HeaderText = "Pago Por";
+                dgvCobros.Columns["no_cobro"].HeaderText = "No. Pago";
                 dgvCobros.Columns["monto"].DefaultCellStyle.Format = "C2";
                 dgvCobros.Columns["descripcionPago"].HeaderText = "Forma de Pago";
                 dgvCobros.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;

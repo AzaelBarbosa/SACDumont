@@ -139,7 +139,7 @@ namespace SACDumont.modulos
             DataTable dsTemp = new DataTable("Temp");
 
             //Cobros
-            strSQL = $@"SELECT c.id_cobro, c.monto, cat.descripcion AS FormaPago, c.id_movimiento, c.tipopago, c.pago_por, c.fechaAlta
+            strSQL = $@"SELECT c.id_cobro, c.monto, cat.descripcion AS FormaPago, c.id_movimiento, c.tipopago, c.pago_por, c.fechaAlta, c.no_cobro
                         FROM movimientos m
                         INNER JOIN cobros c ON c.id_movimiento = m.id_movimiento
                         LEFT JOIN catalogos cat ON c.tipopago = cat.valor AND cat.tipo_catalogo = 'TipoPago'
@@ -156,7 +156,8 @@ namespace SACDumont.modulos
                     tipopago = (int)row["tipopago"],
                     descripcionPago = row["FormaPago"].ToString(),
                     pago_por = row["pago_por"].ToString(),
-                    fechaAlta = (DateTime)row["fechaAlta"]
+                    fechaAlta = (DateTime)row["fechaAlta"],
+                    no_cobro = (int)row["no_cobro"]
                 };
 
                 listaCobros.Add(p);
