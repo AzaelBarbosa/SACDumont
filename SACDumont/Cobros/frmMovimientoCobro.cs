@@ -63,7 +63,8 @@ namespace SACDumont.Cobros
                 tipopago = Convert.ToInt32(cboCatalogos.IDValor),
                 descripcionPago = Convert.ToString(cboCatalogos.Descripcion),
                 fechaAlta = DateTime.Now,
-                pago_por = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(txRealizado.Text.ToLower())
+                pago_por = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(txRealizado.Text.ToLower()),
+                no_cobro = VerificarNoPago(DateTime.Now),
             };
 
             basGlobals.listaCobros.Add(movimientoCobros);
@@ -93,6 +94,10 @@ namespace SACDumont.Cobros
             this.btQuitarRecargo.Visible = false;
             this.btResetPass.Visible = false;
         }
+
+        
+
+
 
         private void VerificaSaldoFavor()
         {
@@ -144,6 +149,25 @@ namespace SACDumont.Cobros
         {
             txRealizado.Text = System.Globalization.CultureInfo.CurrentCulture.TextInfo
     .ToTitleCase(txRealizado.Text.ToLower());
+        }
+
+        private int VerificarNoPago(DateTime fecha)
+        {
+            // Si la lista está vacía, el primer NoPago es 1
+            if (basGlobals.listaCobros == null || basGlobals.listaCobros.Count == 0)
+                return 1;
+
+            // Buscar el último cobro registrado
+            var ultimoCobro = basGlobals.listaCobros.OrderByDescending(c => c.id_cobro).FirstOrDefault();
+            if (ultimoCobro == null)
+                return 1;
+
+            // Si la fecha es la misma que el último cobro, usar el mismo NoPago
+            if (ultimoCobro.fechaAlta.HasValue && ultimoCobro.fechaAlta.Value.Date == fecha.Date)
+                return ultimoCobro.no_cobro;
+
+            // Si la fecha es distinta, incrementar el NoPago en 1
+            return ultimoCobro.no_cobro + 1;
         }
     }
 }

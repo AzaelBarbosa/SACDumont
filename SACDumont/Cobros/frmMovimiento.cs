@@ -41,6 +41,9 @@ namespace SACDumont.Cobros
         bool impresionTicket = false;
         bool promocionActiva = false;
         bool becaActiva = false;
+        bool imprAbono = false;
+        int noCobro = 0;
+        int idCobro = 0;
         #endregion
 
         #region Constructores
@@ -107,6 +110,8 @@ namespace SACDumont.Cobros
                                 {
                                     item.id_movimiento = idMovimiento;
                                     db.MovimientoCobros.Add(item);
+                                    noCobro = item.no_cobro;
+                                    idCobro = item.id_cobro;
                                     impresionTicket = true;
 
                                     if (item.tipopago == (int)TipoPago.SaldoFavor)
@@ -144,7 +149,22 @@ namespace SACDumont.Cobros
                                     basFunctions.Registrar(basConfiguracion.UserID, "Movimiento", "Abono", idMovimiento, $"Se realizo un abono al Movimiento con ID: {idMovimiento}");
                                 }
 
-                                if (impresionTicket) ExportareImprimirSinAbrir(idMovimiento);
+                                if (impresionTicket)
+                                {
+                                    for (int i = 0; i < 2; i++)
+                                    {
+                                        if (noCobro > 1)
+                                        {
+                                            ExportareImprimirSinAbrir(idMovimiento, "TicketAbono.frx", noCobro);
+                                            Thread.Sleep(2000);
+                                        }
+                                        else
+                                        {
+                                            ExportareImprimirSinAbrir(idMovimiento, "TicketMovimient.frx", noCobro);
+                                            Thread.Sleep(2000);
+                                        }
+                                    }
+                                }
                             }
                         }
 
@@ -199,11 +219,14 @@ namespace SACDumont.Cobros
                             tipopago = c.tipopago,
                             descripcionPago = c.descripcionPago,
                             fechaAlta = c.fechaAlta,
-                            pago_por = c.pago_por
+                            pago_por = c.pago_por,
+                            no_cobro = c.no_cobro
                         }));
 
                         foreach (cobros lc in basGlobals.listaCobros)
                         {
+                            noCobro = lc.no_cobro;
+                            idCobro = lc.id_cobro;
                             if (lc.tipopago == (int)TipoPago.SaldoFavor)
                             {
                                 var saldo = db.SaldoFavor.Where(sf => sf.Matricula == idMatricula && sf.IdCiclo == basGlobals.iCiclo).FirstOrDefault();
@@ -244,8 +267,16 @@ namespace SACDumont.Cobros
                             }
                             for (int i = 0; i < 2; i++)
                             {
-                                ExportareImprimirSinAbrir(nuevo.id_movimiento);
-                                Thread.Sleep(2000);
+                                if (noCobro > 1)
+                                {
+                                    ExportareImprimirSinAbrir(idMovimiento, "TicketAbono.frx", idCobro);
+                                    Thread.Sleep(2000);
+                                }
+                                else
+                                {
+                                    ExportareImprimirSinAbrir(idMovimiento, "TicketMovimient.frx", idCobro);
+                                    Thread.Sleep(2000);
+                                }
                             }
                         }
                     }
@@ -352,7 +383,7 @@ namespace SACDumont.Cobros
             }
         }
 
-        private void ExportareImprimirSinAbrir(int idMov)
+        private void ExportareImprimirSinAbrir(int idMov, string nameReport, int idCobro = 0)
         {
             if (idMov == 0) return;
 
@@ -365,36 +396,37 @@ namespace SACDumont.Cobros
                 mov = db.Movimientos.Find(idMov);
                 ins = db.Inscripciones.Where(i => i.matricula == mov.id_matricula && i.id_ciclo == basGlobals.iCiclo).FirstOrDefault();
                 var lista = db.Movimientos
-                  .Where(m => m.id_movimiento == idMov)
-                  .Include(m => m.MovimientosProductos)
-                  .Include(m => m.MovimientosCobros)
-                  .SelectMany(m => m.MovimientosProductos, (m, mp) => new ReportesDTO
-                  {
-                      Producto = db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
-                      Cantidad = mp.cantidad,
-                      PrecioUnitario = mp.monto - m.beca_descuento - (m.monto_descuento / m.MovimientosProductos.Count),
-                      Total = mp.monto + mp.monto_recargo - m.beca_descuento - (m.monto_descuento / m.MovimientosProductos.Count),
-                      Recargo = mp.monto_recargo,
-                      Folio = m.id_movimiento,
-                      Fecha = m.fechahora,
-                      Grado = db.Catalogos.Where(c => c.valor == ins.id_grado && c.tipo_catalogo == "Grado").Select(c => c.descripcion).FirstOrDefault(),
-                      Matricula = m.id_matricula,
-                      Alumno = db.Alumnos
-                                  .Where(a => a.matricula == m.id_matricula)
-                                  .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
-                                  .FirstOrDefault(),
-                      MontoPendiente = m.montoTotal - m.beca_descuento - m.monto_descuento - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
-                      MontoPagado = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
-                      PagadoPor = db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Select(mc => mc.pago_por).FirstOrDefault()
-                  })
-                  .ToList();
+                    .Where(m => m.id_movimiento == idMovimiento)
+                    .Include(m => m.MovimientosProductos)
+                    .Include(m => m.MovimientosCobros)
+                    .SelectMany(m => m.MovimientosProductos, (m, mp) => new ReportesDTO
+                    {
+                        Producto = noCobro == 1 ? "" : db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
+                        Cantidad = mp.cantidad,
+                        PrecioUnitario = mp.monto,
+                        Total = noCobro == 1 ? mp.monto + mp.monto_recargo : m.montoTotal - db.MovimientoCobros.Where(mc => mc.no_cobro < noCobro && mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                        Recargo = mp.monto_recargo,
+                        Folio = m.id_movimiento,
+                        Fecha = noCobro == 1 ? m.fechahora : (DateTime)db.MovimientoCobros.Where(mc => mc.id_cobro == idCobro).Select(mc => mc.fechaAlta).FirstOrDefault(),
+                        Grado = db.Catalogos.Where(c => c.valor == ins.id_grado && c.tipo_catalogo == "Grado").Select(c => c.descripcion).FirstOrDefault(),
+                        Matricula = m.id_matricula,
+                        Alumno = db.Alumnos
+                                    .Where(a => a.matricula == m.id_matricula)
+                                    .Select(a => a.appaterno + " " + a.apmaterno + " " + a.nombre)
+                                    .FirstOrDefault(),
+                        MontoPendiente = noCobro == 1 ? m.montoTotal - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto) : m.montoTotal - db.MovimientoCobros.Where(mc => mc.no_cobro <= noCobro && mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
+                        MontoPagado = noCobro == 1 ? db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto) : db.MovimientoCobros.Where(mc => mc.id_cobro == idCobro).Sum(mc => mc.monto),
+                        PagadoPor = noCobro == 1 ? db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Select(mc => mc.pago_por).FirstOrDefault() : db.MovimientoCobros.Where(mc => mc.id_cobro == idCobro).Select(mc => mc.pago_por).FirstOrDefault(),
+                        NoPago = noCobro
+                    })
+                    .ToList();
 
                 reportesDTO = lista;
             }
 
             dataTable = basFunctions.ConvertToDataTable(reportesDTO);
             // 2. Cargar el reporte
-            string rutaFrx = Path.Combine(Application.StartupPath, "Reportes", "TicketMovimient.frx");
+            string rutaFrx = Path.Combine(Application.StartupPath, "Reportes", nameReport);
             Report report = new Report();
             report.Load(rutaFrx);
 
@@ -726,6 +758,7 @@ namespace SACDumont.Cobros
                 dgvCobros.Columns["fechaAlta"].HeaderText = "Fecha Pago";
                 dgvCobros.Columns["monto"].HeaderText = "Monto";
                 dgvCobros.Columns["pago_por"].HeaderText = "Pago Por";
+                dgvCobros.Columns["no_cobro"].HeaderText = "No Pago";
                 dgvCobros.Columns["monto"].DefaultCellStyle.Format = "C2";
                 dgvCobros.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvCobros.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

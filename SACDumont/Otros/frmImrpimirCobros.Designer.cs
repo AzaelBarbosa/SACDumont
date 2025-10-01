@@ -55,10 +55,11 @@
             this.reporteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.reporteToolStripMenuItem.Name = "reporteToolStripMenuItem";
             this.reporteToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
-            this.reporteToolStripMenuItem.Size = new System.Drawing.Size(119, 55);
+            this.reporteToolStripMenuItem.Size = new System.Drawing.Size(120, 55);
             this.reporteToolStripMenuItem.Text = "Reimpresion Ticket";
             this.reporteToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.reporteToolStripMenuItem.ToolTipText = "Reimpresion ticket en Impresora de Tickets";
+            this.reporteToolStripMenuItem.Click += new System.EventHandler(this.reporteToolStripMenuItem_Click);
             // 
             // btTicketImpresora
             // 
@@ -67,10 +68,11 @@
             this.btTicketImpresora.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btTicketImpresora.Name = "btTicketImpresora";
             this.btTicketImpresora.Padding = new System.Windows.Forms.Padding(4, 0, 4, 4);
-            this.btTicketImpresora.Size = new System.Drawing.Size(175, 55);
+            this.btTicketImpresora.Size = new System.Drawing.Size(176, 55);
             this.btTicketImpresora.Text = "Reimpresion Ticket Impresora";
             this.btTicketImpresora.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btTicketImpresora.ToolTipText = "Se reimprime Ticket en Impresora";
+            this.btTicketImpresora.Click += new System.EventHandler(this.btTicketImpresora_Click);
             // 
             // dgvCobros
             // 
@@ -84,6 +86,7 @@
             this.dgvCobros.Name = "dgvCobros";
             this.dgvCobros.Size = new System.Drawing.Size(531, 226);
             this.dgvCobros.TabIndex = 16;
+            this.dgvCobros.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCobros_CellClick);
             // 
             // frmImrpimirCobros
             // 

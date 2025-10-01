@@ -116,4 +116,15 @@ namespace SACDumont.Dtos
         public bool confirmado { get; set; }
 
     }
+    public class CobrosDTO
+    {
+        public int IdCobro { get; set; }
+        public int IdMovimiento { get; set; }
+        public DateTime FechaCobro { get; set; }
+        public decimal Monto { get; set; }
+        public string MetodoPago { get; set; }
+        public string Referencia { get; set; }
+        public string PagoPor { get; set; }
+        public int NumeroCobro { get; set; }
+    }
 }

@@ -107,11 +107,15 @@ namespace SACDumont.Listados
                 return;
             }
 
-            for (int i = 0; i < 2; i++)
-            {
-                ExportareImprimirSinAbrir();
-                Thread.Sleep(2000);
-            }
+            frmImrpimirCobros frmImprimirCobros = new frmImrpimirCobros();
+            frmImprimirCobros.idMovimiento = idMov;
+            frmImprimirCobros.ShowDialog();
+
+            //for (int i = 0; i < 2; i++)
+            //{
+             //   ExportareImprimirSinAbrir();
+             //   Thread.Sleep(2000);
+            //}
         }
         protected override void ImprimirTicket()
         {
@@ -225,7 +229,7 @@ namespace SACDumont.Listados
             else
             {
                 dtMovimientos = sqlServer.ExecSQLReturnDT($@"SELECT m.id_movimiento ,m.fechahora AS Fecha, p.descripcion AS Producto, a.appaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, 
-                                                        m.montoTotal AS Total, (m.montoTotal - m.monto_descuento)  - (SELECT SUM(monto) FROM cobros WHERE id_movimiento = m.id_movimiento) AS MontoPendiente, m.porcentaje_descuento AS Descuento, m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento,
+                                                        m.montoTotal AS Total, (m.montoTotal)  - (SELECT SUM(monto) FROM cobros WHERE id_movimiento = m.id_movimiento) AS MontoPendiente, m.porcentaje_descuento AS Descuento, m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento,
                                                         catE.descripcion AS Estatus, m.confirmado
                                                         FROM movimientos m
                                                         INNER JOIN movimiento_productos mp ON m.id_movimiento = mp.id_movimiento

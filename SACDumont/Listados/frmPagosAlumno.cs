@@ -7,6 +7,7 @@ using SACDumont.Dtos;
 using SACDumont.Models;
 using SACDumont.modulos;
 using SACDumont.Modulos;
+using SACDumont.Otros;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -45,11 +46,15 @@ namespace SACDumont.Listados
                 return;
             }
 
-            for (int i = 0; i < 2; i++)
-            {
-                ExportareImprimirSinAbrir();
-                Thread.Sleep(2000);
-            }
+            frmImrpimirCobros frmImprimirCobros = new frmImrpimirCobros();
+            frmImprimirCobros.idMovimiento = idMov;
+            frmImprimirCobros.ShowDialog();
+
+            //for (int i = 0; i < 2; i++)
+            //{
+            //    ExportareImprimirSinAbrir();
+            //    Thread.Sleep(2000);
+            //}
         }
 
         protected override void ImprimirTicket()

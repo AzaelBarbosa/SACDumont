@@ -33,6 +33,7 @@ namespace SACDumont.Models
         public int tipopago { get; set; }
         public DateTime? fechaAlta { get; set; }
         public string pago_por { get; set; }
+        public int no_cobro { get; set; }
 
         [NotMapped]
         public string descripcionPago { get; set; }

@@ -1,13 +1,28 @@
 ﻿using SACDumont.Models;
 using System.Data.Entity;
+using System.Configuration;
 
 namespace SACDumont
 {
     public class DumontContext : DbContext
     {
-        public DumontContext() : base("name=DumontConnectionString")
+
+        #if DEBUG
+            const string ENV_DEFAULT = "Dev";
+        #else
+            const string ENV_DEFAULT = "Prod";
+        #endif
+
+        public DumontContext() : base("name=" + ConnName("DumontConnectionString"))
         {
         }
+
+        private static string ConnName(string baseName)
+        {
+            var env = ConfigurationManager.AppSettings["ENV"] ?? "Dev"; // Dev o Prod
+            return $"{baseName}.{ENV_DEFAULT}";
+        }
+
         public DbSet<cobros> MovimientoCobros { get; set; }
         public DbSet<Movimientos> Movimientos { get; set; }
         public DbSet<movimiento_productos> MovimientoProductos { get; set; }
