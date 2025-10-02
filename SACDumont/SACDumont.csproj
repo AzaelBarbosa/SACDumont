@@ -29,8 +29,8 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.99\Publish\</InstallUrl>
-    <MinimumRequiredVersion>1.0.0.52</MinimumRequiredVersion>
-    <ApplicationRevision>53</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.0.53</MinimumRequiredVersion>
+    <ApplicationRevision>54</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
