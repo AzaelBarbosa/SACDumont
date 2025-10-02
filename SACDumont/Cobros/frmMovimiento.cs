@@ -148,18 +148,20 @@ namespace SACDumont.Cobros
                                     basFunctions.Registrar(basConfiguracion.UserID, "Movimiento", "Abono", idMovimiento, $"Se realizo un abono al Movimiento con ID: {idMovimiento}");
                                 }
 
+                                idCobro = basGlobals.listaCobros.Max(c => c.id_cobro);
+
                                 if (impresionTicket)
                                 {
                                     for (int i = 0; i < 2; i++)
                                     {
                                         if (noCobro > 1)
                                         {
-                                            ExportareImprimirSinAbrir(idMovimiento, "TicketAbono.frx", noCobro);
+                                            ExportareImprimirSinAbrir(idMovimiento, "TicketAbono.frx", idCobro);
                                             Thread.Sleep(2000);
                                         }
                                         else
                                         {
-                                            ExportareImprimirSinAbrir(idMovimiento, "TicketMovimient.frx", noCobro);
+                                            ExportareImprimirSinAbrir(idMovimiento, "TicketMovimient.frx", idCobro);
                                             Thread.Sleep(2000);
                                         }
                                     }
@@ -225,7 +227,6 @@ namespace SACDumont.Cobros
                         foreach (cobros lc in basGlobals.listaCobros)
                         {
                             noCobro = lc.no_cobro;
-                            idCobro = lc.id_cobro;
                             if (lc.tipopago == (int)TipoPago.SaldoFavor)
                             {
                                 var saldo = db.SaldoFavor.Where(sf => sf.Matricula == idMatricula && sf.IdCiclo == basGlobals.iCiclo).FirstOrDefault();

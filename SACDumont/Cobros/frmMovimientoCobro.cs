@@ -62,9 +62,9 @@ namespace SACDumont.Cobros
                 monto = total,
                 tipopago = Convert.ToInt32(cboCatalogos.IDValor),
                 descripcionPago = Convert.ToString(cboCatalogos.Descripcion),
-                fechaAlta = DateTime.Now,
+                fechaAlta = dtFechaPago.Value,
                 pago_por = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(txRealizado.Text.ToLower()),
-                no_cobro = VerificarNoPago(DateTime.Now),
+                no_cobro = VerificarNoPago(dtFechaPago.Value),
             };
 
             basGlobals.listaCobros.Add(movimientoCobros);

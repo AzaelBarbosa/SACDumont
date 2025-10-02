@@ -7,11 +7,7 @@ namespace SACDumont
     public class DumontContext : DbContext
     {
 
-        #if DEBUG
-            const string ENV_DEFAULT = "Dev";
-        #else
-            const string ENV_DEFAULT = "Prod";
-        #endif
+        const string ENV_DEFAULT = "Prod";
 
         public DumontContext() : base("name=" + ConnName("DumontConnectionString"))
         {
@@ -19,7 +15,6 @@ namespace SACDumont
 
         private static string ConnName(string baseName)
         {
-            var env = ConfigurationManager.AppSettings["ENV"] ?? "Dev"; // Dev o Prod
             return $"{baseName}.{ENV_DEFAULT}";
         }
 

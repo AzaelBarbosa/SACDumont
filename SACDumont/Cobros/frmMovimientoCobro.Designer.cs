@@ -38,13 +38,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txSaldoFavor = new System.Windows.Forms.TextBox();
             this.lbSaldoFavor = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dtFechaPago = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // txtTotal
             // 
             this.txtTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotal.Location = new System.Drawing.Point(13, 95);
+            this.txtTotal.Location = new System.Drawing.Point(13, 128);
             this.txtTotal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
@@ -55,7 +57,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(10, 72);
+            this.label1.Location = new System.Drawing.Point(10, 105);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 27);
@@ -64,7 +66,7 @@
             // 
             // txCosto
             // 
-            this.txCosto.Location = new System.Drawing.Point(13, 152);
+            this.txCosto.Location = new System.Drawing.Point(13, 185);
             this.txCosto.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txCosto.Name = "txCosto";
             this.txCosto.Size = new System.Drawing.Size(165, 20);
@@ -75,7 +77,7 @@
             // 
             // lblNombre
             // 
-            this.lblNombre.Location = new System.Drawing.Point(13, 129);
+            this.lblNombre.Location = new System.Drawing.Point(13, 162);
             this.lblNombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(80, 27);
@@ -86,7 +88,7 @@
             // 
             this.cboCatalogos.Descripcion = null;
             this.cboCatalogos.IDValor = 0;
-            this.cboCatalogos.Location = new System.Drawing.Point(189, 151);
+            this.cboCatalogos.Location = new System.Drawing.Point(189, 184);
             this.cboCatalogos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cboCatalogos.Name = "cboCatalogos";
             this.cboCatalogos.Size = new System.Drawing.Size(144, 21);
@@ -95,7 +97,7 @@
             // 
             // label10
             // 
-            this.label10.Location = new System.Drawing.Point(186, 129);
+            this.label10.Location = new System.Drawing.Point(186, 162);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(117, 27);
@@ -104,7 +106,7 @@
             // 
             // txRealizado
             // 
-            this.txRealizado.Location = new System.Drawing.Point(10, 200);
+            this.txRealizado.Location = new System.Drawing.Point(10, 233);
             this.txRealizado.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txRealizado.Name = "txRealizado";
             this.txRealizado.Size = new System.Drawing.Size(323, 20);
@@ -113,7 +115,7 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(10, 182);
+            this.label2.Location = new System.Drawing.Point(10, 215);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 27);
@@ -126,7 +128,7 @@
             this.txSaldoFavor.Enabled = false;
             this.txSaldoFavor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txSaldoFavor.ForeColor = System.Drawing.Color.Green;
-            this.txSaldoFavor.Location = new System.Drawing.Point(189, 95);
+            this.txSaldoFavor.Location = new System.Drawing.Point(189, 128);
             this.txSaldoFavor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txSaldoFavor.Name = "txSaldoFavor";
             this.txSaldoFavor.Size = new System.Drawing.Size(148, 22);
@@ -136,18 +138,37 @@
             // 
             // lbSaldoFavor
             // 
-            this.lbSaldoFavor.Location = new System.Drawing.Point(186, 72);
+            this.lbSaldoFavor.Location = new System.Drawing.Point(186, 105);
             this.lbSaldoFavor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSaldoFavor.Name = "lbSaldoFavor";
             this.lbSaldoFavor.Size = new System.Drawing.Size(98, 27);
             this.lbSaldoFavor.TabIndex = 61;
             this.lbSaldoFavor.Text = "Saldo a favor:";
             // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(10, 69);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(98, 27);
+            this.label3.TabIndex = 62;
+            this.label3.Text = "Importe Pendiente:";
+            // 
+            // dtFechaPago
+            // 
+            this.dtFechaPago.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtFechaPago.Location = new System.Drawing.Point(109, 67);
+            this.dtFechaPago.Name = "dtFechaPago";
+            this.dtFechaPago.Size = new System.Drawing.Size(200, 20);
+            this.dtFechaPago.TabIndex = 63;
+            // 
             // frmMovimientoCobro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(346, 232);
+            this.ClientSize = new System.Drawing.Size(346, 263);
+            this.Controls.Add(this.dtFechaPago);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.txSaldoFavor);
             this.Controls.Add(this.lbSaldoFavor);
             this.Controls.Add(this.txRealizado);
@@ -171,6 +192,8 @@
             this.Controls.SetChildIndex(this.txRealizado, 0);
             this.Controls.SetChildIndex(this.lbSaldoFavor, 0);
             this.Controls.SetChildIndex(this.txSaldoFavor, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.dtFechaPago, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,5 +211,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txSaldoFavor;
         private System.Windows.Forms.Label lbSaldoFavor;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dtFechaPago;
     }
 }
