@@ -220,9 +220,101 @@ namespace SACDumont.Otros
 
         private void frmCierreConfirmar_Load(object sender, EventArgs e)
         {
+            WireQty(txB1000, 1000);
+            WireQty(txB500, 500);
+            WireQty(txB200, 200);
+            WireQty(txB100, 100);
+            WireQty(txB50, 50);
+            WireQty(txB20, 20);
+            WireQty(txM10, 10);
+            WireQty(txM5, 5);
+            WireQty(txM2, 2);
+            WireQty(txM1, 1);
+
+            TxtQty(txB1000);
+            TxtQty(txB500);
+            TxtQty(txB200);
+            TxtQty(txB100);
+            TxtQty(txB50);
+            TxtQty(txB20);
+            TxtQty(txM10);
+            TxtQty(txM5);
+            TxtQty(txM2);
+            TxtQty(txM1);
+            TxtQty(txM050);
+
             CargarDatos();
             basFunctions.SelectAll(this);
         }
+
+        private void WireQty(TextBox qtyTextBox, int denominacion)
+        {
+            qtyTextBox.Tag = denominacion;                 // guarda la denominación
+            qtyTextBox.TextChanged += Qty_TextChanged;     // mismo handler para todas
+        }
+
+        private void TxtQty(TextBox qtyTextBox)
+        {
+            qtyTextBox.Validated += Qty_Validated;     // mismo handler para todas
+        }
+
+        private void Qty_Validated(object sender, EventArgs e)
+        {
+            var qtyBox = (TextBox)sender;
+            if (int.TryParse(qtyBox.Text, out int qty))
+            {
+                qtyBox.Text = qty.ToString(); // C2 = Moneda con 2 decimales
+            }
+            else
+            {
+                qtyBox.Text = "0";
+            }
+        }
+
+        private void Qty_TextChanged(object sender, EventArgs e)
+        {
+            var qtyBox = (TextBox)sender;
+            int denom = (int)qtyBox.Tag;
+
+            // Parse seguro (vacío o no numérico -> 0)
+            if (!int.TryParse(qtyBox.Text, out int qty)) qty = 0;
+
+            decimal importe = denom * qty;
+
+            // Busca el TextBox de importe correspondiente por nombre: txCash{denom}
+            var impBox = this.Controls.Find($"txCash{denom}", true).FirstOrDefault() as TextBox;
+            if (impBox != null)
+                impBox.Text = importe.ToString("N2");      // formateado con 2 decimales
+
+            RecalcularTotal();
+        }
+
+        private void RecalcularTotal()
+        {
+            decimal total = 0m;
+
+            // Suma todos los txtImp...
+            total += ParseImporte(txCash1000);
+            total += ParseImporte(txCash500);
+            total += ParseImporte(txCash200);
+            total += ParseImporte(txCash100);
+            total += ParseImporte(txCash50);
+            total += ParseImporte(txCash20);
+            total += ParseImporte(txCash10);
+            total += ParseImporte(txCash5);
+            total += ParseImporte(txCash2);
+            total += ParseImporte(txCash1);
+            total += ParseImporte(txCash050);
+            // agrega los que tengas
+
+            txBilletes.Text = total.ToString("C2");          // donde quieres mostrar el total
+        }
+
+        private decimal ParseImporte(TextBox impBox)
+        {
+            return decimal.TryParse(impBox.Text, out decimal v) ? v: 0m;
+        }
+
 
         private void txEfectivoConfirmar_Validated(object sender, EventArgs e)
         {
@@ -232,7 +324,7 @@ namespace SACDumont.Otros
             }
             else
             {
-                txEfectivoConfirmar.Text = "0.00";
+                txEfectivoConfirmar.Text = "$0.00";
             }
         }
 
@@ -244,7 +336,7 @@ namespace SACDumont.Otros
             }
             else
             {
-                txTrasnferConfirma.Text = "0.00";
+                txTrasnferConfirma.Text = "$0.00";
             }
         }
 
@@ -256,7 +348,7 @@ namespace SACDumont.Otros
             }
             else
             {
-                txGastoConfirmar.Text = "0.00";
+                txGastoConfirmar.Text = "$0.00";
             }
         }
 
@@ -268,8 +360,13 @@ namespace SACDumont.Otros
             }
             else
             {
-                txTotalesConfirmar.Text = "0.00";
+                txTotalesConfirmar.Text = "$0.00";
             }
+        }
+
+        private void txB1000_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
