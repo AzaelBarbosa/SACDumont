@@ -111,7 +111,6 @@ namespace SACDumont.Cobros
                                     item.id_movimiento = idMovimiento;
                                     db.MovimientoCobros.Add(item);
                                     noCobro = item.no_cobro;
-                                    idCobro = item.id_cobro;
                                     impresionTicket = true;
 
                                     if (item.tipopago == (int)TipoPago.SaldoFavor)
@@ -265,6 +264,7 @@ namespace SACDumont.Cobros
                                 MessageBox.Show("Debe configurar una impresora para tickets en la configuración del sistema.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
                             }
+                            idCobro = basGlobals.listaCobros.Max(c => c.id_cobro);
                             for (int i = 0; i < 2; i++)
                             {
                                 if (noCobro > 1)
@@ -401,7 +401,7 @@ namespace SACDumont.Cobros
                     .Include(m => m.MovimientosCobros)
                     .SelectMany(m => m.MovimientosProductos, (m, mp) => new ReportesDTO
                     {
-                        Producto = noCobro == 1 ? "" : db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
+                        Producto = noCobro == 1 ? db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault() : "",
                         Cantidad = mp.cantidad,
                         PrecioUnitario = mp.monto,
                         Total = noCobro == 1 ? mp.monto + mp.monto_recargo : m.montoTotal - db.MovimientoCobros.Where(mc => mc.no_cobro < noCobro && mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
