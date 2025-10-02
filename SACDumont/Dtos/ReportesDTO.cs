@@ -20,6 +20,7 @@ namespace SACDumont.Dtos
         public decimal MontoPagado { get; set; }
         public string PagadoPor { get; set; }
         public int NoPago { get; set; }
+        public string Talla { get; set; }
 
     }
 

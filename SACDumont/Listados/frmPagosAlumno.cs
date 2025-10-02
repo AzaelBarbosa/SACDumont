@@ -30,6 +30,7 @@ namespace SACDumont.Listados
         List<PagosAlumnoDTO> listaPagos = new List<PagosAlumnoDTO>();
         int idAlumno = 0;
         int idMov = 0; // Variable para almacenar el ID del movimiento seleccionado
+        string strConcepto = "";
         #endregion
 
         #region Metodos Virtuales
@@ -48,6 +49,7 @@ namespace SACDumont.Listados
 
             frmImrpimirCobros frmImprimirCobros = new frmImrpimirCobros();
             frmImprimirCobros.idMovimiento = idMov;
+            frmImprimirCobros.strConcepto = strConcepto;
             frmImprimirCobros.ShowDialog();
 
             //for (int i = 0; i < 2; i++)
@@ -134,7 +136,7 @@ namespace SACDumont.Listados
 
         private void CargarDatos()
         {
-            dtPagosAl = sqlServer.ExecSQLReturnDT($@"SELECT m.id_movimiento ,m.fechahora AS Fecha, p.descripcion AS Producto, a.appaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, 
+            dtPagosAl = sqlServer.ExecSQLReturnDT($@"SELECT m.id_movimiento, m.id_tipomovimiento ,m.fechahora AS Fecha, p.descripcion AS Producto, a.appaterno + ' ' + a.apmaterno + ' ' + a.nombre AS Alumno, cat.descripcion AS Grado, catG.descripcion AS Grupo, 
                                                         m.montoTotal AS Total, (m.montoTotal - m.monto_descuento)  - (SELECT SUM(monto) FROM cobros WHERE id_movimiento = m.id_movimiento) AS MontoPendiente, m.porcentaje_descuento AS Descuento, m.monto_descuento AS MontoDescuento, m.beca_descuento AS BecaDescuento,
                                                         catE.descripcion AS Estatus, m.confirmado
                                                         FROM movimientos m
@@ -163,6 +165,7 @@ namespace SACDumont.Listados
         {
 
             dgvMovimientos.Columns["id_movimiento"].Visible = false;
+            dgvMovimientos.Columns["id_tipomovimiento"].Visible = false;
             dgvMovimientos.Columns["Fecha"].HeaderText = "Fecha";
             dgvMovimientos.Columns["Alumno"].HeaderText = "Alumno";
             dgvMovimientos.Columns["Grado"].HeaderText = "Grado";
@@ -439,6 +442,7 @@ namespace SACDumont.Listados
 
                 // Obtener el valor de la columna "ID" (puedes usar el índice también)
                 idMov = (int)fila.Cells["id_movimiento"].Value;
+                strConcepto = basFunctions.NombreMovimiento((int)fila.Cells["id_tipomovimiento"].Value);
             }
         }
 

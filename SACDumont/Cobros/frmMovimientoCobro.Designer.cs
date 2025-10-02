@@ -156,6 +156,7 @@
             // 
             // dtFechaPago
             // 
+            this.dtFechaPago.CustomFormat = "dd/MM/yyyy HH:mm";
             this.dtFechaPago.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtFechaPago.Location = new System.Drawing.Point(109, 67);
             this.dtFechaPago.Name = "dtFechaPago";

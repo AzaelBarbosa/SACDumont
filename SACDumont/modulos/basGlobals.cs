@@ -33,13 +33,13 @@ namespace SACDumont.modulos
 
     public enum TipoMovimiento
     {
-        Colegiatura = 2,
-        Inscripcion = 3,
-        Producto = 1,
-        Uniformes = 4,
-        Eventos = 5,
-        Graduacion = 6,
-        Gasto = 7
+        COLEGIATURA = 2,
+        INSCRIPCION = 3,
+        ARTICULO = 1,
+        UNIFORMES = 4,
+        EVENTOS = 5,
+        GRADUACION = 6,
+        GASTOS = 7
     }
 
     public enum EstatusMovimiento

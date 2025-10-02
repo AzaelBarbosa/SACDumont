@@ -95,8 +95,11 @@
             this.ClientSize = new System.Drawing.Size(531, 285);
             this.Controls.Add(this.dgvCobros);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmImrpimirCobros";
-            this.Text = "frmImrpimirCobros";
+            this.Text = "Reimprimir Cobros";
             this.Load += new System.EventHandler(this.frmImrpimirCobros_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

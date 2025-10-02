@@ -48,7 +48,7 @@ namespace SACDumont.Listados
                 return;
             }
 
-            if (tipoMovimiento == (int)TipoMovimiento.Gasto)
+            if (tipoMovimiento == (int)TipoMovimiento.GASTOS)
             {
                 basGlobals.Movimiento = new Movimientos();
                 basGlobals.listaProductos = new List<movimiento_productos>();
@@ -109,6 +109,7 @@ namespace SACDumont.Listados
 
             frmImrpimirCobros frmImprimirCobros = new frmImrpimirCobros();
             frmImprimirCobros.idMovimiento = idMov;
+            frmImprimirCobros.strConcepto = basGlobals.sConcepto;
             frmImprimirCobros.ShowDialog();
 
             //for (int i = 0; i < 2; i++)
@@ -217,7 +218,7 @@ namespace SACDumont.Listados
         #region Eventos
         private void CargarMovimientos()
         {
-            if (tipoMovimiento == (int)TipoMovimiento.Gasto)
+            if (tipoMovimiento == (int)TipoMovimiento.GASTOS)
             {
                 dtMovimientos = sqlServer.ExecSQLReturnDT($@"SELECT m.id_movimiento ,m.fechahora AS Fecha, p.descripcion AS Producto, mp.descripcion AS MotivoGasto,
                                                         m.montoTotal AS Total
@@ -250,7 +251,7 @@ namespace SACDumont.Listados
 
         private void FormatGrid()
         {
-            if (tipoMovimiento == (int)TipoMovimiento.Gasto)
+            if (tipoMovimiento == (int)TipoMovimiento.GASTOS)
             {
                 dgvMovimientos.Columns["id_movimiento"].Visible = false;
                 dgvMovimientos.Columns["Fecha"].HeaderText = "Fecha";
@@ -331,7 +332,7 @@ namespace SACDumont.Listados
 
         private void dgvMovimientos_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (tipoMovimiento == (int)TipoMovimiento.Gasto) { return; }
+            if (tipoMovimiento == (int)TipoMovimiento.GASTOS) { return; }
 
             var row = ((DataRowView)dgvMovimientos.SelectedRows[0].DataBoundItem).Row;
 
@@ -345,7 +346,7 @@ namespace SACDumont.Listados
 
         private void dgvMovimientos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (tipoMovimiento == (int)TipoMovimiento.Gasto) { return; }
+            if (tipoMovimiento == (int)TipoMovimiento.GASTOS) { return; }
 
             if (dgvMovimientos.Columns[e.ColumnIndex].Name == "Estatus" && e.Value != null)
             {
@@ -582,7 +583,7 @@ namespace SACDumont.Listados
 
         private void dgvMovimientos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (tipoMovimiento == (int)TipoMovimiento.Gasto) { return; }
+            if (tipoMovimiento == (int)TipoMovimiento.GASTOS) { return; }
 
             if (e.RowIndex >= 0)
             {

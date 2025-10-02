@@ -10,7 +10,7 @@ namespace SACDumont.Otros
     {
 
         #region Variables
-        int tipoMovimiento = (int)TipoMovimiento.Gasto;
+        int tipoMovimiento = (int)TipoMovimiento.GASTOS;
         Movimientos movimientos;
         movimiento_productos movimientosProductos;
         cobros movientoCobro;

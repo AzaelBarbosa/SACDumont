@@ -230,10 +230,10 @@ namespace SACDumont.Catalogos
 
                                 porBeca = Convert.ToDecimal(nPorBeca.Value);
                                 var movimientosInscripcion = db.Movimientos.Where(m => m.id_matricula == intMatricula && m.id_ciclo == basGlobals.iCiclo
-                                && m.id_tipomovimiento == (int)TipoMovimiento.Inscripcion && m.id_estatusmovimiento == 2).ToList();
+                                && m.id_tipomovimiento == (int)TipoMovimiento.INSCRIPCION && m.id_estatusmovimiento == 2).ToList();
 
                                 var movimientosColegiatura = db.Movimientos.Where(m => m.id_matricula == intMatricula && m.id_ciclo == basGlobals.iCiclo
-                                && m.id_tipomovimiento == (int)TipoMovimiento.Colegiatura && m.id_estatusmovimiento == 2).ToList();
+                                && m.id_tipomovimiento == (int)TipoMovimiento.COLEGIATURA && m.id_estatusmovimiento == 2).ToList();
 
                                 foreach (var mi in movimientosInscripcion)
                                 {

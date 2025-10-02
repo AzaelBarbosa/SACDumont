@@ -183,7 +183,7 @@ namespace SACDumont.Cobros
                             id_movimiento = 0, // Se asignará automáticamente por la base de datos
                             id_matricula = (int)cboAlumnos.matricula,
                             id_usuario = idGrupo,
-                            fechahora = DateTime.Now,
+                            fechahora = dtFechaMov.Value,
                             id_ciclo = basGlobals.iCiclo,
                             montoTotal = basGlobals.listaProductos.Sum(p => p.monto) + basGlobals.listaProductos.Sum(c => c.monto_recargo),
                             porcentaje_descuento = 0, // Asignar el valor correspondiente si se aplica descuento
@@ -358,27 +358,27 @@ namespace SACDumont.Cobros
         private void DefinirVariables()
         {
             // Definir las variables necesarias para el movimiento
-            if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Colegiatura)
+            if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.COLEGIATURA)
             {
                 strConcepto = Conceptos.COLEGIATURA.ToString();
             }
-            else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Inscripcion)
+            else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.INSCRIPCION)
             {
                 strConcepto = Conceptos.INSCRIPCION.ToString();
             }
-            else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Producto)
+            else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.ARTICULO)
             {
                 strConcepto = Conceptos.ARTICULO.ToString();
             }
-            else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Uniformes)
+            else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.UNIFORMES)
             {
                 strConcepto = Conceptos.UNIFORMES.ToString();
             }
-            else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Eventos)
+            else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.EVENTOS)
             {
                 strConcepto = Conceptos.EVENTOS.ToString();
             }
-            else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.Graduacion)
+            else if (basGlobals.tipoMovimiento == (int)modulos.TipoMovimiento.GRADUACION)
             {
                 strConcepto = Conceptos.GRADUACION.ToString();
             }
@@ -418,11 +418,20 @@ namespace SACDumont.Cobros
                         MontoPendiente = noCobro == 1 ? m.montoTotal - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto) : m.montoTotal - db.MovimientoCobros.Where(mc => mc.no_cobro <= noCobro && mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
                         MontoPagado = noCobro == 1 ? db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto) : db.MovimientoCobros.Where(mc => mc.id_cobro == idCobro).Sum(mc => mc.monto),
                         PagadoPor = noCobro == 1 ? db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Select(mc => mc.pago_por).FirstOrDefault() : db.MovimientoCobros.Where(mc => mc.id_cobro == idCobro).Select(mc => mc.pago_por).FirstOrDefault(),
-                        NoPago = noCobro
+                        NoPago = noCobro,
+                        Talla = mp.talla,
                     })
                     .ToList();
 
                 reportesDTO = lista;
+            }
+
+            if (strConcepto == Conceptos.UNIFORMES.ToString())
+            {
+                foreach (var item in reportesDTO)
+                {
+                    item.Producto = basFunctions.TextoUniformes(item.Producto, item.Talla, strConcepto);
+                }
             }
 
             dataTable = basFunctions.ConvertToDataTable(reportesDTO);
@@ -664,6 +673,7 @@ namespace SACDumont.Cobros
                 }
             }
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (cboAlumnos.matricula == 0)
@@ -892,6 +902,9 @@ namespace SACDumont.Cobros
             }
         }
 
+
+
         #endregion
+
     }
 }

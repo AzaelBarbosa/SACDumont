@@ -300,21 +300,21 @@ namespace SACDumont
 
         private void btCobroColegiatura_Click(object sender, EventArgs e)
         {
-            basGlobals.tipoMovimiento = (int)TipoMovimiento.Colegiatura;
+            basGlobals.tipoMovimiento = (int)TipoMovimiento.COLEGIATURA;
             basGlobals.sConcepto = Conceptos.COLEGIATURA.ToString();
             AbrirUnicoFormularioHijo<frmMovimientos>();
         }
 
         private void btCobroInscripcion_Click(object sender, EventArgs e)
         {
-            basGlobals.tipoMovimiento = (int)TipoMovimiento.Inscripcion;
+            basGlobals.tipoMovimiento = (int)TipoMovimiento.INSCRIPCION;
             basGlobals.sConcepto = Conceptos.INSCRIPCION.ToString();
             AbrirUnicoFormularioHijo<frmMovimientos>();
         }
 
         private void btCobroProducts_Click(object sender, EventArgs e)
         {
-            basGlobals.tipoMovimiento = (int)TipoMovimiento.Producto;
+            basGlobals.tipoMovimiento = (int)TipoMovimiento.ARTICULO;
             basGlobals.sConcepto = Conceptos.ARTICULO.ToString();
             AbrirUnicoFormularioHijo<frmMovimientos>();
         }
@@ -357,21 +357,21 @@ namespace SACDumont
 
         private void uniformesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            basGlobals.tipoMovimiento = (int)TipoMovimiento.Uniformes;
+            basGlobals.tipoMovimiento = (int)TipoMovimiento.UNIFORMES;
             basGlobals.sConcepto = Conceptos.UNIFORMES.ToString();
             AbrirUnicoFormularioHijo<frmMovimientos>();
         }
 
         private void eventosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            basGlobals.tipoMovimiento = (int)TipoMovimiento.Eventos;
+            basGlobals.tipoMovimiento = (int)TipoMovimiento.EVENTOS;
             basGlobals.sConcepto = Conceptos.EVENTOS.ToString();
             AbrirUnicoFormularioHijo<frmMovimientos>();
         }
 
         private void graduacionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            basGlobals.tipoMovimiento = (int)TipoMovimiento.Graduacion;
+            basGlobals.tipoMovimiento = (int)TipoMovimiento.GRADUACION;
             basGlobals.sConcepto = Conceptos.GRADUACION.ToString();
             AbrirUnicoFormularioHijo<frmMovimientos>();
         }
@@ -407,7 +407,7 @@ namespace SACDumont
 
         private void btGastos_Click(object sender, EventArgs e)
         {
-            basGlobals.tipoMovimiento = (int)TipoMovimiento.Gasto;
+            basGlobals.tipoMovimiento = (int)TipoMovimiento.GASTOS;
             basGlobals.sConcepto = Conceptos.GASTOS.ToString();
             AbrirUnicoFormularioHijo<frmMovimientos>();
         }

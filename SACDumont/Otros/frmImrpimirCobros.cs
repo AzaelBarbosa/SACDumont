@@ -18,6 +18,7 @@ namespace SACDumont.Otros
     public partial class frmImrpimirCobros : Form
     {
         public int idMovimiento = 0;
+        public string strConcepto = string.Empty;
         int idCobro = 0;
         int noCobro = 0;
         string nameReporte = string.Empty;
@@ -201,7 +202,7 @@ namespace SACDumont.Otros
                     .Include(m => m.MovimientosCobros)
                     .SelectMany(m => m.MovimientosProductos, (m, mp) => new ReportesDTO
                     {
-                        Producto = noCobro == 1 ? "" : db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault(),
+                        Producto = noCobro == 1 ? db.Productos.Where(p => p.id_producto == mp.id_producto).Select(p => p.descripcion).FirstOrDefault() : "" ,
                         Cantidad = mp.cantidad,
                         PrecioUnitario = mp.monto,
                         Total = noCobro == 1 ? mp.monto + mp.monto_recargo : m.montoTotal - db.MovimientoCobros.Where(mc => mc.no_cobro < noCobro && mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
@@ -217,11 +218,20 @@ namespace SACDumont.Otros
                         MontoPendiente = noCobro == 1 ? m.montoTotal - db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto) : m.montoTotal - db.MovimientoCobros.Where(mc => mc.no_cobro <= noCobro && mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto),
                         MontoPagado = noCobro == 1 ? db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Sum(mc => mc.monto) : db.MovimientoCobros.Where(mc => mc.id_cobro == idCobro).Sum(mc => mc.monto),
                         PagadoPor = noCobro == 1 ? db.MovimientoCobros.Where(mc => mc.id_movimiento == m.id_movimiento).Select(mc => mc.pago_por).FirstOrDefault() : db.MovimientoCobros.Where(mc => mc.id_cobro == idCobro).Select(mc => mc.pago_por).FirstOrDefault(),
-                        NoPago = noCobro
+                        NoPago = noCobro,
+                        Talla = mp.talla
                     })
                     .ToList();
 
                 reportesDTO = lista;
+            }
+
+            if (strConcepto == Conceptos.UNIFORMES.ToString())
+            {
+                foreach (var item in reportesDTO)
+                {
+                    item.Producto = basFunctions.TextoUniformes(item.Producto, item.Talla, strConcepto);
+                }
             }
 
             dataTable = basFunctions.ConvertToDataTable(reportesDTO);

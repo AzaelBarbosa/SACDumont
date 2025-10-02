@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="06/29/2025 09:41:38" ReportInfo.Modified="10/01/2025 09:02:16" ReportInfo.CreatorVersion="2025.2.0.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/29/2025 09:41:38" ReportInfo.Modified="10/02/2025 12:46:58" ReportInfo.CreatorVersion="2025.2.0.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -67,7 +67,7 @@ namespace FastReport
       <LineObject Name="Line2" Width="302.4"/>
       <TextObject Name="Text3" Top="9.45" Width="47.25" Height="18.9" Text="[TicketData.Cantidad]" HorzAlign="Center" Font="Century Gothic, 9pt, style=Bold"/>
       <TextObject Name="Text38" Left="226.8" Top="9.45" Width="75.6" Height="18.9" Text="[TicketData.PrecioUnitario]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Century Gothic, 9pt, style=Bold" Trimming="EllipsisCharacter"/>
-      <TextObject Name="Text1" Left="47.25" Top="9.45" Width="179.55" Height="18.9" Text="[TicketData.Producto]" HorzAlign="Center" Font="Century Gothic, 9pt, style=Bold"/>
+      <TextObject Name="Text1" Left="47.25" Top="9.45" Width="179.55" Height="18.9" Text="[TicketData.Producto]" HorzAlign="Center" Font="Century Gothic, 8pt, style=Bold"/>
     </DataBand>
     <ReportSummaryBand Name="ReportSummary1" Top="229.35" Width="302.4" Height="444.15" CanShrink="true">
       <TextObject Name="Text35" Top="37.8" Width="75.6" Height="18.9" Text="Recargos:" HorzAlign="Right" VertAlign="Center" Font="Century Gothic, 9pt, style=Bold"/>

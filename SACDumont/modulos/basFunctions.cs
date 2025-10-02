@@ -942,5 +942,26 @@ namespace SACDumont.Modulos
 
             return valureReturn;
         }
+
+        public static string TextoUniformes(string texto, string talla, string concepto)
+        {
+            if (concepto != Conceptos.UNIFORMES.ToString()) return texto;
+
+            if (string.IsNullOrEmpty(texto))
+                return texto;
+
+            int idx = texto.IndexOf('(');
+            if (idx <= 0) return texto;
+
+            return texto.Substring(0, idx).TrimEnd() + " Talla " + talla;
+        }
+
+        public static string NombreMovimiento(int valor)
+        {
+            return Enum.IsDefined(typeof(TipoMovimiento), valor)
+                ? ((TipoMovimiento)valor).ToString()
+                : "Desconocido";
+        }
+
     }
 }

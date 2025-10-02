@@ -65,6 +65,8 @@
             this.lbGrupoActual = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.chConfirmar = new System.Windows.Forms.CheckBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.dtFechaMov = new System.Windows.Forms.DateTimePicker();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.gbProductos.SuspendLayout();
@@ -260,7 +262,7 @@
             this.cboAlumnos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cboAlumnos.matricula = 0;
             this.cboAlumnos.Name = "cboAlumnos";
-            this.cboAlumnos.Size = new System.Drawing.Size(417, 18);
+            this.cboAlumnos.Size = new System.Drawing.Size(294, 18);
             this.cboAlumnos.SqlQuery = null;
             this.cboAlumnos.TabIndex = 0;
             this.cboAlumnos.OnAlumnoSeleccionado += new System.Action<System.Data.DataRow>(this.cboAlumnos_OnAlumnoSeleccionado);
@@ -471,11 +473,31 @@
             this.chConfirmar.Text = "Confirmado";
             this.chConfirmar.UseVisualStyleBackColor = true;
             // 
+            // label11
+            // 
+            this.label11.Location = new System.Drawing.Point(380, 80);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(53, 21);
+            this.label11.TabIndex = 53;
+            this.label11.Text = "Fecha:";
+            // 
+            // dtFechaMov
+            // 
+            this.dtFechaMov.CustomFormat = "dd/MM/yyyy HH:mm";
+            this.dtFechaMov.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtFechaMov.Location = new System.Drawing.Point(425, 80);
+            this.dtFechaMov.Name = "dtFechaMov";
+            this.dtFechaMov.Size = new System.Drawing.Size(108, 21);
+            this.dtFechaMov.TabIndex = 54;
+            // 
             // frmMovimiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(545, 767);
+            this.Controls.Add(this.dtFechaMov);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.chConfirmar);
             this.Controls.Add(this.gbInformacion);
             this.Controls.Add(this.btDeletePago);
@@ -505,6 +527,8 @@
             this.Controls.SetChildIndex(this.btDeletePago, 0);
             this.Controls.SetChildIndex(this.gbInformacion, 0);
             this.Controls.SetChildIndex(this.chConfirmar, 0);
+            this.Controls.SetChildIndex(this.label11, 0);
+            this.Controls.SetChildIndex(this.dtFechaMov, 0);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
@@ -554,5 +578,7 @@
         private System.Windows.Forms.Label lbBeca;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox chConfirmar;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DateTimePicker dtFechaMov;
     }
 }
