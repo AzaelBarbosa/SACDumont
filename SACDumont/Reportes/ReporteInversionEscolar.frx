@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/29/2025 09:41:38" ReportInfo.Modified="10/03/2025 20:31:27" ReportInfo.CreatorVersion="2025.2.0.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="TicketData" ReferenceName="TicketData" DataType="System.Int32" Enabled="true">
+      <Column Name="Producto" Alias="Alumno" DataType="System.String"/>
+      <Column Name="Grupo" DataType="System.String" PropName="Cantidad"/>
+      <Column Name="Grado" DataType="System.String" PropName="PrecioUnitario"/>
+      <Column Name="Ciclo" DataType="System.String" PropName="Total"/>
+      <Column Name="Recargo" Enabled="false" DataType="System.Decimal" PropName="Column"/>
+      <Column Name="Recargo" Enabled="false" DataType="System.Decimal" PropName="Column1"/>
+      <Column Name="MontoPendiente" Enabled="false" DataType="System.Decimal" PropName="Column1"/>
+      <Column Name="Matricula" DataType="System.String" PropName="Column"/>
+    </TableDataSource>
+    <Parameter Name="Alumno" DataType="System.String" AsString=""/>
+    <Parameter Name="Matricula" DataType="System.Int32" AsString=""/>
+    <Parameter Name="Grado" DataType="System.String" AsString=""/>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="215.9" PaperHeight="279.4" RawPaperSize="1" Guides="737.1" Watermark.Font="Arial, 60pt" LastPageSource="15" FirstPageSource="15">
+    <ReportTitleBand Name="ReportTitle1" Width="740.5"/>
+    <PageHeaderBand Name="PageHeader1" Top="4" Width="740.5" CanGrow="true" Guides="0"/>
+    <DataBand Name="Data1" Top="8" Width="740.5" Height="935.55" CanGrow="true" Guides="0,0,0,0" DataSource="TicketData">
+      <ShapeObject Name="Shape3" Left="9.45" Top="66.15" Width="727.65" Height="869.4" Border.Color="Cyan" Shape="RoundRectangle"/>
+      <ShapeObject Name="Shape1" Left="18.9" Top="47.25" Width="718.2" Height="75.6" Fill.Color="128, 128, 255" Shape="RoundRectangle"/>
+      <TextObject Name="Text30" Left="47.25" Top="18.9" Width="519.75" Height="18.9" Border.Color="Cyan" Text="Ciclo Escolar 2025-2026 RIE # 2, [Date]" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 12pt"/>
+      <TextObject Name="Text31" Left="37.8" Top="56.7" Width="689.85" Height="56.7" Border.Color="Cyan" Text="Reporte de Inversión Escolar" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 32pt, style=Bold, Underline" TextFill.Color="White"/>
+      <TextObject Name="Text32" Left="47.25" Top="151.2" Width="387.45" Height="18.9" Border.Color="Cyan" Text="Colegio Particular Dumont" VertAlign="Center" Font="Century Gothic, 12pt" TextFill.Color="RoyalBlue"/>
+      <TextObject Name="Text33" Left="47.25" Top="217.35" Width="652.05" Height="103.95" Border.Color="Cyan" Text="Por medio de la presente queremos agradecerle por confiar en nosotros como Institución Educativa para sus hijos(as). Se hace de su conocimiento por medio de este &quot;Reporte de Inversión Escolar&quot; los saldos de nuestro alumno (a):" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 12pt"/>
+      <TextObject Name="Text34" Left="47.25" Top="189" Width="652.05" Height="18.9" Border.Color="Cyan" Text="Estimados Padres de Familia:" HorzAlign="Center" VertAlign="Center" Font="Century Gothic, 18pt" TextFill.Color="RoyalBlue"/>
+      <TextObject Name="Text35" Left="75.6" Top="330.75" Width="623.7" Height="18.9" Border.Color="Cyan" Text="[Matricula] [Alumno] de [Grado]" VertAlign="Center" Font="Century Gothic, 12pt"/>
+      <TextObject Name="Text36" Left="47.25" Top="396.9" Width="170.1" Height="18.9" Border.Color="Cyan" Text="Observaciones:" VertAlign="Center" Font="Century Gothic, 12pt" TextFill.Color="RoyalBlue"/>
+      <TextObject Name="Text37" Left="47.25" Top="425.25" Width="283.5" Height="472.5" Border.Color="Cyan" Text="El presente Reporte esta al [Date]&#13;&#10;&#13;&#10;Si ya cubrio el concepto señalado enviar su comprobante al correo: DumontColegiogmail.com y presentarlo en oficina. En caso contrario favor de liquidar el concepto vencido a la brevedad para evitar suspensión del servicio educativo.&#13;&#10;&#13;&#10;Si tiene 3 colegiaturas o mas vencidas, cualquier otro concepto vencido o el total presentado en este documento cuente con valo negativo: se retira el derecho de presentacion de actividades y evaluación mensual hasta cubrir la cantidad indicada en &quot;Total al vencimiento&quot; con base al Acuerdo de Convivencia Escolar.&#13;&#10;&#13;&#10;Se le recuerda que a vencimiento de cada colegiatura si no se encuentra totalmente cubierta, sera acreedor a un cargo por moratorio del 10% sobre el costo de la misma.&#13;&#10;&#13;&#10;" VertAlign="Center" Font="Century Gothic, 10pt"/>
+      <ShapeObject Name="Shape2" Left="37.8" Top="9.45" Width="538.65" Height="47.25" Border.Color="Cyan"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="947.55" Width="740.5" CanGrow="true"/>
+  </ReportPage>
+</Report>

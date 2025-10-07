@@ -29,8 +29,8 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\192.168.1.99\Publish\</InstallUrl>
-    <MinimumRequiredVersion>1.0.0.53</MinimumRequiredVersion>
-    <ApplicationRevision>54</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.0.54</MinimumRequiredVersion>
+    <ApplicationRevision>55</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -665,6 +665,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Reportes\TicketAbono.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reportes\ReporteInversionEscolar.frx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\nopicture.jpg" />

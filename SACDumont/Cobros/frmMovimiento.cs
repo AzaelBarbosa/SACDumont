@@ -509,8 +509,8 @@ namespace SACDumont.Cobros
                 cboAlumnos.Enabled = false;
                 txImporte.Text = (basGlobals.listaProductos.Sum(p => p.monto)).ToString("C2");
                 txRecargo.Text = (basGlobals.listaProductos.Sum(p => p.monto_recargo)).ToString("C2");
-                txImportePte.Text = (basGlobals.Movimiento.montoTotal - basGlobals.Movimiento.monto_descuento - basGlobals.Movimiento.beca_descuento - basGlobals.listaCobros.Sum(p => p.monto)).ToString("C2");
-                txTotal.Text = (basGlobals.Movimiento.montoTotal - basGlobals.Movimiento.monto_descuento - basGlobals.Movimiento.beca_descuento).ToString("C");
+                txImportePte.Text = (basGlobals.Movimiento.montoTotal - basGlobals.listaCobros.Sum(p => p.monto)).ToString("C2");
+                txTotal.Text = (basGlobals.Movimiento.montoTotal).ToString("C");
                 txDescuento.Text = (basGlobals.Movimiento.monto_descuento).ToString("C");
                 txBeca.Text = (basGlobals.Movimiento.beca_descuento).ToString("C");
                 chConfirmar.Checked = basGlobals.Movimiento.confirmado;

@@ -7,7 +7,7 @@ namespace SACDumont
     public class DumontContext : DbContext
     {
 
-        const string ENV_DEFAULT = "Prod";
+        const string ENV_DEFAULT = "Dev";
 
         public DumontContext() : base("name=" + ConnName("DumontConnectionString"))
         {
