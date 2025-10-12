@@ -178,9 +178,12 @@ namespace SACDumont.Cobros
                     }
                     else
                     {
+                        idMovimiento = db.Movimientos.Max(m => (int?)m.id_movimiento) ?? 0;
+                        idMovimiento++;
+
                         var nuevo = new Movimientos
                         {
-                            id_movimiento = 0, // Se asignará automáticamente por la base de datos
+                            id_movimiento = idMovimiento, // Se asignará automáticamente por la base de datos
                             id_matricula = (int)cboAlumnos.matricula,
                             id_usuario = idGrupo,
                             fechahora = dtFechaMov.Value,

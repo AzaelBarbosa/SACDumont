@@ -227,16 +227,29 @@ namespace SACDumont.Cobros
 
             if (basConfiguracion.Recargos)
             {
-                if (DateTime.Now.Date > fechaNuevaVencimiento.Date)
+                if (basGlobals.sConcepto == Conceptos.COLEGIATURA.ToString())
                 {
-                    lbAtencion.Visible = true;
-                    decRecargo = basConfiguracion.PorcentajeRecargo;
-                    valuePromocion = (Convert.ToDecimal(obj["precio"]) * promocion / 100);
-                    valueBeca = (Convert.ToDecimal(obj["precio"]) * beca / 100);
-                    precioConBeca = Convert.ToDecimal(obj["precio"]) - valuePromocion - valueBeca;
-                    txCosto.Text = Convert.ToDecimal(precioConBeca).ToString("C");
-                    txRecargo.Text = (precioConBeca * decRecargo / 100).ToString("C");
-                    txtTotal.Text = ((precioConBeca) + precioConBeca * decRecargo / 100).ToString("C");
+                    if (DateTime.Now.Date > fechaNuevaVencimiento.Date)
+                    {
+                        lbAtencion.Visible = true;
+                        decRecargo = basConfiguracion.PorcentajeRecargo;
+                        valuePromocion = (Convert.ToDecimal(obj["precio"]) * promocion / 100);
+                        valueBeca = (Convert.ToDecimal(obj["precio"]) * beca / 100);
+                        precioConBeca = Convert.ToDecimal(obj["precio"]) - valuePromocion - valueBeca;
+                        txCosto.Text = Convert.ToDecimal(precioConBeca).ToString("C");
+                        txRecargo.Text = (precioConBeca * decRecargo / 100).ToString("C");
+                        txtTotal.Text = ((precioConBeca) + precioConBeca * decRecargo / 100).ToString("C");
+                    }
+                    else
+                    {
+                        lbAtencion.Visible = false;
+                        valuePromocion = (Convert.ToDecimal(obj["precio"]) * promocion / 100);
+                        valueBeca = (Convert.ToDecimal(obj["precio"]) * beca / 100);
+                        precioConBeca = Convert.ToDecimal(obj["precio"]) - valuePromocion - valueBeca;
+                        txCosto.Text = Convert.ToDecimal(precioConBeca).ToString("C");
+                        txRecargo.Text = (0).ToString("C");
+                        txtTotal.Text = ((precioConBeca)).ToString("C");
+                    }
                 }
                 else
                 {

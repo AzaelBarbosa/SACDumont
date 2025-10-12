@@ -42,6 +42,7 @@ namespace SACDumont.Models
     public class Movimientos
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id_movimiento { get; set; }
         public int id_tipomovimiento { get; set; }
         public int id_estatusmovimiento { get; set; }
